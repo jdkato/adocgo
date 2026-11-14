@@ -58,14 +58,16 @@ to compare against upstream:
 | `node.go`, `document.go` | `abstract_node.rb`, `abstract_block.rb`, `section.rb`, `document.rb` … | AST (`Document`, `Block`, `Table`, `Cell`, `Inline`) and document attributes |
 | `subs.go` | `substitutors.rb` | inline substitutions |
 | `html5.go` | `converter/html5.rb` | HTML5/XHTML5 converter |
-| `rxdefs.go` | `rx.rb` | the regular expressions, copied verbatim |
-| `internal/rx` | — | a small backtracking regexp engine with Ruby (Onigmo) semantics |
+| `scan.go`, `scan_block.go`, `scan_inline.go`, `scan_macro.go`, `scan_pass.go` | `rx.rb` | hand-written scanners, one per Asciidoctor regular expression |
+| `internal/rx` | — | test-only: a backtracking regexp engine with Ruby (Onigmo) semantics, used as the oracle for the scanners |
 
-Asciidoctor's regular expressions rely on backreferences and lookahead, which
-Go's RE2-based `regexp` package cannot express. Rather than rewriting ~120
-patterns by hand, `internal/rx` implements the subset of Onigmo syntax they
-use, so the patterns are used unchanged. `TestRxCompat` checks the engine
-against match results recorded from Ruby for every pattern.
+Asciidoctor recognises its syntax with about 120 regular expressions, many of
+which rely on backreferences and lookahead that Go's RE2-based `regexp`
+package cannot express. adocgo does not use regular expressions at run time:
+every pattern is replaced by a hand-written scanner that reproduces the
+pattern's leftmost-match, alternation-order and capture-group semantics. Each
+scanner is declared together with the expression it replaces, and the tests
+hold the two to identical results (see [Testing](#testing)).
 
 The AST is exposed (`Document.Blocks`, `Block.Context`, `Block.Attributes`,
 `Block.Table`, …) but should be considered unstable.
@@ -161,7 +163,7 @@ stylesheets, docinfo files, and XML syntax (`-b xhtml5`).
 * **Encodings**: input must be UTF-8 (a UTF-8 BOM is stripped). UTF-16 input
   and the include `encoding` attribute are not supported. Invalid UTF-8 is
   passed through, whereas Asciidoctor aborts.
-* **Unicode tables**: `\p{Alpha}`, `\p{Word}` etc. use Go's Unicode tables,
+* **Unicode tables**: the word/letter/digit character classes use Go's Unicode tables,
   which may differ from Ruby's Unicode version for recently added
   characters.
 * **Windows**: path handling assumes `/` separators and has not been tested
@@ -172,28 +174,52 @@ stylesheets, docinfo files, and XML syntax (`-b xhtml5`).
 
 ## Performance
 
-`go test -bench Convert -benchmem` converts three corpus documents. On a
-generated 150 KB document (headings, paragraphs with inline markup, lists,
-code blocks, block quotes) written equivalently in AsciiDoc and Markdown,
-adocgo runs at roughly 7 MB/s against roughly 19 MB/s for
-[goldmark](https://github.com/yuin/goldmark) on the same machine, and
-allocates about 1.4x as much. Most of the time is spent in the
-backtracking regex engine (`internal/rx`) that runs Asciidoctor's patterns
-unchanged.
+`cd benchmarks && go test -run xxx -bench Convert -benchmem .` converts a
+generated document (headings, paragraphs with inline markup, lists, code
+blocks, block quotes) written equivalently in AsciiDoc and Markdown with
+adocgo and with [goldmark](https://github.com/yuin/goldmark). Median of three
+runs on a 4-core x86-64 VM (the machine is noisy; individual runs vary by
+about ±10%):
+
+| Document | Converter | Time | Throughput | Allocated | Allocations |
+|----------|-----------|-----:|-----------:|----------:|------------:|
+| 8 sections (15 KB)    | goldmark | 1.08 ms | 13.5 MB/s | 413 KB  | 2,714   |
+|                       | adocgo   | 0.93 ms | 15.5 MB/s | 283 KB  | 1,951   |
+| 80 sections (150 KB)  | goldmark | 10.1 ms | 14.4 MB/s | 3.98 MB | 26,910  |
+|                       | adocgo   | 8.3 ms  | 17.2 MB/s | 2.66 MB | 18,842  |
+| 800 sections (1.5 MB) | goldmark | 96.9 ms | 15.0 MB/s | 38.8 MB | 268,843 |
+|                       | adocgo   | 81.1 ms | 17.7 MB/s | 26.3 MB | 187,645 |
+
+Throughput is flat from 15 KB to 1.5 MB, i.e. conversion time is linear in
+the input size. `go test -run xxx -bench Convert -benchmem .` in the root
+module converts three documents from the corpus:
+
+| Document | Size | Time | Throughput | Allocated | Allocations |
+|----------|-----:|-----:|-----------:|----------:|------------:|
+| `realworld/README.adoc`     | 20 KB  | 1.20 ms | 17.1 MB/s | 398 KB  | 2,794  |
+| `docs/ROOT__whats-new.adoc` | 41 KB  | 2.11 ms | 19.5 MB/s | 675 KB  | 4,448  |
+| `realworld/CHANGELOG.adoc`  | 136 KB | 7.94 ms | 17.1 MB/s | 3.02 MB | 11,450 |
 
 ## Testing
 
 ```console
-$ go test ./...                     # corpus comparison, regexp compatibility, robustness
+$ go test ./...                     # corpus comparison, scanner/regexp equivalence, robustness
 $ go test -run '^$' -fuzz FuzzConvert -fuzztime 60s .
+$ go test -run '^$' -fuzz FuzzScanners -fuzztime 60s .
 $ scripts/regen.sh                  # regenerate expected HTML (needs Ruby + asciidoctor)
 $ scripts/difffuzz.sh 7 "-d book"   # differential fuzzing against asciidoctor
 ```
 
 * `TestCorpus` compares every fixture byte-for-byte; fixtures listed in
   `known-failures.txt` must fail (the test complains if one starts passing).
-* `TestRxCompat` replays 64,664 pattern/input pairs recorded from Ruby
-  against the bundled regexp engine.
+* `TestScannersAgainstRegexps` converts the whole corpus, mutated variants
+  of it and the adversarial inputs while comparing the outcome of *every*
+  scan with the regular expression the scanner replaces (about 635,000
+  scans). `TestScannersOnSamples` additionally runs every scanner and its
+  regular expression over about 4,000 sample strings (about 790,000
+  comparisons), and `FuzzScanners` does the same on arbitrary input.
+* `TestRxCompat` validates the oracle itself: it replays 64,664
+  pattern/input pairs recorded from Ruby against `internal/rx`.
 * `TestMutatedCorpus`, `TestPathological`, `TestNestingLimit` and
   `FuzzConvert` feed truncated, garbled and adversarial input through the
   converter to make sure it neither fails nor hangs.

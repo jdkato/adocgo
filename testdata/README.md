@@ -22,7 +22,7 @@ Conventions:
   fixtures themselves.
 * `known-failures.txt` lists fixtures whose output is known to differ.
 * `rx-compat.json` records what Ruby's regular expression engine matches for
-  every pattern used by adocgo (see `rxcompat_test.go`).
+  every Asciidoctor pattern that adocgo's scanners replace (see `rxcompat_test.go`).
 * `SOURCE_DATE_EPOCH=1700000000` is set while generating and testing so that
   date attributes are stable.
 
