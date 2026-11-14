@@ -827,6 +827,17 @@ func dlistSiblingScanner(pat, marker string) *scanner {
 				return true
 			}
 		}
+		if colon && le < len(s) && le >= f+sz && strings.HasPrefix(s[le+1:], marker) {
+			// the [^:] before the marker may be the newline itself
+			e := le + 1
+			if end, ts, te, ok := dlistTail(s, e+len(marker)); ok {
+				set2(c, 0, i, end)
+				set2(c, 1, f, e)
+				set2(c, 2, e, e+len(marker))
+				set2(c, 3, ts, te)
+				return true
+			}
+		}
 		if colon && s[f] != ':' && strings.HasPrefix(s[f+sz:], marker) {
 			// second alternative: a single-character term
 			e := f + sz

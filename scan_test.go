@@ -240,3 +240,67 @@ func TestScannersOnSamples(t *testing.T) {
 	}
 	o.report(t)
 }
+
+// FuzzScanners compares every hand-written scanner with the regular
+// expression it replaces on arbitrary input:
+//
+//	go test -run '^$' -fuzz FuzzScanners -fuzztime 60s
+func FuzzScanners(f *testing.F) {
+	for _, s := range []string{
+		"a *b* _c_ `d` #e# ^f^ ~g~ **h** __i__ ``j`` ##k##\n", "[.r]*x* [#i]_y_ \\*z* +p+ `+q+` ++r++ +++s+++ $$t$$ pass:q[u]",
+		"https://a.b/c[d] <https://e.f> link:g[h] mailto:i@j.kl[m] n@o.pq xref:r#s[t] <<u,v>> &lt;&lt;w&gt;&gt;",
+		"term:: def\n* item\n. item\n<1> co\n[[id,ref]]\n[quote,a,b]\n.Title\n:attr: val\n== Sect [[x]]\n",
+		"image:a.png[b] icon:c[d] kbd:[e] btn:[f] menu:g[h > i] \"j &gt; k\" footnote:[l] ((m)) (((n))) indexterm:[o]",
+		"x -- y (C) (R) (TM) ... -> => <- <= it's &amp;amp; &amp;#167; a--b `'", "code &lt;1&gt; // &lt;2&gt; &lt;!--3--&gt;\n# <1> <2>",
+		"{a} \\{b} {set:c:d} {counter:e} {counter2:f:1}\\}", "|a 2+|b .3+^.>s|c 2*d|e\n\\<1> [x-]`y` [z]\\+w+",
+	} {
+		f.Add(s)
+	}
+	scs := append([]*scanner(nil), allScanners...)
+	for _, lc := range []string{"", "%", "--"} {
+		scs = append(scs, lineCommentCalloutScanner(lc))
+	}
+	f.Fuzz(func(t *testing.T, in string) {
+		if len(in) > 400 {
+			in = in[:400]
+		}
+		o := &scanOracle{res: scanFuzzOracles, checked: map[string]int{}}
+		for _, sc := range scs {
+			pos := 0
+			for n := 0; n < 3 && pos <= len(in); n++ {
+				var m rmatch
+				c := m.c[:2*(sc.n+1)]
+				for i := range c {
+					c[i] = -1
+				}
+				ok := sc.find(in, pos, c)
+				o.check(sc, in, pos, false, c, ok)
+				if !ok {
+					break
+				}
+				if c[1] == c[0] {
+					pos = c[1] + 1
+				} else {
+					pos = c[1]
+				}
+			}
+		}
+		for _, sc := range allAtScanners {
+			for pos := 0; pos <= len(in) && pos < 8; pos++ {
+				var m rmatch
+				c := m.c[:2*(sc.n+1)]
+				for i := range c {
+					c[i] = -1
+				}
+				o.check(sc, in, pos, true, c, sc.at(in, pos, c))
+			}
+		}
+		for _, fl := range o.failures {
+			t.Error(fl)
+		}
+	})
+}
+
+// scanFuzzOracles caches the compiled oracle expressions across fuzz
+// iterations (each worker process runs iterations sequentially).
+var scanFuzzOracles = map[*scanner]*rx.Regexp{}
