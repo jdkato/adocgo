@@ -3,8 +3,6 @@ package adocgo
 import (
 	"strconv"
 	"strings"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 // This file is a port of Asciidoctor's substitutors.rb.
@@ -973,11 +971,7 @@ func (b *Block) subSource(source string, processCallouts bool) string {
 func (b *Block) subCallouts(text string) string {
 	re := calloutSourceRx
 	if lc, ok := b.Attributes["line-comment"]; ok {
-		pre := ""
-		if lc != "" {
-			pre = rx.Quote(lc) + " ?"
-		}
-		re = rxScan(`(` + pre + `)?(\\)?&lt;()(\d+|\.)&gt;(?=(?: ?\\?&lt;(?:\d+|\.)&gt;)*$)`)
+		re = lineCommentCalloutScanner(lc)
 	}
 	autonum := 0
 	return re.ReplaceAllFunc(text, func(m *rmatch) string {

@@ -103,6 +103,13 @@ func (o *scanOracle) report(t *testing.T) {
 		total += n
 	}
 	t.Logf("compared %d scans of %d hand-written scanners with their regular expressions", total, len(o.checked))
+	if testing.Verbose() {
+		for pat, n := range o.checked {
+			if n < 200 {
+				t.Logf("  only %d scans: %s", n, pat)
+			}
+		}
+	}
 }
 
 // TestScannersAgainstRegexps converts the whole corpus, mutated variants of
@@ -188,7 +195,16 @@ func scanSamples(t *testing.T) []string {
 func TestScannersOnSamples(t *testing.T) {
 	o := &scanOracle{res: map[*scanner]*rx.Regexp{}, checked: map[string]int{}}
 	samples := scanSamples(t)
-	for _, sc := range allScanners {
+	scs := append([]*scanner(nil), allScanners...)
+	for _, lc := range []string{"", "%", "--", "#!", "//"} {
+		scs = append(scs, lineCommentCalloutScanner(lc))
+	}
+	for _, in := range append([]string(nil), samples...) {
+		if strings.Contains(in, "&lt;") {
+			samples = append(samples, strings.ReplaceAll(in, "//", "%"), strings.ReplaceAll(in, " &lt;", "#!&lt;"))
+		}
+	}
+	for _, sc := range scs {
 		for _, in := range samples {
 			pos := 0
 			for n := 0; n < 4 && pos <= len(in); n++ {
