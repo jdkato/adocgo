@@ -1,0 +1,24 @@
+.Title
+.Second title wins
+
+para
+
+.Title before section
+== Section
+
+.Title lost
+
+////
+c
+////
+para after comment
+
+.  not title
+..also not?
+...literal?
+
+.Title then list
+* a
+
+.Title then macro
+image::x.png[]

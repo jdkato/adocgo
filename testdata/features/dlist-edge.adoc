@@ -1,0 +1,15 @@
+a:: b :: c
+d ::
+e:::f
+g::h
+::
+x :: y
+https://example.com:: url term
+Term 1::Term 2:: nested inline?
+`code::term`:: def
+Term;; semi
+;; alone
+
+ indented:: term
+// comment:: not
+//// four:: slashes
