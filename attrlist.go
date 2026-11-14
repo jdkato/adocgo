@@ -3,17 +3,15 @@ package adocgo
 import (
 	"strconv"
 	"strings"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 var (
-	alBoundaryQuot  = rx.MustCompile(`.*?[^\\](?=")`)
-	alBoundaryApos  = rx.MustCompile(`.*?[^\\](?=')`)
-	alBoundaryComma = rx.MustCompile(`.*?(?=[ \t]*(,|$))`)
-	alNameRx        = rx.MustCompile(`\p{Word}[\p{Word}\-.]*`)
-	alBlankRx       = rx.MustCompile(`[ \t]+`)
-	alSkipRx        = rx.MustCompile(`[ \t]*(,|$)`)
+	alBoundaryQuot  = rxScan(`.*?[^\\](?=")`)
+	alBoundaryApos  = rxScan(`.*?[^\\](?=')`)
+	alBoundaryComma = rxScan(`.*?(?=[ \t]*(,|$))`)
+	alNameRx        = rxScan(`\p{Word}[\p{Word}\-.]*`)
+	alBlankRx       = rxScan(`[ \t]+`)
+	alSkipRx        = rxScan(`[ \t]*(,|$)`)
 )
 
 // posKey returns the attribute key used for the positional attribute at the
@@ -31,7 +29,7 @@ type attributeList struct {
 
 func (a *attributeList) eos() bool { return a.pos >= len(a.src) }
 
-func (a *attributeList) scan(re *rx.Regexp) (string, bool) {
+func (a *attributeList) scan(re *scanner) (string, bool) {
 	m := re.MatchAt(a.src, a.pos)
 	if m == nil {
 		return "", false

@@ -117,8 +117,8 @@ func subSpecialchars(text string) string {
 }
 
 var (
-	quotedTextSniffRx       = rx.MustCompile("[*_`#^~]")
-	quotedTextSniffCompatRx = rx.MustCompile(`[*'_+#^~]`)
+	quotedTextSniffRx       = rxScan("[*_`#^~]")
+	quotedTextSniffCompatRx = rxScan(`[*'_+#^~]`)
 )
 
 func (b *Block) subQuotes(text string) string {
@@ -130,7 +130,7 @@ func (b *Block) subQuotes(text string) string {
 	if sniff.MatchString(text) {
 		for _, q := range qs {
 			q := q
-			text = q.re.ReplaceAllFunc(text, func(m *rx.Match) string {
+			text = q.re.ReplaceAllFunc(text, func(m *rmatch) string {
 				return b.convertQuotedText(m, q.typ, q.constrained)
 			})
 		}
@@ -147,7 +147,7 @@ func (b *Block) subAttributes(text string, opts subAttrOpts) string {
 	docAttrs := doc.Attributes
 	drop, dropLine, dropEmptyLine := false, false, false
 	attributeUndefined, attributeMissing := "", ""
-	text = attributeReferenceRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+	text = attributeReferenceRx.ReplaceAllFunc(text, func(m *rmatch) string {
 		if m.Group(1) == `\` || m.Group(4) == `\` {
 			return "{" + m.Group(2) + "}"
 		}
@@ -261,7 +261,7 @@ func subReplacements(text string) string {
 	}
 	for _, r := range replacements {
 		r := r
-		text = r.re.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = r.re.ReplaceAllFunc(text, func(m *rmatch) string {
 			captured := m.Group(0)
 			if strings.Contains(captured, `\`) {
 				return strings.Replace(captured, `\`, "", 1)
@@ -294,7 +294,7 @@ func (b *Block) subMacros(text string) string {
 
 	if hasDocAttr("experimental") {
 		if foundMacroishShort && (strings.Contains(text, "kbd:") || strings.Contains(text, "btn:")) {
-			text = inlineKbdBtnMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+			text = inlineKbdBtnMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 				if m.Has(1) {
 					return m.Group(0)[1:]
 				}
@@ -338,7 +338,7 @@ func (b *Block) subMacros(text string) string {
 			})
 		}
 		if foundMacroish && strings.Contains(text, "menu:") {
-			text = inlineMenuMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+			text = inlineMenuMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 				if strings.HasPrefix(m.Group(0), `\`) {
 					return m.Group(0)[1:]
 				}
@@ -372,7 +372,7 @@ func (b *Block) subMacros(text string) string {
 			})
 		}
 		if strings.Contains(text, `"`) && strings.Contains(text, "&gt;") {
-			text = inlineMenuRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+			text = inlineMenuRx.ReplaceAllFunc(text, func(m *rmatch) string {
 				if strings.HasPrefix(m.Group(0), `\`) {
 					return m.Group(0)[1:]
 				}
@@ -393,7 +393,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if foundMacroish && (strings.Contains(text, "image:") || strings.Contains(text, "icon:")) {
-		text = inlineImageMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineImageMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			var typ string
 			var posattrs []string
@@ -422,7 +422,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if (strings.Contains(text, "((") && strings.Contains(text, "))")) || (foundMacroishShort && strings.Contains(text, "dexterm")) {
-		text = inlineIndextermMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineIndextermMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			switch m.Group(1) {
 			case "indexterm":
@@ -487,7 +487,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if foundColon && strings.Contains(text, "://") {
-		text = inlineLinkRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineLinkRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			g1, g3 := m.Group(1), m.Group(3)
 			if m.Has(2) && !m.Has(5) {
@@ -503,7 +503,7 @@ func (b *Block) subMacros(text string) string {
 				target := g3 + m.Group(6)
 				linkText := target
 				if hasDocAttr("hide-uri-scheme") {
-					linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rx.Match) string { return "" })
+					linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rmatch) string { return "" })
 				}
 				return b.inline(&Inline{Context: "anchor", Text: linkText, hasText: true, Type: "link", Target: target, Attrs: map[string]string{"role": "bare"}})
 			}
@@ -582,14 +582,14 @@ func (b *Block) subMacros(text string) string {
 				if hasNew && newLinkText == "" {
 					linkText = target
 					if hasDocAttr("hide-uri-scheme") {
-						linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rx.Match) string { return "" })
+						linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rmatch) string { return "" })
 					}
 					bare = true
 				}
 			} else {
 				linkText = target
 				if hasDocAttr("hide-uri-scheme") {
-					linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rx.Match) string { return "" })
+					linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rmatch) string { return "" })
 				}
 				bare = true
 			}
@@ -609,7 +609,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if foundMacroish && (strings.Contains(text, "link:") || strings.Contains(text, "ilto:")) {
-		text = inlineLinkMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineLinkMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			if strings.HasPrefix(all, `\`) {
 				return all[1:]
@@ -660,7 +660,7 @@ func (b *Block) subMacros(text string) string {
 					linkText = mailtoText
 				} else {
 					if hasDocAttr("hide-uri-scheme") {
-						linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rx.Match) string { return "" })
+						linkText = uriSniffRx.ReplaceFirstFunc(target, func(*rmatch) string { return "" })
 						if linkText == "" {
 							linkText = target
 						}
@@ -683,7 +683,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if strings.Contains(text, "@") {
-		text = inlineEmailRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineEmailRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			if m.Has(1) {
 				if m.Group(1) == `\` {
@@ -696,13 +696,13 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if foundSquareBracket && b.Context == "list_item" && b.Parent != nil && b.Parent.Style == "bibliography" {
-		text = inlineBiblioAnchorRx.ReplaceFirstFunc(text, func(m *rx.Match) string {
+		text = inlineBiblioAnchorRx.ReplaceFirstFunc(text, func(m *rmatch) string {
 			return b.inline(&Inline{Context: "anchor", Text: m.Group(2), hasText: m.Has(2), Type: "bibref", ID: m.Group(1)})
 		})
 	}
 
 	if (foundSquareBracket && strings.Contains(text, "[[")) || (foundMacroish && strings.Contains(text, "or:")) {
-		text = inlineAnchorRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineAnchorRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			if m.Has(1) {
 				return m.Group(0)[1:]
 			}
@@ -723,7 +723,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if (strings.Contains(text, "&") && strings.Contains(text, ";&l")) || (foundMacroish && strings.Contains(text, "xref:")) {
-		text = inlineXrefMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineXrefMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			if strings.HasPrefix(all, `\`) {
 				return all[1:]
@@ -861,7 +861,7 @@ func (b *Block) subMacros(text string) string {
 	}
 
 	if foundMacroish && strings.Contains(text, "tnote") {
-		text = inlineFootnoteMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineFootnoteMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			all := m.Group(0)
 			if strings.HasPrefix(all, `\`) {
 				return all[1:]
@@ -961,7 +961,7 @@ func (b *Block) subPostReplacements(text string) string {
 		}
 		return strings.Join(append(lines, last), "\n")
 	} else if strings.Contains(text, "+") && strings.Contains(text, " +") {
-		return hardLineBreakRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		return hardLineBreakRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			return b.inline(&Inline{Context: "break", Text: m.Group(1), hasText: true, Type: "line"})
 		})
 	}
@@ -982,10 +982,10 @@ func (b *Block) subCallouts(text string) string {
 		if lc != "" {
 			pre = rx.Quote(lc) + " ?"
 		}
-		re = rx.MustCompile(`(` + pre + `)?(\\)?&lt;()(\d+|\.)&gt;(?=(?: ?\\?&lt;(?:\d+|\.)&gt;)*$)`)
+		re = rxScan(`(` + pre + `)?(\\)?&lt;()(\d+|\.)&gt;(?=(?: ?\\?&lt;(?:\d+|\.)&gt;)*$)`)
 	}
 	autonum := 0
-	return re.ReplaceAllFunc(text, func(m *rx.Match) string {
+	return re.ReplaceAllFunc(text, func(m *rmatch) string {
 		if m.Has(2) {
 			return strings.Replace(m.Group(0), `\`, "", 1)
 		}
@@ -1007,7 +1007,7 @@ func (b *Block) subCallouts(text string) string {
 func (b *Block) extractPassthroughs(text string) string {
 	compat := b.Document.compatMode
 	if strings.Contains(text, "++") || strings.Contains(text, "$$") || strings.Contains(text, "ss:") {
-		text = inlinePassMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlinePassMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			preceding := ""
 			var p passthru
 			if m.Has(4) {
@@ -1078,7 +1078,7 @@ func (b *Block) extractPassthroughs(text string) string {
 		trigger = strings.Contains(text, "`")
 	}
 	if trigger {
-		text = passRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = passRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			preceding := m.Group(1)
 			attrlist, hasAttrlist := "", false
 			if m.Has(4) {
@@ -1146,7 +1146,7 @@ func (b *Block) extractPassthroughs(text string) string {
 		})
 	}
 	if strings.Contains(text, ":") && (strings.Contains(text, "stem:") || strings.Contains(text, "math:")) {
-		text = inlineStemMacroRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+		text = inlineStemMacroRx.ReplaceAllFunc(text, func(m *rmatch) string {
 			if strings.HasPrefix(m.Group(0), `\`) {
 				return m.Group(0)[1:]
 			}
@@ -1183,7 +1183,7 @@ func (b *Block) restorePassthroughs(text string) string {
 	}
 	b.passDepth++
 	defer func() { b.passDepth-- }()
-	return passSlotRx.ReplaceAllFunc(text, func(m *rx.Match) string {
+	return passSlotRx.ReplaceAllFunc(text, func(m *rmatch) string {
 		idx := atoi(m.Group(1))
 		if len(m.Group(1)) > 9 || idx >= len(b.passthroughs) {
 			return "??pass??"
@@ -1338,7 +1338,7 @@ func (b *Block) extractAttributesFromTextOpt(text string) (string, map[string]st
 	return "", attrs, false
 }
 
-func (b *Block) convertQuotedText(m *rx.Match, typ string, constrained bool) string {
+func (b *Block) convertQuotedText(m *rmatch, typ string, constrained bool) string {
 	unescapedAttrs := ""
 	if strings.HasPrefix(m.Group(0), `\`) {
 		if constrained && m.Has(2) {

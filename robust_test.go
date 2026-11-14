@@ -107,8 +107,8 @@ func TestMutatedCorpus(t *testing.T) {
 
 // TestPathological checks inputs designed to stress nesting and unterminated
 // constructs.
-func TestPathological(t *testing.T) {
-	cases := map[string]string{
+func pathologicalCases() map[string]string {
+	return map[string]string{
 		"deep ulist":          deepList("*", 60),
 		"deep olist":          deepList(".", 60),
 		"deep quote":          strings.Repeat("> ", 200) + "x\n",
@@ -162,6 +162,12 @@ func TestPathological(t *testing.T) {
 		"leveloffset huge":    ":leveloffset: 99999999999999999999\n\n= T\n\n== S\n",
 		"toc levels":          ":toc:\n:toclevels: -5\n:sectnumlevels: 99\n:sectnums:\n\n== a\n\n=== b\n",
 	}
+}
+
+// TestPathological checks inputs designed to stress nesting and unterminated
+// constructs.
+func TestPathological(t *testing.T) {
+	cases := pathologicalCases()
 	for _, doctype := range []string{"article", "book", "manpage", "inline"} {
 		for name, src := range cases {
 			opts := Options{Safe: SafeSecure, Doctype: doctype, Standalone: doctype == "book"}

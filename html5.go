@@ -6,8 +6,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 // This file is a port of Asciidoctor's converter/html5.rb.
@@ -22,12 +20,12 @@ const (
 )
 
 var (
-	dropAnchorRx         = rx.MustCompile(`<(?:a\b[^>]*|/a)>`)
-	leadingAnchorsRx     = rx.MustCompile(`^(?:<a id="[^"]+"></a>)+`)
-	stemBreakRx          = rx.MustCompile(` *\\\n(?:\\?\n)*|\n\n+`)
-	svgPreambleRx        = rx.MustCompile(`\A.*?(?=<svg[\s>])`, "m")
-	svgStartTagRx        = rx.MustCompile(`\A<svg(?:\s[^>]*)?>`)
-	dimensionAttributeRx = rx.MustCompile(`\s(?:width|height|style)=(["']).*?\1`)
+	dropAnchorRx         = rxScan(`<(?:a\b[^>]*|/a)>`)
+	leadingAnchorsRx     = rxScan(`^(?:<a id="[^"]+"></a>)+`)
+	stemBreakRx          = rxScan(` *\\\n(?:\\?\n)*|\n\n+`)
+	svgPreambleRx        = rxScan(`\A.*?(?=<svg[\s>])`, "m")
+	svgStartTagRx        = rxScan(`\A<svg(?:\s[^>]*)?>`)
+	dimensionAttributeRx = rxScan(`\s(?:width|height|style)=(["']).*?\1`)
 )
 
 type html5Converter struct {
@@ -981,7 +979,7 @@ func (b *Block) readSVG(target string, attrs map[string]string) (string, bool) {
 		return "", false
 	}
 	if !strings.HasPrefix(svg, "<svg") {
-		svg = svgPreambleRx.ReplaceFirstFunc(svg, func(*rx.Match) string { return "" })
+		svg = svgPreambleRx.ReplaceFirstFunc(svg, func(*rmatch) string { return "" })
 	}
 	oldStart, newStart := "", ""
 	for _, dim := range []string{"width", "height"} {
@@ -1139,7 +1137,7 @@ func (c *html5Converter) stem(node *Block) string {
 	}
 	equation := node.content()
 	if node.Style == "asciimath" && strings.Contains(equation, "\n") {
-		equation = stemBreakRx.ReplaceAllFunc(equation, func(m *rx.Match) string {
+		equation = stemBreakRx.ReplaceAllFunc(equation, func(m *rmatch) string {
 			return close + strings.Repeat("\n<br"+c.sl()+">", strings.Count(m.Group(0), "\n")-1) + "\n" + open
 		})
 	}

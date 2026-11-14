@@ -3,8 +3,6 @@ package adocgo
 import (
 	"strconv"
 	"strings"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 // This file is a port of Asciidoctor's parser.rb.
@@ -1035,7 +1033,7 @@ func setSourceDefaults(attributes, docAttrs map[string]string) {
 	}
 }
 
-func admonitionMatch(ch0 byte, line string) *rx.Match {
+func admonitionMatch(ch0 byte, line string) *rmatch {
 	switch ch0 {
 	case 'N', 'T', 'I', 'W', 'C':
 		if strings.Contains(line, ":") {
@@ -1736,7 +1734,7 @@ func processAttributeEntries(reader *Reader, document *Document) {
 	}
 }
 
-func processAttributeEntry(reader *Reader, document *Document, attributes map[string]string, m *rx.Match) bool {
+func processAttributeEntry(reader *Reader, document *Document, attributes map[string]string, m *rmatch) bool {
 	if m == nil {
 		if !reader.HasMoreLines() {
 			return false

@@ -3,8 +3,6 @@ package adocgo
 import (
 	"strings"
 	"unicode/utf8"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 const rubySpace = " \t\n\v\f\r"
@@ -38,7 +36,7 @@ func rubySplitN(s, sep string, n int) []string {
 }
 
 // rubySplitRx emulates String#split(regexp), dropping trailing empty fields.
-func rubySplitRx(s string, re *rx.Regexp) []string {
+func rubySplitRx(s string, re *scanner) []string {
 	if s == "" {
 		return nil
 	}

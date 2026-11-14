@@ -3,8 +3,6 @@ package adocgo
 import (
 	"strconv"
 	"strings"
-
-	"github.com/jdkato/adocgo/internal/rx"
 )
 
 func parseList(reader *Reader, listType string, parent *Block, style string) *Block {
@@ -26,7 +24,7 @@ func parseList(reader *Reader, listType string, parent *Block, style string) *Bl
 	return list
 }
 
-func parseDescriptionList(reader *Reader, m *rx.Match, parent *Block) *Block {
+func parseDescriptionList(reader *Reader, m *rmatch, parent *Block) *Block {
 	list := newList(parent, "dlist")
 	sibling := descriptionListSiblingRx[m.Group(2)]
 	current := parseDlistItem(reader, list, m, sibling)
@@ -49,7 +47,7 @@ func parseDescriptionList(reader *Reader, m *rx.Match, parent *Block) *Block {
 	return list
 }
 
-func parseCalloutList(reader *Reader, m *rx.Match, parent *Block, callouts *callouts) *Block {
+func parseCalloutList(reader *Reader, m *rmatch, parent *Block, callouts *callouts) *Block {
 	list := newList(parent, "colist")
 	autonum := 0
 	for {
@@ -79,7 +77,7 @@ func parseCalloutList(reader *Reader, m *rx.Match, parent *Block, callouts *call
 	return list
 }
 
-func parseDlistItem(reader *Reader, list *Block, m *rx.Match, sibling *rx.Regexp) *DlistEntry {
+func parseDlistItem(reader *Reader, list *Block, m *rmatch, sibling *scanner) *DlistEntry {
 	termText := m.Group(1)
 	term := newListItem(list, termText, true)
 	if strings.HasPrefix(termText, "[[") {
@@ -101,7 +99,7 @@ func parseDlistItem(reader *Reader, list *Block, m *rx.Match, sibling *rx.Regexp
 	return entry
 }
 
-func parseListItem(reader *Reader, list *Block, m *rx.Match, siblingTrait string, _ *rx.Regexp, style string) *Block {
+func parseListItem(reader *Reader, list *Block, m *rmatch, siblingTrait string, _ *scanner, style string) *Block {
 	listType := list.Context
 	itemText := m.Group(2)
 	item := newListItem(list, itemText, true)
@@ -157,7 +155,7 @@ func parseListItem(reader *Reader, list *Block, m *rx.Match, siblingTrait string
 	return item
 }
 
-func parseListItemBody(reader *Reader, list, item *Block, listType, siblingTrait string, siblingRx *rx.Regexp, hasText bool) {
+func parseListItemBody(reader *Reader, list, item *Block, listType, siblingTrait string, siblingRx *scanner, hasText bool) {
 	dlist := listType == "dlist"
 	reader.Shift()
 	itemReader := newListItemReader(readLinesForListItem(reader, listType, siblingTrait, siblingRx, hasText))
@@ -195,7 +193,7 @@ type listLine struct {
 	marker bool // list continuation marker (string or placeholder)
 }
 
-func nestedListType(line string, withinNested bool) (string, *rx.Match) {
+func nestedListType(line string, withinNested bool) (string, *rmatch) {
 	if withinNested {
 		if m := descriptionListRx.Find(line); m != nil {
 			return "dlist", m
@@ -210,7 +208,7 @@ func nestedListType(line string, withinNested bool) (string, *rx.Match) {
 	return "", nil
 }
 
-func readLinesForListItem(reader *Reader, listType, siblingTrait string, siblingRx *rx.Regexp, hasText bool) []listLine {
+func readLinesForListItem(reader *Reader, listType, siblingTrait string, siblingRx *scanner, hasText bool) []listLine {
 	var buffer []listLine
 	const (
 		inactive = iota
@@ -435,7 +433,7 @@ func resolveOrderedListMarker(marker string) (string, string) {
 	return marker, ""
 }
 
-func isSiblingListItem(line, listType, siblingTrait string, siblingRx *rx.Regexp) bool {
+func isSiblingListItem(line, listType, siblingTrait string, siblingRx *scanner) bool {
 	if siblingRx != nil {
 		return siblingRx.MatchString(line)
 	}
