@@ -2,6 +2,7 @@ package adocgo
 
 import (
 	"strings"
+	"sync"
 	"unicode/utf8"
 )
 
@@ -70,27 +71,37 @@ func (sc *scanner) run(m *rmatch, s string, from int) bool {
 	return ok
 }
 
+// matchPool recycles the scratch match used while scanning. Scanners are
+// called through function values, which makes their arguments escape to
+// the heap; pooling keeps unsuccessful scans allocation-free.
+var matchPool = sync.Pool{New: func() any { return new(rmatch) }}
+
 // Find returns the first match in s or nil.
 func (sc *scanner) Find(s string) *rmatch { return sc.FindAt(s, 0) }
 
 // FindAt returns the first match in s starting at or after from, or nil.
 func (sc *scanner) FindAt(s string, from int) *rmatch {
-	var m rmatch
-	if sc.run(&m, s, from) {
-		return &m
+	m := matchPool.Get().(*rmatch)
+	if sc.run(m, s, from) {
+		return m // handed to the caller, not returned to the pool
 	}
+	m.s = ""
+	matchPool.Put(m)
 	return nil
 }
 
 // MatchString reports whether s contains a match.
 func (sc *scanner) MatchString(s string) bool {
-	var m rmatch
-	return sc.run(&m, s, 0)
+	m := matchPool.Get().(*rmatch)
+	ok := sc.run(m, s, 0)
+	m.s = ""
+	matchPool.Put(m)
+	return ok
 }
 
 // MatchAt matches anchored at pos.
 func (sc *scanner) MatchAt(s string, pos int) *rmatch {
-	var m rmatch
+	m := matchPool.Get().(*rmatch)
 	c := m.c[:2*(sc.n+1)]
 	for i := range c {
 		c[i] = -1
@@ -100,10 +111,11 @@ func (sc *scanner) MatchAt(s string, pos int) *rmatch {
 		scanCheck(sc, s, pos, true, c, ok)
 	}
 	if !ok {
+		matchPool.Put(m)
 		return nil
 	}
 	m.s = s
-	return &m
+	return m
 }
 
 // FindAll returns all successive non-overlapping matches.
@@ -131,16 +143,20 @@ func (sc *scanner) FindAll(s string) []*rmatch {
 
 // ReplaceAllFunc replaces every match with the result of f (Ruby gsub).
 func (sc *scanner) ReplaceAllFunc(s string, f func(m *rmatch) string) string {
-	var m rmatch
-	if !sc.run(&m, s, 0) {
+	m := matchPool.Get().(*rmatch)
+	defer func() {
+		m.s = ""
+		matchPool.Put(m)
+	}()
+	if !sc.run(m, s, 0) {
 		return s
 	}
 	var b strings.Builder
-	b.Grow(len(s) + len(s)/4)
+	b.Grow(len(s) + 16)
 	last := 0
 	for {
 		b.WriteString(s[last:m.c[0]])
-		b.WriteString(f(&m))
+		b.WriteString(f(m))
 		last = m.c[1]
 		pos := last
 		if m.c[1] == m.c[0] {
@@ -152,7 +168,7 @@ func (sc *scanner) ReplaceAllFunc(s string, f func(m *rmatch) string) string {
 			pos += sz
 			last = pos
 		}
-		if !sc.run(&m, s, pos) {
+		if !sc.run(m, s, pos) {
 			break
 		}
 	}
