@@ -13,6 +13,8 @@ type quoteSub struct {
 	typ         string
 	constrained bool
 	re          *scanner
+	// mark is a byte every match contains (part of the formatting mark).
+	mark byte
 }
 
 var quoteSubs, quoteSubsCompat []quoteSub
@@ -21,6 +23,8 @@ type replacement struct {
 	re      *scanner
 	repl    string
 	restore string
+	// need is a literal every match contains.
+	need string
 }
 
 var intrinsicAttributes = map[string]string{

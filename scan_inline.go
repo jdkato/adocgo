@@ -384,9 +384,9 @@ func isBlankRune(r rune) bool {
 }
 
 var replacements = []replacement{
-	{escLiteralScanner(`\\?\(C\)`, "(C)"), "&#169;", "none"},
-	{escLiteralScanner(`\\?\(R\)`, "(R)"), "&#174;", "none"},
-	{escLiteralScanner(`\\?\(TM\)`, "(TM)"), "&#8482;", "none"},
+	{escLiteralScanner(`\\?\(C\)`, "(C)"), "&#169;", "none", "(C)"},
+	{escLiteralScanner(`\\?\(R\)`, "(R)"), "&#174;", "none", "(R)"},
+	{escLiteralScanner(`\\?\(TM\)`, "(TM)"), "&#8482;", "none", "(TM)"},
 	{newScanner(`(?: |\n|^|\\)--(?: |\n|$)`, "", 0, func(s string, from int, c []int) bool {
 		for i := from; i < len(s); i++ {
 			j := strings.Index(s[i:], "--")
@@ -412,7 +412,7 @@ var replacements = []replacement{
 			return true
 		}
 		return false
-	}), "&#8201;&#8212;&#8201;", "none"},
+	}), "&#8201;&#8212;&#8201;", "none", "--"},
 	{newScanner(`(\p{Word})\\?--(?=\p{Word})`, "", 1, func(s string, from int, c []int) bool {
 		for i := from; i < len(s); i++ {
 			j := strings.Index(s[i:], "--")
@@ -439,9 +439,9 @@ var replacements = []replacement{
 			return true
 		}
 		return false
-	}), "&#8212;&#8203;", "leading"},
-	{escLiteralScanner(`\\?\.\.\.`, "..."), "&#8230;&#8203;", "none"},
-	{escLiteralScanner("\\\\?`'", "`'"), "&#8217;", "none"},
+	}), "&#8212;&#8203;", "leading", "--"},
+	{escLiteralScanner(`\\?\.\.\.`, "..."), "&#8230;&#8203;", "none", "..."},
+	{escLiteralScanner("\\\\?`'", "`'"), "&#8217;", "none", "`'"},
 	{newScanner(`(\p{Alnum})\\?'(?=\p{Alpha})`, "", 1, func(s string, from int, c []int) bool {
 		for i := from; i < len(s); i++ {
 			j := strings.IndexByte(s[i:], '\'')
@@ -468,11 +468,11 @@ var replacements = []replacement{
 			return true
 		}
 		return false
-	}), "&#8217;", "leading"},
-	{escLiteralScanner(`\\?-&gt;`, "-&gt;"), "&#8594;", "none"},
-	{escLiteralScanner(`\\?=&gt;`, "=&gt;"), "&#8658;", "none"},
-	{escLiteralScanner(`\\?&lt;-`, "&lt;-"), "&#8592;", "none"},
-	{escLiteralScanner(`\\?&lt;=`, "&lt;="), "&#8656;", "none"},
+	}), "&#8217;", "leading", "'"},
+	{escLiteralScanner(`\\?-&gt;`, "-&gt;"), "&#8594;", "none", "-&gt;"},
+	{escLiteralScanner(`\\?=&gt;`, "=&gt;"), "&#8658;", "none", "=&gt;"},
+	{escLiteralScanner(`\\?&lt;-`, "&lt;-"), "&#8592;", "none", "&lt;-"},
+	{escLiteralScanner(`\\?&lt;=`, "&lt;="), "&#8656;", "none", "&lt;="},
 	{newScanner(`\\?(&)amp;((?:[a-zA-Z][a-zA-Z]+\d{0,2}|#\d\d\d{0,4}|#x[\da-fA-F][\da-fA-F][\da-fA-F]{0,3});)`, "", 2, func(s string, from int, c []int) bool {
 		for i := from; i < len(s); i++ {
 			j := strings.Index(s[i:], "&amp;")
@@ -488,7 +488,7 @@ var replacements = []replacement{
 			}
 		}
 		return false
-	}), "", "bounding"},
+	}), "", "bounding", "&amp;"},
 }
 
 // ---------------------------------------------------------------------------
@@ -647,24 +647,24 @@ func constrainedScanner(pat, open, closer, excl, laExcl string) *scanner {
 
 func init() {
 	quoteSubs = []quoteSub{
-		{"strong", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\*\*(.+?)\*\*`, "m", "**", false)},
-		{"strong", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?\*(\S|\S.*?\S)\*(?!\p{Word})`, "*", "*", ";:}", "")},
-		{"double", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?\"`(\\S|\\S.*?\\S)`\"(?!\\p{Word})", "\"`", "`\"", ";:}", "")},
-		{"single", true, constrainedScanner("(^|[^\\p{Word};:`}])(?:\\[([^\\]]+)\\])?'`(\\S|\\S.*?\\S)`'(?!\\p{Word})", "'`", "`'", ";:`}", "")},
-		{"monospaced", false, unconstrainedScanner("\\\\?(?:\\[([^\\]]+)\\])?``(.+?)``", "m", "``", false)},
-		{"monospaced", true, constrainedScanner("(^|[^\\p{Word};:\"'`}])(?:\\[([^\\]]+)\\])?`(\\S|\\S.*?\\S)`(?![\\p{Word}\"'`])", "`", "`", ";:\"'`}", "\"'`")},
-		{"emphasis", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?__(.+?)__`, "m", "__", false)},
-		{"emphasis", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?_(\S|\S.*?\S)_(?!\p{Word})`, "_", "_", ";:}", "")},
-		{"mark", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?##(.+?)##`, "m", "##", false)},
-		{"mark", true, constrainedScanner(`(^|[^\p{Word}&;:}])(?:\[([^\]]+)\])?#(\S|\S.*?\S)#(?!\p{Word})`, "#", "#", "&;:}", "")},
-		{"superscript", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\^(\S+?)\^`, "", "^", true)},
-		{"subscript", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?~(\S+?)~`, "", "~", true)},
+		{"strong", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\*\*(.+?)\*\*`, "m", "**", false), '*'},
+		{"strong", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?\*(\S|\S.*?\S)\*(?!\p{Word})`, "*", "*", ";:}", ""), '*'},
+		{"double", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?\"`(\\S|\\S.*?\\S)`\"(?!\\p{Word})", "\"`", "`\"", ";:}", ""), '`'},
+		{"single", true, constrainedScanner("(^|[^\\p{Word};:`}])(?:\\[([^\\]]+)\\])?'`(\\S|\\S.*?\\S)`'(?!\\p{Word})", "'`", "`'", ";:`}", ""), '`'},
+		{"monospaced", false, unconstrainedScanner("\\\\?(?:\\[([^\\]]+)\\])?``(.+?)``", "m", "``", false), '`'},
+		{"monospaced", true, constrainedScanner("(^|[^\\p{Word};:\"'`}])(?:\\[([^\\]]+)\\])?`(\\S|\\S.*?\\S)`(?![\\p{Word}\"'`])", "`", "`", ";:\"'`}", "\"'`"), '`'},
+		{"emphasis", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?__(.+?)__`, "m", "__", false), '_'},
+		{"emphasis", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?_(\S|\S.*?\S)_(?!\p{Word})`, "_", "_", ";:}", ""), '_'},
+		{"mark", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?##(.+?)##`, "m", "##", false), '#'},
+		{"mark", true, constrainedScanner(`(^|[^\p{Word}&;:}])(?:\[([^\]]+)\])?#(\S|\S.*?\S)#(?!\p{Word})`, "#", "#", "&;:}", ""), '#'},
+		{"superscript", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\^(\S+?)\^`, "", "^", true), '^'},
+		{"subscript", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?~(\S+?)~`, "", "~", true), '~'},
 	}
 	c := append([]quoteSub(nil), quoteSubs...)
-	c[2] = quoteSub{"double", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?``(\\S|\\S.*?\\S)''(?!\\p{Word})", "``", "''", ";:}", "")}
-	c[3] = quoteSub{"single", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?`(\\S|\\S.*?\\S)'(?!\\p{Word})", "`", "'", ";:}", "")}
-	c[4] = quoteSub{"monospaced", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\+\+(.+?)\+\+`, "m", "++", false)}
-	c[5] = quoteSub{"monospaced", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?\+(\S|\S.*?\S)\+(?!\p{Word})`, "+", "+", ";:}", "")}
-	emph := quoteSub{"emphasis", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?'(\S|\S.*?\S)'(?!\p{Word})`, "'", "'", ";:}", "")}
+	c[2] = quoteSub{"double", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?``(\\S|\\S.*?\\S)''(?!\\p{Word})", "``", "''", ";:}", ""), '`'}
+	c[3] = quoteSub{"single", true, constrainedScanner("(^|[^\\p{Word};:}])(?:\\[([^\\]]+)\\])?`(\\S|\\S.*?\\S)'(?!\\p{Word})", "`", "'", ";:}", ""), '`'}
+	c[4] = quoteSub{"monospaced", false, unconstrainedScanner(`\\?(?:\[([^\]]+)\])?\+\+(.+?)\+\+`, "m", "++", false), '+'}
+	c[5] = quoteSub{"monospaced", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?\+(\S|\S.*?\S)\+(?!\p{Word})`, "+", "+", ";:}", ""), '+'}
+	emph := quoteSub{"emphasis", true, constrainedScanner(`(^|[^\p{Word};:}])(?:\[([^\]]+)\])?'(\S|\S.*?\S)'(?!\p{Word})`, "'", "'", ";:}", ""), '\''}
 	quoteSubsCompat = append(append(append([]quoteSub(nil), c[:3]...), emph), c[3:]...)
 }

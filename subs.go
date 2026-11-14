@@ -123,6 +123,9 @@ func (b *Block) subQuotes(text string) string {
 	if strings.ContainsAny(text, sniff) {
 		for _, q := range qs {
 			q := q
+			if strings.IndexByte(text, q.mark) < 0 {
+				continue // the formatting mark does not occur at all
+			}
 			text = q.re.ReplaceAllFunc(text, func(m *rmatch) string {
 				return b.convertQuotedText(m, q.typ, q.constrained)
 			})
@@ -254,6 +257,9 @@ func subReplacements(text string) string {
 	}
 	for _, r := range replacements {
 		r := r
+		if !strings.Contains(text, r.need) {
+			continue // the literal part of the pattern does not occur
+		}
 		text = r.re.ReplaceAllFunc(text, func(m *rmatch) string {
 			captured := m.Group(0)
 			if strings.Contains(captured, `\`) {
