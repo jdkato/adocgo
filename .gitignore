@@ -1,0 +1,5 @@
+/adocgo
+/cmd/adocgo/adocgo
+*.test
+*.out
+.DS_Store
