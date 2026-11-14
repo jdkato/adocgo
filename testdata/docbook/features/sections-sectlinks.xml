@@ -1,0 +1,11 @@
+<section xml:id="_leading_anchor">
+<title><anchor xml:id="a1" xreflabel="[a1]"/>Leading anchor</title>
+
+</section>
+<section xml:id="_plain">
+<title>Plain</title>
+<section xml:id="_with_link">
+<title>With <link xl:href="https://x.org">link</link></title>
+
+</section>
+</section>

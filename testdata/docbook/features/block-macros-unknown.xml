@@ -1,0 +1,11 @@
+<simpara>foo::bar[baz]</simpara>
+<variablelist>
+<varlistentry>
+<term>image</term>
+<listitem>
+<simpara>image::[]</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+<simpara>video::[]</simpara>
+<simpara>include::[]</simpara>

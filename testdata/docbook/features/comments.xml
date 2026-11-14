@@ -1,0 +1,5 @@
+<simpara>para
+continues</simpara>
+<simpara>para /// not comment</simpara>
+<simpara>///
+triple slash line</simpara>

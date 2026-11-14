@@ -1,0 +1,105 @@
+<informalexample>
+<simpara>example</simpara>
+</informalexample>
+<example xml:id="e1" role="r">
+<title>Ex</title>
+<simpara>titled</simpara>
+</example>
+<informalexample>
+<simpara>collapsed</simpara>
+</informalexample>
+<example xml:id="cid" role="x">
+<title>Summary</title>
+<simpara>open collapsed</simpara>
+</example>
+<sidebar>
+<simpara>sidebar</simpara>
+</sidebar>
+<sidebar xml:id="s1" role="r">
+<title>Side</title>
+<simpara>titled sidebar</simpara>
+</sidebar>
+<blockquote>
+<simpara>quote</simpara>
+</blockquote>
+<blockquote>
+<attribution>
+Author Name
+<citetitle>Source Title</citetitle>
+</attribution>
+<simpara>attributed</simpara>
+</blockquote>
+<blockquote>
+<attribution>
+Author
+</attribution>
+<simpara>para quote</simpara>
+</blockquote>
+<blockquote>
+<attribution>
+Thomas Jefferson
+<citetitle>Papers</citetitle>
+</attribution>
+<simpara>I hold it.</simpara>
+</blockquote>
+<blockquote>
+<attribution>
+Someone
+<citetitle>Somewhere</citetitle>
+</attribution>
+<simpara>markdown quote
+second line</simpara>
+<blockquote>
+<simpara>nested</simpara>
+</blockquote>
+</blockquote>
+<blockquote>
+<attribution>
+Poet
+<citetitle>Poem</citetitle>
+</attribution>
+<literallayout>line one
+  line two
+
+stanza</literallayout>
+</blockquote>
+<blockquote>
+<literallayout>para verse
+line <emphasis role="strong">two</emphasis></literallayout>
+</blockquote>
+<formalpara xml:id="o1" role="r">
+<title>Open</title>
+<para>
+<simpara>open</simpara>
+</para>
+</formalpara>
+<abstract>
+<simpara>abstract open</simpara>
+</abstract>
+<abstract>
+<simpara>Abstract para.</simpara>
+</abstract>
+<sidebar>
+<simpara>para sidebar</simpara>
+</sidebar>
+<informalexample>
+<simpara>para example</simpara>
+</informalexample>
+
+<literallayout class="monospaced">literal</literallayout>
+<literallayout class="monospaced">para literal</literallayout>
+<literallayout class="monospaced">indented literal
+ more</literallayout>
+<formalpara xml:id="l1" role="r">
+<title>Lit title</title>
+<para>
+<literallayout class="monospaced">x</literallayout>
+</para>
+</formalpara>
+<informalexample>
+<simpara>nested example outer</simpara>
+<informalexample>
+<simpara>inner</simpara>
+</informalexample>
+</informalexample>
+<simpara>unterminated open</simpara>

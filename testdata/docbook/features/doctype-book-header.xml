@@ -1,0 +1,11 @@
+<preface>
+<title></title>
+<simpara>preamble</simpara>
+</preface>
+<part xml:id="_part">
+<title>Part</title>
+<chapter xml:id="_chapter">
+<title>Chapter</title>
+<simpara>text book {backend-html5-doctype-book}</simpara>
+</chapter>
+</part>

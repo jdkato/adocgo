@@ -1,0 +1,52 @@
+= Doc
+:multi: line one \
+line two \
+  line three
+:hard: first + \
+second
+:pass: pass:[<b>raw</b>]
+:passq: pass:q[*bold*]
+:url: https://example.org
+:name with space: x
+:Mixed-Case: mc
+:empty:
+:!sectids:
+:esc: \{multi}
+
+{multi}
+
+{hard}
+
+{pass} {passq}
+
+{url}[site] {mixed-case} {MIXED-CASE} [{empty}] {esc}
+
+\{multi} {multi\} {nosuch}
+
+== Title without id
+
+:sectids:
+
+== Title with id
+
+{set:late:val}
+{late}
+
+:late!:
+{late} dropped?
+
+line with {nosuch} stays
+:attribute-missing: drop
+
+line with {nosuch} dropped ref
+:attribute-missing: drop-line
+
+line with {nosuch} dropped line
+kept line
+:attribute-missing: warn
+
+warn {nosuch}
+
+{lt}{gt}{amp}{startsb}{endsb}{vbar}{caret}{asterisk}{tilde}{plus}{backslash}{backtick}{two-colons}{two-semicolons}{nbsp}{deg}{zwsp}{quot}{apos}{lsquo}{rsquo}{ldquo}{rdquo}{wj}{brvbar}{pp}{cpp}{blank}{empty}{sp}!
+
+{asciidoctor-version} {backend} {doctype} {basebackend} {filetype} {outfilesuffix} {safe-mode-name} {safe-mode-level} {docname} {docfilesuffix} {localyear} {docyear} {docdate} {doctime} {localdate}

@@ -1,0 +1,20 @@
+<simpara>Simple para.</simpara>
+<literallayout class="monospaced">Literal para.</literallayout>
+<simpara>Para then
+ indented line stays.</simpara>
+<formalpara xml:id="pid" role="prole">
+<title>Titled</title>
+<para>Para.</para>
+</formalpara>
+<simpara>one<?asciidoc-br?>
+two</simpara>
+<simpara>Line ending in backslash \
+next</simpara>
+<simpara>Normal styled.</simpara>
+<simpara>Para interrupted by</simpara>
+<screen>listing</screen>
+<simpara>Para interrupted by attr</simpara>
+<simpara>next para</simpara>
+<simpara>Para then list
+* not a list item (needs blank)</simpara>
+<simpara>open after</simpara>

@@ -1,0 +1,47 @@
+<note>
+<simpara>Note.</simpara>
+</note>
+<tip>
+<simpara>Tip</simpara>
+</tip>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/flag.png"/>
+</imageobject>
+<textobject><phrase>flag</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject role="x">
+<imageobject>
+<imagedata fileref="./images/icons/bolt.png"/>
+</imageobject>
+<textobject><phrase>bolt</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</inlinemediaobject></simpara>
+<screen>code <co xml:id="CO1-1"/></screen>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>Callout</para>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10003; done</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; todo</simpara>
+</listitem>
+</itemizedlist>
+</callout>
+</calloutlist>
+<simpara><menuchoice><guimenu>File</guimenu> <guimenuitem>Save</guimenuitem></menuchoice> <keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo></simpara>

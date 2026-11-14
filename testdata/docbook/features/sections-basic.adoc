@@ -1,0 +1,64 @@
+= Document Title
+
+preamble
+
+== Level 1
+
+=== Level 2
+
+==== Level 3
+
+===== Level 4
+
+====== Level 5
+
+======= Too deep
+
+== Trailing equals ==
+
+Setext One
+----------
+
+Setext Two
+~~~~~~~~~~
+
+Setext Three
+^^^^^^^^^^^^
+
+Setext Four
++++++++++++
+
+# Markdown one
+
+## Markdown two
+
+[[custom-id]]
+== Custom id
+
+[#short-id.srole]
+== Shorthand id
+
+== Inline id [[inline-id]]
+
+== Dup
+
+== Dup
+
+=== Dup
+
+== Title with *bold* & <angle> "quotes" and `code`
+
+== Über Ünïcödé 日本語
+
+== trailing space  
+
+[discrete]
+== Discrete heading
+
+[float]
+=== Float heading
+
+[discrete#did.drole]
+==== Discrete with id
+
+== A.B-C_D e/f (g) h's

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc maxdepth="3"?>
+<?asciidoc-numbered maxdepth="2"?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Book Title</title>
+<date>2023-11-14</date>
+<author>
+<personname>
+<firstname>Author</firstname>
+<surname>Name</surname>
+</personname>
+</author>
+<authorinitials>AN</authorinitials>
+</info>
+<preface>
+<title></title>
+<simpara>Preamble becomes a preface.</simpara>
+</preface>
+<part xml:id="_part_one">
+<title>Part One</title>
+<partintro>
+<simpara>Intro.</simpara>
+</partintro>
+<chapter xml:id="_chapter">
+<title>Chapter</title>
+<simpara>text</simpara>
+</chapter>
+<appendix xml:id="_appendix">
+<title>Appendix</title>
+<simpara>text</simpara>
+</appendix>
+</part>
+</book>

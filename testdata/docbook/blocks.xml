@@ -1,0 +1,125 @@
+<formalpara xml:id="p1" role="lead" xreflabel="Para &lt;i&gt;Ref&lt;/i&gt;">
+<title>Para title</title>
+<para>Paragraph.</para>
+</formalpara>
+<note>
+<simpara>Admonition para.</simpara>
+</note>
+<tip xml:id="t1" role="r">
+<title>Titled</title>
+<simpara>Compound tip.</simpara>
+<simpara>Two.</simpara>
+</tip>
+<informalexample>
+<simpara>informal example</simpara>
+</informalexample>
+<example xml:id="ex" role="r">
+<title>Example</title>
+<simpara>formal</simpara>
+</example>
+<sidebar>
+<simpara>sidebar</simpara>
+</sidebar>
+<sidebar xml:id="s1">
+<title>Side</title>
+<simpara>para sidebar</simpara>
+</sidebar>
+<blockquote>
+<attribution>
+Author
+<citetitle>Source</citetitle>
+</attribution>
+<simpara>quote</simpara>
+</blockquote>
+<epigraph role="epigraph">
+<title>Epi</title>
+<attribution>
+Who
+</attribution>
+<simpara>short epigraph</simpara>
+</epigraph>
+<blockquote>
+<attribution>
+Poet
+<citetitle>Poem</citetitle>
+</attribution>
+<literallayout>verse
+  line</literallayout>
+</blockquote>
+<epigraph role="epigraph">
+<literallayout>v</literallayout>
+</epigraph>
+<blockquote>
+<attribution>
+Me
+<citetitle>Title</citetitle>
+</attribution>
+<simpara>A quote.</simpara>
+</blockquote>
+<simpara>open</simpara>
+<para xml:id="o1">
+<simpara>open id</simpara>
+</para>
+<para role="orole">
+<simpara>open role</simpara>
+</para>
+<formalpara>
+<title>Open title</title>
+<para>
+<simpara>open titled</simpara>
+</para>
+</formalpara>
+
+<abstract>
+<simpara>An abstract paragraph (not first).</simpara>
+</abstract>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-pagebreak?></simpara>
+<bridgehead xml:id="disc" role="r" renderas="sect2">Bridgehead</bridgehead>
+<raw>&</raw>
+<informalequation>
+<mathphrase><![CDATA[x < y & z]]></mathphrase>
+</informalequation>
+<equation xml:id="eq1">
+<title>Eq</title>
+<alt><![CDATA[\alpha < \beta]]></alt>
+<mathphrase><![CDATA[\alpha < \beta]]></mathphrase>
+</equation>
+<informalequation>
+<mathphrase><![CDATA[a
+
+b]]></mathphrase>
+</informalequation>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<figure xml:id="f1" role="r">
+<title>Fig</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="a.png" contentwidth="100" contentdepth="200" align="center"/>
+</imageobject>
+<textobject><phrase>Alt &amp; &lt;alt&gt;</phrase></textobject>
+</mediaobject>
+</figure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="b.png" width="40%"/>
+</imageobject>
+<textobject><phrase>b</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="b.png" scale="75"/>
+</imageobject>
+<textobject><phrase>b</phrase></textobject>
+</mediaobject>
+</informalfigure>

@@ -1,0 +1,20 @@
+= tool(8)
+Auth Or
+:mansource: Tool 1.0
+:manmanual: Tool Manual
+
+== NAME
+
+tool, tool2 - does things
+
+== SYNOPSIS
+
+*tool* [_OPTION_]
+
+== DESCRIPTION
+
+d
+
+=== Sub
+
+s

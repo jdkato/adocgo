@@ -1,0 +1,3 @@
+'emphasis' `mono` ``double'' `single' +mono+ ++mono++ *bold* _em_ `+pass+` `{backend}`
+[role]'styled' x`y`z \`esc` \'esc'
+`a *b* c` +a *b* c+ `$$a *b*$$`

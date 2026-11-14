@@ -1,0 +1,16 @@
+<simpara><indexterm>
+<primary>one</primary><secondary>two</secondary>
+</indexterm>
+<indexterm>
+<primary>two</primary>
+</indexterm> <indexterm>
+<primary>one</primary><secondary>two</secondary><tertiary>three</tertiary>
+</indexterm>
+<indexterm>
+<primary>two</primary><secondary>three</secondary>
+</indexterm>
+<indexterm>
+<primary>three</primary>
+</indexterm> <indexterm>
+<primary>single</primary>
+</indexterm></simpara>

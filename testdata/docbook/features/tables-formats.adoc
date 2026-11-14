@@ -1,0 +1,51 @@
+[format=csv,options=header]
+|===
+Name,Qty,"Quoted, value"
+Apple,3,"He said ""hi"""
+"Multi
+line",5,x
+,,
+|===
+
+,===
+a,b,c
+1,2,3
+,===
+
+[format=dsv]
+|===
+root:x:0:0
+user\:name:y:1:1
+|===
+
+:===
+a:b:c
+:===
+
+[format=tsv]
+|===
+a	b	c
+1	2	3
+|===
+
+[%header,format=csv,separator=;]
+|===
+a;b;c
+1;2;3
+|===
+
+[separator=¦]
+|===
+¦a ¦b
+¦c ¦d
+|===
+
+[format=csv,cols="1,1a"]
+|===
+x,* y
+|===
+
+[separator=!]
+|===
+!a!b
+|===

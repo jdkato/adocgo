@@ -1,0 +1,10 @@
+= Book
+
+[abstract]
+--
+Book abstract in preamble.
+--
+
+== Ch
+
+x

@@ -1,0 +1,12 @@
+<section xml:id="_one">
+<title>One</title>
+
+</section>
+<section xml:id="_another_level_0">
+<title>Another Level 0</title>
+<simpara>text</simpara>
+<section xml:id="_two">
+<title>Two</title>
+
+</section>
+</section>

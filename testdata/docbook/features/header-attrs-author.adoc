@@ -1,0 +1,7 @@
+= Title
+:author: Mary Sue Johnson
+:email: mary@example.com
+:revnumber: 1.2
+:revdate: Jan 1
+
+{author} {firstname} {middlename} {lastname} {authorinitials} {authorcount}

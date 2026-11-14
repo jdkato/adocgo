@@ -1,0 +1,69 @@
+<programlisting language="ruby" linenumbering="unnumbered">def greet name
+  puts "Hello, #{name}!" <co xml:id="CO1-1"/>
+end</programlisting>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>Say hello</para>
+</callout>
+</calloutlist>
+<formalpara>
+<title>All but inner</title>
+<para>
+<programlisting language="ruby" linenumbering="unnumbered">def bye
+end</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>Wildcards</title>
+<para>
+<programlisting language="ruby" linenumbering="unnumbered">require 'set'
+
+def greet name
+  puts "Hello, #{name}!" <co xml:id="CO2-1"/>
+end
+
+def bye
+  puts 'bye'
+end
+puts 'untagged'</programlisting>
+</para>
+</formalpara>
+<screen>require 'set'
+
+def greet name
+  puts "Hello, #{name}!" <co xml:id="CO2-2"/>
+end
+
+def bye
+  puts 'bye'
+end</screen>
+<screen>puts 'untagged'</screen>
+<screen>require 'set'
+
+
+def bye
+  puts 'bye'
+end
+puts 'untagged'</screen>
+<screen>require 'set'
+
+def greet name
+  puts "Hello, #{name}!" <co xml:id="CO2-3"/>
+end</screen>
+<screen></screen>
+<screen>puts 'untagged'</screen>
+<screen>require 'set'
+
+def greet name
+  puts "Hello, #{name}!" <co xml:id="CO2-4"/>
+end
+
+puts 'untagged'</screen>
+<screen>require 'set'
+
+def greet name
+  puts "Hello, #{name}!" <co xml:id="CO2-5"/>
+end
+
+def bye
+end</screen>

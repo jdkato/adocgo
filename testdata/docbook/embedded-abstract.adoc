@@ -1,0 +1,10 @@
+= Doc
+
+[abstract]
+Leading abstract is dropped from embedded output.
+
+Rest of preamble.
+
+== S
+
+t

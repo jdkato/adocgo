@@ -1,0 +1,8 @@
+<simpara><emphasis role="strong">b</emphasis>old <emphasis>i</emphasis>talic <literal>m</literal>ono <emphasis role="marked">m</emphasis>ark <emphasis role="strong"><emphasis>both</emphasis></emphasis> x<superscript>2</superscript>y<subscript>n</subscript>
+st<emphasis role="strong">ro</emphasis>ng em<emphasis>pha</emphasis>sis mo<literal>nosp</literal>aced hi<emphasis role="marked">ghli</emphasis>ght
+<emphasis role="strong"><phrase role="role">styled</phrase></emphasis> <anchor xml:id="id"/><emphasis>styled</emphasis> <literal role="a b">styled</literal> <phrase role="c">span</phrase>
+<emphasis role="strong">*escaped</emphasis>* <emphasis>_escaped_</emphasis> <literal>`escaped`</literal> <emphasis role="marked">#escaped</emphasis>#
+<emphasis role="strong"> not bold </emphasis> <emphasis> nor this </emphasis>
+<emphasis role="strong"><emphasis role="strong">*strong stars</emphasis><emphasis role="strong"> <emphasis><emphasis>_under</emphasis>_</emphasis>
+</emphasis>multi
+line</emphasis>*</simpara>

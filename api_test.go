@@ -86,6 +86,35 @@ func TestBaseDirAndSafeModes(t *testing.T) {
 	}
 }
 
+func TestDocBookBackend(t *testing.T) {
+	src := []byte("= Title\n\nHello *world*.\n")
+	out, err := Convert(src, Options{Backend: "docbook"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := "<simpara>Hello <emphasis role=\"strong\">world</emphasis>.</simpara>\n"; string(out) != want {
+		t.Errorf("got %q, want %q", out, want)
+	}
+	doc, err := Load(src, Options{Backend: "docbook5", Standalone: true, Attributes: map[string]string{"reproducible": ""}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if doc.Backend != "docbook5" || doc.OutFileSuffix() != ".xml" {
+		t.Errorf("backend %q, suffix %q", doc.Backend, doc.OutFileSuffix())
+	}
+	out, _ = doc.Convert()
+	for _, want := range []string{`<?xml version="1.0" encoding="UTF-8"?>`, `<article xmlns="http://docbook.org/ns/docbook"`, "<title>Title</title>", "</article>\n"} {
+		if !strings.Contains(string(out), want) {
+			t.Errorf("output lacks %q:\n%s", want, out)
+		}
+	}
+	// the backend can also be selected in the document header
+	out, _ = Convert([]byte("= T\n:backend: docbook\n\ntext\n"), Options{})
+	if string(out) != "<simpara>text</simpara>\n" {
+		t.Errorf("header backend: %q", out)
+	}
+}
+
 func TestLoadAST(t *testing.T) {
 	doc, err := Load([]byte("= Title\n\n== Section\n\n* a\n* b\n\n|===\n|x |y\n|===\n"), Options{})
 	if err != nil {

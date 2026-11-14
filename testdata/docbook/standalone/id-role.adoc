@@ -1,0 +1,4 @@
+[#docid.docrole]
+= Doc With Id
+
+<<docid>>

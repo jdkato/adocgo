@@ -1,0 +1,9 @@
+<programlisting language="ruby" linenumbering="unnumbered">puts 1 <co xml:id="CO1-1"/></programlisting>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>co</para>
+</callout>
+</calloutlist>
+<screen linenumbering="unnumbered">none</screen>
+<programlisting language="java" linenumbering="unnumbered">x</programlisting>
+<screen>listing</screen>

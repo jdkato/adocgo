@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>asciidoctor(1)</title>
+<date>2023-11-14</date>
+<authorgroup>
+<author>
+<personname>
+<firstname>Dan</firstname>
+<surname>Allen</surname>
+</personname>
+</author>
+<author>
+<personname>
+<firstname>Sarah</firstname>
+<surname>White</surname>
+</personname>
+</author>
+</authorgroup>
+</info>
+<refentry>
+<refmeta>
+<refentrytitle>asciidoctor</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="source">Asciidoctor 2.0.26</refmiscinfo>
+<refmiscinfo class="manual">Asciidoctor Manual</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>asciidoctor</refname>
+<refpurpose>converts AsciiDoc source files to HTML, DocBook, and other formats</refpurpose>
+</refnamediv>
+<refsynopsisdiv xml:id="_synopsis">
+<title>Synopsis</title>
+<simpara><emphasis role="strong">asciidoctor</emphasis> [<emphasis>OPTION</emphasis>]&#8230;&#8203; <emphasis>FILE</emphasis>&#8230;&#8203;</simpara>
+</refsynopsisdiv>
+<refsection xml:id="_description">
+<title>Description</title>
+<simpara>The asciidoctor(1) command converts the AsciiDoc source file(s) <emphasis>FILE</emphasis> to HTML5, DocBook 5, man(ual) page, and other custom output formats.</simpara>
+<simpara>If <emphasis>FILE</emphasis> is <emphasis>-</emphasis> then the AsciiDoc source is read from standard input.</simpara>
+</refsection>
+<refsection xml:id="_options">
+<title>Options</title>
+<refsection xml:id="_security_settings">
+<title>Security Settings</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">-B, --base-dir</emphasis>=<emphasis>DIR</emphasis></term>
+<listitem>
+<simpara>Base directory containing the document and resources.
+Defaults to the directory containing the source file or, if the source is read from a stream, the working directory.
+When combined with the safe mode setting, can be used to chroot the execution of the program.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-S, --safe-mode</emphasis>=<emphasis>SAFE_MODE</emphasis></term>
+<listitem>
+<simpara>Set safe mode level: <emphasis>unsafe</emphasis>, <emphasis>safe</emphasis>, <emphasis>server</emphasis>, or <emphasis>secure</emphasis>.
+Disables potentially dangerous macros in source files, such as <literal>include::[]</literal>.
+If not set, the safe mode level defaults to <emphasis>unsafe</emphasis> when Asciidoctor is invoked using this script.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">--safe</emphasis></term>
+<listitem>
+<simpara>Set safe mode level to <emphasis>safe</emphasis>.
+Enables include directives, but prevents access to ancestor paths of source file.
+Provided for compatibility with the asciidoc command.
+If not set, the safe mode level defaults to <emphasis>unsafe</emphasis> when Asciidoctor is invoked using this script.</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+<refsection xml:id="_document_settings">
+<title>Document Settings</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">-a, --attribute</emphasis>=<emphasis>ATTRIBUTE</emphasis></term>
+<listitem>
+<simpara>Define, override, or unset a document attribute.
+Command-line attributes take precedence over attributes defined in the source file unless either the name or value ends in <emphasis>@</emphasis>.
+No substitutions are applied to the value.</simpara>
+<simpara><emphasis>ATTRIBUTE</emphasis> is normally formatted as a key-value pair, in the form <emphasis>NAME=VALUE</emphasis>.
+Alternate forms are <emphasis>NAME</emphasis> (where the <emphasis>VALUE</emphasis> defaults to an empty string), <emphasis>NAME!</emphasis> (unsets the <emphasis>NAME</emphasis> attribute), and <emphasis>NAME=VALUE@</emphasis> (or <emphasis>NAME@=VALUE</emphasis>) (where <emphasis>VALUE</emphasis> does not override the <emphasis>NAME</emphasis> attribute if it&#8217;s already defined in the source document).
+A value containing spaces must be enclosed in quotes, in the form <emphasis>NAME="VALUE WITH SPACES"</emphasis>.</simpara>
+<simpara>This option may be specified more than once.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-b, --backend</emphasis>=<emphasis>BACKEND</emphasis></term>
+<listitem>
+<simpara>Backend output file format: <emphasis>html5</emphasis>, <emphasis>docbook5</emphasis>, and <emphasis>manpage</emphasis> are supported out of the box.
+You can also use the backend alias names <emphasis>html</emphasis> (aliased to <emphasis>html5</emphasis>) or <emphasis>docbook</emphasis> (aliased to <emphasis>docbook5</emphasis>).
+Other values can be passed, but if Asciidoctor cannot resolve the backend to a converter, it will fail.
+Defaults to <emphasis>html5</emphasis>.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-d, --doctype</emphasis>=<emphasis>DOCTYPE</emphasis></term>
+<listitem>
+<simpara>Document type: <emphasis>article</emphasis>, <emphasis>book</emphasis>, <emphasis>manpage</emphasis>, or <emphasis>inline</emphasis>.
+Sets the root element when using the <emphasis>docbook</emphasis> backend and the style class on the HTML body element when using the <emphasis>html</emphasis> backend.
+The <emphasis>book</emphasis> document type allows multiple level-0 section titles in a single document.
+The <emphasis>manpage</emphasis> document type enables parsing of metadata necessary to produce a man page.
+The <emphasis>inline</emphasis> document type allows the content of a single paragraph to be formatted and returned without wrapping it in a containing element.
+Defaults to <emphasis>article</emphasis>.</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+<refsection xml:id="_document_conversion">
+<title>Document Conversion</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">-D, --destination-dir</emphasis>=<emphasis>DIR</emphasis></term>
+<listitem>
+<simpara>Destination output directory.
+Defaults to the directory containing the source file or, if the source is read from a stream, the working directory.
+If specified, the directory is resolved relative to the working directory.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-E, --template-engine</emphasis>=<emphasis>NAME</emphasis></term>
+<listitem>
+<simpara>Template engine to use for the custom converter templates.
+The gem with the same name as the engine will be loaded automatically.
+This name is also used to build the full path to the custom converter templates.
+If a template engine is not specified, it will be auto-detected based on the file extension of the custom converter templates found.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-e, --embedded</emphasis></term>
+<listitem>
+<simpara>Output an embeddable document, which excludes the header, the footer, and everything outside the body of the document.
+This option is useful for producing documents that can be inserted into an external template.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-I, --load-path</emphasis>=<emphasis>DIRECTORY</emphasis></term>
+<listitem>
+<simpara>Add the specified directory to the load path, so that <emphasis>-r</emphasis> can load extensions from outside the default Ruby load path.
+This option may be specified more than once.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-n, --section-numbers</emphasis></term>
+<listitem>
+<simpara>Auto-number section titles.
+Synonym for <emphasis role="strong">--attribute sectnums</emphasis>.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-o, --out-file</emphasis>=<emphasis>OUT_FILE</emphasis></term>
+<listitem>
+<simpara>Write output to file <emphasis>OUT_FILE</emphasis>.
+Defaults to the base name of the input file suffixed with <emphasis>backend</emphasis> extension.
+The file is resolved relative to the working directory.
+If the input is read from standard input or a named pipe (fifo), then the output file defaults to stdout.
+If <emphasis>OUT_FILE</emphasis> is <emphasis>-</emphasis>, then the output file is written to standard output.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-R, --source-dir</emphasis>=<emphasis>DIR</emphasis></term>
+<listitem>
+<simpara>Source directory.
+Currently only used if the destination directory is also specified.
+Used to preserve the directory structure of files converted within this directory in the destination directory.
+If specified, the directory is resolved relative to the working directory.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-r, --require</emphasis>=<emphasis>LIBRARY</emphasis></term>
+<listitem>
+<simpara>Require the specified library before executing the processor, using the standard Ruby require.
+This option may be specified more than once.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-s, --no-header-footer</emphasis></term>
+<listitem>
+<simpara>Output an embeddable document, which excludes the header, the footer, and everything outside the body of the document.
+This option is useful for producing documents that can be inserted into an external template.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-T, --template-dir</emphasis>=<emphasis>DIR</emphasis></term>
+<listitem>
+<simpara>A directory containing custom converter templates that override one or more templates from the built-in set.
+(requires <emphasis>tilt</emphasis> gem)</simpara>
+<simpara>If there is a subfolder that matches the engine name (if specified), that folder is appended to the template directory path.
+Similarly, if there is a subfolder in the resulting template directory that matches the name of the backend, that folder is appended to the template directory path.</simpara>
+<simpara>This option may be specified more than once.
+Matching templates found in subsequent directories override ones previously discovered.</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+<refsection xml:id="_processing_information">
+<title>Processing Information</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">--failure-level</emphasis>=<emphasis>LEVEL</emphasis></term>
+<listitem>
+<simpara>Set the minimum logging level (default: FATAL) that yields a non-zero exit code (i.e., failure).
+If this option is not set, the program exits with a zero exit code even if warnings or errors have been logged.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-q, --quiet</emphasis></term>
+<listitem>
+<simpara>Silence application log messages and script warnings.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">--trace</emphasis></term>
+<listitem>
+<simpara>Include backtrace information when reporting errors.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-v, --verbose</emphasis></term>
+<listitem>
+<simpara>Sets log level to DEBUG so application messages logged at INFO or DEBUG level are printed to stderr.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-w, --warnings</emphasis></term>
+<listitem>
+<simpara>Turn on script warnings (applies to executed code).</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-t, --timings</emphasis></term>
+<listitem>
+<simpara>Print timings report to stderr (time to read, parse, and convert).</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+<refsection xml:id="_program_information">
+<title>Program Information</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">-h, --help</emphasis> [<emphasis>TOPIC</emphasis>]</term>
+<listitem>
+<simpara>Print a help message.
+Show the command usage if <emphasis>TOPIC</emphasis> is not specified or recognized.
+Dump the Asciidoctor man page (in troff/groff format) if <emphasis>TOPIC</emphasis> is <emphasis>manpage</emphasis>.
+Print an AsciiDoc syntax crib sheet (in AsciiDoc) if <emphasis>TOPIC</emphasis> is <emphasis>syntax</emphasis>.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">-V, --version</emphasis></term>
+<listitem>
+<simpara>Print program version number.</simpara>
+<simpara><emphasis role="strong">-v</emphasis> can also be used if no source files are specified.</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+</refsection>
+<refsection xml:id="_environment">
+<title>Environment</title>
+<simpara><emphasis role="strong">Asciidoctor</emphasis> honors the <emphasis role="strong">SOURCE_DATE_EPOCH</emphasis> environment variable.
+If this variable is assigned an integer value, that value is used as the epoch of all input documents and as the local date and time.
+See <link xl:href="https://reproducible-builds.org/specs/source-date-epoch/">https://reproducible-builds.org/specs/source-date-epoch/</link> for more information about this environment variable.</simpara>
+</refsection>
+<refsection xml:id="_exit_status">
+<title>Exit Status</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">0</emphasis></term>
+<listitem>
+<simpara>Success.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><emphasis role="strong">1</emphasis></term>
+<listitem>
+<simpara>Failure (syntax or usage error; configuration error; document processing failure; unexpected error).</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+<refsection xml:id="_bugs">
+<title>Bugs</title>
+<simpara>Refer to the <emphasis role="strong">Asciidoctor</emphasis> issue tracker at <link xl:href="https://github.com/asciidoctor/asciidoctor/issues?q=is%3Aopen">https://github.com/asciidoctor/asciidoctor/issues?q=is%3Aopen</link>.</simpara>
+</refsection>
+<refsection xml:id="_authors">
+<title>Authors</title>
+<simpara><emphasis role="strong">Asciidoctor</emphasis> is led and maintained by Dan Allen and Sarah White and has received contributions from many individuals in the Asciidoctor community.
+The project was started in 2012 by Ryan Waldron based on a prototype written by Nick Hengeveld for the Git website.
+Jason Porter wrote the first implementation of the CLI interface provided by this command.</simpara>
+<simpara><emphasis role="strong">AsciiDoc.py</emphasis> was created by Stuart Rackham and has received contributions from many individuals in the AsciiDoc.py community.</simpara>
+</refsection>
+<refsection xml:id="_resources">
+<title>Resources</title>
+<simpara><emphasis role="strong">Project website:</emphasis> <link xl:href="https://asciidoctor.org">https://asciidoctor.org</link></simpara>
+<simpara><emphasis role="strong">Project documentation:</emphasis> <link xl:href="https://docs.asciidoctor.org">https://docs.asciidoctor.org</link></simpara>
+<simpara><emphasis role="strong">Community chat:</emphasis> <link xl:href="https://chat.asciidoctor.org">https://chat.asciidoctor.org</link></simpara>
+<simpara><emphasis role="strong">Source repository:</emphasis> <link xl:href="https://github.com/asciidoctor/asciidoctor">https://github.com/asciidoctor/asciidoctor</link></simpara>
+<simpara><emphasis role="strong">Mailing list archive:</emphasis> <link xl:href="https://discuss.asciidoctor.org">https://discuss.asciidoctor.org</link></simpara>
+</refsection>
+<refsection xml:id="_copying">
+<title>Copying</title>
+<simpara>Copyright (C) 2012-present Dan Allen, Sarah White, Ryan Waldron, and the individual contributors to Asciidoctor.
+Use of this software is granted under the terms of the MIT License.</simpara>
+</refsection>
+</refentry>
+</article>

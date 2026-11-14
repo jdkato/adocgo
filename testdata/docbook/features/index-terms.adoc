@@ -1,0 +1,4 @@
+((visible term)) and (((hidden, term))) and indexterm:[a,b,c] and indexterm2:[shown] \((escaped)) \(((x))) (((a)))) ((x)))
+((see >> other)) (((a, b >> see))) ((also &> one &> two)) indexterm2:[t,see=x] indexterm:[a,see-also="b,c"]
+(text (in parens)) ((a
+b))

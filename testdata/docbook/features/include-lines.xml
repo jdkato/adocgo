@@ -1,0 +1,26 @@
+<screen>line 2
+line 3
+line 4</screen>
+<screen>line 1
+line 3
+line 5
+line 6</screen>
+<screen>line 1
+line 10
+line 11
+line 12</screen>
+<screen>line 11
+line 12</screen>
+<screen>   four
+     six
+Tab
+   four again</screen>
+<screen>     four
+       six
+  Tab
+     four again</screen>
+<programlisting language="text" linenumbering="unnumbered">    four
+      six
+    Tab
+    four again</programlisting>
+<literallayout class="monospaced"></literallayout>

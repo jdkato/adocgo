@@ -1,0 +1,9 @@
+<simpara><?asciidoc-hr?></simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</mediaobject>
+</informalfigure>

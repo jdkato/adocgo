@@ -1,0 +1,7 @@
+= Docinfo
+Author Name
+v1.0, 2020-02-02
+:docinfo: shared
+:docinfodir: include
+
+text

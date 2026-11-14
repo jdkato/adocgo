@@ -1,0 +1,170 @@
+<variablelist>
+<varlistentry>
+<term>term</term>
+<listitem>
+<simpara>definition</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>term2</term>
+<listitem>
+<simpara>definition on next line</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>term3</term>
+<listitem>
+<simpara>indented definition</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>term4</term>
+<listitem>
+<simpara>def</simpara>
+<simpara>continued</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>a</term>
+<term>b</term>
+<listitem>
+<simpara>shared def</simpara>
+<variablelist>
+<varlistentry>
+<term>c</term>
+<listitem>
+<simpara>deep</simpara>
+<variablelist>
+<varlistentry>
+<term>nested</term>
+<listitem>
+<simpara>nested def
+;; sub?</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+</variablelist>
+<informaltable tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+<tgroup cols="2">
+<colspec colwidth="15*"/>
+<colspec colwidth="85*"/>
+<tbody valign="top">
+<row>
+<entry>
+<simpara>h1</simpara>
+</entry>
+<entry>
+<simpara>hd1</simpara>
+</entry>
+</row>
+<row>
+<entry>
+<simpara>h2</simpara>
+</entry>
+<entry>
+<simpara>block</simpara>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+<tgroup cols="2">
+<colspec colwidth="20*"/>
+<colspec colwidth="80%*"/>
+<tbody valign="top">
+<row>
+<entry>
+<simpara>h1</simpara>
+</entry>
+<entry>
+<simpara>hd1</simpara>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<variablelist>
+<varlistentry>
+<term>x</term>
+<listitem>
+<simpara>y</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+<qandaset>
+<qandaentry>
+<question>
+<simpara>Question one?</simpara>
+</question>
+<answer>
+<simpara>Answer one.</simpara>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<simpara>Question two?</simpara>
+</question>
+<answer>
+<simpara>Answer two.</simpara>
+<simpara>More.</simpara>
+</answer>
+</qandaentry>
+</qandaset>
+<glossentry>
+<glossterm>word</glossterm>
+<glossdef>
+<simpara>meaning</simpara>
+</glossdef>
+</glossentry>
+<variablelist xml:id="dl" role="role">
+<title>Title</title>
+<varlistentry>
+<term>t</term>
+<listitem>
+<simpara>d</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>term with <literal>code</literal> and <emphasis role="strong">bold</emphasis></term>
+<listitem>
+<simpara>def with <footnote><simpara>fn</simpara></footnote></simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><anchor xml:id="anchored" xreflabel="[anchored]"/>anchored term</term>
+<listitem>
+<simpara>d</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>no def</term>
+<listitem>
+<simpara>next para</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>mixed</term>
+<listitem>
+<itemizedlist>
+<listitem>
+<simpara>list in def</simpara>
+</listitem>
+<listitem>
+<simpara>two</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>other</term>
+<listitem>
+<simpara>. ordered in def</simpara>
+</listitem>
+</varlistentry>
+</variablelist>

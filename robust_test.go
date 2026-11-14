@@ -90,6 +90,8 @@ func TestMutatedCorpus(t *testing.T) {
 		{Safe: SafeSecure},
 		{Safe: SafeSecure, Standalone: true, Attributes: map[string]string{"toc": "", "sectnums": "", "experimental": "", "icons": "font"}},
 		{Safe: SafeSecure, Doctype: "book", Attributes: map[string]string{"compat-mode": "", "hardbreaks": ""}},
+		{Safe: SafeSecure, Backend: "docbook", Standalone: true, Attributes: map[string]string{"experimental": "", "stem": ""}},
+		{Safe: SafeSecure, Backend: "docbook", Doctype: "book"},
 	}
 	for i, path := range files {
 		src, err := os.ReadFile(path)
@@ -172,6 +174,8 @@ func TestPathological(t *testing.T) {
 		for name, src := range cases {
 			opts := Options{Safe: SafeSecure, Doctype: doctype, Standalone: doctype == "book"}
 			convertWithTimeout(t, name+" ("+doctype+")", []byte(src), opts)
+			opts.Backend = "docbook"
+			convertWithTimeout(t, name+" ("+doctype+", docbook)", []byte(src), opts)
 		}
 	}
 }
@@ -264,6 +268,9 @@ func FuzzConvert(f *testing.F) {
 			opts.Doctype = "manpage"
 		case 3:
 			opts.Doctype = "inline"
+		}
+		if mode&16 != 0 {
+			opts.Backend = "docbook"
 		}
 		if mode&8 != 0 {
 			opts.Attributes = map[string]string{"experimental": "", "sectnums": "", "toc": "", "icons": "font", "compat-mode": ""}

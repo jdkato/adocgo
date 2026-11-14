@@ -1,0 +1,8 @@
+**b**old __i__talic ``m``ono ##m##ark **__both__** x^2^y~n~
+st**ro**ng em__pha__sis mo``nosp``aced hi##ghli##ght
+[.role]**styled** [#id]__styled__ [.a.b]``styled`` [.c]##span##
+\**escaped** \__escaped__ \``escaped`` \##escaped##
+** not bold ** __ nor this __
+****strong stars**** ____under____
+**multi
+line**

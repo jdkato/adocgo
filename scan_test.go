@@ -125,6 +125,7 @@ func TestScannersAgainstRegexps(t *testing.T) {
 		{Safe: SafeSecure, Standalone: true, Attributes: map[string]string{"toc": "", "sectnums": "", "experimental": "", "icons": "font", "stem": ""}},
 		{Safe: SafeSecure, Doctype: "book", Attributes: map[string]string{"compat-mode": "", "hardbreaks": "", "experimental": ""}},
 		{Safe: SafeSecure, Doctype: "manpage", Attributes: map[string]string{"hide-uri-scheme": "", "sectanchors": "", "sectlinks": ""}},
+		{Safe: SafeSecure, Backend: "docbook", Standalone: true, Attributes: map[string]string{"experimental": "", "copyright": "ACME 2020", "front-cover-image": "image:c.png[]"}},
 	}
 	for i, path := range corpusFiles(t) {
 		src, err := os.ReadFile(path)

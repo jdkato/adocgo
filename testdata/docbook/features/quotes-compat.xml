@@ -1,0 +1,3 @@
+<simpara><emphasis>emphasis</emphasis> <literal>mono</literal> <quote>double</quote> <literal>single' +mono+ ++mono++ *bold* _em_ `+pass+</literal> <literal>{backend}</literal>
+<emphasis><phrase role="role">styled</phrase></emphasis> x`y`z <quote>esc` 'esc</quote>
+<literal>a *b* c</literal> <literal>a <emphasis role="strong">b</emphasis> c</literal> <literal>a *b*</literal></simpara>

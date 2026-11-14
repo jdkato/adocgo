@@ -1,0 +1,45 @@
+<screen>plain <co xml:id="CO1-1"/></screen>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>co</para>
+</callout>
+</calloutlist>
+<formalpara xml:id="l1" role="r">
+<title>Titled</title>
+<para>
+<screen>titled listing</screen>
+</para>
+</formalpara>
+<screen linenumbering="unnumbered">no lang</screen>
+<programlisting language="ruby" linenumbering="unnumbered">puts 1 <co xml:id="CO2-1"/>
+puts 2 <co xml:id="CO2-2"/></programlisting>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>one</para>
+</callout>
+<callout arearefs="CO2-2">
+<para>two</para>
+<simpara>more</simpara>
+</callout>
+</calloutlist>
+<formalpara xml:id="s1">
+<title>Src</title>
+<para>
+<programlisting language="java" linenumbering="numbered" startinglinenumber="5">int x;</programlisting>
+</para>
+</formalpara>
+<programlisting language="c" linenumbering="numbered">x</programlisting>
+<literallayout class="monospaced">literal &amp; &lt;x&gt;</literallayout>
+<formalpara xml:id="lit" role="r">
+<title>Lit</title>
+<para>
+<literallayout class="monospaced">titled literal</literallayout>
+</para>
+</formalpara>
+<literallayout class="monospaced">indented</literallayout>
+<calloutlist xml:id="co" role="r">
+<title>Colist title</title>
+<callout arearefs="">
+<para>orphan</para>
+</callout>
+</calloutlist>

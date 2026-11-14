@@ -1,0 +1,42 @@
+= Book Title
+Author Name
+
+[preface]
+== Preface
+
+pre
+
+= Part One
+
+[partintro]
+intro para
+
+== Chapter One
+
+=== Section
+
+== Chapter Two
+
+= Part Two
+
+intro without style
+
+another intro para
+
+== Chapter Three
+
+[appendix]
+== Appendix A
+
+=== App section
+
+[appendix]
+== Appendix B
+
+[glossary]
+== Glossary
+
+t:: d
+
+[index]
+== Index

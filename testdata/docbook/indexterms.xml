@@ -1,0 +1,43 @@
+<simpara><indexterm>
+<primary>visible</primary>
+</indexterm>visible <indexterm>
+<primary>one</primary>
+</indexterm> <indexterm>
+<primary>one</primary><secondary>two</secondary>
+</indexterm> <indexterm>
+<primary>one</primary><secondary>two</secondary><tertiary>three</tertiary>
+</indexterm> <indexterm>
+<primary>a</primary><secondary>b</secondary><tertiary>c</tertiary>
+</indexterm> <indexterm>
+<primary>shown</primary>
+</indexterm>shown
+<indexterm>
+<primary>see</primary>
+<see>other</see>
+</indexterm>see <indexterm>
+<primary>a</primary><secondary>b</secondary>
+<see>see</see>
+</indexterm> <indexterm>
+<primary>also</primary>
+<seealso>one</seealso>
+<seealso>two</seealso>
+</indexterm>also <indexterm>
+<primary>x</primary>
+<seealso>y</seealso>
+</indexterm>
+<indexterm>
+<primary>t</primary>
+<see>x</see>
+</indexterm>t <indexterm>
+<primary>a</primary>
+<seealso>b</seealso>
+<seealso>c</seealso>
+</indexterm> <indexterm>
+<primary>a</primary><secondary>b</secondary>
+<see>q</see>
+</indexterm> <indexterm>
+<primary>s</primary><secondary>e</secondary><tertiary>e</tertiary>
+</indexterm> <indexterm>
+<primary>u</primary>
+<seealso>v</seealso>
+</indexterm>u</simpara>

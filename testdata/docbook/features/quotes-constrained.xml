@@ -1,0 +1,12 @@
+<simpara><emphasis role="strong">bold</emphasis> <emphasis>italic</emphasis> <literal>mono</literal> <emphasis role="marked">mark</emphasis> <emphasis role="strong"><emphasis>bold italic</emphasis></emphasis> <literal><emphasis role="strong">mono bold</emphasis></literal> 'single' "double"
+<quote>curly double</quote> <quote>curly single</quote> <superscript>super</superscript> <subscript>sub</subscript> H<subscript>2</subscript>O E=mc<superscript>2</superscript>
+<emphasis role="strong"><phrase role="role">styled bold</phrase></emphasis> <anchor xml:id="anid"/><emphasis><phrase role="r1 r2">id and roles</phrase></emphasis> <phrase role="underline">underlined</phrase> <phrase role="big">big</phrase>
+word*notbold*word <emphasis role="strong">not bold * * neither</emphasis> 2*3*4 <emphasis>under_score</emphasis> <literal>a`b</literal>
+*escaped* _escaped_ `escaped` #escaped# ^nosup^ ~nosub~
+<emphasis role="strong">bold
+across lines</emphasis> <emphasis>it
+too</emphasis> <literal>and
+mono</literal>
+<emphasis role="strong">a</emphasis> <emphasis role="strong">b</emphasis> <emphasis role="strong">c</emphasis>, (<emphasis role="strong">paren</emphasis>), [<emphasis role="strong">bracket</emphasis>] "<emphasis role="strong">quoted</emphasis>" ;*semi* :*colon* }*brace*
+<literal>literal *mono*</literal> passthrough *text* <literal>double plus</literal>
+Mañana*bold*, über_not_ ñ_x_ <emphasis role="strong">ñ</emphasis> é*x*é</simpara>

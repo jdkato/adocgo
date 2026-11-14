@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Doc</title>
+<date>2023-11-14</date>
+<abstract xml:id="_summary">
+<title>Summary</title>
+<simpara>Abstract section.</simpara>
+</abstract>
+</info>
+<section xml:id="_body">
+<title>Body</title>
+<simpara>x</simpara>
+</section>
+</article>

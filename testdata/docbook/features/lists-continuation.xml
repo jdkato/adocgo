@@ -1,0 +1,63 @@
+<itemizedlist>
+<listitem>
+<simpara>one</simpara>
+<simpara>attached to one
+** nested</simpara>
+<simpara>+
+attached to nested</simpara>
+<simpara>attached to one via detached</simpara>
+</listitem>
+<listitem>
+<simpara>two</simpara>
+<itemizedlist>
+<listitem>
+<simpara>nested two</simpara>
+<itemizedlist>
+<listitem>
+<simpara>nested three</simpara>
+<simpara>attached three</simpara>
+</listitem>
+</itemizedlist>
+<simpara>attached two (one blank)</simpara>
+</listitem>
+</itemizedlist>
+<simpara>attached top?</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>a</simpara>
+<informalexample>
+<simpara>example</simpara>
+</informalexample>
+</listitem>
+<listitem>
+<simpara>b</simpara>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>t</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>c</simpara>
+<variablelist>
+<varlistentry>
+<term>term</term>
+<listitem>
+<simpara>only block</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>item with literal</simpara>
+<literallayout class="monospaced">literal</literallayout>
+<simpara>trailing para</simpara>
+</listitem>
+</itemizedlist>

@@ -1,0 +1,39 @@
+[subs=none]
+*none* {backend} <x>
+
+[subs="attributes+"]
+----
+{backend} <x>
+----
+
+[subs=+quotes]
+----
+*bold* <x>
+----
+
+[subs="-specialchars"]
+----
+<b>raw</b>
+----
+
+[subs=normal]
+----
+*bold* http://x.org
+----
+
+[subs="quotes,macros"]
+....
+*b* http://x.org <x>
+....
+
+[subs=verbatim]
+*not* <x>
+
+[subs="specialcharacters,+macros"]
+*x* http://x.org
+
+[subs="a,q"]
+bad keys {backend} *x*
+
+[subs=bogus]
+*x*

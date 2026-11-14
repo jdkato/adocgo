@@ -1,0 +1,40 @@
+<simpara><emphasis role="strong">strong</emphasis> <emphasis>em</emphasis> <literal>mono</literal> <emphasis role="marked">mark</emphasis> <superscript>sup</superscript> <subscript>sub</subscript> <quote>double</quote> <quote>single</quote> <emphasis role="strong"><phrase role="role">strong role</phrase></emphasis> <literal role="role">mono role</literal> <anchor xml:id="id"/><phrase role="r">span</phrase> <phrase role="u">underline</phrase> <anchor xml:id="q1"/><emphasis>em id</emphasis> <superscript role="x">sup</superscript>
+<keycap>F1</keycap> <keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo> <guibutton>OK</guibutton> <guimenu>File</guimenu> <menuchoice><guimenu>File</guimenu> <guimenuitem>Save</guimenuitem></menuchoice> <menuchoice><guimenu>File</guimenu> <guisubmenu>Save As</guisubmenu> <guimenuitem>PDF</guimenuitem></menuchoice> <menuchoice><guimenu>View</guimenu> <guisubmenu>Zoom</guisubmenu> <guimenuitem>In</guimenuitem></menuchoice>
+<link xl:href="https://example.com">https://example.com</link> <link xl:href="https://example.com">Site</link> <link xl:href="a.html">A</link> <link xl:href="mailto:a@b.cc">Mail</link> <link xl:href="mailto:a@b.cc">a@b.cc</link>
+<inlinemediaobject>
+<imageobject>
+<imagedata fileref="a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</inlinemediaobject> <link xl:href="x.html"><inlinemediaobject role="r">
+<imageobject>
+<imagedata fileref="a.png" contentwidth="10" contentdepth="20"/>
+</imageobject>
+<textobject><phrase>Alt</phrase></textobject>
+</inlinemediaobject></link> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="a.png" width="50%"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="a.png" scale="30"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject>
+<inlineequation><mathphrase><![CDATA[x^2 < 1]]></mathphrase></inlineequation> <inlineequation><alt><![CDATA[\alpha & \beta]]></alt><mathphrase><![CDATA[\alpha & \beta]]></mathphrase></inlineequation> <inlineequation><mathphrase><![CDATA[sqrt(4)]]></mathphrase></inlineequation>
+line<?asciidoc-br?>
+break
+<footnote><simpara>A <emphasis role="strong">note</emphasis>.</simpara></footnote> <footnote xml:id="fn1"><simpara>Named</simpara></footnote> <footnoteref linkend="fn1"/> <footnoteref linkend="nope"/>
+<anchor xml:id="inl" xreflabel="[inl]"/>inline anchor <anchor xml:id="inl2" xreflabel="Ref &lt;b&gt;Text&lt;/b&gt; &quot;q&quot;"/>another <anchor xml:id="mac" xreflabel="Mac"/> <xref linkend="inl"/> <xref linkend="inl2"/> <link linkend="inl">text</link> <xref linkend="nosuch"/> <link xl:href="other.xml">other.xml</link> <link xl:href="other.xml#f">O</link> <xref linkend="__article-root__"/> <link linkend="__article-root__">top</link>
+pass <literal>lit</literal> <raw/> <raw/> &#169;&#8201;&#8212;&#8201;&#8230;&#8203; &#8594; &amp;</simpara>

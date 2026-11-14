@@ -1,0 +1,58 @@
+<preface xml:id="_preface">
+<title>Preface</title>
+<simpara>pre</simpara>
+</preface>
+<part xml:id="_part_one">
+<title>Part One</title>
+<partintro>
+<simpara>intro para</simpara>
+</partintro>
+<chapter xml:id="_chapter_one">
+<title>Chapter One</title>
+<section xml:id="_section">
+<title>Section</title>
+
+</section>
+</chapter>
+<chapter xml:id="_chapter_two">
+<title>Chapter Two</title>
+
+</chapter>
+</part>
+<part xml:id="_part_two">
+<title>Part Two</title>
+<partintro>
+<simpara>intro without style</simpara>
+<simpara>another intro para</simpara>
+</partintro>
+<chapter xml:id="_chapter_three">
+<title>Chapter Three</title>
+
+</chapter>
+<appendix xml:id="_appendix_a">
+<title>Appendix A</title>
+<section xml:id="_app_section">
+<title>App section</title>
+
+</section>
+</appendix>
+<appendix xml:id="_appendix_b">
+<title>Appendix B</title>
+
+</appendix>
+<glossary xml:id="_glossary">
+<title>Glossary</title>
+<variablelist>
+<varlistentry>
+<term>t</term>
+<listitem>
+<simpara>d</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</glossary>
+<index xml:id="_index">
+<title>Index</title>
+
+</index>
+</part>

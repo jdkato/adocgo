@@ -1,0 +1,23 @@
+<div class="raw">
+*not bold* {backend}
+</div>
+<p>docbook5</p>
+<b>para pass</b> *x*
+<emphasis role="strong">bold</emphasis> &#169;
+<informalequation>
+<mathphrase><![CDATA[sqrt(4) = 2]]></mathphrase>
+</informalequation>
+<informalequation>
+<alt><![CDATA[\alpha + \beta]]></alt>
+<mathphrase><![CDATA[\alpha + \beta]]></mathphrase>
+</informalequation>
+<informalequation>
+<mathphrase><![CDATA[a
+
+b \
+c]]></mathphrase>
+</informalequation>
+<equation xml:id="eq1" role="role">
+<title>Titled stem</title>
+<mathphrase><![CDATA[x]]></mathphrase>
+</equation>

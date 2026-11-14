@@ -1,0 +1,20 @@
+= Book Title
+Author Name
+:toclevels: 3
+:sectnumlevels: 2
+
+Preamble becomes a preface.
+
+= Part One
+
+[partintro]
+Intro.
+
+== Chapter
+
+text
+
+[appendix]
+== Appendix
+
+text

@@ -1,0 +1,7 @@
+Before.
+
+include::include/chapter.adoc[]
+
+include::include/with space.adoc[]
+
+After.

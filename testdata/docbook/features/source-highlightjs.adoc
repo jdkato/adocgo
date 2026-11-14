@@ -1,0 +1,19 @@
+[source,ruby]
+----
+puts 1 # <1>
+----
+<1> co
+
+[source]
+----
+none
+----
+
+[source%nowrap,java]
+----
+x
+----
+
+----
+listing
+----

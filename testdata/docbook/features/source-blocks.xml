@@ -1,0 +1,24 @@
+<screen linenumbering="unnumbered">plain</screen>
+<programlisting language="ruby" linenumbering="unnumbered">puts 1</programlisting>
+<programlisting language="ruby" linenumbering="numbered">puts 1</programlisting>
+<programlisting language="java" linenumbering="unnumbered">  class A {
+      int x;
+  }</programlisting>
+<programlisting language="python" linenumbering="unnumbered">print(1)</programlisting>
+<programlisting language="js" linenumbering="unnumbered">console.log(1)</programlisting>
+<screen linenumbering="unnumbered">no lang</screen>
+<programlisting language="ruby" linenumbering="numbered">x</programlisting>
+<programlisting language="c++" linenumbering="unnumbered">puts &lt;b&gt;</programlisting>
+<screen>para listing</screen>
+<screen linenumbering="unnumbered"><emphasis role="strong">bold</emphasis> &lt;tag&gt;</screen>
+<formalpara xml:id="sid" role="r">
+<title>Title</title>
+<para>
+<programlisting language="sh" linenumbering="unnumbered">$ ls</programlisting>
+</para>
+</formalpara>
+<screen>&lt;&amp;&gt; "q" 'a'
+  indented
+
+trailing blank kept inside?</screen>
+<programlisting language="text" linenumbering="unnumbered">x</programlisting>

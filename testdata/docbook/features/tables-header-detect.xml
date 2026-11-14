@@ -1,0 +1,139 @@
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">implicit</entry>
+<entry align="left" valign="top">header</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>body</simpara></entry>
+<entry align="left" valign="top"><simpara>row</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>no</simpara></entry>
+<entry align="left" valign="top"><simpara>header</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>body</simpara></entry>
+<entry align="left" valign="top"><simpara>row</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+<entry align="left" valign="top"><simpara>d</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>multi
+line</simpara></entry>
+<entry align="left" valign="top"><simpara>header?</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>body</simpara></entry>
+<entry align="left" valign="top"><simpara>row</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">implicit</entry>
+<entry align="left" valign="top">header</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>body</simpara></entry>
+<entry align="left" valign="top"><literallayout class="monospaced">row</literallayout></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tfoot>
+<row>
+<entry align="left" valign="top"><simpara>only</simpara></entry>
+<entry align="left" valign="top"><simpara>row</simpara></entry>
+</row>
+</tfoot>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">h</entry>
+<entry align="left" valign="top">h</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+</tbody>
+<tfoot>
+<row>
+<entry align="left" valign="top"><simpara>f</simpara></entry>
+<entry align="left" valign="top"><simpara>f</simpara></entry>
+</row>
+</tfoot>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top"><anchor xml:id="cellanchor" xreflabel="[cellanchor]"/>h <emphasis role="strong">bold</emphasis></entry>
+<entry align="left" valign="top">h</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><anchor xml:id="cellanchor2" xreflabel="[cellanchor2]"/>b</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>

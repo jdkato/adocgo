@@ -1,0 +1,12 @@
+= Book
+:doctype: book
+:sectnums:
+:toc:
+
+preamble
+
+= Part
+
+== Chapter
+
+text {doctype} {backend-html5-doctype-book}

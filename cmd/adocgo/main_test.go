@@ -77,6 +77,33 @@ func TestFileOutput(t *testing.T) {
 	}
 }
 
+func TestDocBook(t *testing.T) {
+	out, _, code := runCLI(t, "Hello _there_.\n", "-b", "docbook", "-s", "-")
+	if code != 0 || out != "<simpara>Hello <emphasis>there</emphasis>.</simpara>\n" {
+		t.Errorf("code %d, output %q", code, out)
+	}
+	dir := t.TempDir()
+	in := filepath.Join(dir, "doc.adoc")
+	os.WriteFile(in, []byte("= Doc\n\n{outfilesuffix}\n"), 0o644)
+	if _, stderr, code := runCLI(t, "", "-b", "docbook5", in); code != 0 {
+		t.Fatalf("exit code %d: %s", code, stderr)
+	}
+	got, err := os.ReadFile(filepath.Join(dir, "doc.xml"))
+	if err != nil {
+		t.Fatalf("DocBook output should be written to doc.xml: %v", err)
+	}
+	if !strings.Contains(string(got), "<simpara>.xml</simpara>") || !strings.HasPrefix(string(got), "<?xml") {
+		t.Errorf("unexpected output: %s", got)
+	}
+	// a backend chosen in the header also determines the extension
+	os.WriteFile(in, []byte("= Doc\n:backend: docbook\n\ntext\n"), 0o644)
+	os.Remove(filepath.Join(dir, "doc.xml"))
+	runCLI(t, "", in)
+	if _, err := os.Stat(filepath.Join(dir, "doc.xml")); err != nil {
+		t.Errorf("header backend should produce doc.xml: %v", err)
+	}
+}
+
 func TestErrors(t *testing.T) {
 	if _, _, code := runCLI(t, "", "--bogus", "-"); code == 0 {
 		t.Error("expected failure for unknown option")

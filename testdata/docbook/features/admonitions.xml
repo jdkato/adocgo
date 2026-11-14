@@ -1,0 +1,38 @@
+<note>
+<simpara>Note para.</simpara>
+</note>
+<tip>
+<simpara>Tip
+continues.</simpara>
+</tip>
+<important>
+<simpara>Imp.</simpara>
+</important>
+<warning>
+<simpara>Warn.</simpara>
+</warning>
+<caution>
+<simpara>Caut.</simpara>
+</caution>
+<simpara>NOTE:no space</simpara>
+<note xml:id="nid" role="nrole">
+<title>Titled</title>
+<simpara>Block admonition.</simpara>
+<simpara>Two paras.</simpara>
+</note>
+<tip>
+<simpara>Para style.</simpara>
+</tip>
+<warning>
+<simpara>custom caption</simpara>
+</warning>
+<caution>
+<simpara>open as admonition</simpara>
+</caution>
+<screen>not admonition listing</screen>
+<note>
+<simpara>Localized.</simpara>
+</note>
+<note>
+<simpara>No label.</simpara>
+</note>

@@ -1,0 +1,36 @@
+<simpara><indexterm>
+<primary>visible term</primary>
+</indexterm>visible term and <indexterm>
+<primary>hidden</primary><secondary>term</secondary>
+</indexterm> and <indexterm>
+<primary>a</primary><secondary>b</secondary><tertiary>c</tertiary>
+</indexterm> and <indexterm>
+<primary>shown</primary>
+</indexterm>shown ((escaped)) (<indexterm>
+<primary>x</primary>
+</indexterm>x) <indexterm>
+<primary>a)</primary>
+</indexterm> <indexterm>
+<primary>x</primary>
+</indexterm>x)
+<indexterm>
+<primary>see</primary>
+<see>other</see>
+</indexterm>see <indexterm>
+<primary>a</primary><secondary>b</secondary>
+<see>see</see>
+</indexterm> <indexterm>
+<primary>also</primary>
+<seealso>one</seealso>
+<seealso>two</seealso>
+</indexterm>also <indexterm>
+<primary>t</primary>
+<see>x</see>
+</indexterm>t <indexterm>
+<primary>a</primary>
+<seealso>b</seealso>
+<seealso>c</seealso>
+</indexterm>
+(text (in parens)) <indexterm>
+<primary>a b</primary>
+</indexterm>a b</simpara>

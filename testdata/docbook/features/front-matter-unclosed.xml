@@ -1,0 +1,6 @@
+<simpara><?asciidoc-hr?></simpara>
+<simpara>layout: post</simpara>
+<section xml:id="_title">
+<title>Title</title>
+<simpara>text</simpara>
+</section>

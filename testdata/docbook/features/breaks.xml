@@ -1,0 +1,17 @@
+<simpara>line one<?asciidoc-br?>
+line two<?asciidoc-br?>
+line three</simpara>
+<simpara>auto one<?asciidoc-br?>
+auto two<?asciidoc-br?>
+auto three</simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara><?asciidoc-pagebreak?></simpara>
+<simpara><?asciidoc-hr?></simpara>
+<simpara>text<?asciidoc-br?></simpara>
+<literallayout class="monospaced">literal +
+literal</literallayout>

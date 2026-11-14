@@ -1,0 +1,56 @@
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="include/pic.svg"/>
+</imageobject>
+<textobject><phrase>pic</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="include/pic.svg" contentwidth="50" contentdepth="40"/>
+</imageobject>
+<textobject><phrase>Pic</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="include/bad.svg" contentwidth="5"/>
+</imageobject>
+<textobject><phrase>Bad</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="include/nope.svg"/>
+</imageobject>
+<textobject><phrase>Missing "alt"</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="include/pic.svg" contentwidth="9"/>
+</imageobject>
+<textobject><phrase>pic</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<simpara>Inline <inlinemediaobject>
+<imageobject>
+<imagedata fileref="include/pic.svg" contentdepth="3"/>
+</imageobject>
+<textobject><phrase>pic</phrase></textobject>
+</inlinemediaobject> and <inlinemediaobject>
+<imageobject>
+<imagedata fileref="include/nope.svg"/>
+</imageobject>
+<textobject><phrase>Alt</phrase></textobject>
+</inlinemediaobject> and <inlinemediaobject>
+<imageobject>
+<imagedata fileref="include/pic.svg"/>
+</imageobject>
+<textobject><phrase>pic</phrase></textobject>
+</inlinemediaobject>.</simpara>

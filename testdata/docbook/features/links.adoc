@@ -1,0 +1,12 @@
+https://example.com http://example.com/path?a=1&b=2 ftp://x.org irc://chat file:///etc/hosts
+https://example.com[Example] https://example.com[] link:https://example.com[] link:relative/path.html[Rel]
+<https://example.com> (https://example.com) https://example.com. https://example.com, https://example.com; https://example.com: https://example.com)
+\https://example.com https://example.com[text with \] bracket]
+https://example.com[Open^] https://example.com[Open,window=_blank,role=ext] https://example.com[Open,role="a b",id=lnk,title=T,opts=nofollow]
+https://example.com[^] https://example.com[a=b] https://example.com["a=b"] https://example.com[A, B]
+link:file.html[] link:file.html[File,window=read-later] link:++url with spaces.html++[Spaces] link:a%20b.html[x]
+mailto:joe@example.com[] mailto:joe@example.com[Joe] mailto:joe@example.com[Joe,Subject here,Body & more] joe@example.com \joe@example.com joe.bloggs+tag@sub.example.co.uk
+"https://example.com" 'https://example.com' x=https://example.com [https://example.com]
+https://example.com/a_b_c*d* *https://example.com* _https://example.com_
+link:#frag[Frag] link:/abs[Abs] link:[empty]
+https://example.com[*Bold* link] https://example.com[image:x.png[]]

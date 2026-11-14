@@ -1,0 +1,69 @@
+<preface xml:id="_preface">
+<title>Preface</title>
+<simpara>p</simpara>
+</preface>
+<part xml:id="_part">
+<title>Part</title>
+<partintro>
+<info>
+<abstract>
+<simpara>Part abstract.</simpara>
+</abstract>
+</info>
+<simpara>intro</simpara>
+</partintro>
+<chapter xml:id="_chapter">
+<title>Chapter</title>
+<abstract>
+<simpara>ch abstract</simpara>
+</abstract>
+<section xml:id="_section">
+<title>Section</title>
+<section xml:id="_styled">
+<title>Styled</title>
+
+</section>
+</section>
+</chapter>
+</part>
+<part xml:id="_part_two">
+<title>Part Two</title>
+<partintro>
+<simpara>implicit intro</simpara>
+</partintro>
+<chapter xml:id="_ch">
+<title>Ch</title>
+
+</chapter>
+<appendix xml:id="_app">
+<title>App</title>
+
+</appendix>
+<glossary xml:id="_glossary">
+<title>Glossary</title>
+<glossentry>
+<glossterm>t</glossterm>
+<glossdef>
+<simpara>d</simpara>
+</glossdef>
+</glossentry>
+</glossary>
+<bibliography xml:id="_bib">
+<title>Bib</title>
+<bibliodiv>
+<bibliomixed>
+<bibliomisc><anchor xml:id="b1" xreflabel="[b1]"/>[b1] B</bibliomisc>
+</bibliomixed>
+</bibliodiv>
+</bibliography>
+<index xml:id="_index">
+<title>Index</title>
+
+</index>
+<colophon xml:id="_colophon">
+<simpara>c</simpara>
+</colophon>
+<dedication xml:id="_dedication">
+<simpara>d</simpara>
+</dedication>
+</part>

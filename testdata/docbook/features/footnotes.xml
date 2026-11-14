@@ -1,0 +1,24 @@
+<simpara>A footnote.<footnote><simpara>The <emphasis role="strong">text</emphasis> of a <link xl:href="https://x.org">link</link> note.</simpara></footnote> Another.<footnote xml:id="named"><simpara>Named note</simpara></footnote>
+Reuse.<footnoteref linkend="named"/> Unresolved.<footnoteref linkend="nope"/> Old.<footnote xml:id="old"><simpara>Old style</simpara></footnote> Again.<footnoteref linkend="old"/>
+Escaped footnote:[x] Empty footnote:[] Bracket.<footnote><simpara>a ] b</simpara></footnote> Multi.<footnote><simpara>line one line two</simpara></footnote></simpara>
+<section xml:id="_section_in_title">
+<title>Section <footnote><simpara>In title</simpara></footnote></title>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>cell <footnote><simpara>In cell</simpara></footnote></simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>ascii <footnote><simpara>In a-cell</simpara></footnote></simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<itemizedlist>
+<listitem>
+<simpara>item <footnote><simpara>In item</simpara></footnote></simpara>
+</listitem>
+</itemizedlist>
+</section>
