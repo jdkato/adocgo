@@ -1,0 +1,22 @@
+<section xml:id="_included_chapter">
+<title>Included Chapter</title>
+<simpara>Included paragraph with p.</simpara>
+<section xml:id="_nested_in_include">
+<title>Nested in include</title>
+<simpara>Leaf content from a subdirectory.</simpara>
+<simpara>Flag is set.</simpara>
+</section>
+</section>
+<section xml:id="_back_at_level_1">
+<title>Back at level 1</title>
+<section xml:id="_included_chapter_2">
+<title>Included Chapter</title>
+<simpara>Included paragraph with p.</simpara>
+<section xml:id="_nested_in_include_2">
+<title>Nested in include</title>
+<simpara>Leaf content from a subdirectory.</simpara>
+<simpara>Flag is set.</simpara>
+<simpara>yes / yes indeed</simpara>
+</section>
+</section>
+</section>

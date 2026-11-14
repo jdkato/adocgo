@@ -1,0 +1,2 @@
+:from-include: yes
+:another: {from-include} indeed

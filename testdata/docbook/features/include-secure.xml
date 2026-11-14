@@ -1,0 +1,4 @@
+<simpara>Before.</simpara>
+<simpara><link xl:href="include/chapter.adoc">include/chapter.adoc</link></simpara>
+<simpara><link xl:href="include/with space.adoc">include/with space.adoc</link></simpara>
+<simpara>After.</simpara>

@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+(C) & (R) are translated to character references, but not the &.

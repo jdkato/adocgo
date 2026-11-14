@@ -1,0 +1,47 @@
+* one
++
+attached to one
+** nested
++
+attached to nested
+
+
++
+attached to one via detached
+
+* two
+** nested two
+*** nested three
++
+attached three
+
++
+attached two (one blank)
+
+
++
+attached top?
+
+. a
++
+====
+example
+====
+. b
++
+|===
+|t
+|===
+. c
+
+term::
++
+only block
+
+* item with literal
++
+....
+literal
+....
++
+trailing para

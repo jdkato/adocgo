@@ -1,0 +1,3 @@
+<pre class="pygments highlight"><code data-lang="ruby"><span></span><span class="hll"><span class="tok-nb">puts</span> <span class="tok-s1">&#39;Hello, world!&#39;</span>
+</span><span class="hll"><span class="tok-nb">puts</span> <span class="tok-s1">&#39;Goodbye, world!&#39;</span>
+</span></code></pre>

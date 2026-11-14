@@ -1,0 +1,3 @@
+((visible)) (((one))) (((one, two))) (((one, two, three))) indexterm:[a,b,c] indexterm2:[shown]
+((see >> other)) (((a, b >> see))) ((also &> one &> two)) (((x &> y)))
+indexterm2:[t,see=x] indexterm:[a,see-also="b,c"] indexterm:[a,b,see=q] indexterm:[see=only] indexterm2:[u,see-also=v]

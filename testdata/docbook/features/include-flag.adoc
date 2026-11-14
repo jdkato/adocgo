@@ -1,0 +1,12 @@
+:flag:
+:attr-from-parent: p
+
+include::include/chapter.adoc[leveloffset=+1]
+
+== Back at level 1
+
+include::include/chapter.adoc[leveloffset=2]
+
+include::include/attrs.adoc[]
+
+{from-include} / {another}

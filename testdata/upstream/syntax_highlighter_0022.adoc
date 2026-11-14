@@ -1,0 +1,6 @@
+[source,ruby]
+----
+puts 'hi'
+puts 'value' #<1>
+----
+<1> print to stdout

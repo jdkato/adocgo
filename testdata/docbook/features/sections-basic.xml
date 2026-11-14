@@ -1,0 +1,82 @@
+<simpara>preamble</simpara>
+<section xml:id="_level_1">
+<title>Level 1</title>
+<section xml:id="_level_2">
+<title>Level 2</title>
+<section xml:id="_level_3">
+<title>Level 3</title>
+<section xml:id="_level_4">
+<title>Level 4</title>
+<section xml:id="_level_5">
+<title>Level 5</title>
+<simpara>======= Too deep</simpara>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section xml:id="_trailing_equals">
+<title>Trailing equals</title>
+
+</section>
+<section xml:id="_setext_one">
+<title>Setext One</title>
+<section xml:id="_setext_two">
+<title>Setext Two</title>
+<section xml:id="_setext_three">
+<title>Setext Three</title>
+<section xml:id="_setext_four">
+<title>Setext Four</title>
+
+</section>
+</section>
+</section>
+</section>
+<section xml:id="_markdown_one">
+<title>Markdown one</title>
+<section xml:id="_markdown_two">
+<title>Markdown two</title>
+
+</section>
+<section xml:id="custom-id">
+<title>Custom id</title>
+
+</section>
+<section xml:id="short-id" role="srole">
+<title>Shorthand id</title>
+
+</section>
+<section xml:id="inline-id">
+<title>Inline id</title>
+
+</section>
+<section xml:id="_dup">
+<title>Dup</title>
+
+</section>
+<section xml:id="_dup_2">
+<title>Dup</title>
+<section xml:id="_dup_3">
+<title>Dup</title>
+
+</section>
+</section>
+<section xml:id="_title_with_bold_angle_quotes_and_code">
+<title>Title with <emphasis role="strong">bold</emphasis> &amp; &lt;angle&gt; "quotes" and <literal>code</literal></title>
+
+</section>
+<section xml:id="_über_ünïcödé_日本語">
+<title>Über Ünïcödé 日本語</title>
+
+</section>
+<section xml:id="_trailing_space">
+<title>trailing space</title>
+<bridgehead xml:id="_discrete_heading" renderas="sect1">Discrete heading</bridgehead>
+<bridgehead xml:id="_float_heading" renderas="sect2">Float heading</bridgehead>
+<bridgehead xml:id="did" role="drole" renderas="sect3">Discrete with id</bridgehead>
+</section>
+<section xml:id="_a_b_c_d_ef_g_hs">
+<title>A.B-C_D e/f (g) h&#8217;s</title>
+
+</section>
+</section>

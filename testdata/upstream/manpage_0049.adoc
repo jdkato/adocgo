@@ -1,0 +1,4 @@
+.sp
+Please search |\c
+.URL "http://discuss.asciidoctor.org" "the forums" "|"
+before asking.

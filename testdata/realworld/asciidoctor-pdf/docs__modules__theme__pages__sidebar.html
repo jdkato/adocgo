@@ -1,0 +1,264 @@
+<div class="sect1">
+<h2 id="sidebar">sidebar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>sidebar</code> category control the arrangement and style of sidebar blocks.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>'EEEEEE'</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  background-color: #121212</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-color">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-color: #FFFFFF</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-radius</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#radius">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-radius: 4</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-style">Border style</a><br>
+(default: <code>solid</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-style: dashed</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-width">Measurement</a> | <a href="blocks.html#border-width">Measurement[]</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  font-color: #262626</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  font-family: M+ 1p</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  font-size: 13</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  font-style: italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">padding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#padding">Measurement</a> | <a href="blocks.html#padding">Measurement[]</a><br>
+(default: <code>12</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  padding: [12, 15]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  text-transform: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="title">sidebar-title</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>sidebar-title</code> category control the arrangement and style of sidebar block titles.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    font-color: #333333</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    font-size: 13</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>bold</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    font-style: bold_italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#text-align">Text alignment</a><br>
+(default: <code>center</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    text-align: left</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  title:
+    text-transform: smallcaps</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

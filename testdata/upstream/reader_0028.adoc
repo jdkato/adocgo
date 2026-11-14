@@ -1,0 +1,4 @@
+[source,xml]
+----
+include::fixtures/#{filename}[tag=snippet,indent=0]
+----

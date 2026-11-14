@@ -1,0 +1,5 @@
+<indexterm>
+<primary>HTML 5</primary>
+<seealso>CSS 3</seealso>
+<seealso>SVG</seealso>
+</indexterm>

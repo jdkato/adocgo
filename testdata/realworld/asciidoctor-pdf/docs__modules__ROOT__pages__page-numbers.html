@@ -1,0 +1,34 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF automatically keeps track of page numbers.
+These page numbers determine the folio placement of each page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_page_number_assignment">Default page number assignment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="theme:page$page-numbers.adoc" class="bare include">theme:page$page-numbers.adoc</a></p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s possible to influence the virtual page numbering, the folio placement, and where page numbers are displayed using a combination of theme keys and document attributes.
+See <a href="theme:page-numbers.html">theme:page-numbers.html</a> to learn more.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_printing_page_ranges">Printing page ranges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The print dialog doesn&#8217;t understand the page numbers that are displayed in the running content.
+The print dialog only considers physical pages.
+Therefore, to print a range of pages as they are labeled in the document, you need to add the number of front matter pages (i.e., the non-numbered pages) to the page number range in the print dialog.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you only want to print the first 5 pages labeled with a page number (e.g., 1-5), and there are 2 pages before the page labeled as page 1, you need to add 2 to both numbers in the range, giving you a physical page range of 3-7.
+That&#8217;s the range you need to enter into the print dialog.</p>
+</div>
+</div>
+</div>

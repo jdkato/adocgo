@@ -1,0 +1,7 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+To get your fortune, see <<magic-8-ball>>.
+
+.Magic 8-Ball
+[#magic-8-ball]
+image::signs-point-to-yes.jpg[]

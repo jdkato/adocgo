@@ -1,0 +1,5 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+[start=5]
+. five
+. six

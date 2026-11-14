@@ -1,0 +1,122 @@
+.Para title
+[#p1.lead,reftext="Para <i>Ref</i>"]
+Paragraph.
+
+NOTE: Admonition para.
+
+.Titled
+[TIP#t1.r]
+====
+Compound tip.
+
+Two.
+====
+
+====
+informal example
+====
+
+.Example
+[#ex.r]
+====
+formal
+====
+
+****
+sidebar
+****
+
+.Side
+[sidebar#s1]
+para sidebar
+
+[quote,Author,Source]
+____
+quote
+____
+
+.Epi
+[quote.epigraph,Who]
+short epigraph
+
+[verse,Poet,Poem]
+____
+verse
+  line
+____
+
+[verse.epigraph]
+v
+
+"A quote."
+-- Me, Title
+
+--
+open
+--
+
+[#o1]
+--
+open id
+--
+
+[.orole]
+--
+open role
+--
+
+.Open title
+--
+open titled
+--
+
+[partintro]
+not a part
+
+[abstract]
+An abstract paragraph (not first).
+
+'''
+
+<<<
+
+[discrete#disc.r]
+=== Bridgehead
+
+toc::[]
+
+video::v.mp4[]
+
+audio::a.mp3[]
+
+++++
+<raw>&</raw>
+++++
+
+[stem]
+++++
+x < y & z
+++++
+
+.Eq
+[latexmath#eq1]
+++++
+\alpha < \beta
+++++
+
+[asciimath]
+++++
+a
+
+b
+++++
+
+image::a.png[]
+
+.Fig
+[#f1.r,link=http://x]
+image::a.png[Alt & <alt>,100,200,align=center]
+
+image::b.png[scaledwidth=40]
+
+image::b.png[scale=75,width=5]

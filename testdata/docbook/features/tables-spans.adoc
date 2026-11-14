@@ -1,0 +1,47 @@
+|===
+|1 |2 |3 |4
+
+2+|span two 2+^.^|centered
+.2+|rows |a |b |c
+|d |e |f
+2.2+>.>s|both |x |y
+|z |w
+3*|rep
+4+a|* list in
+* asciidoc cell
+|===
+
+|===
+|a \| b |c\|d
+|esc \
+|===
+
+[cols="2*a"]
+|===
+|
+== Not a section
+
+para
+
+----
+listing
+----
+|NOTE: admon
+
+.Nested
+[cols="2*"]
+!===
+!n1 !n2
+!n3 !n4
+!===
+|===
+
+|===
+|multi
+
+para cell |l|
+ literal
+   cell
+
+e|emph h|head m|mono s|strong d|def
+|===

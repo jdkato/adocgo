@@ -1,0 +1,14 @@
+<simpara>1 2 4</simpara>
+<simpara>a b c</simpara>
+<simpara>Y Z AA</simpara>
+<simpara></simpara>
+<figure>
+<title>Title 1</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</mediaobject>
+</figure>
+<simpara>11 12</simpara>

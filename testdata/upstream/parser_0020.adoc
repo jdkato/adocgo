@@ -1,0 +1,5 @@
+\x20   def names
+
+\x20     @name.split
+
+\x20   end

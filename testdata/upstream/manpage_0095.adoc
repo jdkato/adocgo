@@ -1,0 +1,5 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+text.footnote:fn1[first footnote]footnote:[second footnote]
+
+more text.footnote:fn1[]

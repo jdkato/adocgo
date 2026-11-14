@@ -1,0 +1,4 @@
+source\r
+with\r
+CRLF\r
+line endings\r

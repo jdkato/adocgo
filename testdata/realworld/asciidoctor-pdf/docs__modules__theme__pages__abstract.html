@@ -1,0 +1,326 @@
+<div class="sect1">
+<h2 id="abstract">abstract</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>abstract</code> category control the arrangement and style of the abstract.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$base-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  font-color: #5C6266</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <code>13.5</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  font-size: 13</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>$base-font-style</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  font-style: italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">line-height</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>1.4</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  line-height: 1.2</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">padding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#padding">Measurement</a> | <a href="blocks.html#padding">Measurement[]</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  padding: [0, 12, 0, 12]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#decoration">Text decoration</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  text-decoration: underline</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$abstract-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  text-decoration-color: #0000FF</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>$base-text-decoration-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  text-decoration-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  text-transform: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="first-line">abstract-first-line</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>abstract-first-line</code> category control the style of the first line of the abstract.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 30.7692%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  first-line:
+    font-color: #AA0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  first-line:
+    font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  text-transform: smallcaps</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="title">abstract-title</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>abstract-title</code> category control the style and alignment of the title of an abstract.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 21.4285%;">
+<col style="width: 35.7142%;">
+<col style="width: 42.8573%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$base-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    font-color: #333333</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <code>$base-font-family</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <code>$base-font-size</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    font-size: 13</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>bold</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    font-style: normal_italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#text-align">Text alignment</a><br>
+(default: <code>center</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    text-align: center</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#decoration">Text decoration</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    text-decoration: underline</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$abstract-title-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    text-decoration-color: #0000FF</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>$base-text-decoration-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    text-decoration-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">abstract:
+  title:
+    text-transform: captitalize</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

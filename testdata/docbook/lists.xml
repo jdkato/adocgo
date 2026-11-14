@@ -1,0 +1,156 @@
+<itemizedlist>
+<listitem>
+<simpara>a</simpara>
+</listitem>
+<listitem>
+<simpara>b</simpara>
+<simpara>attached</simpara>
+</listitem>
+</itemizedlist>
+<itemizedlist xml:id="u1" role="r">
+<title>UL</title>
+<listitem>
+<simpara>x</simpara>
+</listitem>
+</itemizedlist>
+<itemizedlist mark="none">
+<listitem>
+<simpara>sq</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; done</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; todo</simpara>
+</listitem>
+<listitem>
+<simpara>plain</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>one</simpara>
+</listitem>
+<listitem>
+<simpara>two</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>nested</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="upperroman" startingnumber="3">
+<listitem>
+<simpara>iii</simpara>
+</listitem>
+</orderedlist>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>r</simpara>
+<orderedlist numeration="upperalpha">
+<listitem>
+<simpara>implicit</simpara>
+<variablelist>
+<varlistentry>
+<term>term</term>
+<listitem>
+<simpara>def</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>term2</term>
+<listitem>
+<simpara>block</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>no def</term>
+<listitem>
+<simpara>.DL</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+<variablelist xml:id="d1" role="r">
+<varlistentry>
+<term>t</term>
+<listitem>
+<simpara>d</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+<informaltable tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+<tgroup cols="2">
+<colspec colwidth="15*"/>
+<colspec colwidth="85*"/>
+<tbody valign="top">
+<row>
+<entry>
+<simpara>h</simpara>
+</entry>
+<entry>
+<simpara>v</simpara>
+</entry>
+</row>
+<row>
+<entry>
+<simpara>h2</simpara>
+</entry>
+<entry>
+<simpara>.HT</simpara>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable xml:id="ht" tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+<tgroup cols="2">
+<colspec colwidth="30*"/>
+<colspec colwidth="70*"/>
+<tbody valign="top">
+<row>
+<entry>
+<simpara>a</simpara>
+</entry>
+<entry>
+<simpara>b</simpara>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<qandaset>
+<qandaentry>
+<question>
+<simpara>Q?</simpara>
+</question>
+<answer>
+<simpara>A.</simpara>
+</answer>
+</qandaentry>
+<qandaentry>
+<question>
+<simpara>Q2?</simpara>
+</question>
+<answer>
+</answer>
+</qandaentry>
+</qandaset>
+<glossentry>
+<glossterm>word</glossterm>
+<glossdef>
+<simpara>meaning</simpara>
+<bibliodiv>
+<bibliomixed>
+<bibliomisc><anchor xml:id="ref1" xreflabel="[ref1]"/>[ref1] A book.</bibliomisc>
+</bibliomixed>
+<bibliomixed>
+<bibliomisc><anchor xml:id="ref2" xreflabel="[Label]"/>[Label] Another.</bibliomisc>
+</bibliomixed>
+</bibliodiv>
+</glossdef>
+</glossentry>

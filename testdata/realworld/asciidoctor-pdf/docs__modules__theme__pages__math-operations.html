@@ -1,0 +1,135 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The theme language supports basic math operations to calculate key values.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operators">Operators</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following table lists the supported operations and the corresponding operator for each.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 25%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Operator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">multiply</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">divide</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subtract</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Like programming languages, the multiply and divide operators take precedence over the add and subtract operators.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_expressions">Expressions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s an example of a math expression with fixed values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">conum:
+  line-height: 4 / 3</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Operators must always be surrounded by a space on either side (e.g., 2 + 2, not 2+2).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Variables may be used in place of numbers anywhere in the expression:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-size: 12
+  font-size-large: $base-font-size * 1.25</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Values used in a math expression are automatically coerced to a float value before the operation.
+If the result of the expression is an integer, the value is coerced to an integer afterwards.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Numeric values less than 1 must have a 0 before the decimal point (e.g., 0.85).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_functions">Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The theme language also supports several functions for rounding the result of a math expression.
+The following functions may be used if they surround the whole value or expression for a key.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">round(&#8230;&#8203;)</dt>
+<dd>
+<p>Rounds the number to the nearest half integer.</p>
+</dd>
+<dt class="hdlist1">floor(&#8230;&#8203;)</dt>
+<dd>
+<p>Rounds the number up to the next integer.</p>
+</dd>
+<dt class="hdlist1">ceil(&#8230;&#8203;)</dt>
+<dd>
+<p>Rounds the number down the previous integer.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>You might use these functions in font size calculations so that you get more exact values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-size: 12.5
+  font-size-large: ceil($base-font-size * 1.25)</code></pre>
+</div>
+</div>
+</div>
+</div>

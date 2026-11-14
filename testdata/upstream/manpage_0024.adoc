@@ -1,0 +1,14 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+[cols=3*]
+|===
+|single paragraph
+|first paragraph
+
+second paragraph
+|foo
+
+more foo
+
+even more foo
+|===

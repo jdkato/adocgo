@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+"`hello`" '`goodbye`' *strong* _weak_ `even`

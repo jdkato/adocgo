@@ -1,0 +1,17 @@
+:source-highlighter: pygments
+:pygments-css: #{css_mode}
+:pygments-linenums-mode: inline
+
+[source%linenums,ruby]
+----
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+puts 'Hello, World!'
+exit 0
+----

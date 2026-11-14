@@ -1,0 +1,58 @@
+:a:
+:b: value
+
+ifdef::a[]
+a is set
+endif::a[]
+
+ifndef::a[]
+a is not set
+endif::[]
+
+ifdef::a,z[either]
+
+ifdef::a+z[both]
+
+ifndef::y,z[neither y nor z... any]
+
+ifndef::a+b[not all]
+
+ifdef::a[]
+ifdef::z[]
+nested hidden
+endif::z[]
+nested shown
+endif::a[]
+
+ifeval::["{b}" == "value"]
+eval string ok
+endif::[]
+
+ifeval::[1 < 2]
+one lt two
+endif::[]
+
+ifeval::[2.5 >= 2]
+float ok
+endif::[]
+
+ifeval::["a" > 1]
+mismatch hidden
+endif::[]
+
+ifeval::[{undefined} == 1]
+undefined hidden
+endif::[]
+
+ifeval::[true != false]
+bool ok
+endif::[]
+
+ifeval::["{a}" == ""]
+empty ok
+endif::[]
+
+\ifdef::a[]
+
+ifdef::z[]
+unterminated hidden

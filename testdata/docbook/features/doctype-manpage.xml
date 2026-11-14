@@ -1,0 +1,19 @@
+<refsynopsisdiv xml:id="_synopsis">
+<title>SYNOPSIS</title>
+<simpara><emphasis role="strong">cmd</emphasis> [<emphasis>OPTION</emphasis>]&#8230;&#8203;</simpara>
+</refsynopsisdiv>
+<refsection xml:id="_description">
+<title>DESCRIPTION</title>
+<simpara>Text.</simpara>
+</refsection>
+<refsection xml:id="_options">
+<title>Options</title>
+<variablelist>
+<varlistentry>
+<term><emphasis role="strong">-x</emphasis></term>
+<listitem>
+<simpara>opt</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>

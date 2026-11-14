@@ -1,0 +1,908 @@
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_its_a_city_under_siege">1. It&#8217;s a City Under Siege</a>
+<ul class="sectlevel2">
+<li><a href="#_rendezvous_point">1.1. Rendezvous Point</a></li>
+</ul>
+</li>
+<li><a href="#ravages">2. The Ravages of Writing</a>
+<ul class="sectlevel2">
+<li><a href="#_a_recipe_for_potion_that_will_ensure_you_win_the_hearts_of_developers">2.1. A Recipe for Potion That Will Ensure You Win the Hearts of Developers</a>
+<ul class="sectlevel3">
+<li><a href="#_searching_for_burdockian">2.1.1. Searching for Burdockian</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_dawn_on_the_plateau">3. Dawn on the Plateau</a></li>
+<li><a href="#_words_seasoned_with_power">4. Words Seasoned with Power</a>
+<ul class="sectlevel2">
+<li><a href="#_can_i_get_some_code">4.1. Can I Get Some <code>Code</code>?</a></li>
+</ul>
+</li>
+<li><a href="#_keeping_it_together">5. Keeping It Together</a></li>
+<li><a href="#_credits">Appendix A: Credits</a></li>
+<li><a href="#_index">Index</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
+<div class="quoteblock abstract">
+<blockquote>
+This story chronicles the inexplicable hazards and vicious beasts a team must conquer and vanquish on their journey to discovering the true power of Open Source.
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_its_a_city_under_siege">1. It&#8217;s a City Under Siege</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This journey begins one late Monday afternoon at <a href="https://devoxx.be">Devoxx</a>.
+
+Our team needs coffee, <em>desperately</em>, but none of us dare open the theater doors&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>During the <a href="https://www.youtube.com/watch?v=1OpAgZvYXLQ&amp;list=PLRsbF2sD7JVq7fv1GZGORShSUIae1ZAPy&amp;index=1">opening university session</a>, a script-happy warlock inadvertently released a legion of Wolpertingers!
+To leave now would mean <strong>code dismemberment and certain death</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Behold &#8594; the horror!</p>
+</div>
+<div class="imageblock left thumb">
+<div class="content">
+<a class="image" href="http://en.wikipedia.org/wiki/Wolpertinger"><img src="wolpertinger.jpg" alt="Wolpertinger"></a>
+</div>
+<div class="title">Figure 1. Wolpertinger, stuffed</div>
+</div>
+<div class="paragraph">
+<p>
+
+You may not be familiar with these <a href="http://en.wikipedia.org/wiki/Wolpertinger">ravenous beasts</a>.
+Trust us, they&#8217;ll eat your shorts and suck loops from your code.
+In light of this danger, we&#8217;ve searched high and wide for the security crew&#8217;s defensive operations manual.
+We can&#8217;t find it and the DefOps<sup class="footnote" id="_footnote_defops">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> werewolves haven&#8217;t returned from their rendezvous at Bier Central.
+They&#8217;ve either eaten each other or fallen victim to the Wolpertingers roaming the streets of Antwerp.
+Quick, hit <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Backspace</kbd></span> or select <span class="menuseq"><b class="menu">File</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Quit</b></span> and let&#8217;s bail out of here!</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Working with DefOps<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> werewolves leads to howling and trying to train aggressive regular expressions with Pavlovian reinforcement.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><em>Weak light from the hallway trickled across the theater, chased by a distant scream.</em></p>
+</div>
+<div class="sect2">
+<h3 id="_rendezvous_point">1.1. Rendezvous Point</h3>
+<div class="paragraph">
+<p>Come on, <a id="bier-central"></a><em>Bier Central</em>, of course!
+Did you have to ask?
+If you beat me there, order me a <a href="http://www.sintbernardus.be/stbernardusabt12.php?l=en">St. Bernardus Abt 12</a>.
+Here&#8217;s some &#x20ac;.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ravages">2. The Ravages of Writing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Crystalline XML tags relentlessly bombarded the theater.</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 1. XML tags</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;author id="1"&gt;
+  &lt;personname&gt;
+    &lt;firstname&gt;Lazarus&lt;/firstname&gt;
+    &lt;surname&gt;het Draeke&lt;/surname&gt;
+  &lt;/personname&gt;
+&lt;/author&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Despite the assault, we continued our pursuit to draft a DefOps<sup class="footnoteref">[<a class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> plan.</p>
+</div>
+<div class="exampleblock">
+<div class="title">Example 1. DefOps Plan</div>
+<div class="content">
+<div class="paragraph">
+<p>Click <b class="button">Download Zip</b> to download the defensive operation plan bundle.</p>
+</div>
+<div class="paragraph">
+<p>OMG!
+Somebody please save us now!
+I want my mum&#8201;&#8212;&#8201;and an extra-large double macchiato, please.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Unfortunaly, Lazarus and I had both come to the conclusion that we weren&#8217;t going to get out of this without corrupted hardrives if we didn&#8217;t locate caffeine within the next few hours.</p>
+</div>
+<div class="sect2">
+<h3 id="_a_recipe_for_potion_that_will_ensure_you_win_the_hearts_of_developers">2.1. A Recipe for Potion That Will Ensure You Win the Hearts of Developers</h3>
+<div class="paragraph">
+<p>This potion for a sample document contains the following ingredients, which are listed in a very random, chaotically nested order.</p>
+</div>
+<div class="ulist">
+<div class="title">Ingredients for Potion that Demystifies Documents</div>
+<ul>
+<li>
+<p>all the headings</p>
+<div class="ulist">
+<ul>
+<li>
+<p>syntax highlighted source code</p>
+<div class="ulist">
+<ul>
+<li>
+<p>non-syntax highlighted source code or just a listing block</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>quote block</p>
+<div class="ulist">
+<ul>
+<li>
+<p>verse block</p>
+<div class="ulist">
+<ul>
+<li>
+<p>table with some cell formatting</p>
+<div class="ulist">
+<ul>
+<li>
+<p>sequential paragraphs</p>
+<div class="ulist">
+<ul>
+<li>
+<p>admonition blocks, but use them sparingly</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>bullet list with nesting</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>numbered list with nesting</p>
+</li>
+<li>
+<p>definition list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>sidebar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>example block</p>
+<div class="ulist">
+<ul>
+<li>
+<p>block image (no inline images)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>inline formatting in a paragraph</p>
+<div class="ulist">
+<ul>
+<li>
+<p>two fresh Burdockian leaves</p>
+<div class="ulist">
+<ul>
+<li>
+<p>They must be harvested by the light of the teal moons.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Are you square?</p>
+</div>
+<div class="ulist square">
+<ul class="square">
+<li>
+<p>one</p>
+</li>
+<li>
+<p>two</p>
+</li>
+<li>
+<p>three</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>What is there to do?</p>
+</div>
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-check-square-o"></i> Done</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Next</p>
+</li>
+<li>
+<p>Who&#8217;s counting?</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_searching_for_burdockian">2.1.1. Searching for Burdockian</h4>
+<div class="olist arabic">
+<div class="title">Steps for finding and preparing Burdockian leaves</div>
+<ol class="arabic">
+<li>
+<p>Locate dusty botany</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Sneeze</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Sneeze some more</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Find section on Burdockian</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Review its characteristics</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Take a picture of the diagram of its leaves</p>
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
+<li>
+<p>Don&#8217;t rip out the picture like a troglodyte</p>
+<div class="olist upperroman">
+<ol class="upperroman" type="I">
+<li>
+<p>Don&#8217;t do it, I&#8217;m watching you</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Put on your hiking boots</p>
+</li>
+<li>
+<p>Freeze your butt off on the side of a mountain at midnight</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s skip a few steps and start counting from 10.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="10">
+<li>
+<p>arabic (10)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>loweralpha (a)</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>lowerroman (i)</p>
+</li>
+<li>
+<p>lowerroman (ii)</p>
+</li>
+<li>
+<p>lowerroman (iii)</p>
+</li>
+<li>
+<p>lowerroman (iv)</p>
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
+<li>
+<p>upperalpha (A)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>arabic (11)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>It&#8217;s time for a top 5 list, made using the <code>reversed</code> option on an ordered list!</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" reversed>
+<li>
+<p>Stone Imperial Russian Stout</p>
+</li>
+<li>
+<p>Pliny the Elder</p>
+</li>
+<li>
+<p>Chimay Grande Réserve (Blue)</p>
+</li>
+<li>
+<p>St. Bernardus Abt 12</p>
+</li>
+<li>
+<p>Westvleteren 12 (XII)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>How about a list with some terms?</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fruits</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Apple</dt>
+<dd>
+<p>The round fruit of a tree of the rose family, which typically has thin red or green skin and crisp flesh.
+Yes, I said <em>flesh</em>.</p>
+</dd>
+<dt class="hdlist1">Pear</dt>
+<dd>
+<p>A yellowish- or brownish-green edible fruit that is typically narrow at the stalk and wider toward the base, with sweet, slightly gritty flesh.
+More flesh.
+Mmmmm.</p>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<p>Vegetables</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Carrot</dt>
+<dd>
+<p>An orange-colored root eaten as a vegetable.
+Beware, it&#8217;s a favorite of the Wolpertinger.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_are_you_still_here">Are You Still Here?</h5>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="title">Move, move, move!</div>
+<div class="paragraph">
+<p>The Wolpertingers can smell your procrastination.
+It&#8217;s not their fault you can&#8217;t find your boots.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sigh">Sigh&#8230;&#8203;</h6>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Your boots are in your closet.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dawn_on_the_plateau">3. Dawn on the Plateau</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lazarus was hanging from the bottom limb of a Burdockian tree, licking the bark.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+On pavements and the bark of trees I have found whole worlds.
+</blockquote>
+<div class="attribution">
+&#8212; Mark Tobey
+</div>
+</div>
+<div class="paragraph">
+<p>&#8220;If there are whole worlds on that bark, he just swallowed them,&#8221; Kizmet replied.</p>
+</div>
+<div class="verseblock">
+<pre class="content">No bark was harmed in the making of this potion.
+    We&#8217;re not so sure about a couple ants though.
+
+        Nor those worlds&#8230;&#8203;
+
+     Crap, I smell an injunction.</pre>
+<div class="attribution">
+&#8212; The documentation attorneys
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;d retrieved the leaves, but we&#8217;d obviously lost our minds in the process.</p>
+</div>
+<div class="verseblock">
+<pre class="content">Roses are <span style="color: #FF0000">red</span>.
+Violets are <span style="color: #0000FF">blue</span><em>-ish</em>.</pre>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_words_seasoned_with_power">4. Words Seasoned with Power</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To <em>tame</em> the <span class="wild">wild</span> wolpertingers, we needed to build a <strong>charm</strong>.
+But <strong>ul</strong>timate victory could only be won if we divined the <strong><em>true name</em></strong> of the <em>war</em>lock.</p>
+</div>
+<div class="paragraph">
+<p>&#8220;What kind of charm?&#8221; Lazarus asked. &#8220;An odoriferous one or a mineral one?&#8221;
+Kizmet shrugged. &#8220;The note from Olaf&#8217;s desk says &#8216;wormwood and licorice,&#8217; but these could be normal groceries for werewolves.&#8221;</p>
+</div>
+<div class="paragraph">
+<p>&#8220;Well the H<sub>2</sub>O written on the security whiteboard could be part of a shopping list, but I don&#8217;t think the local bodega also sells e = mc<sup>2</sup>,&#8221; Lazarus replied.</p>
+</div>
+<div class="paragraph">
+<p>&#8220;Wait!&#8221; Indigo plucked a small vial from her desk&#8217;s top drawer and held it toward us.
+The vial&#8217;s label read &#8216;<code>e = mc<sup>2</sup> <strong><em>the scent of science</em></strong> <em>smells like a genius</em></code>&#8217;.</p>
+</div>
+<div class="sect2">
+<h3 id="_can_i_get_some_code">4.1. Can I Get Some <code>Code</code>?</h3>
+<div class="paragraph">
+<p>Sure.<br>
+Have a listing block.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>This is an example of a listing block.
+The content inside is rendered as &lt;pre&gt; text.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But I&#8217;m not giving you any highlighting shazam just yet.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">What is a listing block?</div>
+<div class="paragraph">
+<p>Like literal blocks, the content in listing blocks is displayed exactly as you entered it.
+Listing block content is rendered as <code>&lt;pre&gt;</code> text.</p>
+</div>
+<div class="paragraph">
+<p>The <code>listing</code> style is applied to an element, such as a paragraph, by setting the <code>listing</code> attribute on that element.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s get our <mark>highlighting</mark> on!</p>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Install Prawn:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install prawn</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then create your first PDF document in Ruby!</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 2. Generates a basic PDF document using Prawn</div>
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'prawn' <i class="conum" data-value="1"></i><b>(1)</b>
+
+Prawn::Document.generate 'output.pdf' do <i class="conum" data-value="3"></i><b>(3)</b>
+  text 'Hello, World!' <i class="conum" data-value="2"></i><b>(2)</b>
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Imports Prawn library</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Adds text “Hello, World!” to first page</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Writes PDF to <em class="file">output.pdf</em> after executing all statements</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>How about some source code that styles code? So meta!</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-css" data-lang="css">code {
+  padding: 2px 4px;
+  font-size: 90%;
+  font-weight: normal;
+  color: #c7254e;
+  white-space: nowrap !important;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where could we go without some Java&#8482;?
+Naturally, some autosizing is necessary.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">package org.javaee7.cdi.events;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.ws.rs.*;
+
+/**
+ * This session-scoped bean receives greeting strings from the event bus
+ * and provides access to the collection of these greetings via a REST API.
+ *
+ * @author The Duke
+ * @since 1.0
+ */
+@SessionScoped
+public class GreetingReceiver implements EventReceiver, Serializable {
+
+    private List&lt;String&gt; greetings;
+
+    @PostConstruct
+    void init() {
+        this.greetings = new ArrayList&lt;String&gt;();
+    }
+
+    void receive(@Observes String greet) {
+        this.greetings.add(greet);
+    }
+
+    @GET
+    @Produces("application/json")
+    public List&lt;String&gt; listAll(@QueryParam("start") Integer start, @QueryParam("max") Integer max) {
+        int numGreetings = this.greetings.size();
+
+        if (numGreetings == 0 || max == 0) {
+            return Collections.&lt;String&gt;emptyList();
+        }
+
+        if (start == null) {
+            start = 0;
+        }
+
+        if (max == null) {
+            max = numGreetings;
+        }
+
+        return this.greetings.subList(start, Math.min(max + start, numGreetings));
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We already showed you an XML example in <a href="#ravages">Chapter 2</a>, a language we often rant about over beers at <a href="#bier-central">Bier Central</a>.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;ll trade you a little table for some of that bark.</p>
+</div>
+<table class="tableblock frame-ends grid-rows stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column 1</th>
+<th class="tableblock halign-left valign-top">Column 2</th>
+<th class="tableblock halign-left valign-top">Column 3</th>
+<th class="tableblock halign-left valign-top">Column 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Prefix <code>|</code> with <code>^</code> to center content horizontally within the cell.</code></p></td>
+<td class="tableblock halign-left valign-bottom"><p class="tableblock">Prefix <code>|</code> with a <code>.</code> and <code>&gt;</code> to align content to the bottom of the cell.</p></td>
+<td class="tableblock halign-center valign-middle"><p class="tableblock">Prefix <code>|</code> with a <code>^</code>, <code>.</code>, and <code>^</code> to place content in the middle of the cell.</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">Prefix <code>|</code> with <code>&gt;</code> to align content to the right horizontally within the cell.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><em>This content spans all four columns (<code>4&#43;</code>) and is centered horizontally (<code>^</code>) within the cell.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Wait.
+What?
+Where is this story going?</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>&lt;span&gt;</code></dt>
+<dd>
+<p>an html tag that makes me crazy</p>
+</dd>
+<dt class="hdlist1">align</dt>
+<dd>
+<p>something I never get going in the right direction.
+Also has to do with my poor verbal communication skills</p>
+</dd>
+<dt class="hdlist1">float</dt>
+<dt class="hdlist1">style</dt>
+<dd>
+<p>don&#8217;t make me laugh</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Does anyone have the time?</p>
+</div>
+<div class="paragraph">
+<p>Tg lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumj.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_keeping_it_together">5. Keeping It Together</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On this page we have nested &#8220;keep together&#8221; logic.
+The combined block will be shifted to the next page if there isn&#8217;t room available on this one.</p>
+</div>
+<div class="verseblock">
+<pre class="content">First,
+we
+need
+to
+waste
+several
+lines
+using
+a
+verse
+to
+push
+the
+next
+block
+to
+its
+breaking
+point.</pre>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">What happens if there is both a field and a method with the same name?</div>
+<div class="paragraph">
+<p>Back to the previous example, suppose that we have both a field and a method with the same name, as in:</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 3. Java class with a field and method that share the same name</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public class Foo {
+  public String bar;
+
+  public String bar() {
+    return bar;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Golo resolves methods first, fields last.</strong>
+Hence, the following Golo code will resolve the <code>bar()</code> method, not the <code>bar</code> field:</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 4. Golo picks the method over the field with the same name</div>
+<div class="content">
+<pre class="highlight"><code class="language-golo" data-lang="golo">let foo = Foo()
+
+foo: bar("baz") <i class="conum" data-value="1"></i><b>(1)</b>
+
+println(foo: bar()) <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Writes the field</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Calls the <code>bar()</code> method</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>Here&#8217;s a preview of how each heading level is rendered.</p>
+</div>
+<h1 id="_heading_1_level_0" class="discrete">Heading 1 (Level 0)</h1>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<h2 id="_heading_2_level_1" class="discrete">Heading 2 (Level 1)</h2>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<h3 id="_heading_3_level_2" class="discrete">Heading 3 (Level 2)</h3>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<h4 id="_heading_4_level_3" class="discrete">Heading 4 (Level 3)</h4>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<h5 id="_heading_5_level_4" class="discrete">Heading 5 (Level 4)</h5>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<h6 id="_heading_6_level_5" class="discrete">Heading 6 (Level 5)</h6>
+<div class="paragraph">
+<p>filler content</p>
+</div>
+<hr>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Here&#8217;s some content inside an open block.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_credits">Appendix A: Credits</h2>
+<div class="sectionbody">
+<table class="tableblock frame-ends grid-rows" style="width: 75%;">
+<caption class="title">Brought to you with <span class="icon love"><i class="fa fa-heart"></i></span> by OpenDevise</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Title</th>
+<th class="tableblock halign-center valign-top">Alias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sarah White</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>President</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://twitter.com/carbonfray">@carbonfray</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dan Allen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Vice President</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="http://twitter.com/mojavelinux">@mojavelinux</a></p></td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><em>Powered by Open Source</em></p></td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_index">Index</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. DefOps is a portmanteau of &#8220;defensive&#8221; and &#8220;operations&#8221;.
+</div>
+</div>

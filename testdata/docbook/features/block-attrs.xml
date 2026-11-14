@@ -1,0 +1,44 @@
+<simpara xml:id="anchor-id">Paragraph with anchor.</simpara>
+<simpara xml:id="anchor2" xreflabel="Ref Text">Para.</simpara>
+<simpara xml:id="idshort" role="role1 role2">Shorthand.</simpara>
+<simpara xml:id="x" role="a b">Longhand.</simpara>
+<simpara role="lead">Lead para.</simpara>
+<formalpara>
+<title>Title only</title>
+<para>Para with title.</para>
+</formalpara>
+<formalpara role="r">
+<title>Title with <emphasis role="strong">bold</emphasis> and docbook5</title>
+<para>Para.</para>
+</formalpara>
+<blockquote>
+<attribution>
+<link xl:href="https://x.org">Linked</link>
+<citetitle>Single <emphasis role="strong">quoted</emphasis></citetitle>
+</attribution>
+<simpara>subs in attrs</simpara>
+</blockquote>
+<formalpara>
+<title>Attr title</title>
+<para>para</para>
+</formalpara>
+<simpara role="x">empty first positional</simpara>
+<simpara>para</simpara>
+<simpara>indented normal</simpara>
+<simpara xml:id="id2" role="a b">stacked attribute lines</simpara>
+<simpara>empty attrlist</simpara>
+<simpara>[ ]
+space attrlist</simpara>
+<simpara>[role=x</simpara>
+<simpara>unterminated attr line is para</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>dotted title?</simpara>
+</listitem>
+</orderedlist>
+<simpara>.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>.</simpara>
+</listitem>
+</orderedlist>

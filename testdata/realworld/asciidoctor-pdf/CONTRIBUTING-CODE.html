@@ -1,0 +1,573 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide provides all the information you need to become a successful Asciidoctor PDF developer and code contributor!
+You&#8217;ll learn how to retrieve the code from GitHub, execute the tests, build and install the gem, and run the application with your local modifications.</p>
+</div>
+<!-- toc disabled -->
+</div>
+</div>
+<div class="sect1">
+<h2 id="guidelines">Guidelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To contribute code, fork the project on GitHub, hack away, and send a pull request with your proposed changes.
+<strong>All pull requests must include a) tests that verify the code change and b) an entry in the CHANGELOG.adoc file to document what changed.</strong>
+If a pull request is missing tests or a CHANGELOG entry, <strong>it will not be merged</strong> and may be closed.</p>
+</div>
+<div class="paragraph">
+<p>Feel free to share ideas in the <strong>#users/asciidoctor-pdf</strong> stream of the <a href="https://asciidoctor.zulipchat.com">project chat</a> or report issues in the <a href="https://github.com/asciidoctor/asciidoctor-pdf/issues">issue tracker</a>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When filing an issue, you must include the AsciiDoc source and theme file (if relevant) that demonstrates the problem.
+Sharing a screenshot of the output is not sufficient information to reproduce the issue and therefore not actionable.
+If the AsciiDoc source is not provided within 24 hours of filing the issue, the issue will be closed.
+A reproducible test case is required (in any form you can provide it) so we can concentrate our time on fixing the problem instead of trying to reverse engineer the scenario.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Follow the instructions below to learn how to clone the source and run it from your local copy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="development">Development</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="prerequisites">Prerequisites</h3>
+<div class="paragraph">
+<p>In order to set up the project build and run the tests, you&#8217;ll need the following software installed on your computer:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>git</p>
+</li>
+<li>
+<p>Base development tools (for installing certain development gems)</p>
+</li>
+<li>
+<p>Ruby (with development headers)</p>
+</li>
+<li>
+<p>Bundler (optional, but recommended)</p>
+</li>
+<li>
+<p>pdftocairo (required for visual tests)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The test suite relies on additional software to analyze and assert the behavior of Asciidoctor PDF.
+Therefore, these prerequisites are more extensive than what&#8217;s needed for using Asciidoctor PDF alone.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re running a Debian-based Linux distribution, you can install the required software using the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo apt-get install -y build-essential git ruby-dev ruby-bundler poppler-utils</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re running a Fedora-based Linux distribution, you can install the required software using the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo dnf group install -y "Development Tools"
+  sudo dnf install -y redhat-rpm-config ruby-devel rubygem-bundler poppler-utils</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to run the tests on Fedora without using Bundler, install these dependencies instead:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo dnf install -y ruby rubygem-asciidoctor rubygem-chunky_png rubygem-coderay rubygem-pdf-inspector \
+  rubygem-prawn rubygem-prawn-icon rubygem-prawn-svg rubygem-prawn-table rubygem-prawn-templates \
+  rubygem-rouge rubygem-rspec rubygem-treetop poppler-utils</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can study the CI workflow at <em class="path">.github/workflows/ci.yml</em> to learn more about what software is needed to run the full test suite.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="retrieve-the-source-code">Retrieve the Source Code</h3>
+<div class="paragraph">
+<p>You can retrieve the source of Asciidoctor PDF in one of two ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone the git repository</p>
+</li>
+<li>
+<p>Download a zip archive of the repository</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="option-1-fetch-using-git">Option 1: Fetch Using Git</h4>
+<div class="paragraph">
+<p>If you want to clone the git repository, copy the <a href="https://github.com/asciidoctor/asciidoctor-pdf">GitHub repository URL</a> and pass it to the <code>git clone</code> command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git clone https://github.com/asciidoctor/asciidoctor-pdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, change to the project directory:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd asciidoctor-pdf</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="option-2-download-the-archive">Option 2: Download the Archive</h4>
+<div class="paragraph">
+<p>If you want to download a zip archive, click the <b class="button">Download Zip</b> button on the right-hand side of the repository page on GitHub.
+Once the download finishes, extract the archive, open a console and change to that directory.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Instead of working out of the asciidoctor-pdf directory, you can add the absolute path of the <em class="path">bin</em> directory to your <code>PATH</code> environment variable.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll leverage the project configuration to install the necessary dependencies.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-dependencies">Install Dependencies</h3>
+<div class="paragraph">
+<p>We recommend using <a href="http://rvm.io">RVM</a> to manage the installation of Ruby you&#8217;ll use to build and develop the project.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ rvm use 3.1</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The dependencies needed to use Asciidoctor PDF are defined in the <em class="path">Gemfile</em> at the root of the project.
+You can use Bundler to install the dependencies listed there.</p>
+</div>
+<div class="paragraph">
+<p>To check you have Bundler available, use the <code>bundle</code> command to query the installed version:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle version</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>bundle</code> command is not available, use the <code>gem</code> command to install it.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install bundler</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now configure Bundler to install the project dependencies within the project and run it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle config --local path .bundle/gems
+  bundle</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You must call <code>bundle</code> from the project directory so that it can find the <em class="path">Gemfile</em>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-the-tests">Run the Tests</h3>
+<div class="paragraph">
+<p>Tests are written using RSpec.
+To run the tests, invoke rspec via bundler.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re using Ruby 2.7, you may have to turn off deprecation warnings using <code>export RUBYOPT='-W:no-deprecated'</code> in order for all of the tests to pass.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To disable tests that access the network, pass the <code>-t ~network</code> option:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec -t ~network</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, to disable the visual integration tests, pass the <code>-t ~visual</code> option:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec -t ~visual</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a visual integration test fails, you can instruct the test suite to keep the files in the <em class="path">spec/output</em> directory by setting the <code>DEBUG</code> environment variable:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ DEBUG=true bundle exec rspec -t visual</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to see the name of each test as it is run, add the <code>-fd</code> option:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec -fd</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use the provided Rake task (note the name difference):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rake spec</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running tests using <code>rspec</code> directly gives you the advantage of being able to specify additional options.</p>
+</div>
+<div class="paragraph">
+<p>To run a single test, you can filter by the name of the test.
+For example, to run all tests that pertain to failures, use:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec -e fail</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run all tests that have <code>wip</code> in the name, use:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec -e wip</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also run all tests in a given file by passing the file&#8217;s path to rspec:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rspec spec/toc_spec.rb</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a full list of options that rspec provides, run <code>rspec -h</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-the-application-optional">Run the Application (optional)</h3>
+<div class="paragraph">
+<p>Like with Bundler, you have to run the application from the project directory.
+Assuming all the required gems install properly, verify you can run the <code>asciidoctor-pdf</code> script using Ruby:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec asciidoctor-pdf -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you see the version of Asciidoctor PDF printed, you&#8217;re ready to use Asciidoctor PDF!</p>
+</div>
+<div class="paragraph">
+<p>You can use the application to convert a document as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec asciidoctor-pdf /path/to/sample.adoc</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="install-the-application-optional">Install the Application (optional)</h3>
+<div class="paragraph">
+<p>If you want to install the application globally so you can run it anywhere, use the following <code>rake</code> task:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rake install</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This task will package the gem and install it into your system gems.</p>
+</div>
+<div class="paragraph">
+<p>If you want to install the gem using a separate command, first use the following <code>rake</code> task to build it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ rm -rf pkg
+  bundle exec rake build</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This task packages the application as a gem and writes it to the <em class="path">pkg</em> directory.
+A message will be printed to the console telling you the exact filename.
+You can now use the <code>gem install</code> command to install it.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install pkg/*.gem</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll want to pay attention to which Ruby installation you are installing the gem into.
+If successful, the <code>asciidoctor-pdf</code> executable will be available on your PATH.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re running Asciidoctor PDF in a Gradle build, follow <a href="https://github.com/asciidoctor/asciidoctor-pdf/issues/650#issuecomment-258338060">these instructions</a> to use the development version of Asciidoctor PDF.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test-a-pull-request">Test a Pull Request</h3>
+<div class="paragraph">
+<p>To test a pull request (PR), you first need to fetch the branch that contains the change and switch to it.
+The steps below are covered in detail in the <a href="https://help.github.com/articles/checking-out-pull-requests-locally">GitHub help</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume you want to test PR 955.
+Here&#8217;s how you fetch and switch to it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git fetch origin pull/955/head:pr-955-review
+  git checkout pr-955-review</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure you replace the number with the number of the PR you want to test.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In case any dependencies have changed, you should run the <code>bundle</code> command again:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can run the application as modified by the PR:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec asciidoctor-pdf /path/to/sample.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To switch back to main type:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git checkout main</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="in-your-application">In Your Application</h4>
+<div class="paragraph">
+<p>If you&#8217;re using Asciidoctor PDF in your application, you can test against the code in the pull request using Bundler.</p>
+</div>
+<div class="paragraph">
+<p>First, you need to find the origin URL and branch of the PR.
+You can find this information on the PR page.</p>
+</div>
+<div class="paragraph">
+<p>Next, update the entry in your project&#8217;s <em class="path">Gemfile</em> to point to the branch from which the pull request was originated.</p>
+</div>
+<div class="listingblock">
+<div class="title">Gemfile</div>
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">source 'https://rubygems.org'
+
+gem 'asciidoctor-pdf', github: '&lt;username&gt;/asciidoctor-pdf', branch: 'issue-864'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then run Bundler to update the gems in your project:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ rm -f Gemfile.lock
+  bundle config --local github.https true
+  bundle --path=.bundle/gems --binstubs=.bundle/.bin</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can run the development version of Asciidoctor PDF using:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec asciidoctor-pdf input.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ./.bundle/.bin/asciidoctor-pdf input.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These instructions work for testing any development version of Asciidoctor PDF directly from GitHub.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-the-code-linter">Run the Code Linter</h3>
+<div class="paragraph">
+<p>Before you commit code, you should run it through the linter to make sure it adheres to the coding style.
+You can run the linter using the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ bundle exec rake lint</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The coding style is enforced by <a href="https://rubocop.org/">RuboCop</a>.
+The rules are defined in <em class="path">.rubocop.yml</em>.
+These rules extend from the default rule set to match the style of the project.</p>
+</div>
+<div class="paragraph">
+<p>In additional to those rules, the following rules are enforced manually:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use tap/each instead of each_with_object to build a new Hash from an enumerable object</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generate-code-coverage-report">Generate Code Coverage Report</h3>
+<div class="paragraph">
+<p>To generate a code coverage report when running tests using simplecov, set the <code>COVERAGE</code> environment variable as follows when running the tests:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ COVERAGE=true bundle exec rake spec</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see a total coverage score as well as a link to the HTML report in the output.
+The HTML report helps you understand which lines and branches were missed, if any.</p>
+</div>
+<div class="paragraph">
+<p>Despite being fast, the downside of using simplecov is that it misses code branches.
+You can use deep-cover instead of simplecov to generate a more thorough report.
+To do so, first run <code>bundle</code> at least once with the <code>COVERAGE</code> environment variable set:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ COVERAGE=true bundle</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, set the <code>COVERAGE</code> environment variable to <code>deep</code> when running the tests:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ COVERAGE=deep bundle exec rake spec</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see a total coverage score, a detailed coverage report, and a link to HTML report in the output.
+The HTML report helps you understand which lines and branches were missed, if any.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rebuild-the-formatter-text-parser">Rebuild the Formatter Text Parser</h3>
+<div class="paragraph">
+<p>The formatted text is first converted to a pseudo-HTML language, then converted from there into Prawn text fragments using a <a href="https://github.com/cjheath/treetop">treetop</a> parser.
+treetop is a Ruby-based parsing DSL based on parsing expression grammars.
+This strategy allows the converter to manipulate the formatted text without needing the know the internal details of how Prawn arranges text fragments.
+It also allows Asciidoctor to behave in a consistent manner, since some of the inline parsing in Asciidoctor assumes that the converter is generating an SGML-based language like HTML or DocBook.</p>
+</div>
+<div class="paragraph">
+<p>The parsing expression grammar is defined in the source file <em class="path">lib/asciidoctor/pdf/formatted_text/parser.treetop</em>.
+If you make a change to this file, you must regenerate the parser, which is defined in the source file <em>lib/asciidoctor/pdf/formatted_text/parser.rb</em>.
+(Don&#8217;t modify the generated parser directly).</p>
+</div>
+<div class="paragraph">
+<p>Use the following command to regenerate the parser:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>bundle exec tt lib/asciidoctor/pdf/formatted_text/parser.treetop</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then look for any places that a type is mixed into an object multiple times and remove the duplicate.
+Finally, you then need to commit both files.</p>
+</div>
+</div>
+</div>
+</div>

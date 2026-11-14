@@ -1,0 +1,24 @@
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="data:image/png;base64,"/>
+</imageobject>
+<textobject><phrase>nope</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="data:image/css;base64,Ym9keSB7IGNvbG9yOiAjMjIyOyB9Cg=="/>
+</imageobject>
+<textobject><phrase>custom</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="https://example.com/a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</mediaobject>
+</informalfigure>

@@ -1,0 +1,171 @@
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Name</entry>
+<entry align="left" valign="top">Qty</entry>
+<entry align="left" valign="top">Quoted, value</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>Apple</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+<entry align="left" valign="top"><simpara>He said "hi"</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Multi
+line</simpara></entry>
+<entry align="left" valign="top"><simpara>5</simpara></entry>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"></entry>
+<entry align="left" valign="top"></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>2</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>root</simpara></entry>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+<entry align="left" valign="top"><simpara>0</simpara></entry>
+<entry align="left" valign="top"><simpara>0</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>user:name</simpara></entry>
+<entry align="left" valign="top"><simpara>y</simpara></entry>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>2</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<thead>
+<row>
+<entry align="left" valign="top">a</entry>
+<entry align="left" valign="top">b</entry>
+<entry align="left" valign="top">c</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>1</simpara></entry>
+<entry align="left" valign="top"><simpara>2</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>c</simpara></entry>
+<entry align="left" valign="top"><simpara>d</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+<entry align="left" valign="top"><itemizedlist>
+<listitem>
+<simpara>y</simpara>
+</listitem>
+</itemizedlist></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+<entry align="left" valign="top"><simpara>b</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>

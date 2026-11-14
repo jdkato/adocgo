@@ -1,0 +1,10 @@
+<simpara>Unresolved directive in include-safe.adoc - include::../../LICENSE[lines=1..3]</simpara>
+<section xml:id="_included_chapter">
+<title>Included Chapter</title>
+<simpara>Included paragraph with {attr-from-parent}.</simpara>
+<section xml:id="_nested_in_include">
+<title>Nested in include</title>
+<simpara>Leaf content from a subdirectory.</simpara>
+<simpara>Unresolved directive in include-safe.adoc - include::/etc/hostname-nope[]</simpara>
+</section>
+</section>

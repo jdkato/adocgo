@@ -1,0 +1,6 @@
+:lessonsdir: lessons
+
+[#lesson-1-listing]
+== #{xref}
+
+A summary of the first lesson.

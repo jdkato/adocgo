@@ -1,0 +1,481 @@
+<div class="sect1">
+<h2 id="toc">toc</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>toc</code> category control the arrangement and style of the table of contents.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">break-after</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>auto</code><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  break-after: auto</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  font-color: #333333</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  font-size: 9</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>normal</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hanging-indent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  hanging-indent: 0.5in</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">indent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>15</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  indent: 20</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">line-height</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>1.4</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  line-height: 1.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin-top</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  margin-top: 0</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#decoration">Text decoration</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  text-decoration: underline</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$toc-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  text-decoration-color: #CCCCCC</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>$base-text-decoration-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  text-decoration-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  text-transform: uppercase</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="levels">toc-h&lt;n&gt;</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>toc-h&lt;n&gt;</code> category control the arrangement and style of each heading level displayed in the table of contents.
+<code>&lt;n&gt;</code> is a number ranging from 1 to 6, representing each of the six heading levels.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h3-font-color: #999999</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h2-font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h3-font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h3-font-size: 9</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h2-font-style: italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  h3-text-transform: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="title">toc-title</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>toc-title</code> category control the arrangement and style of the title of the table of contents.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$heading-h2-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    font-color: #AA0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <code>$heading-h2-font-family</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <code>$heading-h2-font-size</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    font-size: 18</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>$heading-h2-font-style</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    font-style: bold_italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#text-align">Text alignment</a><br>
+(default: <code>$heading-h2-text-align</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    text-align: right</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <code>$heading-h2-text-transform</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  title:
+    text-transform: uppercase</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dot">toc-dot-leader</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>toc-dot-leader</code> category control the arrangement and style of the dot leader in the table of contents.
+Any inherited values inherit from the <code>toc</code> category, not the <code>toc_h2</code> category.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="quoted-string.html">Quoted string</a><br>
+(default: <code>'. '</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  dot-leader:
+    content: ". "</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#font-properties">font-color</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  dot-leader:
+    font-color: #999999</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#font-properties">font-size</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  dot-leader:
+    font-size: 10</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#font-properties">font-style</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>normal</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  dot-leader:
+    font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#dot-levels">levels</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>all</code> | <code>none</code> | Integers (space-separated)<br>
+(default: <code>all</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">toc:
+  dot-leader:
+    levels: 2 3</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="font-properties">font-*</h3>
+<div class="paragraph">
+<p>The dot leader inherits all font properties except <code>font-style</code> from the parent <code>toc</code> category.</p>
+</div>
+<div class="paragraph">
+<p>The purpose of the <code>font-size</code> key is to slightly increase the size of the dot leader symbol.
+If the value is too large, it can impact the line height and thus throw off the alignment of the title and the page number.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="dot-levels">levels</h3>
+<div class="paragraph">
+<p>The integers assigned to the <code>levels</code> key are based on the AsciiDoc section levels.
+That is part = 0, chapter = 1, etc.
+Dot leaders are only shown for the specified levels.
+If a value isn&#8217;t specified, dot leaders are shown for all levels.</p>
+</div>
+</div>
+</div>
+</div>

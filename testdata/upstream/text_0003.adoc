@@ -1,0 +1,5 @@
+This line is separated by something that is not a horizontal rule...
+
+#{offset}#{variant}
+
+...from this line.

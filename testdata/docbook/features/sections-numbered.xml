@@ -1,0 +1,60 @@
+<section xml:id="_one">
+<title>One</title>
+<section xml:id="_one_one">
+<title>One.One</title>
+<section xml:id="_one_one_one">
+<title>One.One.One</title>
+<section xml:id="_deep">
+<title>deep</title>
+
+</section>
+</section>
+</section>
+</section>
+<section xml:id="_unnumbered">
+<title>Unnumbered</title>
+
+</section>
+<section xml:id="_two">
+<title>Two</title>
+
+</section>
+<appendix xml:id="_app">
+<title>App</title>
+<section xml:id="_app_sub">
+<title>App sub</title>
+
+</section>
+</appendix>
+<glossary xml:id="_gloss">
+<title>Gloss</title>
+
+</glossary>
+<bibliography xml:id="_bib">
+<title>Bib</title>
+
+</bibliography>
+<index xml:id="_index">
+<title>Index</title>
+
+</index>
+<colophon xml:id="_colophon">
+<title>Colophon</title>
+
+</colophon>
+<dedication xml:id="_dedication">
+<title>Dedication</title>
+
+</dedication>
+<abstract xml:id="_abstract">
+<title>Abstract</title>
+
+</abstract>
+<preface xml:id="_preface">
+<title>Preface</title>
+
+</preface>
+<section xml:id="_styled_level">
+<title>Styled level</title>
+
+</section>

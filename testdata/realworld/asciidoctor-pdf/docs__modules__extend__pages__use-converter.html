@@ -1,0 +1,36 @@
+<div class="sect1">
+<h2 id="_require_the_extended_converter">Require the extended converter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To use an extended converter, require it by passing the path to the <code>-r</code> flag when calling the <code>asciidoctor-pdf</code> command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -r ./extended-pdf-converter.rb doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The converter will self-register with the <code>pdf</code> backend and thus get used as the Asciidoctor PDF converter.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using Asciidoctor PDF via the <code>asciidoctorj</code> command provided by AsciidoctorJ, you&#8217;ll need to first require the <code>asciidoctor-pdf</code> gem.
+This step is necessary since the extended converter assumes that Asciidoctor PDF has already been required by the time it&#8217;s required itself.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctorj -b pdf -r asciidoctor-pdf -r ./extended-pdf-converter.rb doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s all there is to it!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_further">Go further</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To get deeper into the world of extended converters, explore the <a href="use-cases.html">use cases</a>.</p>
+</div>
+</div>
+</div>

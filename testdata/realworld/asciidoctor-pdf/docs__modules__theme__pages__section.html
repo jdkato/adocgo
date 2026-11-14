@@ -1,0 +1,35 @@
+<div class="paragraph">
+<p>The key in the <code>section</code> category controls the indent of a section body.</p>
+</div>
+<div class="paragraph">
+<p>The <code>indent</code> keys applies to the section body only, excluding section titles and discrete headings.
+A single value gets applied to both the left and right side (e.g., <code>0.5in</code>).
+A two-value array configures the left and right side independently (e.g., <code>[0.5in, 0]</code>).</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 46.1538%;">
+<col style="width: 30.7693%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">indent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a> | <a href="measurement-units.html">Measurement[left,right]</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">section:
+  indent: [0.5in, 0]</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>

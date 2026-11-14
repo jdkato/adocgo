@@ -1,0 +1,4 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+Before break. +
+After break.

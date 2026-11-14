@@ -1,0 +1,4 @@
+.sp
+First paragraph.
+.sp
+.MTO "doc\(atexample.org" "Contact the doc" ""

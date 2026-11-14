@@ -1,0 +1,1 @@
+-a docinfo=shared-head -a docinfodir=include -a docinfosubs=attributes,replacements

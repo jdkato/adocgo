@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Document Title</title>
+<subtitle>The Subtitle</subtitle>
+<date>2024-03-04</date>
+<copyright>
+<holder>ACME, Inc.</holder>
+<year>2020-2024</year>
+</copyright>
+<author>
+<personname>
+<firstname>Jane</firstname>
+<othername>Q.</othername>
+<surname>Doe</surname>
+</personname>
+<email>jane@example.com</email>
+</author>
+<authorinitials>JQD</authorinitials>
+<revhistory>
+<revision>
+<revnumber>1.2</revnumber>
+<date>2024-03-04</date>
+<authorinitials>JQD</authorinitials>
+<revremark>A remark</revremark>
+</revision>
+</revhistory>
+<cover role="front">
+<mediaobject>
+<imageobject>
+<imagedata fileref="cover.png" contentwidth="400" contentdepth="600"/>
+</imageobject>
+</mediaobject>
+</cover>
+<orgname>ACME</orgname>
+<abstract>
+<simpara>The abstract goes into info.</simpara>
+</abstract>
+</info>
+<simpara>Preamble.</simpara>
+<section xml:id="_first">
+<title>First</title>
+<simpara>text <xref linkend="_second"/></simpara>
+</section>
+<section xml:id="_second">
+<title>Second</title>
+<simpara>text</simpara>
+</section>
+</article>

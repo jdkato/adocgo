@@ -1,0 +1,15 @@
+= Doc
+
+A footnote.footnote:[The *text* of a https://x.org[link] note.] Another.footnote:named[Named note]
+Reuse.footnote:named[] Unresolved.footnote:nope[] Old.footnoteref:[old,Old style] Again.footnoteref:[old]
+Escaped \footnote:[x] Empty footnote:[] Bracket.footnote:[a \] b] Multi.footnote:[line one
+line two]
+
+== Section footnote:[In title]
+
+|===
+|cell footnote:[In cell]
+a|ascii footnote:[In a-cell]
+|===
+
+* item footnote:[In item]

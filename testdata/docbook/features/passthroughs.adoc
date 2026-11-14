@@ -1,0 +1,9 @@
++++<del>raw</del>+++ $$<b>escaped</b>$$ pass:[<i>raw</i>] pass:c[<i>esc</i>] pass:q[*b* <u>] pass:a,q[{backend} *x*]
+`+{backend}+` `+a+b+` +{backend}+ ++{backend}++ +++{backend}+++
+[.red]+++<b>x</b>+++ [x-]`+a+` \+++x+++ \$$x$$ \pass:[x] \+x+ +x\+
+a+b+c a +b+ c +b +c+ `++` `+++`
+pass:[multi
+line] +++multi
+line+++
+pass:[] pass:[\]]
+stem:[x^2] latexmath:[\alpha] asciimath:[sqrt(4)] \stem:[x]

@@ -1,0 +1,9 @@
+:source-highlighter: rouge
+
+[source%linenums,ruby,highlight=#{highlight}]
+----
+require 'rouge' # <1>
+exit 0 # <2>
+----
+<1> Load library
+<2> Exit program

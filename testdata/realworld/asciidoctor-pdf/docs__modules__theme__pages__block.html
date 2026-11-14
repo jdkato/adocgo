@@ -1,0 +1,90 @@
+<div class="paragraph">
+<p>The keys in the <code>block</code> category control the anchor position and spacing below block elements when a more specific setting isn&#8217;t designated.
+Block styles are applied to the following block types:</p>
+</div>
+<table class="tableblock frame-none grid-none" style="width: 75%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>admonition</p>
+</li>
+<li>
+<p>block image</p>
+</li>
+<li>
+<p>code (listing, literal, source)</p>
+</li>
+<li>
+<p>example</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>quote</p>
+</li>
+<li>
+<p>sidebar</p>
+</li>
+<li>
+<p>table</p>
+</li>
+<li>
+<p>verse</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To control the spacing and indentation for paragraphs, see <a href="prose.html">prose.html</a>.</p>
+</div>
+<div class="paragraph">
+<p>The bottom margin (<code>margin-bottom</code>) is only added if the block is followed by an adjacent block within the same enclosure (e.g., a sidebar, a table cell, or the area outside any blocks).</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 30.7692%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">anchor-top</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">block:
+  anchor-top: -12</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin-bottom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>12</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">block:
+  margin-bottom: 6</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>

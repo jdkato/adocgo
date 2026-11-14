@@ -1,0 +1,31 @@
+<note>
+<simpara>Note.</simpara>
+</note>
+<tip>
+<simpara>Tip</simpara>
+</tip>
+<warning>
+<simpara>Warn</simpara>
+</warning>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png" contentwidth="3"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/x.svg.png"/>
+</imageobject>
+<textobject><phrase>X</phrase></textobject>
+</inlinemediaobject></simpara>
+<screen>code <co xml:id="CO1-1"/></screen>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>Callout</para>
+</callout>
+</calloutlist>

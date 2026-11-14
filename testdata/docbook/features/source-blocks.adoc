@@ -1,0 +1,68 @@
+[source]
+----
+plain
+----
+
+[source,ruby]
+----
+puts 1
+----
+
+[source,ruby,linenums]
+----
+puts 1
+----
+
+[source%nowrap,java,indent=2]
+----
+    class A {
+        int x;
+    }
+----
+
+[,python]
+----
+print(1)
+----
+
+```js
+console.log(1)
+```
+
+```
+no lang
+```
+
+``` ruby , linenums
+x
+```
+
+[source,c++]
+puts <b>
+
+[listing]
+para listing
+
+[source,subs="verbatim,quotes"]
+----
+*bold* <tag>
+----
+
+.Title
+[source,sh,id=sid,role=r]
+----
+$ ls
+----
+
+----
+<&> "q" 'a'
+  indented
+
+trailing blank kept inside?
+
+----
+
+[source,text,start=5]
+----
+x
+----

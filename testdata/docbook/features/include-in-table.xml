@@ -1,0 +1,39 @@
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="3">
+<colspec colname="col_1" colwidth="33.3333*"/>
+<colspec colname="col_2" colwidth="33.3333*"/>
+<colspec colname="col_3" colwidth="33.3334*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Name</entry>
+<entry align="left" valign="top">Qty</entry>
+<entry align="left" valign="top">Note</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>Apple</simpara></entry>
+<entry align="left" valign="top"><simpara>3</simpara></entry>
+<entry align="left" valign="top"><simpara>Red, shiny</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Pear</simpara></entry>
+<entry align="left" valign="top"><simpara>5</simpara></entry>
+<entry align="left" valign="top"><simpara>Says "hi"</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<informaltable frame="all" rowsep="1" colsep="1">
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>Leaf content from a subdirectory.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Leaf content from a subdirectory.</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>

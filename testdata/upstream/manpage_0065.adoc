@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+The Magic 8 Ball says image:signs-point-to-yes.jpg[].

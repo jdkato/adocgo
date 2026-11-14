@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Book</title>
+<date>2023-11-14</date>
+</info>
+<preface>
+<title>Foreword</title>
+<simpara>pre</simpara>
+</preface>
+<chapter xml:id="_ch">
+<title>Ch</title>
+<simpara>x</simpara>
+</chapter>
+</book>

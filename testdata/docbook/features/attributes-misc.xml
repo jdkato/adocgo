@@ -1,0 +1,25 @@
+<simpara>line one line two line three</simpara>
+<simpara>first<?asciidoc-br?>
+second</simpara>
+<simpara><b>raw</b> <emphasis role="strong">bold</emphasis></simpara>
+<simpara><link xl:href="https://example.org">site</link> mc mc [] {multi}</simpara>
+<simpara>{multi} {multi} {nosuch}</simpara>
+<section>
+<title>Title without id</title>
+
+</section>
+<section xml:id="_title_with_id">
+<title>Title with id</title>
+<simpara>val</simpara>
+<simpara>{late} dropped?</simpara>
+<simpara>line with {nosuch} stays
+:attribute-missing: drop</simpara>
+<simpara>line with {nosuch} dropped ref
+:attribute-missing: drop-line</simpara>
+<simpara>line with {nosuch} dropped line
+kept line
+:attribute-missing: warn</simpara>
+<simpara>warn {nosuch}</simpara>
+<simpara><>&[]|^*~&#43;\`::;;&#160;&#176;&#8203;&#34;&#39;&#8216;&#8217;&#8220;&#8221;&#8288;&#166;&#43;&#43;C&#43;&#43; !</simpara>
+<simpara>2.0.26 docbook5 article docbook xml .xml unsafe 0 attributes-misc .adoc 2023 2023 2023-11-14 22:13:20 UTC 2023-11-14</simpara>
+</section>

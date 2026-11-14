@@ -1,0 +1,10 @@
+*strong* _em_ `mono` #mark# ^sup^ ~sub~ "`double`" '`single`' [.role]*strong role* [.role]`mono role` [#id.r]#span# [.u]#underline# [#q1]_em id_ [.x]^sup^
+kbd:[F1] kbd:[Ctrl+C] btn:[OK] menu:File[] menu:File[Save] menu:File[Save As > PDF] "View > Zoom > In"
+https://example.com https://example.com[Site^,role=ext] link:a.html[A] mailto:a@b.cc[Mail] a@b.cc
+image:a.png[] image:a.png[Alt,10,20,role=r,link=x.html] image:a.png[scaledwidth=50%] image:a.png[scale=30] icon:heart[] icon:heart[2x,link=y]
+stem:[x^2 < 1] latexmath:[\alpha & \beta] asciimath:[sqrt(4)]
+line +
+break
+footnote:[A *note*.] footnote:fn1[Named] footnote:fn1[] footnote:nope[]
+[[inl]]inline anchor [[inl2,Ref <b>Text</b> "q"]]another anchor:mac[Mac] <<inl>> <<inl2>> <<inl,text>> <<nosuch>> xref:other.adoc[] xref:other.adoc#f[O] <<#>> xref:#[top]
++pass+ `+lit+` pass:[<raw/>] +++<raw/>+++ (C) -- ... -> &

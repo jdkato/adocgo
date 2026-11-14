@@ -1,0 +1,4 @@
+[%header,format=tsv]
+|===
+include::fixtures/data.tsv[]
+|===

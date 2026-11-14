@@ -1,0 +1,11 @@
+foo::bar[baz]
+
+image::
+
+image::[]
+
+video::[]
+
+toc::[x]
+
+include::[]

@@ -1,0 +1,16 @@
+<simpara>Before.</simpara>
+<section xml:id="_included_chapter">
+<title>Included Chapter</title>
+<simpara>Included paragraph with a parent value.</simpara>
+<section xml:id="_nested_in_include">
+<title>Nested in include</title>
+<simpara>Leaf content from a subdirectory.</simpara>
+<simpara>After.</simpara>
+<simpara>Unresolved directive in include-basic.adoc - include::include/missing.adoc[]</simpara>
+<simpara>include::include/chapter.adoc[]</simpara>
+<simpara>Unresolved directive in include-basic.adoc - include::{undefined-dir}/x.adoc[]</simpara>
+<simpara>first</simpara>
+<simpara>last</simpara>
+<simpara>tail</simpara>
+</section>
+</section>

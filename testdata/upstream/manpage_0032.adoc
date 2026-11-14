@@ -1,0 +1,4 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+\\.foo \\ bar \\\\ baz\\
+more

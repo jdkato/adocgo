@@ -1,0 +1,9 @@
+= Document Title
+
+|===
+a|
+= Nested Document Title
+:#{name == 'showtitle' ? '!' : ''}#{name}:
+
+content
+|===

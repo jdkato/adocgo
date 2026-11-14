@@ -1,0 +1,44 @@
+<part xml:id="_part_one">
+<title>Part One</title>
+<chapter xml:id="chap">
+<title>Chapter</title>
+<simpara>See <xref linkend="chap"/>, <xref linkend="sec"/>, <xref linkend="fig"/>, <xref linkend="tbl"/>, <xref linkend="app"/>, <xref linkend="_part_one"/>, <xref linkend="lst"/>, <xref linkend="ex"/>, <xref linkend="fig"/>.</simpara>
+<section xml:id="sec">
+<title>Section</title>
+<figure xml:id="fig">
+<title>Fig title</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</figure>
+<table xml:id="tbl" frame="all" rowsep="1" colsep="1">
+<title>Tbl title</title>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<formalpara xml:id="lst">
+<title>Lst title</title>
+<para>
+<screen>x</screen>
+</para>
+</formalpara>
+<example xml:id="ex">
+<title>Ex title</title>
+<simpara>x</simpara>
+</example>
+</section>
+</chapter>
+<appendix xml:id="app">
+<title>Appendix Title</title>
+<simpara>x</simpara>
+</appendix>
+</part>

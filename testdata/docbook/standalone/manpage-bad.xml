@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Not a manpage title</title>
+<date>2023-11-14</date>
+</info>
+<refentry>
+<refmeta>
+<refentrytitle>Not a manpage title</refentrytitle>
+<manvolnum>1</manvolnum>
+<refmiscinfo class="source">&#160;</refmiscinfo>
+<refmiscinfo class="manual">&#160;</refmiscinfo>
+</refmeta>
+<refnamediv>
+<refname>manpage-bad</refname>
+</refnamediv>
+<refsection xml:id="_section_2">
+<title>Section</title>
+<simpara>x</simpara>
+</refsection>
+</refentry>
+</article>

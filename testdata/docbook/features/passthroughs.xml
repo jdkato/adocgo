@@ -1,0 +1,9 @@
+<simpara><del>raw</del> &lt;b&gt;escaped&lt;/b&gt; <i>raw</i> &lt;i&gt;esc&lt;/i&gt; <emphasis role="strong">b</emphasis> <u> docbook5 <emphasis role="strong">x</emphasis>
+<literal>{backend}</literal> <literal>a+b</literal> {backend} {backend} {backend}
+<phrase role="red"><b>x</b></phrase> <literal>+a+</literal> ++x++ $$x$$ pass:[x] +x+ x\
+a+b+c a b c b +c <literal>` `+</literal>
+multi
+line multi
+line
+ ]
+<inlineequation><mathphrase><![CDATA[x^2]]></mathphrase></inlineequation> <inlineequation><alt><![CDATA[\alpha]]></alt><mathphrase><![CDATA[\alpha]]></mathphrase></inlineequation> <inlineequation><mathphrase><![CDATA[sqrt(4)]]></mathphrase></inlineequation> stem:[x]</simpara>

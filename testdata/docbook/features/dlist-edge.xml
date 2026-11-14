@@ -1,0 +1,61 @@
+<variablelist>
+<varlistentry>
+<term>a</term>
+<listitem>
+<simpara>b :: c</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>d </term>
+<listitem>
+<simpara>e:::f
+g::h
+::</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>x </term>
+<listitem>
+<simpara>y</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><link xl:href="https://example.com">https://example.com</link></term>
+<listitem>
+<simpara>url term</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Term 1::Term 2</term>
+<listitem>
+<simpara>nested inline?</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>code::term</literal></term>
+<listitem>
+<simpara>def</simpara>
+<variablelist>
+<varlistentry>
+<term>Term</term>
+<listitem>
+<simpara>semi
+;; alone</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>indented</term>
+<listitem>
+<simpara>term</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>//// four</term>
+<listitem>
+<simpara>slashes</simpara>
+</listitem>
+</varlistentry>
+</variablelist>

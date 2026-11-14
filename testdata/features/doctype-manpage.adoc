@@ -1,0 +1,20 @@
+= cmd(1)
+Author Name
+:manmanual: Manual
+:mansource: Source
+
+== NAME
+
+cmd, cmd2 - does things
+
+== SYNOPSIS
+
+*cmd* [_OPTION_]...
+
+== DESCRIPTION
+
+Text.
+
+== Options
+
+*-x*:: opt

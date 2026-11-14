@@ -1,0 +1,12 @@
+// comment
+////
+block comment
+////
+= Title
+// comment
+Author Name
+// comment
+:attr: val
+// another
+
+{attr}

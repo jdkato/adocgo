@@ -1,0 +1,14 @@
+= Doc
+:backend: docbook5
+
+ifdef::backend-docbook5[backend-docbook5 set]
+
+ifdef::basebackend-docbook[basebackend-docbook set]
+
+ifdef::basebackend-html[basebackend-html set]
+
+{backend} {basebackend} {filetype} {outfilesuffix} {backend-docbook5-doctype-article}
+
+*x* <<_s>>
+
+== S

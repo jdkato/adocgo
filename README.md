@@ -1,0 +1,272 @@
+# adocgo
+
+A native Go implementation of [Asciidoctor](https://asciidoctor.org)'s
+AsciiDoc → HTML5 and DocBook 5 conversion. It is a port of Asciidoctor 2.0.26
+(parser, preprocessor, substitutors and the `html5` and `docbook5`
+converters) that aims to produce
+**byte-identical output**, so it can replace shelling out to the Ruby
+`asciidoctor` binary. It has no dependencies outside the Go standard library.
+
+```console
+$ go install github.com/jdkato/adocgo/cmd/adocgo@latest
+$ adocgo -s -o - README.adoc
+```
+
+## Library
+
+```go
+import "github.com/jdkato/adocgo"
+
+html, err := adocgo.Convert(src, adocgo.Options{
+    Attributes: map[string]string{"toc": "", "icons": "font"}, // like -a
+    Standalone: false,              // true: full <html> document; false: like -s
+    Safe:       adocgo.SafeSecure,  // zero value is SafeUnsafe (the CLI default)
+    BaseDir:    "docs",             // base directory for include:: and friends
+    Doctype:    "book",             // article (default), book, manpage, inline
+    Backend:    "html5",            // html5 (default), xhtml5 or docbook5
+})
+
+html, err = adocgo.ConvertFile("guide.adoc", adocgo.Options{Standalone: true})
+```
+
+* `Convert(src []byte, opts Options) ([]byte, error)` converts a document held
+  in memory. `ConvertFile(name, opts)` reads a file and additionally sets the
+  `docfile`, `docdir`, `docname` and `docdate`/`doctime` attributes from it,
+  exactly as `asciidoctor FILE` does.
+* `Load(src, opts) (*Document, error)` parses without converting and returns
+  the document tree; `(*Document).Convert()` renders it.
+* `Options.Attributes` follows the `-a` conventions: `"name": "value"` sets,
+  `"name!": ""` unsets, and a trailing `@` on the name or value makes the
+  assignment a default the document may override.
+* `Options.Safe` is one of `SafeUnsafe`, `SafeSafe`, `SafeServer`,
+  `SafeSecure`. As in Asciidoctor, `secure` turns `include::` directives into
+  links and disables reading local files; `safe` and above confine includes
+  to `BaseDir`. **Use `SafeSecure` (or at least `SafeSafe`) for untrusted
+  input** — in unsafe mode a document can include any readable file.
+* Conversion never panics: internal failures are returned as errors. Inputs
+  nested more than 3000 blocks deep are rejected with an error (Asciidoctor
+  itself dies with "stack level too deep" long before that).
+
+### Structure
+
+The code mirrors the layout of the Ruby implementation, which keeps it easy
+to compare against upstream:
+
+| File | Ported from | Role |
+|------|-------------|------|
+| `reader.go` | `reader.rb` | line reader and preprocessor (conditionals, `include::`) |
+| `parser.go`, `parser_list.go`, `table.go` | `parser.rb`, `table.rb` | block parser producing the AST |
+| `attrlist.go` | `attribute_list.rb` | attribute list parser |
+| `node.go`, `document.go` | `abstract_node.rb`, `abstract_block.rb`, `section.rb`, `document.rb` … | AST (`Document`, `Block`, `Table`, `Cell`, `Inline`) and document attributes |
+| `subs.go` | `substitutors.rb` | inline substitutions |
+| `html5.go` | `converter/html5.rb` | HTML5/XHTML5 converter |
+| `docbook5.go` | `converter/docbook5.rb` | DocBook 5 converter |
+| `scan.go`, `scan_block.go`, `scan_inline.go`, `scan_macro.go`, `scan_pass.go` | `rx.rb` | hand-written scanners, one per Asciidoctor regular expression |
+| `internal/rx` | — | test-only: a backtracking regexp engine with Ruby (Onigmo) semantics, used as the oracle for the scanners |
+
+Asciidoctor recognises its syntax with about 120 regular expressions, many of
+which rely on backreferences and lookahead that Go's RE2-based `regexp`
+package cannot express. adocgo does not use regular expressions at run time:
+every pattern is replaced by a hand-written scanner that reproduces the
+pattern's leftmost-match, alternation-order and capture-group semantics. Each
+scanner is declared together with the expression it replaces, and the tests
+hold the two to identical results (see [Testing](#testing)).
+
+The AST is exposed (`Document.Blocks`, `Block.Context`, `Block.Attributes`,
+`Block.Table`, …) but should be considered unstable.
+
+## Command line
+
+`cmd/adocgo` accepts the commonly used `asciidoctor` flags:
+
+```
+adocgo [OPTION]... FILE...
+
+  -a, --attribute name[=value]  set a document attribute (name!, name@ supported)
+  -b, --backend BACKEND         html5 (default), xhtml5 or docbook5 (alias docbook)
+  -B, --base-dir DIR            base directory containing the document and resources
+  -d, --doctype DOCTYPE         article, book, manpage, inline
+  -e, --embedded                output an embedded document (no header/footer)
+  -s, --no-header-footer        same as --embedded
+  -o, --out-file FILE           output file (default: next to the input, .html or .xml; - for stdout)
+  -S, --safe-mode MODE          unsafe (default), safe, server, secure
+      --safe                    set safe mode to safe
+  -n, --section-numbers         auto-number section titles
+  -V, --version                 display the version
+```
+
+Use `-` as FILE to read from stdin (output then goes to stdout). `-q`, `-v`,
+`-w`, `-t` and `--trace` are accepted and ignored.
+
+## Compatibility
+
+The measure of success is fidelity to `asciidoctor` (`-b html5` and
+`-b docbook5`). The test suite converts a corpus of 1976 fixtures and
+compares the result byte-for-byte with output generated by Asciidoctor
+2.0.26:
+
+| Corpus | Fixtures | Source |
+|--------|---------:|--------|
+| `testdata/upstream` | 1459 | every AsciiDoc snippet in Asciidoctor's Ruby test suite |
+| `testdata/realworld` | 167 | Asciidoctor README (5 languages), CHANGELOG, man page, test fixtures; Asciidoctor PDF docs |
+| `testdata/docs` | 99 | the Asciidoctor documentation |
+| `testdata/features` | 97 | hand-written, feature-focused fixtures (many with flags) |
+| `testdata/standalone` | 27 | full-document HTML output (`<html>`, stylesheet, TOC, docinfo, …) |
+| `testdata/docbook` | 11 | DocBook-focused fixtures (inline nodes, index terms, blocks, lists, tables, book structure, abstracts) |
+| `testdata/docbook/features` | 97 | the feature fixtures again, converted with `-b docbook` |
+| `testdata/docbook/standalone` | 19 | full DocBook documents: article, book and manpage structure, info blocks, docinfo, real-world docs |
+
+All 1976 fixtures match; [`testdata/known-failures.txt`](testdata/known-failures.txt)
+is empty. See [`testdata/README.md`](testdata/README.md) for the layout and
+`scripts/regen.sh` to regenerate the expected output from a real Asciidoctor
+installation.
+
+Supported: document header (title, authors, revision line, attribute
+entries), attribute references, counters and `{set:…}`, all substitution
+groups and `subs` overrides, constrained/unconstrained formatting,
+passthroughs (`+…+`, `++…++`, `+++…+++`, `pass:[]`, `++++` blocks), sections
+(auto ids, `idprefix`, `idseparator`, `sectnums`, `sectanchors`, `sectlinks`,
+special sections, book parts/chapters/appendices), TOC (all placements,
+`toc::[]`, `toclevels`), paragraphs, every delimited block, source blocks
+(plain and `highlight.js`), callouts, admonitions, all list types (nesting,
+continuations, checklists, description lists incl. horizontal/qanda), tables
+(psv/csv/dsv/tsv, col specs, spans, cell styles incl. AsciiDoc cells, nested
+tables, header/footer), block and inline images (incl. `data-uri`, inline
+and interactive SVG), video/audio, links, autolinks, mailto, xrefs with
+automatic reference text and `xrefstyle`, anchors, footnotes, index terms,
+`kbd`/`btn`/`menu` macros, icons, STEM passthrough (MathJax), captions with
+counters, conditionals (`ifdef`/`ifndef`/`ifeval`), `include::` (tags, lines,
+`leveloffset`, `indent`, safe modes, depth limit), hard breaks, breaks,
+comments, `compat-mode`, doctypes `article`/`book`/`manpage`/`inline`,
+standalone output with the embedded default stylesheet, `linkcss`, custom
+stylesheets, docinfo files, and XML syntax (`-b xhtml5`).
+
+The DocBook 5 backend (`-b docbook`, `Options.Backend`, or `:backend:
+docbook` in the document header) covers the whole upstream converter:
+`<article>`/`<book>` roots and manpage `<refentry>` structure, the `<info>`
+block (title/subtitle, date, copyright, authors, revision history, cover
+images, organisation, docinfo, root abstract), sections and special sections
+(parts, chapters, appendices, prefaces, glossaries, bibliographies, …), every
+block type, lists, tables (including absolute column widths and nested
+tables), figures, admonitions, callouts, and all inline nodes (quotes,
+anchors, xrefs, links, footnotes, index terms with see/see-also, keyboard,
+button and menu macros, inline images, STEM). Selecting the backend sets the
+`backend-*`, `basebackend-*`, `filetype-*` and `outfilesuffix` attributes as
+Asciidoctor does, so conditionals such as `ifdef::basebackend-docbook[]`
+behave identically, and the CLI writes `.xml` files.
+
+### Known gaps
+
+* **Backends**: `html5`, `xhtml5` and `docbook5`. Asciidoctor's `manpage`
+  (roff) backend is not implemented, and any other backend name (including
+  the legacy `docbook45`) is rendered as HTML5, whereas Asciidoctor aborts
+  with "missing converter".
+* **AsciiMath in DocBook**: Asciidoctor converts AsciiMath to MathML when the
+  `asciimath` gem is installed. adocgo always emits what Asciidoctor emits
+  without that gem (the expression in a `<mathphrase>` CDATA section).
+* **Syntax highlighters**: `rouge`, `pygments` and `coderay` are not run.
+  With one of those selected, adocgo emits the markup Asciidoctor produces
+  when the highlighter library is *not installed* (the highlighter's `<pre>`
+  wrapper around unhighlighted source). Output therefore differs from an
+  Asciidoctor installation that has the highlighter gem; `linenums` has no
+  effect, and the highlighter stylesheets are not added to standalone
+  output. `highlight.js` (client-side) is fully supported.
+* **No diagnostics**: Asciidoctor's warnings and errors (missing include
+  files, invalid references, out-of-sequence sections, unterminated blocks,
+  …) are not reported. The HTML is the same, but nothing is logged.
+* **Remote content**: `include::https://…[]`, `allow-uri-read`, `cache-uri`
+  and `data-uri` for remote images are not implemented; remote includes are
+  always rendered as links (what Asciidoctor does without `allow-uri-read`).
+* **Not implemented**: the extensions API, custom templates/converters,
+  `sourcemap`, asset cataloguing, AsciiMath/diagram rendering.
+* **CLI**: no stylesheet copying for `linkcss` + `copycss`, and no `-D`,
+  `-r`, `-I`, `-T`, `-E` options. Output for multiple input files is written
+  next to each input.
+* **`showtitle`/`notitle` passed together** as API attributes: Asciidoctor
+  lets the one given last win; adocgo (whose attributes are an unordered
+  map) lets `showtitle` win.
+* **Encodings**: input must be UTF-8 (a UTF-8 BOM is stripped). UTF-16 input
+  and the include `encoding` attribute are not supported. Invalid UTF-8 is
+  passed through, whereas Asciidoctor aborts.
+* **Unicode tables**: the word/letter/digit character classes use Go's Unicode tables,
+  which may differ from Ruby's Unicode version for recently added
+  characters.
+* **Windows**: path handling assumes `/` separators and has not been tested
+  on Windows.
+* Where Asciidoctor itself fails (for example on NUL bytes in an include
+  path, or deep recursion), adocgo's behaviour is unspecified beyond "no
+  panic, no hang".
+
+## Performance
+
+`cd benchmarks && go test -run xxx -bench Convert -benchmem .` converts a
+generated document (headings, paragraphs with inline markup, lists, code
+blocks, block quotes) written equivalently in AsciiDoc and Markdown with
+adocgo and with [goldmark](https://github.com/yuin/goldmark). Median of three
+runs on a 4-core x86-64 VM (the machine is noisy; individual runs vary by
+about ±10%):
+
+| Document | Converter | Time | Throughput | Allocated | Allocations |
+|----------|-----------|-----:|-----------:|----------:|------------:|
+| 8 sections (15 KB)    | goldmark | 1.08 ms | 13.5 MB/s | 413 KB  | 2,714   |
+|                       | adocgo   | 0.93 ms | 15.5 MB/s | 283 KB  | 1,951   |
+| 80 sections (150 KB)  | goldmark | 10.1 ms | 14.4 MB/s | 3.98 MB | 26,910  |
+|                       | adocgo   | 8.3 ms  | 17.2 MB/s | 2.66 MB | 18,842  |
+| 800 sections (1.5 MB) | goldmark | 96.9 ms | 15.0 MB/s | 38.8 MB | 268,843 |
+|                       | adocgo   | 81.1 ms | 17.7 MB/s | 26.3 MB | 187,645 |
+
+Throughput is flat from 15 KB to 1.5 MB, i.e. conversion time is linear in
+the input size. `go test -run xxx -bench Convert -benchmem .` in the root
+module converts three documents from the corpus:
+
+| Document | Size | Time | Throughput | Allocated | Allocations |
+|----------|-----:|-----:|-----------:|----------:|------------:|
+| `realworld/README.adoc`     | 20 KB  | 1.20 ms | 17.1 MB/s | 398 KB  | 2,794  |
+| `docs/ROOT__whats-new.adoc` | 41 KB  | 2.11 ms | 19.5 MB/s | 675 KB  | 4,448  |
+| `realworld/CHANGELOG.adoc`  | 136 KB | 7.94 ms | 17.1 MB/s | 3.02 MB | 11,450 |
+
+## Testing
+
+```console
+$ go test ./...                     # corpus comparison, scanner/regexp equivalence, robustness
+$ go test -run '^$' -fuzz FuzzConvert -fuzztime 60s .
+$ go test -run '^$' -fuzz FuzzScanners -fuzztime 60s .
+$ scripts/regen.sh                  # regenerate expected HTML (needs Ruby + asciidoctor)
+$ scripts/difffuzz.sh 7 "-d book"   # differential fuzzing against asciidoctor
+```
+
+* `TestCorpus` compares every fixture byte-for-byte; fixtures listed in
+  `known-failures.txt` (currently none) must fail, and the test complains if
+  one starts passing.
+* `TestScannersAgainstRegexps` converts the whole corpus, mutated variants
+  of it and the adversarial inputs while comparing the outcome of *every*
+  scan with the regular expression the scanner replaces (about 635,000
+  scans). `TestScannersOnSamples` additionally runs every scanner and its
+  regular expression over about 4,000 sample strings (about 790,000
+  comparisons), and `FuzzScanners` does the same on arbitrary input.
+* `TestRxCompat` validates the oracle itself: it replays 64,664
+  pattern/input pairs recorded from Ruby against `internal/rx`.
+* `TestMutatedCorpus`, `TestPathological`, `TestNestingLimit` and
+  `FuzzConvert` feed truncated, garbled and adversarial input through the
+  converter to make sure it neither fails nor hangs.
+* `scripts/difffuzz.sh` mutates the corpus, renders the mutants with the real
+  Asciidoctor and diffs the results; it is the main tool for finding
+  divergences beyond the committed corpus.
+
+None of the tests need Ruby; only the `scripts/` do.
+
+## AI attribution
+
+adocgo was written by [Claude Code](https://claude.com/claude-code),
+Anthropic's AI coding agent, working under the direction of the repository
+owner. The code is a port of the Asciidoctor source, and its correctness
+rests on the differential test corpus described above (byte-for-byte
+comparison with Asciidoctor 2.0.26) rather than on line-by-line human
+authorship. Commits produced this way carry a `Co-Authored-By: Claude`
+trailer.
+
+## License
+
+Apache-2.0 (see [LICENSE](LICENSE)). adocgo is derived from Asciidoctor, which
+is MIT licensed, and embeds the Asciidoctor default stylesheet; see
+[NOTICE](NOTICE).

@@ -1,0 +1,137 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can apply a bundled source highlighter theme to your source blocks or define and apply your own.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_a_bundled_highlighting_theme">Using a bundled highlighting theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rouge bundles several themes you can use to colorize your source blocks.
+To use one of these themes, first set the value of the <code>source-highlighter</code> document attribute to <code>rouge</code>.
+Then, specify the desired theme using the <code>rouge-style</code> document attribute.</p>
+</div>
+<div class="paragraph">
+<p>The following example demonstrates how to apply the monokai theme from Rouge to source blocks.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:source-highlighter: rouge
+:rouge-style: monokai</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can generate a list of all available themes by running the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ruby -e 'require :rouge.to_s; puts Rouge::Theme.registry.keys.sort.join ?\n'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also find the <a href="https://github.com/rouge-ruby/rouge/tree/master/lib/rouge/themes">list of themes in the Rouge source repository</a>.</p>
+</div>
+<div class="paragraph">
+<p>If the bundled themes don&#8217;t suit your needs, you can define one of your own.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_define_a_custom_highlighting_theme">Define a custom highlighting theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A custom theme for Rouge is defined using a Ruby class.
+Start by creating a Ruby source file to define your theme.
+Name the file according to the name of your theme and put the file in a folder of your choice (e.g., <em class="path">rouge_themes/custom.rb</em>).
+The name of the Ruby class doesn&#8217;t matter, though it&#8217;s customary to name it according to the name of the theme as well.</p>
+</div>
+<div class="listingblock">
+<div class="title">rouge_themes/custom.rb</div>
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'rouge' unless defined? ::Rouge.version
+
+module Rouge; module Themes
+  class Custom &lt; CSSTheme
+    name 'custom'
+
+    style Comment,           fg: '#008800', italic: true
+    style Error,             fg: '#a61717', bg: '#e3d2d2'
+    style Str,               fg: '#0000ff'
+    style Str::Char,         fg: '#800080'
+    style Num,               fg: '#0000ff'
+    style Keyword,           fg: '#000080', bold: true
+    style Operator::Word,    bold: true
+    style Name::Tag,         fg: '#000080', bold: true
+    style Name::Attribute,   fg: '#ff0000'
+    style Generic::Deleted,  fg: '#000000', bg: '#ffdddd', inline_block: true, extend: true
+    style Generic::Inserted, fg: '#000000', bg: '#ddffdd', inline_block: true, extend: true
+    style Text, {}
+  end
+end; end</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each style declaration accepts the following properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>fg</code> - sets the foreground (text) color</p>
+</li>
+<li>
+<p><code>bg</code> - sets the background color</p>
+</li>
+<li>
+<p><code>bold</code> - change the font weight to bold</p>
+</li>
+<li>
+<p><code>italic</code> - change the font style to italic</p>
+</li>
+<li>
+<p><code>underline</code> - add an underline to the text</p>
+</li>
+<li>
+<p><code>inline_block</code> - fill the background color to the height of the line (Asciidoctor PDF only)</p>
+</li>
+<li>
+<p><code>extend</code> - extend the background color to the end of the line for a line-oriented match (Asciidoctor PDF only)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Colors are defined using hexadecimal format (e.g., #ff0000 for red).</p>
+</div>
+<div class="paragraph">
+<p>Use the <code>Text</code> token to set the background color of the source block and the default text color.</p>
+</div>
+<div class="paragraph">
+<p>The complete list of tokens can be found in the <a href="https://github.com/jneen/rouge/blob/master/lib/rouge/token.rb" target="_blank" rel="noopener">token.rb file</a> from Rouge.
+Refer to the <a href="https://github.com/jneen/rouge/tree/master/lib/rouge/themes" target="_blank" rel="noopener">bundled themes</a> to find more examples.</p>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;ve defined your theme, you need to enable it to use it using the <code>rouge-style</code> document attribute, which you specify in the document header or via the Asciidoctor CLI or API.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:source-highlighter: rouge
+:rouge-style: custom</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you need to activate your theme by requiring the theme file when you invoke Asciidoctor.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor -r ./rouge_themes/custom.rb sample.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should now see that the source code is highlighted to your liking.
+For more information about source highlighting with Rouge, refer to the <a href="https://rouge.jneen.net/" target="_blank" rel="noopener">Rouge project page</a>.</p>
+</div>
+</div>
+</div>

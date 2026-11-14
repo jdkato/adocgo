@@ -1,0 +1,10 @@
+<simpara>*none* {backend} <x></simpara>
+<screen>docbook5 &lt;x&gt;</screen>
+<screen><emphasis role="strong">bold</emphasis> &lt;x&gt;</screen>
+<screen><b>raw</b></screen>
+<screen><emphasis role="strong">bold</emphasis> <link xl:href="http://x.org">http://x.org</link></screen>
+<literallayout class="monospaced"><emphasis role="strong">b</emphasis> <link xl:href="http://x.org">http://x.org</link> <x></literallayout>
+<simpara>*not* &lt;x&gt;</simpara>
+<simpara>*x* <link xl:href="http://x.org">http://x.org</link></simpara>
+<simpara>bad keys {backend} *x*</simpara>
+<simpara>*x*</simpara>

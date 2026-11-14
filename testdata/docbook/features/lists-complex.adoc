@@ -1,0 +1,104 @@
+* level 1
+** level 2
+*** level 3
+**** level 4
+***** level 5
+* back to 1
++
+continued paragraph
++
+----
+listing in item
+----
++
+NOTE: admonition in item
+
+- dash list
+- second
+
+. ordered
+.. loweralpha
+... lowerroman
+.... upperalpha
+..... upperroman
+. second
+
+[start=5]
+. five
+. six
+
+[%reversed]
+. three
+. two
+
+[loweralpha]
+. a
+. b
+
+1. explicit
+2. numbers
+
+a. alpha
+b. beta
+
+A. upper
+B. upper
+
+i) roman
+ii) roman
+
+I) Roman
+II) Roman
+
+[square]
+* square
+[circle]
+** circle
+[disc]
+*** disc
+[none]
+* none
+[no-bullet]
+* nob
+[unstyled]
+* unst
+
+.Titled list
+[#lid.lrole]
+* item
+
+* [ ] unchecked
+* [x] checked
+* [*] starred
+* normal
+
+[%interactive]
+* [ ] unchecked
+* [x] checked
+
+* item
+
+  literal attached
+
+* item
++
+--
+open block
+
+with paras
+--
+* last
+
+* a
+//
+* b
+
+* one
+
+//-
+* separate list
+
+* parent
+. child ordered
+* parent 2
+term:: nested dl

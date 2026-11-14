@@ -1,0 +1,270 @@
+<div class="sect1">
+<h2 id="quote">quote</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>quote</code> category control the arrangement and style of quote blocks.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 30.7692%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  background-color: #757575</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-color">Color</a><br>
+(default: <code>'EEEEEE'</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  border-color: #E6E8FA</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-width">border-left-width</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-width">Measurement</a><br>
+(default: <code>4</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  border-left-width: 5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-radius</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#radius">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  border-radius: 4</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-style">Border style</a><br>
+(default: <code>solid</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  border-style: dotted</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-width">border-width</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-width">Measurement</a> | <a href="blocks.html#border-width">Measurement[]</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  border-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  font-color: #333333</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  font-size: 13</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">padding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#padding">Measurement</a> | <a href="blocks.html#padding">Measurement[]</a><br>
+(default: <code>[3, 12, 3, 14]</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  padding: [3, 0, 3, 20]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  text-transform: uppercase</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="border-width">border-width and border-left-width</h3>
+<div class="paragraph">
+<p>If the value assigned to the <code>border-left-width</code> key is non-zero, the border is only applied to the left side of the quote block.
+Otherwise, if the value assigned to the <code>border-width</code> key is non-zero, the border is drawn around the whole quote block.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quote-cite">quote-cite</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>quote-cite</code> category control the arrangement and style of the citation in quote blocks.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 30.7692%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    font-color: #999999</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    font-family: Noto Serif</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    font-size: 9</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  cite:
+    text-transform: smallcaps</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,11 @@
+image::include/pic.svg[opts=inline]
+
+image::include/pic.svg[Pic,50,40,opts=inline]
+
+image::include/bad.svg[Bad,width=5,opts=inline]
+
+image::include/nope.svg[Missing "alt",opts=inline]
+
+image::include/pic.svg[opts=interactive,width=9]
+
+Inline image:include/pic.svg[opts=inline,height=3] and image:include/nope.svg[Alt,opts=inline] and image:include/pic.svg[opts=interactive,fallback=f.png].

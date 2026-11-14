@@ -1,0 +1,74 @@
+<programlisting language="ruby" linenumbering="unnumbered">require 'x' <co xml:id="CO1-1"/>
+puts 1 <co xml:id="CO1-2"/>
+x = 1 <co xml:id="CO1-3"/>
+y <co xml:id="CO1-4"/>
+<co xml:id="CO1-5"/>
+two <co xml:id="CO1-6"/> <co xml:id="CO1-7"/>
+esc &lt;8&gt;
+<co xml:id="CO1-8"/>
+auto <co xml:id="CO1-9"/>
+auto2 <co xml:id="CO1-10"/></programlisting>
+<calloutlist>
+<callout arearefs="CO1-1 CO1-9">
+<para>one</para>
+</callout>
+<callout arearefs="CO1-2 CO1-10">
+<para>two</para>
+</callout>
+<callout arearefs="CO1-3">
+<para>three</para>
+</callout>
+<callout arearefs="CO1-4">
+<para>four</para>
+</callout>
+<callout arearefs="CO1-5">
+<para>five</para>
+</callout>
+<callout arearefs="CO1-6">
+<para>six</para>
+</callout>
+<callout arearefs="CO1-7">
+<para>seven</para>
+</callout>
+<callout arearefs="">
+<para>nine</para>
+</callout>
+<callout arearefs="CO1-8">
+<para>auto</para>
+</callout>
+<callout arearefs="">
+<para>auto2</para>
+</callout>
+</calloutlist>
+<screen>no callout here &lt;1</screen>
+<programlisting language="xml" linenumbering="unnumbered">&lt;a&gt;
+  &lt;b/&gt; <co xml:id="CO2-1"/>
+&lt;/a&gt; <co xml:id="CO2-2"/></programlisting>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>first</para>
+</callout>
+<callout arearefs="CO2-2">
+<para>second</para>
+<simpara>with continuation</simpara>
+</callout>
+</calloutlist>
+<programlisting language="erlang" linenumbering="unnumbered">hello <co xml:id="CO3-1"/></programlisting>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para>erl</para>
+</callout>
+</calloutlist>
+<calloutlist xml:id="co" role="role">
+<title>Colist title</title>
+<callout arearefs="">
+<para>orphan</para>
+</callout>
+</calloutlist>
+<screen>kept &lt;1&gt;</screen>
+<literallayout class="monospaced">literal <co xml:id="CO5-1"/></literallayout>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para>lit</para>
+</callout>
+</calloutlist>

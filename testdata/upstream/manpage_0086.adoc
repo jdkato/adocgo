@@ -1,0 +1,3 @@
+.SH "UI MACROS"
+.sp
+\fIFile\0\(fc\0New Tab\fP

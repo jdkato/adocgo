@@ -1,0 +1,60 @@
+<example>
+<title>One</title>
+<simpara>x</simpara>
+</example>
+<example>
+<title>Two</title>
+<simpara>x</simpara>
+</example>
+<example>
+<title>No caption</title>
+<simpara>x</simpara>
+</example>
+<formalpara>
+<title>L1</title>
+<para>
+<screen>x</screen>
+</para>
+</formalpara>
+<table frame="all" rowsep="1" colsep="1">
+<title>T1</title>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>T2</title>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>G</title>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>x</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<figure>
+<title>F</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</figure>

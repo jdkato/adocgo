@@ -1,0 +1,49 @@
+|===
+|implicit |header
+
+|body |row
+|===
+
+|===
+
+|no |header
+|body |row
+|===
+
+|===
+|a |b
+|c |d
+|===
+
+|===
+|multi
+line |header?
+
+|body |row
+|===
+
+[cols="1a,1l"]
+|===
+|implicit |header
+
+|body |row
+|===
+
+[%footer]
+|===
+|only |row
+|===
+
+[%header%footer]
+|===
+|h|h
+|b|b
+|f|f
+|===
+
+[%header]
+|===
+|[[cellanchor]]h *bold*|h
+
+|[[cellanchor2]]b|b
+|===

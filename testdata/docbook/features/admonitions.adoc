@@ -1,0 +1,44 @@
+NOTE: Note para.
+
+TIP: Tip
+continues.
+
+IMPORTANT: Imp.
+
+WARNING: Warn.
+
+CAUTION: Caut.
+
+NOTE:no space
+
+.Titled
+[NOTE#nid.nrole]
+====
+Block admonition.
+
+Two paras.
+====
+
+[TIP]
+Para style.
+
+[WARNING,caption=Achtung]
+custom caption
+
+[CAUTION]
+--
+open as admonition
+--
+
+[NOTE]
+----
+not admonition listing
+----
+
+:note-caption: Hinweis
+
+NOTE: Localized.
+
+:note-caption!:
+
+NOTE: No label.

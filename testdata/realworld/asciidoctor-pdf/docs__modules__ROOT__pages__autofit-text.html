@@ -1,0 +1,67 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verbatim blocks often have long lines that don&#8217;t fit within the fixed width of the PDF canvas.
+And unlike on the web, the PDF reader cannot scroll horizontally to reveal the overflow text.
+Therefore, the long lines are forced to wrap.
+Wrapped lines can make the verbatim blocks hard to read or even cause confusion.</p>
+</div>
+<div class="paragraph">
+<p>To help address this problem, Asciidoctor PDF provides the <code>autofit</code> option on all verbatim&#8212;&#8203;literal, listing and source&#8212;&#8203;blocks to attempt to fit the text within the available width.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="autofit">autofit option</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the <code>autofit</code> option is enabled, Asciidoctor PDF will decrease the font size as much as it can until the longest line fits without wrapping.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+The converter won&#8217;t shrink the font size beyond the value of the <code>base-font-size-min</code> key specified in the PDF theme.
+If that threshold is reached, lines may still wrap.
+To allow <code>autofit</code> to handle all cases, set <code>base-font-size-min</code> to <code>0</code> in your theme.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of the <code>autofit</code> option enabled on a source block:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[source%autofit,java]
+----
+@SessionScoped
+public class WidgetRepository {
+    @GET
+    @Produces("application/json")
+    public List&lt;String&gt; listAll(@QueryParam("start") Integer start, @QueryParam("max") Integer max) {
+        ...
+    }
+}
+----</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="autofit-attribute">autofit-option attribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To enable the <code>autofit</code> option globally, set the <code>autofit-option</code> document attribute in the document header or before the relevant blocks in your content.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:autofit-option:</code></pre>
+</div>
+</div>
+</div>
+</div>

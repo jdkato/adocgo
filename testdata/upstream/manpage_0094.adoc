@@ -1,0 +1,4 @@
+#{expected_coda}
+.SH "AUTHOR"
+.sp
+Author Name

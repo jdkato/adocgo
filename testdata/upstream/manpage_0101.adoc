@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+text.footnote:[https://example.org is the place]

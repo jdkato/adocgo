@@ -1,0 +1,34 @@
+<div class="sect1">
+<h2 id="_skipping_passthrough_content">Skipping passthrough content</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF does not support arbitrary passthrough content.
+While the basebackend for the PDF converter is html, it only recognizes a limited subset of inline HTML elements that can be mapped to PDF (e.g., a, strong, em, code, etc.).
+Therefore, if your content contains passthrough blocks or inlines, you most likely have to use a conditional preprocessor to skip them (and make other arrangements).</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to skip a passthrough block when converting to PDF:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">ifndef::backend-pdf[]
+&lt;script&gt;
+//...
+&lt;/script&gt;
+endif::[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to only enable a passthrough block when converting to HTML5:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">ifdef::backend-html5[]
+&lt;script&gt;
+//...
+&lt;/script&gt;
+endif::[]</code></pre>
+</div>
+</div>
+</div>
+</div>

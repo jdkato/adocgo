@@ -1,0 +1,6 @@
+= Highlight
+
+[source,go]
+----
+package main
+----

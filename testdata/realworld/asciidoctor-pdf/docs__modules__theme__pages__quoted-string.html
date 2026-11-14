@@ -1,0 +1,39 @@
+<div class="paragraph">
+<p>Some keys accept a quoted string as text content.
+The final segment of these keys is always named <code>content</code>.</p>
+</div>
+<div class="paragraph">
+<p>A content key accepts a string value.
+It&#8217;s usually best to quote the string or use the <a href="https://symfony.com/doc/current/components/yaml/yaml_format.html#strings" target="_blank" rel="noopener">YAML multi-line string syntax</a>.</p>
+</div>
+<div class="paragraph">
+<p>Text content may be formatted using a subset of inline HTML.
+You can use the well-known elements such as <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code>, <code>&lt;del&gt;</code>, <code>&lt;span&gt;</code>, and <code>&lt;br&gt;</code>.
+The <code>&lt;span&gt;</code> element supports the <code>style</code> attribute, which you can use to specify the <code>color</code>, <code>font-weight</code>, and <code>font-style</code> CSS properties.
+You can also use the <code>rgb</code> attribute on the <code>&lt;color&gt;</code> element to change the color or the <code>name</code> and <code>size</code> attributes on the <code>&lt;font&gt;</code> element to change the font properties.
+If you need to add an underline or strikethrough decoration to the text, you can assign the <code>underline</code> or <code>line-through</code> to the <code>class</code> attribute on any aforementioned element.
+You can create a hard line break using <code>&lt;br&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of using formatting in the content of the menu caret:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">menu-caret-content: " &lt;font size=\"1.15em\"&gt;&lt;color rgb=\"#b12146\"&gt;\u203a&lt;/color&gt;&lt;/font&gt; "</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The string must be double quoted in order to use a Unicode escape code like <code>\u203a</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Additionally, normal substitutions are applied to the value of content keys for <a href="running-content.html">running content</a>, so you can use most AsciiDoc inline formatting (e.g., <code>*strong*</code> or <code>{attribute-name}</code>) in the values of those keys.</p>
+</div>

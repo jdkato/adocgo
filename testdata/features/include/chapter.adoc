@@ -1,0 +1,7 @@
+== Included Chapter
+
+Included paragraph with {attr-from-parent}.
+
+=== Nested in include
+
+include::sub/leaf.adoc[]

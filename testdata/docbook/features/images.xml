@@ -1,0 +1,118 @@
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/sunset.jpg"/>
+</imageobject>
+<textobject><phrase>sunset</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/sunset.jpg" contentwidth="300" contentdepth="200"/>
+</imageobject>
+<textobject><phrase>Sunset</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<figure xml:id="img1" role="thumb">
+<title>Titled</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/sunset.jpg" align="center"/>
+</imageobject>
+<textobject><phrase>Sunset "at" dusk</phrase></textobject>
+</mediaobject>
+</figure>
+<figure>
+<title>Custom caption</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/a_b-c.png"/>
+</imageobject>
+<textobject><phrase>a b c</phrase></textobject>
+</mediaobject>
+</figure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="https://example.com/x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/has%20space.png" contentwidth="10"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/chart.svg"/>
+</imageobject>
+<textobject><phrase>chart</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/chart.svg"/>
+</imageobject>
+<textobject><phrase>Chart</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/{nope}.png"/>
+</imageobject>
+<textobject><phrase>{nope}</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<simpara>Inline <inlinemediaobject>
+<imageobject>
+<imagedata fileref="img/a.png"/>
+</imageobject>
+<textobject><phrase>a</phrase></textobject>
+</inlinemediaobject> <link xl:href="x.html"><inlinemediaobject role="r">
+<imageobject>
+<imagedata fileref="img/a.png" contentwidth="10" contentdepth="20"/>
+</imageobject>
+<textobject><phrase>Alt</phrase></textobject>
+</inlinemediaobject></link> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="img/b.svg"/>
+</imageobject>
+<textobject><phrase>b</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject role="red">
+<imageobject>
+<imagedata fileref="./images/icons/heart.png"/>
+</imageobject>
+<textobject><phrase>heart</phrase></textobject>
+</inlinemediaobject> image:x.png[] <inlinemediaobject>
+<imageobject>
+<imagedata fileref="img/has%20space.png"/>
+</imageobject>
+<textobject><phrase>has space</phrase></textobject>
+</inlinemediaobject> <inlinemediaobject>
+<imageobject>
+<imagedata fileref="img/a.png"/>
+</imageobject>
+<textobject><phrase>a]b</phrase></textobject>
+</inlinemediaobject></simpara>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="img/x.png" width="50%"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</informalfigure>

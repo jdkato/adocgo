@@ -1,0 +1,19 @@
+= Document Title: The Subtitle
+Jane Q. Doe <jane@example.com>
+v1.2, 2024-03-04: A remark
+:copyright: ACME, Inc. 2020-2024
+:orgname: ACME
+:front-cover-image: image:cover.png[Front,400,600]
+
+[abstract]
+The abstract goes into info.
+
+Preamble.
+
+== First
+
+text <<_second>>
+
+== Second
+
+text

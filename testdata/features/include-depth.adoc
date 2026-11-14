@@ -1,0 +1,5 @@
+:max-include-depth: 1
+
+include::include/chapter.adoc[]
+
+include::include/chapter.adoc[depth=0]

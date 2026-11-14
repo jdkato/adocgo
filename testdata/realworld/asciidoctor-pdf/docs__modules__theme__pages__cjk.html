@@ -1,0 +1,154 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you&#8217;re writing in a CJK language such as Simplified Chinese, you&#8217;ll likely need to bring your own font by providing a custom theme.
+That&#8217;s because it&#8217;s not possible for Asciidoctor PDF to bundle the necessary fonts since they are too large.
+Fortunately, creating a theme to override the fonts requires very few steps, so you should be up and running with your own font in no time.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_obtain_the_ttf_fonts">Obtain the TTF fonts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first step in creating a CJK theme is to obtain the fonts.
+It&#8217;s important that the fonts are TTF since that&#8217;s the only font format Asciidoctor PDF (via ttfunk) supports reliably.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, good quality TTF fonts for CJK languages are hard to come by.
+We recommend starting with the <a href="https://github.com/googlefonts/noto-cjk/tree/main/Sans#ttf">Noto Sans Variable Fonts for CJK</a> provided by the noto-cjk project (Noto Sans and Noto Sans Mono).
+Just make sure you download the TTF variant.</p>
+</div>
+<div class="paragraph">
+<p>Once you have downloaded the fonts, place the files into the directory where you are going to create your theme.
+For the purpose of this guide, we&#8217;ll assume you are working with the following font files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/NotoSansCJKsc-VF.ttf" target="_blank" rel="noopener">NotoSansCJKsc-VF.ttf</a></p>
+</li>
+<li>
+<p><a href="https://github.com/googlefonts/noto-cjk/raw/main/Sans/Variable/TTF/Mono/NotoSansMonoCJKsc-VF.ttf" target="_blank" rel="noopener">NotoSansMonoCJKsc-VF.ttf</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you&#8217;d like to use different fonts, refer to the <a href="https://en.wikipedia.org/wiki/List_of_CJK_fonts" target="_blank" rel="noopener">list of notable CJK fonts on Wikipedia</a>.
+With that information, you can search for the TTF font on any font service.
+You can also find the Kai Gen Gothic fonts for CJK languages in TTF format on the <a href="https://github.com/chloerei/asciidoctor-pdf-cjk-kai_gen_gothic/releases" target="_blank" rel="noopener">releases page</a> for the now deprecated asciidoctor-pdf-cjk-kai_gen_gothic project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_the_theme_file">Create the theme file</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you&#8217;ve obtained the TTF font files, you can create a new theme to use them.</p>
+</div>
+<div class="paragraph">
+<p>Create a theme file named <em class="path">cjk-theme.yml</em> where you can override the fonts:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+font:
+  catalog:
+    merge: true
+    Noto Sans CN: NotoSansCJKsc-VF.ttf
+    Noto Sans Mono CN: NotoSansMonoCJKsc-VF.ttf
+  fallbacks:
+  - Noto Serif
+base:
+  text-align: left
+  font-family: Noto Sans CN
+codespan:
+  font-family: Noto Sans Mono CN
+kbd:
+  font-family: $codespan-font-family
+code:
+  font-family: $codespan-font-family</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This theme does several things:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Registers the Noto Sans CN and Noto Sans Mono CN fonts in the font catalog provided by the default theme</p>
+</li>
+<li>
+<p>Sets the built-in Noto Serif font as the fallback font in cases when a glyph is not provided by the CJK font</p>
+</li>
+<li>
+<p>Configures Noto Sans CN as the base font, which is used for all variable-width text in the document</p>
+</li>
+<li>
+<p>Sets the default text alignment to left since text justification isn&#8217;t well-suited for CJK languages</p>
+</li>
+<li>
+<p>Configures Noto Sans Mono CN as the monospaced font, which is used for all monospaced text in the document</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using different fonts for normal, bold, italic, and bold italic, you&#8217;ll need to configure them using separate keys.
+Refer to <a href="font.html#extend-catalog">Extending the font catalog</a> for details.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+When using your own fonts, be sure to consult the <a href="prepare-custom-font.html">prepare-custom-font.html</a> to find recommended modifications.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You may also want to darken the font color since the Noto Sans SC font has a thin weight.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  text-align: left
+  font-color: #000000
+  font-family: Noto Sans CN
+heading:
+  font-color: #000000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may need to adjust the font color on other keys as well.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_your_theme">Load your theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you&#8217;ve created the theme, you can put it to use.
+Since the theme provides custom fonts, you&#8217;ll need to specify both the location of the theme file and the location of the fonts when calling Asciidoctor PDF.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume that your theme is located in the <em class="path">themes</em> directory relative to your document.
+Here&#8217;s how you specify the path to the theme and the fonts it uses:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -a scripts=cjk -a pdf-theme=./themes/cjk-theme.yml -a pdf-fontsdir=./themes document.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>-a pdf-fontsdir</code> option is important because it tells Asciidoctor PDF where to look for the fonts specified in the theme.
+Alternately, the theme could specify the location of these fonts using an absolute path.
+The <code>scripts</code> option enables CJK support within Asciidoctor, which allows lines to break anywhere instead of at word boundaries.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve followed the instructions correctly, you should see that there are few (if any) missing glyphs in your PDF document.</p>
+</div>
+</div>
+</div>

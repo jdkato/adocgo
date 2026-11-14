@@ -1,0 +1,7 @@
+= Doc
+
+== [[a1]]Leading anchor
+
+== Plain
+
+=== With https://x.org[link]

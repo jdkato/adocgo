@@ -1,0 +1,183 @@
+<div class="sect1">
+<h2 id="_highlights">Highlights</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Direct AsciiDoc to PDF conversion</p>
+</li>
+<li>
+<p>Composable, <a href="theme:index.html">configuration-driven theming system</a> that resembles basic CSS</p>
+</li>
+<li>
+<p>Themable AsciiDoc blocks (e.g., example, admonition, sidebar, etc.)</p>
+</li>
+<li>
+<p>Custom fonts (TTF and limited OTF support)</p>
+</li>
+<li>
+<p>Full SVG support</p>
+</li>
+<li>
+<p>Front and back cover pages</p>
+</li>
+<li>
+<p>Title page</p>
+</li>
+<li>
+<p>Document metadata (title, authors, subject, keywords, etc.)</p>
+</li>
+<li>
+<p><a href="pdf-outline.html">PDF document outline</a></p>
+</li>
+<li>
+<p><a href="toc.html">Table of contents with page numbers</a></p>
+</li>
+<li>
+<p>Configurable page size (e.g., A4, Letter, Legal, etc.) and layout (portrait or landscape)</p>
+</li>
+<li>
+<p>Internal cross reference links</p>
+</li>
+<li>
+<p>Syntax highlighting with Rouge (preferred), Pygments, or CodeRay</p>
+</li>
+<li>
+<p>Page background color or <a href="background-images.html">page background image</a> with configurable scaling</p>
+</li>
+<li>
+<p><a href="page-numbers.html">Page numbering</a></p>
+</li>
+<li>
+<p>Double-sided (aka prepress) printing mode (i.e., margins alternate on recto and verso pages)</p>
+</li>
+<li>
+<p><a href="theme:add-running-content.html">Customizable header and footer running content</a></p>
+</li>
+<li>
+<p>Section body indent</p>
+</li>
+<li>
+<p><a href="breakable-and-unbreakable.html">Unbreakable blocks</a></p>
+</li>
+<li>
+<p>Orphaned section titles avoided (basic support)</p>
+</li>
+<li>
+<p>Autofit verbatim blocks (as permitted by <code>base_font_size_min</code> setting)</p>
+</li>
+<li>
+<p>Table border settings</p>
+</li>
+<li>
+<p><a href="icons.html">Font-based and image icons</a></p>
+</li>
+<li>
+<p>Auto-generated index</p>
+</li>
+<li>
+<p>Automatic hyphenation (when enabled)</p>
+</li>
+<li>
+<p>Permissive line breaking for CJK languages</p>
+</li>
+<li>
+<p>Compression / optimization of output file</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="limitations">Known limitations</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>All decimal and hexadecimal character references are supported (e.g., <code>&amp;#169;</code>).
+However, the converter only processes a restricted set of named entities.
+The recognized named entities are as follows: amp, apos, gt, lt, nbsp, and quot (e.g., <code>&amp;apos;</code>).</p>
+</li>
+<li>
+<p>Copying text from a PDF in a way that preserves the original line wrapping is not reliable, particularly in code blocks.
+To achieve proper rendering, non-visible characters may either be interpreted, inserted, or dropped.
+This is primarily a limitation of the PDF format, in which text is broken into fragments and positioned at absolute coordinates on the canvas.</p>
+</li>
+<li>
+<p>Footnotes are always displayed as endnotes (at the bottom of the last page of a chapter for books; at the bottom of the last page of the document for all other doctypes).
+<strong>Footnotes cannot be displayed at the current bottom of the page because the PDF generator does not support content reflows</strong> (see {url-project-issues}/85#issuecomment-577412975[#85^] for reasoning).</p>
+</li>
+<li>
+<p>Table cells that exceed the height of a single page are truncated with a warning (see <a href="https://github.com/prawnpdf/prawn-table/issues/41" target="_blank" rel="noopener">prawn-table#41</a>).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>This limitation does not apply to description in a horizontal dlist.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A rowspan in a table that exceeds the height of a single page will be orphaned and the remaining columns will be truncated (see {url-project-issues}/403#issuecomment-1133840210[#403^]).</p>
+</li>
+<li>
+<p>A column can&#8217;t be assigned a <code>width</code> of <code>0%</code> or a <code>width</code> less than the width of a single character.
+The converter will skip the table and emit a warning if such a case occurs.</p>
+</li>
+<li>
+<p>A column can&#8217;t be set to <code>autowidth</code> if the width of all the other columns in the table meets or exceeds 100%.
+The converter will skip the table and emit a warning if such a case occurs.</p>
+</li>
+<li>
+<p>An inline image in a table cell will shrink to fit (rather than force the column wider) if the width of the image exceeds the width of the column; you can increase the width of the column using <code>cols</code> or convert the cell to an AsciiDoc table cell and, preferably, use a block image (see {url-project-issues}/830[#830^]).</p>
+</li>
+<li>
+<p>An inline image with a percentage <code>width</code> value in an <code>autowidth</code> table cell is resized relative to its intrinsic width.
+The space reserved for the image matches its intrinsic width.
+This matches the behavior of HTML.</p>
+</li>
+<li>
+<p>Prawn does not support double-wide box drawing glyphs correctly, so box drawings aren&#8217;t aligned properly in verbatim blocks (see <a href="https://github.com/prawnpdf/prawn/issues/1002" target="_blank" rel="noopener">prawn#1002</a>).</p>
+</li>
+<li>
+<p>Orphan and widow support is limited to delimited blocks, block images, and admonitions; therefore, a page break may occur between a section title and its first block of content</p>
+<div class="ulist">
+<ul>
+<li>
+<p>to avoid an orphaned section title, you can add the <a href="breakable-and-unbreakable.html">breakable option</a> to the section</p>
+</li>
+<li>
+<p>to avoid an orphaned caption on a table, add the <a href="breakable-and-unbreakable.html">breakable option</a> to the table</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>If a no-break hyphen is surrounded by formatted text on both sides (or is formatted individually), it will not prevent a line break.</p>
+</li>
+<li>
+<p>The <code>float</code> attribute on an image (i.e., an image float) is only supported for block images, not inline images.
+The converter will clear the float at the next non-paragraph or when the paragraph content clears the bottom of the image.
+See <a href="extend:use-cases.html#wrap-code-blocks-around-image">Wrap code blocks around an image float</a> to learn how to wrap non-paragraph blocks around an image float.</p>
+</li>
+<li>
+<p>Multiple columns are not supported in the book doctype.</p>
+</li>
+<li>
+<p>You cannot use inline HTML (like a link or emphasized text) in a source block that also uses syntax highlighting.
+These two technologies don&#8217;t mix in the PDF generation process due to how the syntax highlighters work.</p>
+</li>
+<li>
+<p>Verse blocks do not use a fixed-width font by default, but you can control this setting <a href="theme:verse.html">using the theme</a>.</p>
+</li>
+<li>
+<p>Cannot use remote inline image in the doctitle or a section title with an automatic ID.</p>
+</li>
+<li>
+<p>Cannot use custom subs that introduce text formatting (e.g., <code>subs=+quotes</code>) on a source block when source-highlighter is set.
+The converter will automatically remove the formatting so the source can be recognized and highlighted properly by the syntax highlighter.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>

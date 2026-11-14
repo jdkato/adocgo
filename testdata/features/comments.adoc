@@ -1,0 +1,20 @@
+// line comment
+para
+// inside para
+continues
+
+////
+block
+comment
+////
+
+/////
+long comment
+////
+still comment
+/////
+
+para /// not comment
+
+///
+triple slash line

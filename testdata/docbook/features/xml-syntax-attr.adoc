@@ -1,0 +1,6 @@
+:htmlsyntax: xml
+:backend: html5
+
+'''
+
+image::a.png[]

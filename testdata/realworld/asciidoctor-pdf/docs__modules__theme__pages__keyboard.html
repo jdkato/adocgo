@@ -1,0 +1,160 @@
+<div class="sect1">
+<h2 id="kbd">kbd</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>kbd</code> category apply to a kbd reference generated from the inline keyboard macro.
+The kbd reference is a span of text denoting textual user input from a keyboard, voice input, or other text entry device.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  background-color: #FAFAFA</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-color">border-color</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  border-color: #CCCCCC</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#offset">border-offset</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  border-offset: 1.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-color">border-radius</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  border-radius: 2</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-color">border-width</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>$base-border-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  border-width: 0.375</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  font-color: #000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <code>Courier</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  font-family: $base-font-family</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  font-size: 10.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>italic</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  font-style: normal</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#separator">separator</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="quoted-string.html">Quoted string</a><br>
+(default: <code>"+"</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kbd:
+  separator: "\u2009+\u2009"</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-color">border-color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A border is only applied to a kbd reference if the <code>border-color</code> key is specified and the <code>border-width</code> key isn&#8217;t explicitly set to zero.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="offset">border-offset</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The border offset is the amount that the background and border swells around the keyboard sequence text.
+The value assigned to <code>border-offset</code> doesn&#8217;t affect the distance between the formatted keyboard sequence and the phrases that surround it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="separator">separator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The value of the <code>separator</code> key is only used for multi-key input sequences.</p>
+</div>
+</div>
+</div>

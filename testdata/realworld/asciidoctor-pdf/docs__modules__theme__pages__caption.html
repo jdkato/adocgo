@@ -1,0 +1,262 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>caption</code> category control the arrangement and style of block captions globally.
+Many of these keys can be customized <a href="#per-block">per block</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="caption">caption</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The <code>caption-align</code> and <code>caption-text-align</code> keys on the <code>image</code> and <code>table</code> categories also accept the value <code>inherit</code>.
+See <a href="block-images.html">block-images.html</a> and <a href="tables.html">tables.html</a> for more information about setting <code>inherit</code> on their captions.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#align">Block alignment</a><br>
+(default: <code>left</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  align: right</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  background-color: #DDDDDD</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">top | bottom<br>
+(default: <em>varies by block</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  end: bottom</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  font-color: #333333</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  font-family: M+ 1mn</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>none</code> | <code>normal</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  font-size: 11</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>italic</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  font-style: italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin-inside</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>4</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  margin-inside: 3</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin-outside</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  margin-outside: 0</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#text-align">Text alignment</a><br>
+(default: <code>$&lt;category&gt;-caption-align</code> or <code>$caption-align</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  text-align: right</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#decoration">Text decoration</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  text-decoration: line-through</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$caption-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  text-decoration-color: #FF0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>$base-text-decoration-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  text-decoration-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">caption:
+  text-transform: uppercase</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="per-block">Caption per block</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the global <code>caption</code> category, each of the keys listed in <a href="#caption">caption</a>, except for the <code>text-decoration</code> keys, can be set on the caption key nested inside the following block categories:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>code</code></p>
+</li>
+<li>
+<p><code>description-list</code></p>
+</li>
+<li>
+<p><code>example</code></p>
+</li>
+<li>
+<p><code>footnotes</code></p>
+</li>
+<li>
+<p><code>image</code></p>
+</li>
+<li>
+<p><code>list</code> (applies to ulist and olist)</p>
+</li>
+<li>
+<p><code>quote</code></p>
+</li>
+<li>
+<p><code>table</code></p>
+</li>
+<li>
+<p><code>verse</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, to configure the caption just for code blocks, use the following declaration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">code:
+  caption:
+    background-color: #FF0000
+    font-color: #FFFFFF
+    font-size: 1em
+    font-style: bold</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a key is not specified on a block category, the key from the global <code>caption</code> category will be used as a fallback.</p>
+</div>
+</div>
+</div>

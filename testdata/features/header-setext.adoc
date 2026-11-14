@@ -1,0 +1,8 @@
+Document Title
+==============
+Author Name
+
+Section
+-------
+
+text 'compat emphasis' `mono`

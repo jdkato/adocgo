@@ -1,0 +1,68 @@
+<section xml:id="top-sect" xreflabel="Top Reftext">
+<title>First Section</title>
+<simpara>See <xref linkend="second"/>, <link linkend="second">custom text</link>, <xref linkend="Second Section"/>, <xref linkend="second"/>, <link linkend="second">text</link>, <xref linkend="nosuch"/>, <xref linkend="fig1"/>, <xref linkend="tab1"/>, <xref linkend="ex1"/>, <xref linkend="lst1"/>.
+Also <xref linkend="top-sect"/> <xref linkend="_third_section"/> <link xl:href="other.xml">other.xml</link> <link xl:href="other.xml#frag">other.xml</link> <link xl:href="other.xml">Other</link> <link xl:href="other.xml">Other doc</link> <link xl:href="other.xml#frag">other.xml</link> <link xl:href="other.xml#frag">x</link> <link xl:href="img.png">img.png</link> <xref linkend="para"/> <xref linkend="term1"/> <xref linkend="li1"/> <link linkend="second">self</link> <xref linkend="second"/> <xref linkend="__article-root__"/> <link linkend="__article-root__">top</link>
+&lt;&lt;second&gt;&gt; xref:second[]</simpara>
+</section>
+<section xml:id="second" xreflabel="Second Ref">
+<title>Second Section</title>
+<figure xml:id="fig1">
+<title>A figure</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</figure>
+<table xml:id="tab1" frame="all" rowsep="1" colsep="1">
+<title>A table</title>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="100*"/>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>a</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<example xml:id="ex1">
+<title>An example</title>
+<simpara>x</simpara>
+</example>
+<formalpara xml:id="lst1">
+<title>A listing</title>
+<para>
+<screen>x</screen>
+</para>
+</formalpara>
+<simpara xml:id="para">Paragraph with anchor <anchor xml:id="inl" xreflabel="[inl]"/>inline and <anchor xml:id="inl2" xreflabel="Inline Ref"/>another, <anchor xml:id="mac" xreflabel="Macro Ref"/>; see <xref linkend="inl"/> <xref linkend="inl2"/> <xref linkend="mac"/>.</simpara>
+<variablelist>
+<varlistentry>
+<term><anchor xml:id="term1" xreflabel="[term1]"/>Term</term>
+<listitem>
+<simpara>def</simpara>
+<itemizedlist>
+<listitem>
+<simpara><anchor xml:id="li1" xreflabel="[li1]"/>item, see <xref linkend="bib"/></simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+</variablelist>
+</section>
+<section xml:id="_third_section">
+<title>Third Section</title>
+
+</section>
+<bibliography xml:id="_refs">
+<title>Refs</title>
+<bibliodiv>
+<bibliomixed>
+<bibliomisc><anchor xml:id="bib" xreflabel="[bib]"/>[bib] A book.</bibliomisc>
+</bibliomixed>
+<bibliomixed>
+<bibliomisc><anchor xml:id="bib2" xreflabel="[Label]"/>[Label] Another. <xref linkend="bib2"/></bibliomisc>
+</bibliomixed>
+</bibliodiv>
+</bibliography>

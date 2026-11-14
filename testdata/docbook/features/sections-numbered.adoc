@@ -1,0 +1,46 @@
+= Doc
+
+== One
+
+=== One.One
+
+==== One.One.One
+
+===== deep
+
+:sectnums!:
+
+== Unnumbered
+
+:sectnums:
+
+== Two
+
+[appendix]
+== App
+
+=== App sub
+
+[glossary]
+== Gloss
+
+[bibliography]
+== Bib
+
+[index]
+== Index
+
+[colophon]
+== Colophon
+
+[dedication]
+== Dedication
+
+[abstract]
+== Abstract
+
+[preface]
+== Preface
+
+[sect2]
+== Styled level

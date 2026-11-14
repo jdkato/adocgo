@@ -1,0 +1,33 @@
+<formalpara>
+<title>Second title wins</title>
+<para>para</para>
+</formalpara>
+<section xml:id="_section">
+<title>Section</title>
+<formalpara>
+<title>Title lost</title>
+<para>para after comment</para>
+</formalpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>not title
+..also not?
+&#8230;&#8203;literal?</simpara>
+</listitem>
+</orderedlist>
+<itemizedlist>
+<title>Title then list</title>
+<listitem>
+<simpara>a</simpara>
+</listitem>
+</itemizedlist>
+<figure>
+<title>Title then macro</title>
+<mediaobject>
+<imageobject>
+<imagedata fileref="x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</mediaobject>
+</figure>
+</section>

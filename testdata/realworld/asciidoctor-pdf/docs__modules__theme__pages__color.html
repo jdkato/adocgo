@@ -1,0 +1,207 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The theme language supports color values in three formats:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="hex"></a>Hex</dt>
+<dd>
+<p>A string of 3 or 6 hexadecimal characters with an optional leading <code>#</code> and optional enclosing quotes.</p>
+</dd>
+<dt class="hdlist1">RGB</dt>
+<dd>
+<p>An array of numeric values ranging from 0 to 255.</p>
+</dd>
+<dt class="hdlist1">CMYK</dt>
+<dd>
+<p>An array of numeric values ranging from 0 to 1 or from 0% to 100%.</p>
+</dd>
+<dt class="hdlist1">Transparent</dt>
+<dd>
+<p>The special value <code>transparent</code> indicates that a color should not be used.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a quick translation between how hex, RGB, and CMYK colors are expressed in an Asciidoctor PDF theme.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Hex</th>
+<th class="tableblock halign-left valign-top">RGB</th>
+<th class="tableblock halign-left valign-top">CMYK (decimal)</th>
+<th class="tableblock halign-left valign-top">CMYK (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">#333333</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[51, 51, 51]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[0, 0, 0, 0.92]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[0, 0, 0, 92%]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This page describes each color model and how to use it in your theme.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hex">Hex</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The hex color value is likely most familiar to web developers.
+The value must be either 3 or 6 characters (case insensitive) with an optional leading hash (<code>#</code>), optional surrounding quotes, or both.</p>
+</div>
+<div class="paragraph">
+<p>To align with CSS, you may add a <code>#</code> in front of the hex color value.
+A YAML preprocessor is used to ensure the value is not treated as a comment as would normally be the case in YAML.
+That same preprocessor will also coerce a primitive value to a string if <code>color</code> is the name of the last segment in the key (e.g., <code>font-color</code>).
+This avoids the problem of 000 becoming 0 (and similar implicit conversions) when the theme file is parsed.</p>
+</div>
+<div class="paragraph">
+<p>You also may put quotes around the CSS-style hex value to make it friendly to a YAML editor or validation tool.
+In this case, the leading <code>#</code> on a hex value is entirely optional.</p>
+</div>
+<div class="paragraph">
+<p>Regardless, we recommend that you always use either a leading <code>#</code> or surrounding quotes (or both) to prevent YAML from mangling the value.</p>
+</div>
+<div class="paragraph">
+<p>The following are all equivalent values for the color red:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#ff0000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#FF0000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'ff0000'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'FF0000'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#f00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#F00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'f00'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>'F00'</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Here&#8217;s how a hex color value appears in the theme file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-color: #FF0000</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rgb">RGB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An RGB array value must be three numbers ranging from 0 to 255.
+The values must be separated by commas and be surrounded by square brackets.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+An RGB array is automatically converted to a hex string internally, so there&#8217;s no difference between ff0000 and [255, 0, 0].
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how to specify the color red in RGB:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[255, 0, 0]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how an RGB color value appears in the theme file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-color: [255, 0, 0]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cmyk">CMYK</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A CMYK array value must be four numbers ranging from 0 and 1 or from 0% to 100%.
+The values must be separated by commas and be surrounded by square brackets.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the RGB array, the CMYK array <em>is not</em> converted to a hex string internally.
+PDF has native support for CMYK colors, so you can preserve the original color values in the final PDF.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how to specify the color red in CMYK:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[0, 0.99, 1, 0]</p>
+</li>
+<li>
+<p>[0, 99%, 100%, 0]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how a CMYK color value appears in the theme file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-color: [0, 0.99, 1, 0]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transparent">Transparent</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It&#8217;s possible to specify no color by assigning the special value <code>transparent</code>, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  background-color: transparent</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>transparent</code> keyword can be used for the background or border color, but not the font color.</p>
+</div>
+</div>
+</div>

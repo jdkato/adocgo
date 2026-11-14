@@ -1,0 +1,67 @@
+.Table title
+[#t1.role,cols="1,2,3",options="header,footer",frame=sides,grid=cols,stripes=odd,width=75%,float=left]
+|===
+|H1 |H2 |H3
+
+|a |b |c
+|d
+|e
+|f
+
+|f1 |f2 |f3
+|===
+
+[cols="3*",%autowidth]
+|===
+|a |b |c
+|===
+
+[cols="1,~,~"]
+|===
+|a |b |c
+|===
+
+[cols="10%,90%"]
+|===
+|a |b
+|===
+
+[cols="<.<1,^.^2,>.>3s,e,m,h,l,a,d"]
+|===
+|1 |2 |3 |4 |5 |6 |7 |8 |9
+|===
+
+[cols="7*"]
+|===
+|1|2|3|4|5|6|7
+|===
+
+[cols=6]
+|===
+|1|2|3|4|5|6
+|===
+
+[width=0]
+|===
+|x
+|===
+
+[%noheader]
+|===
+|not header
+
+|body
+|===
+
+[%rotate,frame=topbot,grid=none]
+|===
+|x|y
+|===
+
+|===
+|===
+
+[cols="1,1"]
+|===
+|only one cell
+|===

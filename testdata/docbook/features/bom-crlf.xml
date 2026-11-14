@@ -1,0 +1,13 @@
+<section xml:id="_section">
+<title>Section</title>
+<itemizedlist>
+<listitem>
+<simpara>one</simpara>
+</listitem>
+<listitem>
+<simpara>two</simpara>
+</listitem>
+</itemizedlist>
+<simpara>trailing spaces
+	and tab</simpara>
+</section>

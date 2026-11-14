@@ -1,0 +1,16 @@
+<section xml:id="_included_chapter">
+<title>Included Chapter</title>
+<simpara>Included paragraph with {attr-from-parent}.</simpara>
+<section xml:id="_nested_in_include">
+<title>Nested in include</title>
+<simpara>Leaf content from a subdirectory.</simpara>
+</section>
+</section>
+<section xml:id="_included_chapter_2">
+<title>Included Chapter</title>
+<simpara>Included paragraph with {attr-from-parent}.</simpara>
+<section xml:id="_nested_in_include_2">
+<title>Nested in include</title>
+<simpara>include::sub/leaf.adoc[]</simpara>
+</section>
+</section>

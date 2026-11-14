@@ -1,0 +1,71 @@
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_main">Main</a></li>
+<li><a href="#_conclusion">Conclusion</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An example of a basic <a href="https://asciidoc.org">AsciiDoc</a> document prepared by Doc Writer.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A paragraph followed by an unordered list<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> with square bullets.<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
+</div>
+<div class="ulist square">
+<ul class="square">
+<li>
+<p>item 1</p>
+</li>
+<li>
+<p>item 2</p>
+</li>
+<li>
+<p>item 3</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_main">Main</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s how you say &#8220;Hello, World!&#8221; in Prawn:</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 1. Create a basic PDF document using Prawn</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby">require 'prawn'
+
+Prawn::Document.generate 'example.pdf' do
+  text 'Hello, World!'
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>That&#8217;s all, folks!</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. AsciiDoc supports unordered, ordered, and description lists.
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. You may choose from square, disc, and circle for the bullet style.
+</div>
+</div>

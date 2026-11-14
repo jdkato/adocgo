@@ -1,0 +1,5 @@
+kbd:[F11] kbd:[Ctrl+Shift+N] kbd:[Ctrl + +] kbd:[Ctrl,Alt,Del] kbd:[\ ] kbd:[Ctrl+\]] kbd:[ a ] \kbd:[x]
+btn:[OK] btn:[Open *File*] \btn:[x]
+menu:File[] menu:File[Save] menu:File[Save As > PDF > Compact] menu:View[Zoom, Reset] menu:File New[x] \menu:x[y]
+"File > Save" "View > Zoom > Reset" \"A > B" "&Edit > Copy"
+menu:File[Save As\] > x]

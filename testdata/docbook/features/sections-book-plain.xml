@@ -1,0 +1,22 @@
+<preface>
+<title></title>
+<simpara>Preamble para.</simpara>
+</preface>
+<chapter xml:id="_chapter">
+<title>Chapter</title>
+
+</chapter>
+<chapter xml:id="_abs">
+<title>Abs</title>
+<simpara>text</simpara>
+</chapter>
+<part xml:id="_part">
+<title>Part</title>
+<partintro>
+<simpara>Part intro block.</simpara>
+</partintro>
+<chapter xml:id="_ch">
+<title>Ch</title>
+
+</chapter>
+</part>

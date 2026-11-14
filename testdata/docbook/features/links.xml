@@ -1,0 +1,17 @@
+<simpara><link xl:href="https://example.com">https://example.com</link> <link xl:href="http://example.com/path?a=1&amp;b=2">http://example.com/path?a=1&amp;b=2</link> <link xl:href="ftp://x.org">ftp://x.org</link> <link xl:href="irc://chat">irc://chat</link> <link xl:href="file:///etc/hosts">file:///etc/hosts</link>
+<link xl:href="https://example.com">Example</link> <link xl:href="https://example.com">https://example.com</link> <link xl:href="https://example.com">https://example.com</link> <link xl:href="relative/path.html">Rel</link>
+<link xl:href="https://example.com">https://example.com</link> (<link xl:href="https://example.com">https://example.com</link>) <link xl:href="https://example.com">https://example.com</link>. <link xl:href="https://example.com">https://example.com</link>, <link xl:href="https://example.com">https://example.com</link>; <link xl:href="https://example.com">https://example.com</link>: <link xl:href="https://example.com">https://example.com</link>)
+https://example.com <link xl:href="https://example.com">text with ] bracket</link>
+<link xl:href="https://example.com">Open</link> <link xl:href="https://example.com">Open</link> <link xl:href="https://example.com">Open</link>
+<link xl:href="https://example.com">https://example.com</link> <link xl:href="https://example.com">https://example.com</link> <link xl:href="https://example.com">a=b</link> <link xl:href="https://example.com">A, B</link>
+<link xl:href="file.html">file.html</link> <link xl:href="file.html">File</link> <link xl:href="url with spaces.html">Spaces</link> <link xl:href="a%20b.html">x</link>
+<link xl:href="mailto:joe@example.com">joe@example.com</link> <link xl:href="mailto:joe@example.com">Joe</link> <link xl:href="mailto:joe@example.com?subject=Subject%20here&amp;body=Body%20%26amp%3B%20more">Joe</link> <link xl:href="mailto:joe@example.com">joe@example.com</link> joe@example.com <link xl:href="mailto:joe.bloggs+tag@sub.example.co.uk">joe.bloggs+tag@sub.example.co.uk</link>
+"https://example.com" 'https://example.com' x=https://example.com [<link xl:href="https://example.com">https://example.com</link>]
+<link xl:href="https://example.com/a_b_c*d*">https://example.com/a_b_c*d*</link> <emphasis role="strong"><link xl:href="https://example.com">https://example.com</link></emphasis> _https://example.com</emphasis>
+<link xl:href="#frag">Frag</link> <link xl:href="/abs">Abs</link> <link xl:href="">empty</link>
+<link xl:href="https://example.com"><emphasis role="strong">Bold</emphasis> link</link> <link xl:href="https://example.com"><inlinemediaobject>
+<imageobject>
+<imagedata fileref="x.png"/>
+</imageobject>
+<textobject><phrase>x</phrase></textobject>
+</inlinemediaobject></link></simpara>

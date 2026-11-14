@@ -1,0 +1,12 @@
+*bold* _italic_ `mono` #mark# *_bold italic_* `*mono bold*` 'single' "double"
+"`curly double`" '`curly single`' ^super^ ~sub~ H~2~O E=mc^2^
+[.role]*styled bold* [#anid.r1.r2]_id and roles_ [.underline]#underlined# [big]#big#
+word*notbold*word *not bold * * neither* 2*3*4 _under_score_ `a`b`
+\*escaped* \_escaped_ \`escaped` \#escaped# \^nosup^ \~nosub~
+*bold
+across lines* _it
+too_ `and
+mono`
+*a* *b* *c*, (*paren*), [*bracket*] "*quoted*" ;*semi* :*colon* }*brace*
+`+literal *mono*+` +passthrough *text*+ `++double plus++`
+Mañana*bold*, über_not_ ñ_x_ *ñ* é*x*é

@@ -1,0 +1,16 @@
+NOTE: Note.
+
+[TIP,icon=star]
+Tip
+
+icon:heart[] icon:heart[2x] icon:flag[flip=horizontal,title=Flag] icon:bolt[rotate=90,role=x] icon:x[link=y.html,window=_blank]
+
+----
+code <1>
+----
+<1> Callout
+
+* [x] done
+* [ ] todo
+
+menu:File[Save] kbd:[Ctrl+C]

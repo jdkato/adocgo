@@ -1,0 +1,14 @@
+= tool(8)
+Auth Or
+
+== NAME
+
+tool - a tool
+
+== SYNOPSIS
+
+*tool*
+
+== DESCRIPTION
+
+d

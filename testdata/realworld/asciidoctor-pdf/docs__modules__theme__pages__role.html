@@ -1,0 +1,305 @@
+<div class="sect1">
+<h2 id="role">role</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>role</code> category define custom roles for formatting.
+The name of the role is the subkey.
+The keys under the role are the theming properties.
+The role name may contain a hyphen, but <strong>a role name cannot contain an underscore</strong>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Custom roles only apply to paragraphs and inline phrases (text).
+In the table below, the <strong>p</strong> indicates keys which are recognized when the role is applied to a paragraph and the <strong>i</strong> indicates keys which are recognized when the role is applied to an inline phrase.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">background-color<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  high-contrast:
+    background-color: #121212</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-color<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  found:
+    border-color: #CCCCCC</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-offset<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>0</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  found:
+    border-offset: 2</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-radius<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  found:
+    border-radius: 3</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-width<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  found:
+    border-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color<br>
+(i, p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  red:
+    font-color: #FF0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family<br>
+(i, p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  label:
+    font-family: M+ 1mn</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size<br>
+(i, p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  large:
+    font-size: 12</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style<br>
+(i, p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  heavy:
+    font-style: bold</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-align<br>
+(p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#text-align">Text alignment</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  declare:
+    text-align: center</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#decoration">Text decoration</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  deleted:
+    text-decoration: line-through</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-color<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>$role-&lt;name&gt;-font-color</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  deleted:
+    text-decoration-color: #FF0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-decoration-width<br>
+(i)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="language.html#values">Number</a><br>
+(default: <code>$base-text-decoration-width</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  underline:
+    text-decoration-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text-transform<br>
+(i, p)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#transform">Text transform</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  heavy:
+    text-transform: uppercase</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To learn more about defining a custom role, see <a href="custom-role.html">custom-role.html</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="built-in">Built-in roles</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF provides several predefined roles.
+You can <a href="ROOT:roles.html">use these roles</a> when using a built-in theme or a custom theme that extends a built-in theme.
+You can also redefine the built-in roles in your theme configuration file.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">lead</dt>
+<dd>
+<p>The <code>lead</code> role defines the font properties for a lead paragraph or phrase.
+The built-in themes configure this role to set the font size to the <code>$base-font-size-large</code> value.
+This role is automatically assigned to the first paragraph of the preamble if a role is not already declared.</p>
+</dd>
+<dt class="hdlist1">big</dt>
+<dd>
+<p>The <code>big</code> role maps the font size to the <code>$base-font-size-large</code> value.</p>
+</dd>
+<dt class="hdlist1">small</dt>
+<dd>
+<p>The <code>small</code> role maps the font size to the <code>$base-font-size-small</code> value.</p>
+</dd>
+<dt class="hdlist1">underline</dt>
+<dd>
+<p>The <code>underline</code> role adds the underline decoration.</p>
+</dd>
+<dt class="hdlist1">line-through</dt>
+<dd>
+<p>The <code>line-through</code> role adds the strikethrough decoration.</p>
+</dd>
+<dt class="hdlist1">subtitle</dt>
+<dd>
+<p>The <code>subtitle</code> role is used to configure the font properties of the subtitle of a section title.</p>
+</dd>
+<dt class="hdlist1">text-justify</dt>
+<dd>
+<p>Aligns the text to the left margin with justification.</p>
+</dd>
+<dt class="hdlist1">text-left</dt>
+<dd>
+<p>Aligns the text to the left margin (without justification).</p>
+</dd>
+<dt class="hdlist1">text-right</dt>
+<dd>
+<p>Aligns the text to the right margin.</p>
+</dd>
+<dt class="hdlist1">text-center</dt>
+<dd>
+<p>Aligns the text to the center of the page.</p>
+</dd>
+<dt class="hdlist1">unresolved</dt>
+<dd>
+<p>The <code>unresolved</code> role is applied automatically to the text of an unresolved footnote reference.
+(Only recognizes the <code>font-color</code> theme key).</p>
+</dd>
+<dt class="hdlist1">noborder</dt>
+<dd>
+<p>Only applies to block images.
+If this role is present on the block image, the border will not be drawn even if configured on the <code>image</code> category in the theme.
+This role cannot be redefined.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The color roles (e.g., <code>blue</code>), which you may be familiar with from the HTML converter, are not mapped by default.
+You&#8217;ll need to define these color roles as <a href="custom-role.html">custom roles</a> in your theme if you&#8217;d like to make use of them when converting to PDF.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>

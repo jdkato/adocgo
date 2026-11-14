@@ -1,0 +1,5 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+does stuff
+
+== "`Main`" _<Options>_

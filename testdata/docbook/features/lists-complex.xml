@@ -1,0 +1,228 @@
+<itemizedlist>
+<listitem>
+<simpara>level 1</simpara>
+<itemizedlist>
+<listitem>
+<simpara>level 2</simpara>
+<itemizedlist>
+<listitem>
+<simpara>level 3</simpara>
+<itemizedlist>
+<listitem>
+<simpara>level 4</simpara>
+<itemizedlist>
+<listitem>
+<simpara>level 5</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>back to 1</simpara>
+<simpara>continued paragraph</simpara>
+<screen>listing in item</screen>
+<note>
+<simpara>admonition in item</simpara>
+</note>
+<itemizedlist>
+<listitem>
+<simpara>dash list</simpara>
+</listitem>
+<listitem>
+<simpara>second</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>ordered</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>loweralpha</simpara>
+<orderedlist numeration="lowerroman">
+<listitem>
+<simpara>lowerroman</simpara>
+<orderedlist numeration="upperalpha">
+<listitem>
+<simpara>upperalpha</simpara>
+<orderedlist numeration="upperroman">
+<listitem>
+<simpara>upperroman</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>second</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic" startingnumber="5">
+<listitem>
+<simpara>five</simpara>
+</listitem>
+<listitem>
+<simpara>six</simpara>
+</listitem>
+</orderedlist>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>three</simpara>
+</listitem>
+<listitem>
+<simpara>two</simpara>
+</listitem>
+</orderedlist>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>a</simpara>
+</listitem>
+<listitem>
+<simpara>b</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>explicit</simpara>
+</listitem>
+<listitem>
+<simpara>numbers</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>alpha</simpara>
+</listitem>
+<listitem>
+<simpara>beta</simpara>
+<orderedlist numeration="upperalpha">
+<listitem>
+<simpara>upper</simpara>
+</listitem>
+<listitem>
+<simpara>upper</simpara>
+<orderedlist numeration="lowerroman">
+<listitem>
+<simpara>roman</simpara>
+</listitem>
+<listitem>
+<simpara>roman</simpara>
+<orderedlist numeration="upperroman">
+<listitem>
+<simpara>Roman</simpara>
+</listitem>
+<listitem>
+<simpara>Roman</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</orderedlist>
+<itemizedlist mark="square">
+<listitem>
+<simpara>square</simpara>
+<itemizedlist mark="circle">
+<listitem>
+<simpara>circle</simpara>
+<itemizedlist mark="disc">
+<listitem>
+<simpara>disc</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>none</simpara>
+</listitem>
+<listitem>
+<simpara>nob</simpara>
+</listitem>
+<listitem>
+<simpara>unst</simpara>
+</listitem>
+</itemizedlist>
+<itemizedlist xml:id="lid" role="lrole" mark="none">
+<title>Titled list</title>
+<listitem>
+<simpara>item</simpara>
+</listitem>
+<listitem>
+<simpara>&#10063; unchecked</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; checked</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; starred</simpara>
+</listitem>
+<listitem>
+<simpara>normal</simpara>
+</listitem>
+</itemizedlist>
+<itemizedlist mark="none">
+<listitem>
+<simpara>&#10063; unchecked</simpara>
+</listitem>
+<listitem>
+<simpara>&#10003; checked</simpara>
+</listitem>
+<listitem>
+<simpara>item</simpara>
+<literallayout class="monospaced">literal attached</literallayout>
+</listitem>
+<listitem>
+<simpara>item</simpara>
+<simpara>open block</simpara>
+<simpara>with paras</simpara>
+</listitem>
+<listitem>
+<simpara>last</simpara>
+</listitem>
+<listitem>
+<simpara>a</simpara>
+</listitem>
+<listitem>
+<simpara>b</simpara>
+</listitem>
+<listitem>
+<simpara>one</simpara>
+</listitem>
+</itemizedlist>
+<itemizedlist>
+<listitem>
+<simpara>separate list</simpara>
+</listitem>
+<listitem>
+<simpara>parent</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>child ordered</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>parent 2</simpara>
+<variablelist>
+<varlistentry>
+<term>term</term>
+<listitem>
+<simpara>nested dl</simpara>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</itemizedlist>

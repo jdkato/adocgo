@@ -1,0 +1,27 @@
+:imagesdir: img
+
+image::sunset.jpg[]
+
+image::sunset.jpg[Sunset,300,200]
+
+.Titled
+[#img1.thumb,link=https://example.com,window=_blank,opts=nofollow]
+image::sunset.jpg[Sunset "at" dusk,align=center,float=right]
+
+[caption="Fig A: "]
+.Custom caption
+image::a_b-c.png[]
+
+image::https://example.com/x.png[]
+
+image::has space.png[alt=x,width=10]
+
+image::chart.svg[opts=interactive,fallback=chart.png]
+
+image::chart.svg[Chart,opts=inline]
+
+image::{nope}.png[]
+
+Inline image:a.png[] image:a.png[Alt,10,20,title="T",role=r,float=left,link=x.html] image:b.svg[opts=interactive] icon:heart[] icon:heart[2x,role=red] \image:x.png[] image:has space.png[] image:a.png[a\]b]
+
+image::x.png[scaledwidth=50]

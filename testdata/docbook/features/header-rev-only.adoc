@@ -1,0 +1,5 @@
+= Title
+Author Name
+v1.0
+
+body {revnumber} [{revdate}]

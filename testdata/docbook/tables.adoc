@@ -1,0 +1,64 @@
+|===
+|a |b
+|===
+
+.Title
+[#t1.r,cols="1,2a,>.^3h,l",options="header,footer",frame=ends,grid=rows,width=60%]
+|===
+|H1 |H2 |H3 |H4
+
+|c1
+|* list
+|head cell
+
+two paras
+|lit
+  eral
+
+2+|span 2.2+|rowspan
+|x |y
+
+|f1 |f2 |f3 |f4
+|===
+
+[%pgwide%unbreakable,frame=sides,grid=cols]
+|===
+|x
+|===
+
+[%breakable%rotate,grid=none,frame=none]
+|===
+|x
+|===
+
+[cols="3*",width=33%]
+|===
+|1|2|3
+|===
+
+[cols="1,~,~",%autowidth]
+|===
+|1|2|3
+|===
+
+[cols=7]
+|===
+|1|2|3|4|5|6|7
+|===
+
+[%header,format=csv]
+|===
+a,b
+1,2
+|===
+
+|===
+a|
+.Nested
+!===
+!n
+!===
+|===
+
+|===
+|===

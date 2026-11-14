@@ -1,0 +1,5 @@
+first
+
+include::#{tmp_include_path}[]
+
+last

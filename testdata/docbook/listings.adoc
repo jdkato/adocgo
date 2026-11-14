@@ -1,0 +1,52 @@
+----
+plain <1>
+----
+<1> co
+
+.Titled
+[#l1.r]
+----
+titled listing
+----
+
+[source]
+----
+no lang
+----
+
+[source,ruby]
+----
+puts 1 # <1>
+puts 2 # <2>
+----
+<1> one
+<2> two
++
+more
+
+.Src
+[source%linenums,java,start=5,id=s1]
+----
+int x;
+----
+
+[source,c,linenums]
+----
+x
+----
+
+....
+literal & <x>
+....
+
+.Lit
+[#lit.r]
+....
+titled literal
+....
+
+ indented
+
+.Colist title
+[#co.r]
+<1> orphan

@@ -1,0 +1,59 @@
+[[anchor-id]]
+Paragraph with anchor.
+
+[[anchor2,Ref Text]]
+Para.
+
+[#idshort.role1.role2%opt1%opt2]
+Shorthand.
+
+[id=x,role="a b",options="o1,o2"]
+Longhand.
+
+[.lead]
+Lead para.
+
+.Title only
+Para with title.
+
+.Title with *bold* and {backend}
+[.r]
+Para.
+
+[quote, 'https://x.org[Linked]', 'Single *quoted*']
+____
+subs in attrs
+____
+
+[foo=bar,title="Attr title"]
+para
+
+[,role=x]
+empty first positional
+
+["quoted style"]
+para
+
+[normal]
+ indented normal
+
+[.a]
+[.b]
+[#id2]
+stacked attribute lines
+
+[]
+empty attrlist
+
+[ ]
+space attrlist
+
+[role=x
+
+unterminated attr line is para
+
+.. dotted title?
+
+.
+
+. .

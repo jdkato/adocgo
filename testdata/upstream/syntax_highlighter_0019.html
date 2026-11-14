@@ -1,0 +1,31 @@
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="ruby">require 'coderay' # <b class="conum">(1)</b>
+
+html = CodeRay.scan("puts 'Hello, world!'", :ruby).div line_numbers: :table # <b class="conum">(2)</b>
+puts html # <b class="conum">(3)</b> <b class="conum">(4)</b>
+exit 0 # <b class="conum">(5)</b><b class="conum">(6)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Load library</p>
+</li>
+<li>
+<p>Highlight source</p>
+</li>
+<li>
+<p>Print to stdout</p>
+</li>
+<li>
+<p>Redirect to a file to capture output</p>
+</li>
+<li>
+<p>Exit program</p>
+</li>
+<li>
+<p>Reports success</p>
+</li>
+</ol>
+</div>

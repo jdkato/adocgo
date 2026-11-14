@@ -1,0 +1,4 @@
+[#docid.docrole]
+= Title With Id
+
+body <<docid>>

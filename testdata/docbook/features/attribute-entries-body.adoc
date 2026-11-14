@@ -1,0 +1,23 @@
+:foo: bar
+
+Para {foo}.
+
+:foo: baz
+:!bar:
+
+* item {foo}
+:foo: qux
+* item2 {foo}
+
+[subs=attributes]
+----
+{foo}
+----
+
+|===
+|{foo}
+:foo: cell
+|{foo}
+|===
+
+{foo}

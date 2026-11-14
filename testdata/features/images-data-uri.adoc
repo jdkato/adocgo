@@ -1,0 +1,5 @@
+image::include/nope.png[]
+
+image::include/custom.css[]
+
+image::https://example.com/a.png[]

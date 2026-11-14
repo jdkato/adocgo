@@ -1,0 +1,41 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF is a native PDF converter for AsciiDoc that plugs into the <code>pdf</code> backend.
+It bypasses the requirement to generate an intermediary format such as DocBook, Apache FO, or LaTeX.
+Instead, you can use Asciidoctor PDF to convert your documents directly from AsciiDoc to PDF.
+The aim of this library is to take the pain out of creating PDF documents from AsciiDoc.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+You&#8217;re viewing the documentation for Asciidoctor PDF {page-component-display-version}.
+If you&#8217;re looking for the documentation for Asciidoctor PDF 1.6, refer to the {url-project-repo}/tree/v1.6.x#readme[README] in the v1.6.x branch.
+Asciidoctor PDF &lt; 2 is EOL and is thus no longer being developed.
+You&#8217;re encouraged to migrate to Asciidoctor PDF 2 as soon as possible.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF converts an AsciiDoc document directly to a PDF document.
+The style and layout of the PDF are controlled by a dedicated theme file.
+To the degree possible, Asciidoctor PDF supports all the features of AsciiDoc that are supported by Asciidoctor.
+It also provides <a href="features.html">additional PDF-specific features</a>.
+However, there are <a href="features.html#limitations">certain limits</a> imposed by the PDF format and the underlying PDF library this extension uses.</p>
+</div>
+<div class="paragraph">
+<p>Asciidoctor PDF uses the Prawn gem and Prawn&#8217;s extensions, such as prawn-svg and prawn-table, to generate a PDF document.
+{url-prawn}[Prawn^] is a general purpose PDF generator for Ruby that features high-level APIs for common needs like setting up the page and inserting images and low-level APIs for positioning and rendering text and graphics.</p>
+</div>
+</div>
+</div>

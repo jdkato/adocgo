@@ -1,0 +1,312 @@
+<div class="sect1">
+<h2 id="width-and-radius">Border width and radius</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-width</code> key on the <code>table</code> category <a href="blocks.html#border-width">accepts the same values</a> as the <code>border-width</code> key on most blocks.
+The <code>border-radius</code> key does not apply to the <code>table</code> category.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="#head-bottom-border">head-border-bottom-width key</a>, which can be used to specify the width of the bottom border on the table header row separately from the other table borders, only accepts a single measurement value.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-color">Border color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-color</code> key specifies the color of table borders.
+In addition to the <a href="blocks.html#border-color">single color and transparent keyword</a> accepted by most blocks, the <code>border-color</code> key on the <code>table</code> category also accepts an array of colors.</p>
+</div>
+<div class="paragraph">
+<p>When a 2-value array is assigned to <code>border-color</code>, the first color value is applied to the top and bottom borders, and the second color value is applied to the left and right side borders.</p>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to border-color</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  border-color: [#000000, #DCDCDC]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a 4-value array is assigned to <code>border-color</code>, the first color value is applied to the top border, the second to the right side border, the third to the bottom border, and the fourth to the left side border.</p>
+</div>
+<div class="listingblock">
+<div class="title">Four-value array assigned to border-color</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  border-color: [#000000, #004953, #560319, #1A1110]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value assigned to <code>border-color</code> is ignored if <code>border-width</code> isn&#8217;t set or is set to <code>0</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-style">Border style</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-style</code> key specifies the line style used when drawing borders on tables.
+In addition to the <a href="blocks.html#border-style">dashed, dotted, and solid styles</a> accepted by most blocks, the <code>border-style</code> key on the <code>table</code> category also accepts an array of styles.</p>
+</div>
+<div class="paragraph">
+<p>When a 2-value array is assigned to <code>border-style</code>, the first value is applied to the top and bottom borders, and the second value is applied to the left and right side borders.</p>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to border-style</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  border-style: [solid, dashed]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a 4-value array is assigned to <code>border-style</code>, the first value is applied to the top border, the second to the right side border, the third to the bottom border, and the fourth to the left side border.</p>
+</div>
+<div class="listingblock">
+<div class="title">Four-value array assigned to border-style</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  border-style: [dotted, dashed, solid, dashed]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value assigned to a <code>border-style</code> key is ignored if <code>border-width</code> isn&#8217;t set or <code>border-width</code> is set to <code>0</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The <code>double</code> value can&#8217;t be applied to table borders.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="head-bottom-border">Header row bottom border keys</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The bottom border of the table header row can be styled separately using the <code>head-border-bottom-width</code>, <code>head-border-bottom-style</code>, and <code>head-border-bottom-color</code> keys.
+Each key accepts a single value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  head:
+    border-bottom-width: 2
+    border-bottom-style: dotted
+    border-bottom-color: #20B2AA</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="table.html#head">the table-head category</a> for a list of all keys that can be applied to the table header row.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="grid-width">Grid width</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>grid-width</code> key specifies the width of the grid lines applied to the rows and columns of tables.
+The key accepts a single measurement value or a 2-value array of measurements.
+When a single value is assigned to <code>grid-width</code>, that value is applied to the row and column grid lines.</p>
+</div>
+<div class="listingblock">
+<div class="title">Single value assigned to grid-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  grid-width: 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a 2-value array is assigned to <code>grid-width</code>, the first value is applied to the row grid lines, and the second value is applied to the column grid lines.</p>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to grid-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  grid-width: [0.5, 1]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want grid lines to be applied to tables, assign a tilde (<code>~</code>) to the <code>grid-width</code> key.</p>
+</div>
+<div class="listingblock">
+<div class="title">Unset grid-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  grid-width: ~</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="grid-color">Grid color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>grid-color</code> key specifies the color of the grid lines.
+It accepts the following types of values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Hex, RGB, or CMYK color</dt>
+<dd>
+<p>A single color specified using the hex, RGB, or CMYK format.
+See <a href="color.html">color.html</a> to learn how to assign a value using these formats in the theming language.</p>
+</dd>
+<dt class="hdlist1">transparent</dt>
+<dd>
+<p>A special keyword that indicates a color should not be used when drawing the grid.</p>
+</dd>
+<dt class="hdlist1">Array of colors</dt>
+<dd>
+<p>A 2-value array that specifies a color for row grid lines and column grid lines.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to grid-color</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  grid-color: [#575757, #DCDCDC]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value assigned to <code>grid-color</code> is ignored if <code>grid-width</code> isn&#8217;t set or is set to <code>0</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="grid-style">Grid style</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>grid-style</code> key specifies the line style used when drawing a table grid.
+It accepts the following values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">dashed</dt>
+<dd>
+<p>The grid lines are drawn as a series of short line segments.</p>
+</dd>
+<dt class="hdlist1">dotted</dt>
+<dd>
+<p>The grid lines are drawn as a series of rounded dots.</p>
+</dd>
+<dt class="hdlist1">solid</dt>
+<dd>
+<p>The grid lines are drawn as single lines.</p>
+</dd>
+<dt class="hdlist1">Array of styles</dt>
+<dd>
+<p>A 2-value array that specifies a style for row grid lines and column grid lines.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The value assigned to a <code>grid-style</code> key is ignored if <code>grid-width</code> isn&#8217;t set or is set to <code>0</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stripes">Stripe color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>stripe-background-color</code> key controls the color that is used for stripes in the body of a table.
+The key accepts a single color specified using the <a href="color.html">hex, RGB, or CMYK format</a>.</p>
+</div>
+<div class="paragraph">
+<p>The appearance of stripes is controlled using the <code>stripes</code> table attribute or the <code>table-stripes</code> document attribute.
+Permitted attribute values are <code>even</code>, <code>odd</code>, <code>all</code>, and <code>none</code>.
+Table stripes are not enabled by default (e.g., <code>stripes=none</code>).</p>
+</div>
+<div class="paragraph">
+<p>See <a href="table.html#body">the table-body category</a> for a list of all theme keys that can be applied to the table body.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="caption-align">Caption alignment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the <a href="blocks.html#align">center, left, and right block alignment keywords</a>, the <code>caption-align</code> key accepts the value <code>inherit</code> when set on the <code>table</code> category.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  caption:
+    align: inherit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When the value is <code>inherit</code>, the <code>table-caption-align</code> key will inherit the alignment assigned to the table itself (<code>table-align</code>).
+The <code>caption-align</code> key is distinct from the similarly-named <code>caption-text-align</code> key.
+The <a href="#caption-text-align">caption-text-align key</a> aligns text within the text box of the caption block using text alignment rules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="caption-text-align">Caption text alignment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>caption-text-align</code> key controls the alignment of the caption text within the bounds of the table caption.
+The key accepts the keyword <code>inherit</code> as well as the <a href="text.html#text-align">usual text alignment values</a> when set on the <code>table</code> category.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  caption:
+    text-align: inherit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The value <code>inherit</code> resolves to the alignment assigned to the table itself (<code>table-align</code>).</p>
+</div>
+<div class="paragraph">
+<p>The <code>caption-text-align</code> key is distinct from the similarly-named <code>caption-align</code> key.
+The <a href="#caption-align">caption-align key</a> aligns a caption block horizontally within its container.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="end">Caption end</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>caption-end</code> key specifies whether the table caption is located on top or below the table.
+The key accepts the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bottom</dt>
+<dd>
+<p>The caption block is placed below the bottom of the table.</p>
+</dd>
+<dt class="hdlist1">top</dt>
+<dd>
+<p>The caption block is place above the top of the table.</p>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">table:
+  caption:
+    end: bottom</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="table-cell-paragraphs">Table cell paragraphs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Except for AsciiDoc table cells, paragraphs in a table cell are always separated by the height of one line.
+This spacing cannot be controlled directly by the theme.
+If you require control over the spacing between paragraphs in a table cell, convert that table cell to an AsciiDoc table cell by adding the <code>a</code> style.</p>
+</div>
+</div>
+</div>

@@ -1,0 +1,9 @@
+.SH "SYNOPSIS"
+.sp
+.nf
+\fIcommand\fP [\fIOPTION\fP].\|.\|. \fIFILE\fP.\|.\|.
+.fi
+.br
+.SH "DESCRIPTION"
+.sp
+description

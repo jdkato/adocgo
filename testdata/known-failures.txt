@@ -1,0 +1,5 @@
+# Fixtures whose output is known to differ from Asciidoctor. One path per
+# line (relative to the repository root), optionally followed by a reason.
+# TestCorpus expects these to fail and reports an error if one starts passing.
+#
+# (currently empty)

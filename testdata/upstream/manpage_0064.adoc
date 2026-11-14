@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+image::rainbow.jpg["That's a double rainbow, otherwise known as rainbow{pp}!"]

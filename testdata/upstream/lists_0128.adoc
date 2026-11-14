@@ -1,0 +1,7 @@
+term1::
+def1
+
+  literal
+
+term2::
+  def2

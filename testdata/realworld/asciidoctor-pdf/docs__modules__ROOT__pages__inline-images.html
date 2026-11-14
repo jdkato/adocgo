@@ -1,0 +1,32 @@
+<div class="sect1">
+<h2 id="_inline_image_sizing">Inline image sizing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Inline images can be sized in much the same way as block images, using the <code>pdfwidth</code>, <code>scaledwidth</code>, or <code>width</code> attributes, with the following exceptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The viewport width unit (i.e., vw) is not recognized in this context.</p>
+</li>
+<li>
+<p>The image will be scaled down, if necessary, to fit the width and height of the content area.</p>
+</li>
+<li>
+<p>Inline images do not currently support a default width controlled from the theme.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To confine the inline image to the height of the line while preserving the aspect ratio, use the attribute <code>fit=line</code>.
+If you want to prevent the inline image from being fit to the content area, such as in a normal table cell, use <code>fit=none</code>.</p>
+</div>
+<div class="paragraph">
+<p>If the resolved height of the image is less than or equal to 1.5 times the line height, the image won&#8217;t disrupt the line height and is centered vertically in the line.
+This is done to maximize the use of available space.
+Once the resolved height exceeds this amount, the height of the line is increased (by increasing the font size of the invisible placeholder text) to accommodate the image.
+In this case, the surrounding text will be aligned to the bottom of the image.
+If the image height exceeds the height of the page, the image will be scaled down to fit on a single page (this may cause the image to advance to the subsequent page).</p>
+</div>
+</div>
+</div>

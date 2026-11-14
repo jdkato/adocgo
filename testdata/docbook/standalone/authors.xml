@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Multi</title>
+<date>2020-01-01</date>
+<copyright>
+<holder>Just Holder</holder>
+</copyright>
+<authorgroup>
+<author>
+<personname>
+<firstname>Jane</firstname>
+<surname>Doe</surname>
+</personname>
+<email>j@x.org</email>
+</author>
+<author>
+<personname>
+<firstname>John</firstname>
+<othername>M.</othername>
+<surname>Roe</surname>
+</personname>
+</author>
+<author>
+<personname>
+<firstname>Mononym</firstname>
+</personname>
+</author>
+</authorgroup>
+<revhistory>
+<revision>
+<date>2020-01-01</date>
+<authorinitials>JD</authorinitials>
+<revremark>only remark</revremark>
+</revision>
+</revhistory>
+<cover role="front"/>
+<cover role="back">
+<mediaobject>
+<imageobject>
+<imagedata fileref="back.jpg"/>
+</imageobject>
+</mediaobject>
+</cover>
+</info>
+<simpara>text</simpara>
+</article>

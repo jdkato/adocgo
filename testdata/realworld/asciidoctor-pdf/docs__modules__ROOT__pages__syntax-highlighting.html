@@ -1,0 +1,69 @@
+<div class="sect1">
+<h2 id="install">Install a syntax highlighter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To add source highlighting to source blocks, you must have a suitable syntax highlighter available.
+Asciidoctor PDF performs source highlighting during conversion, which means you must use a build-time syntax highlighter.</p>
+</div>
+<div class="paragraph">
+<p>The build-time syntax highlighters that Asciidoctor PDF supports out of the box are Rouge, Pygments, and CodeRay.
+Rouge is the preferred syntax highlighter.
+The use of CodeRay is no longer recommended.</p>
+</div>
+<div class="paragraph">
+<p>Refer to the table below for instructions on how to install one of these build-time syntax highlighters.
+If you use Bundler to manage your gems in a <em class="path">Gemfile</em>, add the entry listed in the <strong>Bundler</strong> column.
+Otherwise, run the command in the <strong>gem command</strong> column.</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Library</th>
+<th class="tableblock halign-left valign-top">gem name</th>
+<th class="tableblock halign-left valign-top">Bundler</th>
+<th class="tableblock halign-left valign-top">gem command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Rouge</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock">rouge</p></th>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem 'rouge'</pre></div></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem install rouge</pre></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Pygments</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock">pygments.rb</p></th>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem 'pygments.rb'</pre></div></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem install pygments.rb</pre></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">CodeRay</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock">coderay</p></th>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem 'coderay'</pre></div></td>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>gem install coderay</pre></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="activate">Activate syntax highlighting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you&#8217;ve installed a syntax highlighter, you need to activate it for a given document by setting the <code>source-highlighter</code> attribute in the document header and assigning it the keyword value of the applicable library.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:source-highlighter: rouge</code></pre>
+</div>
+</div>
+</div>
+</div>

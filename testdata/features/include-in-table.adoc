@@ -1,0 +1,11 @@
+[%header,format=csv]
+|===
+include::include/data.csv[]
+|===
+
+|===
+a|
+include::include/sub/leaf.adoc[]
+
+a|include::include/sub/leaf.adoc[]
+|===

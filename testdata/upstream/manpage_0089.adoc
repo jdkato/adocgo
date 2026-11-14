@@ -1,0 +1,11 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+You can access this information using the options listed under <<_generic_program_information>>.
+
+== Options
+
+=== Generic Program Information
+
+--help:: Output a usage message and exit.
+
+-V, --version:: Output the version number of grep and exit.

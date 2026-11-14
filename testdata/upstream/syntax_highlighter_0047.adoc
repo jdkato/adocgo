@@ -1,0 +1,7 @@
+:source-highlighter: rouge
+
+[source#{opts},ruby,highlight=2]
+----
+puts 'Hello, world!'
+puts 'Goodbye, world!'
+----

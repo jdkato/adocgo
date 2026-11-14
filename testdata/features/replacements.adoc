@@ -1,0 +1,7 @@
+(C) (R) (TM) -- a -- b... c -> d => e <- f <= g it's '`x`' Sam's 'tis
+\(C) \(R) \(TM) x\--y \... \-> \=> \<- \<= Sam\'s
+foo--bar em--dash -- at start
+end --
+&amp; &#167; &#x1F600; &copy; \&copy; & and &notanentity
+5 > 3 < 9 & "quotes" 'apos'
+A--B and A -- B and A --B

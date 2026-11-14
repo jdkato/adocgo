@@ -1,0 +1,35 @@
+Simple para.
+
+ Literal para.
+
+Para then
+ indented line stays.
+
+.Titled
+[#pid.prole]
+Para.
+
+[%hardbreaks]
+one
+two
+
+Line ending in backslash \
+next
+
+[normal]
+Normal styled.
+
+Para interrupted by
+----
+listing
+----
+Para interrupted by attr
+[role]
+next para
+
+Para then list
+* not a list item (needs blank)
+
+--
+open after
+--
