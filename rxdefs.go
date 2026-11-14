@@ -5,47 +5,16 @@ package adocgo
 // CC_WORD/CG_WORD are \p{Word}, CC_ALPHA is \p{Alpha}, CC_ALNUM is \p{Alnum}
 // and CG_BLANK is \p{Blank}.
 var (
-	authorInfoLineRx            = rxScan(`^(\p{Word}[\p{Word}\-'.]*)(?: +(\p{Word}[\p{Word}\-'.]*))?(?: +(\p{Word}[\p{Word}\-'.]*))?(?: +<([^>]+)>)?$`)
 	authorDelimiterRx           = rxScan(`;(?: |$)`)
-	revisionInfoLineRx          = rxScan(`^(?:[^\d{]*(.*?),)? *(?!:)(.*?)(?: *(?!^),?: *(.*))?$`)
-	manpageTitleVolnumRx        = rxScan(`^(.+?) *\( *(.+?) *\)$`)
-	manpageNamePurposeRx        = rxScan(`^(.+?) +- +(.+)$`)
-	conditionalDirectiveRx      = rxScan(`^(\\)?(ifdef|ifndef|ifeval|endif)::(\S*?(?:([,+])\S*?)?)\[(.+)?\]$`)
-	evalExpressionRx            = rxScan(`^(.+?) *([=!><]=|[><]) *(.+)$`)
-	includeDirectiveRx          = rxScan(`^(\\)?include::([^\s\[](?:[^\[]*[^\s\[])?)\[(.+)?\]$`)
 	tagDirectiveRx              = rxScan(`\b(?:tag|(e)nd)::(\S+?)\[\](?=$|[ \r])`, "m")
-	attributeEntryRx            = rxScan(`^:(!?\p{Word}[^:]*):(?:[ \t]+(.*))?$`)
 	invalidAttributeNameCharsRx = rxScan(`[^\p{Word}-]`)
-	attributeEntryPassMacroRx   = rxScan(`\Apass:([a-z]+(?:,[a-z-]+)*)?\[(.*)\]\Z`, "m")
 	attributeReferenceRx        = rxScan(`(\\)?\{(\p{Word}[\p{Word}-]*|(set|counter2?):.+?)(\\)?\}`)
-	blockAnchorRx               = rxScan(`^\[\[(?:|([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+))?)\]\]$`)
-	blockAttributeListRx        = rxScan(`^\[(|[\p{Word}.#%{,"'].*)\]$`)
-	blockAttributeLineRx        = rxScan(`^\[(?:|[\p{Word}.#%{,"'].*|\[(?:|[\p{Alpha}_:][\p{Word}\-:.]*(?:, *.+)?)\])\]$`)
-	blockTitleRx                = rxScan(`^\.(\.?[^ \t.].*)$`)
-	admonitionParagraphRx       = rxScan(`^(NOTE|TIP|IMPORTANT|WARNING|CAUTION):[ \t]+`)
-	literalParagraphRx          = rxScan(`^([ \t]+.*)$`)
-	extAtxSectionTitleRx        = rxScan(`^(=={0,5}|##{0,5})[ \t]+(.+?)(?:[ \t]+\1)?$`)
-	setextSectionTitleRx        = rxScan(`^((?!\.).*?\p{Alnum}.*)$`)
-	inlineSectionAnchorRx       = rxScan(` (\\)?\[\[([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+))?\]\]$`)
 	invalidSectionIDCharsRx     = rxScan(`<[^>]+>|&(?:[a-z][a-z]+\d{0,2}|#\d\d\d{0,4}|#x[\da-f][\da-f][\da-f]{0,3});|[^ \p{Word}\-.]+?`)
-	sectionLevelStyleRx         = rxScan(`^sect\d$`)
-	anyListRx                   = rxScan(`^(?:[ \t]*(?:-|\*\**|\.\.*|•|\d+\.|[a-zA-Z]\.|[IVXivx]+\))[ \t]|(?!//[^/])[ \t]*[^ \t].*?(?::::{0,2}|;;)(?:$|[ \t])|<(?:\d+|\.)>[ \t])`)
-	unorderedListRx             = rxScan(`^[ \t]*(-|\*\**|•)[ \t]+(.*)$`)
-	orderedListRx               = rxScan(`^[ \t]*(\.\.*|\d+\.|[a-zA-Z]\.|[IVXivx]+\))[ \t]+(.*)$`)
-	descriptionListRx           = rxScan(`^(?!//[^/])[ \t]*([^ \t].*?)(:::{0,2}|;;)(?:$|[ \t]+(.*)$)`)
-	calloutListRx               = rxScan(`^<(\d+|\.)>[ \t]+(.*)$`)
 	calloutExtractRx            = rxScan(`((?://|#|--|;;) ?)?(\\)?<!?(|--)(\d+|\.)\3>(?=(?: ?\\?<!?\3(?:\d+|\.)\3>)*$)`)
 	calloutScanRx               = rxScan(`\\?<!?(|--)(\d+|\.)\1>(?=(?: ?\\?<!?\1(?:\d+|\.)\1>)*$)`)
 	calloutSourceRx             = rxScan(`((?://|#|--|;;) ?)?(\\)?&lt;!?(|--)(\d+|\.)\3&gt;(?=(?: ?\\?&lt;!?\3(?:\d+|\.)\3&gt;)*$)`)
-	columnSpecRx                = rxScan(`^(?:(\d+)\*)?([<^>](?:\.[<^>]?)?|(?:[<^>]?\.)?[<^>])?(\d+%?|~)?([a-z])?$`)
-	cellSpecStartRx             = rxScan(`^[ \t]*(?:(\d+(?:\.\d*)?|(?:\d*\.)?\d+)([*+]))?([<^>](?:\.[<^>]?)?|(?:[<^>]?\.)?[<^>])?([a-z])?$`)
-	cellSpecEndRx               = rxScan(`[ \t]+(?:(\d+(?:\.\d*)?|(?:\d*\.)?\d+)([*+]))?([<^>](?:\.[<^>]?)?|(?:[<^>]?\.)?[<^>])?([a-z])?$`)
-	blockMediaMacroRx           = rxScan(`^(image|video|audio)::(\S|\S.*?\S)\[(.+)?\]$`)
-	blockTocMacroRx             = rxScan(`^toc::\[(.+)?\]$`)
 	inlineAnchorRx              = rxScan(`(\\)?(?:\[\[([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+?))? ?\]\]|anchor:([\p{Alpha}_:][\p{Word}\-:.]*)\[(?:\]|(.*?[^\\])\]))`)
 	inlineAnchorScanRx          = rxScan(`(?:^|[^\\\[])\[\[([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+?))? ?\]\]|(?:^|[^\\])anchor:([\p{Alpha}_:][\p{Word}\-:.]*)\[(?:\]|(.*?[^\\])\])`)
-	leadingInlineAnchorRx       = rxScan(`^\[\[([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+?))?\]\]`)
-	inlineBiblioAnchorRx        = rxScan(`^\[\[\[([\p{Alpha}_:][\p{Word}\-:.]*)(?:, *(.+?))?\]\]\]`)
 	inlineEmailRx               = rxScan(`([\\>:/])?\p{Word}(?:&amp;|[\p{Word}\-.%+])*@\p{Alnum}[\p{Alnum}_\-.]*\.[a-zA-Z]{2,5}\b`)
 	inlineFootnoteMacroRx       = rxScan(`\\?footnote(?:(ref):|:([\p{Word}-]+)?)\[(?:|(.*?[^\\]))\](?!</a>)`, "m")
 	inlineImageMacroRx          = rxScan(`\\?i(?:mage|con):([^:\s\[](?:[^\n\[]*[^\s\[])?)\[(|.*?[^\\])\]`, "m")
@@ -61,34 +30,15 @@ var (
 	inlinePassMacroRx           = rxScan(`(?:(?:(\\?)\[([^\]]+)\])?(\\{0,2})(\+\+\+?|\$\$)(.*?)\4|(\\?)pass:([a-z]+(?:,[a-z-]+)*)?\[(|.*?[^\\])\])`, "m")
 	inlineXrefMacroRx           = rxScan(`\\?(?:&lt;&lt;([\p{Word}#/.:{].*?)&gt;&gt;|xref:([\p{Word}#/.:{].*?)\[(?:\]|(.*?[^\\])\]))`, "m")
 	hardLineBreakRx             = rxScan(`^(.*) \+$`)
-	markdownThematicBreakRx     = rxScan(`^ {0,3}([-*_])( *)\1\2\1$`)
-	extLayoutBreakRx            = rxScan(`^(?:'{3,}|<{3,}|([-*_])( *)\1\2\1)$`)
 	blankLineRx                 = rxScan(`\n{2,}`)
 	escapedSpaceRx              = rxScan(`\\([ \t\n])`)
 	replaceableTextRx           = rxScan(`[&']|--|\.\.\.|\([CRT]M?\)`)
 	spaceDelimiterRx            = rxScan(`([^\\])[ \t\n]+`)
-	trailingDigitsRx            = rxScan(`\d+$`)
-	uriSniffRx                  = rxScan(`\A\p{Alpha}[\p{Alnum}.+-]+:/{0,2}`)
 	xmlSanitizeRx               = rxScan(`<[^>]+>`)
 	passSlotRx                  = rxScan("\u0096(\\d+)\u0097")
 )
 
-var descriptionListSiblingRx = map[string]*scanner{
-	"::":   rxScan(`^(?!//[^/])[ \t]*([^ \t].*?[^:]|[^ \t:])(::)(?:$|[ \t]+(.*)$)`),
-	":::":  rxScan(`^(?!//[^/])[ \t]*([^ \t].*?[^:]|[^ \t:])(:::)(?:$|[ \t]+(.*)$)`),
-	"::::": rxScan(`^(?!//[^/])[ \t]*([^ \t].*?[^:]|[^ \t:])(::::)(?:$|[ \t]+(.*)$)`),
-	";;":   rxScan(`^(?!//[^/])[ \t]*([^ \t].*?)(;;)(?:$|[ \t]+(.*)$)`),
-}
-
 var orderedListStyles = []string{"arabic", "loweralpha", "lowerroman", "upperalpha", "upperroman"}
-
-var orderedListMarkerRx = map[string]*scanner{
-	"arabic":     rxScan(`\d+\.`),
-	"loweralpha": rxScan(`[a-z]\.`),
-	"lowerroman": rxScan(`[ivx]+\)`),
-	"upperalpha": rxScan(`[A-Z]\.`),
-	"upperroman": rxScan(`[IVX]+\)`),
-}
 
 var listRxMap = map[string]*scanner{
 	"ulist": unorderedListRx, "olist": orderedListRx, "dlist": descriptionListRx, "colist": calloutListRx,

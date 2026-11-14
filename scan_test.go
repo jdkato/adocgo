@@ -1,6 +1,7 @@
 package adocgo
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"os"
@@ -148,6 +149,65 @@ func TestScannersAgainstRegexps(t *testing.T) {
 		}
 		if _, err := Convert([]byte(src), optSets[1]); err != nil && !strings.Contains(err.Error(), "nesting") {
 			t.Errorf("%s: %v", name, err)
+		}
+	}
+	o.report(t)
+}
+
+// scanSamples returns the inputs for TestScannersOnSamples: the lines and
+// multi-line chunks recorded for the Ruby compatibility test, their
+// special-character-escaped forms and mutated variants of both.
+func scanSamples(t *testing.T) []string {
+	data, err := os.ReadFile(rxCompatFile)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var c rxCompat
+	if err := json.Unmarshal(data, &c); err != nil {
+		t.Fatal(err)
+	}
+	r := rand.New(rand.NewSource(11))
+	var out []string
+	for _, in := range c.Inputs {
+		out = append(out, in)
+		for j := 0; j < 6; j++ {
+			m := string(mutate(r, []byte(in)))
+			if len(m) < 600 {
+				out = append(out, m)
+			}
+		}
+	}
+	extra := []string{"", "\n", "a\n", "\na", " ", "[[a]]", "[[a, b]]\n[[c]]", "x::\ny:: z", "* a\n* b\n", "= T\n\n== S", "a *b* c\n*d*", "x\n\n\ny"}
+	return append(out, extra...)
+}
+
+// TestScannersOnSamples runs every hand-written scanner and the regular
+// expression it replaces over a fixed set of sample strings (including
+// multi-line and garbled ones that the converter itself may never pass to
+// a given scanner) and requires identical matches.
+func TestScannersOnSamples(t *testing.T) {
+	o := &scanOracle{res: map[*scanner]*rx.Regexp{}, checked: map[string]int{}}
+	samples := scanSamples(t)
+	for _, sc := range allScanners {
+		for _, in := range samples {
+			pos := 0
+			for n := 0; n < 4 && pos <= len(in); n++ {
+				var m rmatch
+				c := m.c[:2*(sc.n+1)]
+				for i := range c {
+					c[i] = -1
+				}
+				ok := sc.find(in, pos, c)
+				o.check(sc, in, pos, false, c, ok)
+				if !ok {
+					break
+				}
+				if c[1] == c[0] {
+					pos = c[1] + 1
+				} else {
+					pos = c[1]
+				}
+			}
 		}
 	}
 	o.report(t)

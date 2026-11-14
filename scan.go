@@ -177,5 +177,10 @@ func (sc *scanner) ReplaceFirstFunc(s string, f func(m *rmatch) string) string {
 // newScanner declares a hand-written scanner for the given pattern with n
 // capture groups.
 func newScanner(pat, flags string, n int, find func(s string, from int, c []int) bool) *scanner {
-	return &scanner{pat: pat, flags: flags, n: n, find: find, hand: true}
+	sc := &scanner{pat: pat, flags: flags, n: n, find: find, hand: true}
+	allScanners = append(allScanners, sc)
+	return sc
 }
+
+// allScanners lists every hand-written scanner (used by the tests).
+var allScanners []*scanner
