@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -181,9 +182,11 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 			status = 1
 			continue
 		}
+		// Asciidoctor ends stream output with a newline but writes files
+		// without one.
 		if dest == "-" {
 			stdout.Write(out)
-		} else if err := os.WriteFile(dest, out, 0o644); err != nil {
+		} else if err := os.WriteFile(dest, bytes.TrimSuffix(out, []byte("\n")), 0o644); err != nil {
 			fmt.Fprintf(stderr, "adocgo: %v\n", err)
 			status = 1
 		}
