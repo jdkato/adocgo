@@ -1,0 +1,58 @@
+[source,ruby]
+----
+require 'x' # <1>
+puts 1 // <2>
+x = 1 -- <3>
+y ;; <4>
+<5>
+two <6> <7>
+esc \<8>
+<!--9-->
+auto <.>
+auto2 <.>
+----
+<1> one
+<2> two
+<3> three
+<4> four
+<5> five
+<6> six
+<7> seven
+<9> nine
+<.> auto
+<.> auto2
+
+----
+no callout here <1
+----
+
+[source,xml]
+----
+<a>
+  <b/> <!--1-->
+</a> <!--2-->
+----
+<1> first
+<2> second
++
+with continuation
+
+[source,erlang,line-comment=%]
+----
+hello % <1>
+----
+<1> erl
+
+.Colist title
+[#co.role]
+<1> orphan
+
+[subs=-callouts]
+----
+kept <1>
+----
+
+....
+literal <1>
+....
+<1> lit

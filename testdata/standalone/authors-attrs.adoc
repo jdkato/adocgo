@@ -1,0 +1,9 @@
+= Doc
+:author: Doc Writer
+:email: doc@example.com
+:revnumber: 1
+:revdate: now
+:revremark: rem
+:version-label: Edition
+
+x

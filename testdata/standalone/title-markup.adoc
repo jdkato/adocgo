@@ -1,0 +1,3 @@
+= *Bold* <Title> with `code` & footnote:[fn]
+
+x

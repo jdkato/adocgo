@@ -1,0 +1,19 @@
+= Include Test
+:attr-from-parent: a parent value
+
+Before.
+
+include::include/chapter.adoc[]
+
+After.
+
+include::include/missing.adoc[]
+
+include::include/missing.adoc[opts=optional]
+
+\include::include/chapter.adoc[]
+
+include::{undefined-dir}/x.adoc[]
+
+include::include/blank-edges.adoc[]
+tail

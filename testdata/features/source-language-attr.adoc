@@ -1,0 +1,18 @@
+----
+  package main
+----
+
+[source]
+----
+x
+----
+
+[source,ruby]
+----
+y
+----
+
+[listing]
+----
+z
+----

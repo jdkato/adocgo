@@ -1,0 +1,53 @@
+term:: definition
+term2::
+definition on next line
+term3::
+
+  indented definition
+
+term4:: def
++
+continued
+
+a::
+b:: shared def
+c:::: deep
+nested::: nested def
+;; sub?
+
+[horizontal]
+h1:: hd1
+h2::
++
+block
+
+[horizontal,labelwidth=20,itemwidth=80%]
+h1:: hd1
+
+[%strong,horizontal]
+x:: y
+
+[qanda]
+Question one?:: Answer one.
+Question two?::
+Answer two.
++
+More.
+
+[glossary]
+word:: meaning
+
+.Title
+[#dl.role]
+t:: d
+
+term with `code` and *bold*:: def with footnote:[fn]
+[[anchored]]anchored term:: d
+no def::
+
+next para
+
+mixed::
+* list in def
+* two
+other:: . ordered in def

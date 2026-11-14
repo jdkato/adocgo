@@ -1,0 +1,14 @@
+NOTE: Note.
+
+[TIP,icon=star]
+Tip
+
+[WARNING,icon=warn.gif,caption=Careful]
+Warn
+
+icon:heart[] icon:heart[2x,title=T,width=3] icon:x.svg[alt=X]
+
+----
+code <1>
+----
+<1> Callout

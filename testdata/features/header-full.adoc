@@ -1,0 +1,10 @@
+= The Title: A Subtitle
+Jane Q. Doe <jane@example.com>; Juan_de_la Cruz <juan@example.com>; Mononym
+v2.1, 2024-02-03: The remark
+:description: A description
+:keywords: one, two
+
+{author} {firstname} {middlename} {lastname} {authorinitials} {email}
+{author_2} {firstname_2} {lastname_2} {authorinitials_2} {email_2}
+{author_3} {authorcount} {authors}
+{revnumber} {revdate} {revremark} {doctitle}

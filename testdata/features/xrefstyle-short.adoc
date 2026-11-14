@@ -1,0 +1,42 @@
+= Doc
+:doctype: book
+:sectnums:
+:partnums:
+:xrefstyle: short
+
+= Part One
+
+[#chap]
+== Chapter
+
+See <<chap>>, <<sec>>, <<fig>>, <<tbl>>, <<app>>, <<_part_one>>, <<lst>>, <<ex>>, xref:fig[xrefstyle=short].
+
+[#sec]
+=== Section
+
+.Fig title
+[#fig]
+image::x.png[]
+
+.Tbl title
+[#tbl]
+|===
+|x
+|===
+
+.Lst title
+[#lst]
+----
+x
+----
+
+.Ex title
+[#ex]
+====
+x
+====
+
+[appendix#app]
+== Appendix Title
+
+x

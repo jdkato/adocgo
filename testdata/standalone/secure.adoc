@@ -1,0 +1,5 @@
+= Secure Mode
+
+include::x.adoc[]
+
+image::x.svg[opts=inline]

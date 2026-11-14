@@ -1,0 +1,127 @@
+====
+example
+====
+
+.Ex
+[#e1.r]
+====
+titled
+====
+
+[%collapsible]
+====
+collapsed
+====
+
+.Summary
+[%collapsible%open.x#cid]
+====
+open collapsed
+====
+
+****
+sidebar
+****
+
+.Side
+[#s1.r]
+****
+titled sidebar
+****
+
+____
+quote
+____
+
+[quote,Author Name,Source Title]
+____
+attributed
+____
+
+[quote,Author]
+para quote
+
+"I hold it."
+-- Thomas Jefferson, Papers
+
+> markdown quote
+> second line
+>
+> > nested
+>
+> -- Someone, Somewhere
+
+[verse,Poet,Poem]
+____
+line one
+  line two
+
+stanza
+____
+
+[verse]
+para verse
+line *two*
+
+.Open
+[#o1.r]
+--
+open
+--
+
+[abstract]
+--
+abstract open
+--
+
+[abstract]
+Abstract para.
+
+[sidebar]
+para sidebar
+
+[example]
+para example
+
+[partintro]
+not in book
+
+....
+literal
+....
+
+[literal]
+para literal
+
+ indented literal
+  more
+
+.Lit title
+[#l1.r%nowrap]
+....
+x
+....
+
+////
+comment
+////
+
+//line comment
+
+[comment]
+para comment
+
+[comment]
+--
+block comment
+--
+
+======
+nested example outer
+====
+inner
+====
+======
+
+--
+unterminated open

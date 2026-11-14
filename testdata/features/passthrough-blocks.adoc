@@ -1,0 +1,42 @@
+++++
+<div class="raw">
+*not bold* {backend}
+</div>
+++++
+
+[subs=attributes]
+++++
+<p>{backend}</p>
+++++
+
+[pass]
+<b>para pass</b> *x*
+
+[subs="quotes,replacements"]
+++++
+*bold* (C)
+++++
+
+[stem]
+++++
+sqrt(4) = 2
+++++
+
+[latexmath]
+++++
+\alpha + \beta
+++++
+
+[asciimath]
+++++
+a
+
+b \
+c
+++++
+
+.Titled stem
+[stem#eq1.role]
+++++
+x
+++++

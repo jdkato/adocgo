@@ -1,0 +1,14 @@
+{counter:n} {counter:n} {counter2:n}{counter:n}
+
+{counter:letter:a} {counter:letter} {counter:letter}
+
+{counter:z:Y} {counter:z} {counter:z}
+
+{set:foo:bar}{foo} {set:foo!}{foo}
+
+.Title {counter:fig}
+image::a.png[]
+
+:seq: 10
+
+{counter:seq} {counter:seq}

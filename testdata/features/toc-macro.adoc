@@ -1,0 +1,17 @@
+= Doc
+:toc: macro
+:toclevels: 3
+
+== One
+
+toc::[]
+
+=== One A
+
+==== One A i
+
+== Two
+
+.Custom TOC
+[#mytoc.tocrole]
+toc::[levels=1]

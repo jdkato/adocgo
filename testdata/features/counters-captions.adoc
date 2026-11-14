@@ -1,0 +1,48 @@
+.One
+====
+x
+====
+
+.Two
+====
+x
+====
+
+:example-caption!:
+
+.No caption
+====
+x
+====
+
+:listing-caption: Listing
+
+.L1
+----
+x
+----
+
+.T1
+|===
+|x
+|===
+
+:table-caption: Tabelle
+
+.T2
+|===
+|x
+|===
+
+:caption: Global:{sp}
+
+.G
+|===
+|x
+|===
+
+:caption!:
+:figure-caption: Abb.
+
+.F
+image::x.png[]

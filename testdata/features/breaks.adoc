@@ -1,0 +1,30 @@
+line one +
+line two +
+line three
+
+[%hardbreaks]
+auto one
+auto two
+auto three
+
+'''
+
+---
+
+- - -
+
+***
+
+* * *
+
+___
+
+<<<
+
+[.x]
+'''
+
+text +
+
+ literal +
+ literal

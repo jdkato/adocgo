@@ -1,0 +1,48 @@
+= Doc
+:sectnums:
+
+[[top-sect,Top Reftext]]
+== First Section
+
+See <<second>>, <<second,custom text>>, <<Second Section>>, xref:second[], xref:second[text], <<nosuch>>, <<fig1>>, <<tab1>>, <<ex1>>, <<lst1>>.
+Also <<top-sect>> <<_third_section>> xref:other.adoc[] xref:other.adoc#frag[] xref:other.adoc[Other] <<other.adoc#,Other doc>> <<other#frag>> xref:other#frag[x] xref:img.png[] <<para>> <<term1>> <<li1>> xref:xrefs.adoc#second[self] <<#second>> <<#>> xref:#[top]
+\<<second>> \xref:second[]
+
+[#second,reftext="Second *Ref*"]
+== Second Section
+
+.A figure
+[#fig1]
+image::x.png[]
+
+.A table
+[#tab1]
+|===
+|a
+|===
+
+.An example
+[#ex1]
+====
+x
+====
+
+.A listing
+[#lst1]
+----
+x
+----
+
+[[para]]
+Paragraph with anchor [[inl]]inline and [[inl2,Inline Ref]]another, anchor:mac[Macro Ref]; see <<inl>> <<inl2>> <<mac>>.
+
+[[term1]]Term:: def
+* [[li1]]item, see <<bib>>
+
+== Third Section
+
+[bibliography]
+== Refs
+
+* [[[bib]]] A book.
+* [[[bib2,Label]]] Another. <<bib2>>
