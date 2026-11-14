@@ -1287,7 +1287,8 @@ func (b *Block) commitSubs() {
 			return
 		}
 	}
-	if custom, ok := b.Attributes["subs"]; ok && custom != "" {
+	if custom, ok := b.Attributes["subs"]; ok {
+		// an empty (or unresolvable) subs attribute disables all substitutions
 		b.subs, _ = resolveSubsOpt(custom, "block", defaultSubs)
 	} else {
 		b.subs = append([]string(nil), defaultSubs...)

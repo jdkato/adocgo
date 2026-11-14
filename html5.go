@@ -1733,7 +1733,10 @@ func (c *html5Converter) inlineCallout(node *Inline) string {
 		if icons == "font" {
 			return `<i class="conum" data-value="` + node.Text + `"></i><b>(` + node.Text + ")</b>"
 		}
-		return `<img src="` + node.Parent.iconURI("callouts/"+node.Text) + `" alt="` + node.Text + `"` + c.sl() + ">"
+		// the icon attribute is looked up on the inline node itself, which
+		// never has one, so resolve the URI against an attribute-less node
+		tmp := &Block{Document: doc, Attributes: map[string]string{}, Parent: node.Parent}
+		return `<img src="` + tmp.iconURI("callouts/"+node.Text) + `" alt="` + node.Text + `"` + c.sl() + ">"
 	}
 	if len(node.Guard) == 2 {
 		return `&lt;!--<b class="conum">(` + node.Text + ")</b>--&gt;"

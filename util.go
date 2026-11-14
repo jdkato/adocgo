@@ -10,7 +10,7 @@ import (
 const rubySpace = " \t\n\v\f\r"
 
 func rstrip(s string) string { return strings.TrimRight(s, rubySpace+"\x00") }
-func lstrip(s string) string { return strings.TrimLeft(s, rubySpace) }
+func lstrip(s string) string { return strings.TrimLeft(s, rubySpace+"\x00") }
 func strip(s string) string  { return lstrip(rstrip(s)) }
 
 func runeLen(s string) int { return utf8.RuneCountInString(s) }

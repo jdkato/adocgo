@@ -161,6 +161,8 @@ func parseDocumentHeader(reader *Reader, doc *Document, headerOnly bool) map[str
 		} else {
 			doc.setDocTitle(l0Title)
 			doctitleAttrVal = subSpecialchars(l0Title)
+			// the raw value is stored first, so a self reference resolves to it
+			docAttrs["doctitle"] = doctitleAttrVal
 			if strings.Contains(doctitleAttrVal, "{") {
 				doctitleAttrVal = doc.subAttributes(doctitleAttrVal, subAttrOpts{attributeMissing: "skip"})
 			}
@@ -268,7 +270,7 @@ func parseManpageHeader(reader *Reader, doc *Document, blockAttrs map[string]str
 				nameSection := initializeSection(reader, &doc.Block, map[string]string{})
 				lines := reader.ReadLinesUntil(readOpts{breakOnBlankLines: true, skipLineComments: true}, nil)
 				for i, l := range lines {
-					lines[i] = strings.TrimLeft(l, " \t")
+					lines[i] = lstrip(l)
 				}
 				buf := strings.Join(lines, " ")
 				if m := manpageNamePurposeRx.Find(buf); m != nil {
@@ -279,7 +281,7 @@ func parseManpageHeader(reader *Reader, doc *Document, blockAttrs map[string]str
 					var mannames []string
 					if strings.Contains(manname, ",") {
 						for _, n := range rubySplit(manname, ",") {
-							mannames = append(mannames, strings.TrimLeft(n, " \t"))
+							mannames = append(mannames, lstrip(n))
 						}
 						manname = mannames[0]
 					} else {
@@ -868,12 +870,12 @@ func nextBlock(reader *Reader, parent *Block, attributes map[string]string, opti
 						if commaIdx < ll-4 {
 							attributes["linenums"] = ""
 						}
-						language = strings.TrimSpace(language[:commaIdx])
+						language = strip(language[:commaIdx])
 					} else if ll > 4 {
 						attributes["linenums"] = ""
 					}
 				} else {
-					language = strings.TrimLeft(language, " \t")
+					language = lstrip(language)
 				}
 			}
 			if language == "" {
@@ -1408,7 +1410,7 @@ func parseHeaderMetadata(reader *Reader, document *Document) {
 				if m.Has(1) {
 					rev["revnumber"] = rstrip(m.Group(1))
 				}
-				if component := strings.TrimSpace(m.Group(2)); component != "" {
+				if component := strip(m.Group(2)); component != "" {
 					if !m.Has(1) && strings.HasPrefix(component, "v") {
 						rev["revnumber"] = component[1:]
 					} else {
@@ -1592,7 +1594,7 @@ func processAuthors(entries []string, namesOnly, multiple bool) (map[string]stri
 				}
 			}
 		} else {
-			fname := strings.TrimSpace(squeezeSpaces(entry))
+			fname := strip(squeezeSpaces(entry))
 			meta[key("author")] = fname
 			meta[key("firstname")] = fname
 			meta[key("authorinitials")] = firstChar(fname)

@@ -9,6 +9,11 @@ import (
 	"unicode/utf8"
 )
 
+// TestMutDump is a helper for differential fuzzing against the reference
+// implementation (see scripts/difffuzz.sh). When MUTDIR is set it writes
+// mutated variants of the corpus inputs into $MUTDIR/x; otherwise it is
+// skipped. MUTSEED selects the random seed and MUTROUNDS the number of
+// variants per fixture.
 func TestMutDump(t *testing.T) {
 	dir := os.Getenv("MUTDIR")
 	if dir == "" {
@@ -24,7 +29,9 @@ func TestMutDump(t *testing.T) {
 		if len(src) > 6000 {
 			continue
 		}
-		for j := 0; j < 2; j++ {
+		rounds := 2
+		fmt.Sscan(os.Getenv("MUTROUNDS"), &rounds)
+		for j := 0; j < rounds; j++ {
 			m := mutate(r, src)
 			if !utf8.Valid(m) {
 				continue

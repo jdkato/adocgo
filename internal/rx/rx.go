@@ -82,6 +82,7 @@ func (c *class) matches(r rune) bool {
 // Regexp is a compiled regular expression.
 type Regexp struct {
 	src    string
+	flags  string
 	progs  [][]inst // progs[0] is the main program
 	ncap   int      // number of capture groups (excluding group 0)
 	nslots int
@@ -98,6 +99,9 @@ type Regexp struct {
 }
 
 func (re *Regexp) String() string { return re.src }
+
+// Flags returns the flags the expression was compiled with ("m", "i").
+func (re *Regexp) Flags() string { return re.flags }
 
 // NumGroups returns the number of capture groups.
 func (re *Regexp) NumGroups() int { return re.ncap }
@@ -173,6 +177,12 @@ func Compile(pattern string, flags ...string) (re *Regexp, err error) {
 		panic("unexpected )")
 	}
 	re = &Regexp{src: pattern, ncap: p.ncap}
+	if p.dotall {
+		re.flags += "m"
+	}
+	if p.icase {
+		re.flags += "i"
+	}
 	c := &compiler{re: re}
 	re.progs = append(re.progs, nil)
 	c.nslots = 2 * (p.ncap + 1)
@@ -1011,7 +1021,9 @@ func (m *machine) run(pi int, pos int) int {
 				pc++
 			}
 		case opBOL:
-			if pos == 0 || s[pos-1] == '\n' {
+			// like Onigmo, ^ does not match at the very end of the text
+			// after a trailing newline
+			if pos == 0 || (s[pos-1] == '\n' && pos < len(s)) {
 				pc++
 			} else {
 				ok = false
