@@ -76,6 +76,15 @@ func reverseLines(lines []string) []string {
 	return out
 }
 
+// reverseInPlace reverses lines, which must not be used by the caller
+// afterwards.
+func reverseInPlace(lines []string) []string {
+	for i, j := 0, len(lines)-1; i < j; i, j = i+1, j-1 {
+		lines[i], lines[j] = lines[j], lines[i]
+	}
+	return lines
+}
+
 func newReader(lines []string) *Reader {
 	return &Reader{lines: reverseLines(lines), dir: ".", path: "<stdin>", lineno: 1, processLines: true}
 }
@@ -86,7 +95,7 @@ func newListItemReader(lines []listLine) *Reader {
 	strs := make([]string, len(lines))
 	r := &Reader{dir: ".", path: "<stdin>", lineno: 1, processLines: true}
 	for i, l := range lines {
-		strs[i] = l.s
+		strs[len(lines)-1-i] = l.s
 		if l.marker && l.s == "" {
 			if r.placeholders == nil {
 				r.placeholders = map[int]bool{}
@@ -94,7 +103,7 @@ func newListItemReader(lines []listLine) *Reader {
 			r.placeholders[len(lines)-1-i] = true
 		}
 	}
-	r.lines = reverseLines(strs)
+	r.lines = strs
 	return r
 }
 
@@ -112,7 +121,7 @@ func newPreprocessorReader(doc *Document, data string, file string) *Reader {
 	if depth > 0 {
 		r.maxdepth = &maxDepth{depth, depth, depth}
 	}
-	r.lines = reverseLines(r.prepareLines(data, true, true, "", false))
+	r.lines = reverseInPlace(r.prepareLines(data, true, true, "", false))
 	return r
 }
 

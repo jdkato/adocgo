@@ -366,7 +366,7 @@ func prepareSourceString(data string, trimEnd bool) []string {
 	if data == "" {
 		return nil
 	}
-	var lines []string
+	lines := make([]string, 0, strings.Count(data, "\n")+1)
 	for len(data) > 0 {
 		i := strings.IndexByte(data, '\n')
 		var line string

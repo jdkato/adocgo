@@ -158,14 +158,25 @@ func newList(parent *Block, context string) *Block {
 }
 
 func newListItem(parent *Block, text string, hasText bool) *Block {
-	b := &Block{Context: "list_item", Attributes: map[string]string{}, ContentModel: "compound"}
+	// Attributes is left nil (most items have none; setAttr allocates it on
+	// demand) and the substitution list is shared, as it is never modified
+	// in place.
+	b := &Block{Context: "list_item", ContentModel: "compound"}
 	b.Parent = parent
 	b.Document = parent.Document
 	b.Level = parent.Level
 	b.text = text
 	b.hasText = hasText
-	b.subs = append([]string(nil), normalSubs...)
+	b.subs = normalSubs
 	return b
+}
+
+// setAttr sets an attribute, allocating the attribute map if necessary.
+func (b *Block) setAttr(name, value string) {
+	if b.Attributes == nil {
+		b.Attributes = map[string]string{}
+	}
+	b.Attributes[name] = value
 }
 
 func (b *Block) setParent(p *Block) {
@@ -216,7 +227,7 @@ func (b *Block) hasOption(name string) bool {
 	return ok
 }
 
-func (b *Block) setOption(name string) { b.Attributes[name+"-option"] = "" }
+func (b *Block) setOption(name string) { b.setAttr(name+"-option", "") }
 
 func (b *Block) role() string { return b.Attributes["role"] }
 
@@ -262,7 +273,7 @@ func (b *Block) hasSub(name string) bool {
 }
 
 func (b *Block) removeSub(name string) {
-	out := b.subs[:0]
+	out := make([]string, 0, len(b.subs))
 	for _, s := range b.subs {
 		if s != name {
 			out = append(out, s)

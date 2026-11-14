@@ -17,6 +17,7 @@ func parseList(reader *Reader, listType string, parent *Block, style string) *Bl
 		if item := parseListItem(reader, list, m, m.Group(1), nil, style); item != nil {
 			list.Blocks = append(list.Blocks, item)
 		}
+		m.release()
 		if reader.SkipBlankLines() < 0 {
 			break
 		}
@@ -68,7 +69,7 @@ func parseCalloutList(reader *Reader, m *rmatch, parent *Block, callouts *callou
 		if item := parseListItem(reader, list, m, "<1>", nil, ""); item != nil {
 			list.Blocks = append(list.Blocks, item)
 			if coids := callouts.calloutIDs(len(list.Blocks)); coids != "" {
-				item.Attributes["coids"] = coids
+				item.setAttr("coids", coids)
 			}
 		}
 		m = nil
@@ -117,9 +118,9 @@ func parseListItem(reader *Reader, list *Block, m *rmatch, siblingTrait string, 
 				}
 			} else if strings.HasPrefix(itemText, "[ ] ") || strings.HasPrefix(itemText, "[x] ") || strings.HasPrefix(itemText, "[*] ") {
 				list.setOption("checklist")
-				item.Attributes["checkbox"] = ""
+				item.setAttr("checkbox", "")
 				if !strings.HasPrefix(itemText, "[ ") {
-					item.Attributes["checked"] = ""
+					item.setAttr("checked", "")
 				}
 				item.text = itemText[4:]
 			}
@@ -193,19 +194,23 @@ type listLine struct {
 	marker bool // list continuation marker (string or placeholder)
 }
 
-func nestedListType(line string, withinNested bool) (string, *rmatch) {
-	if withinNested {
-		if m := descriptionListRx.Find(line); m != nil {
-			return "dlist", m
+// nestedListType reports which kind of nested list (if any) the line
+// starts and, for a description list, whether the item has no text.
+func nestedListType(line string, withinNested bool) (string, bool) {
+	if !withinNested {
+		if unorderedListRx.MatchString(line) {
+			return "ulist", false
 		}
-		return "", nil
-	}
-	for _, ctx := range []string{"ulist", "olist", "dlist"} {
-		if m := listRxMap[ctx].Find(line); m != nil {
-			return ctx, m
+		if orderedListRx.MatchString(line) {
+			return "olist", false
 		}
 	}
-	return "", nil
+	if m := descriptionListRx.Find(line); m != nil {
+		noText := m.Group(3) == ""
+		m.release()
+		return "dlist", noText
+	}
+	return "", false
 }
 
 func readLinesForListItem(reader *Reader, listType, siblingTrait string, siblingRx *scanner, hasText bool) []listLine {
@@ -305,9 +310,9 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 				(ch0 == '[' && blockAttributeLineRx.MatchString(thisLine.s)) || (ch0 == ':' && attributeEntryRx.MatchString(thisLine.s)) {
 				buffer = append(buffer, thisLine)
 			} else {
-				if nt, nm := nestedListType(thisLine.s, withinNestedList); nt != "" {
+				if nt, noText := nestedListType(thisLine.s, withinNestedList); nt != "" {
 					withinNestedList = true
-					if nt == "dlist" && nm.Group(3) == "" {
+					if nt == "dlist" && noText {
 						hasText = false
 					}
 				}
@@ -336,10 +341,10 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 			} else if hasText {
 				if isSibling(thisLine.s) {
 					break
-				} else if nt, nm := nestedListType(thisLine.s, false); nt != "" {
+				} else if nt, noText := nestedListType(thisLine.s, false); nt != "" {
 					buffer = append(buffer, thisLine)
 					withinNestedList = true
-					if nt == "dlist" && nm.Group(3) == "" {
+					if nt == "dlist" && noText {
 						hasText = false
 					}
 				} else if literalParagraphRx.MatchString(thisLine.s) {
@@ -368,9 +373,9 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 			if thisLine.s != "" {
 				hasText = true
 			}
-			if nt, nm := nestedListType(thisLine.s, withinNestedList); nt != "" {
+			if nt, noText := nestedListType(thisLine.s, withinNestedList); nt != "" {
 				withinNestedList = true
-				if nt == "dlist" && nm.Group(3) == "" {
+				if nt == "dlist" && noText {
 					hasText = false
 				}
 			}
@@ -438,7 +443,12 @@ func isSiblingListItem(line, listType, siblingTrait string, siblingRx *scanner) 
 		return siblingRx.MatchString(line)
 	}
 	m := listRxMap[listType].Find(line)
-	return m != nil && siblingTrait == resolveListMarker(listType, m.Group(1))
+	if m == nil {
+		return false
+	}
+	marker := m.Group(1)
+	m.release()
+	return siblingTrait == resolveListMarker(listType, marker)
 }
 
 // callouts ports Asciidoctor's Callouts catalog.

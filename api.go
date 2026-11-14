@@ -109,7 +109,7 @@ func (d *Document) Convert() (out []byte, err error) {
 		d.Attributes["outdir"] = fileDirname(d.outFile)
 	}
 	var w bytes.Buffer
-	w.Grow(d.srcLen + d.srcLen/2 + 256)
+	w.Grow(2*d.srcLen + 1024)
 	d.convertDocumentTo(&w)
 	if n := w.Len(); n > 0 && w.Bytes()[n-1] != '\n' {
 		w.WriteByte('\n')

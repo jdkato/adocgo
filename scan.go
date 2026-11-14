@@ -1,7 +1,6 @@
 package adocgo
 
 import (
-	"strings"
 	"sync"
 	"unicode/utf8"
 )
@@ -40,6 +39,14 @@ const maxCaps = 18
 type rmatch struct {
 	s string
 	c [maxCaps]int
+}
+
+// release returns a match obtained from Find, FindAt or MatchAt to the
+// pool. The match must not be used afterwards (strings obtained from it
+// stay valid).
+func (m *rmatch) release() {
+	m.s = ""
+	matchPool.Put(m)
 }
 
 // Has reports whether group i participated in the match.
@@ -83,10 +90,9 @@ func (sc *scanner) Find(s string) *rmatch { return sc.FindAt(s, 0) }
 func (sc *scanner) FindAt(s string, from int) *rmatch {
 	m := matchPool.Get().(*rmatch)
 	if sc.run(m, s, from) {
-		return m // handed to the caller, not returned to the pool
+		return m // handed to the caller, who may release it
 	}
-	m.s = ""
-	matchPool.Put(m)
+	m.release()
 	return nil
 }
 
@@ -94,8 +100,7 @@ func (sc *scanner) FindAt(s string, from int) *rmatch {
 func (sc *scanner) MatchString(s string) bool {
 	m := matchPool.Get().(*rmatch)
 	ok := sc.run(m, s, 0)
-	m.s = ""
-	matchPool.Put(m)
+	m.release()
 	return ok
 }
 
@@ -111,7 +116,7 @@ func (sc *scanner) MatchAt(s string, pos int) *rmatch {
 		scanCheck(sc, s, pos, true, c, ok)
 	}
 	if !ok {
-		matchPool.Put(m)
+		m.release()
 		return nil
 	}
 	m.s = s
@@ -141,22 +146,23 @@ func (sc *scanner) FindAll(s string) []*rmatch {
 	return out
 }
 
+// bufPool recycles the scratch buffers used to assemble replacement
+// results, so that each replacement pass allocates only its result string.
+var bufPool = sync.Pool{New: func() any { b := make([]byte, 0, 1024); return &b }}
+
 // ReplaceAllFunc replaces every match with the result of f (Ruby gsub).
 func (sc *scanner) ReplaceAllFunc(s string, f func(m *rmatch) string) string {
 	m := matchPool.Get().(*rmatch)
-	defer func() {
-		m.s = ""
-		matchPool.Put(m)
-	}()
 	if !sc.run(m, s, 0) {
+		m.release()
 		return s
 	}
-	var b strings.Builder
-	b.Grow(len(s) + 16)
+	bp := bufPool.Get().(*[]byte)
+	b := (*bp)[:0]
 	last := 0
 	for {
-		b.WriteString(s[last:m.c[0]])
-		b.WriteString(f(m))
+		b = append(b, s[last:m.c[0]]...)
+		b = append(b, f(m)...)
 		last = m.c[1]
 		pos := last
 		if m.c[1] == m.c[0] {
@@ -164,7 +170,7 @@ func (sc *scanner) ReplaceAllFunc(s string, f func(m *rmatch) string) string {
 				break
 			}
 			_, sz := utf8.DecodeRuneInString(s[pos:])
-			b.WriteString(s[pos : pos+sz])
+			b = append(b, s[pos:pos+sz]...)
 			pos += sz
 			last = pos
 		}
@@ -172,8 +178,12 @@ func (sc *scanner) ReplaceAllFunc(s string, f func(m *rmatch) string) string {
 			break
 		}
 	}
-	b.WriteString(s[last:])
-	return b.String()
+	b = append(b, s[last:]...)
+	out := string(b)
+	*bp = b
+	bufPool.Put(bp)
+	m.release()
+	return out
 }
 
 // ReplaceAll replaces every match with the literal string repl.
@@ -187,7 +197,9 @@ func (sc *scanner) ReplaceFirstFunc(s string, f func(m *rmatch) string) string {
 	if m == nil {
 		return s
 	}
-	return s[:m.c[0]] + f(m) + s[m.c[1]:]
+	out := s[:m.c[0]] + f(m) + s[m.c[1]:]
+	m.release()
+	return out
 }
 
 // newScanner declares a hand-written scanner for the given pattern with n
