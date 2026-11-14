@@ -1,0 +1,9 @@
+term:: desc
+
+  <code>text</code>
+
+  more <code>text</code>
+
+another term::
+
+  <code>text</code> in a paragraph

@@ -1,0 +1,8 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+|===
+|*Col A* |_Col B_
+
+|*bold* |`mono`
+|_italic_ | #mark#
+|===

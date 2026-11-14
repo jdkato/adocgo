@@ -1,0 +1,6 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+----
+$ gem install asciidoctor # <1>
+----
+<1> Installs the asciidoctor gem from RubyGems.org

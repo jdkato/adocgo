@@ -1,0 +1,4 @@
+#{SAMPLE_MANPAGE_HEADER}
+First paragraph.
+
+http://asciidoc.org[AsciiDoc]

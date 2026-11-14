@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+A {plus} B

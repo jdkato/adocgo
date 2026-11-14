@@ -1,0 +1,9 @@
+target="",attributes={}
+target="value,key=val",attributes={1=>"value","key"=>"val","name"=>"value"}
+target="",attributes={"text"=>""}
+target="[text]",attributes={"text"=>"[text]"}
+target="target",attributes={}
+target="target",attributes={1=>"value","key"=>"val","name"=>"value"}
+target="target",attributes={"text"=>""}
+target="target",attributes={"text"=>"[text]"}
+target="target",attributes={}

@@ -1,0 +1,10 @@
+class Dog
+
+  def bark
+    if @breed == 'beagle'
+      'woof woof woof woof woof'
+    else
+      'woof woof'
+    end
+  end
+end

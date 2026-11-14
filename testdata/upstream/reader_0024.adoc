@@ -1,0 +1,4 @@
+[source,ruby]
+----
+include::#{url}[tag=init,indent=0]
+----

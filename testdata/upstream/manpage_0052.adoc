@@ -1,0 +1,4 @@
+#{SAMPLE_MANPAGE_HEADER}
+First paragraph.
+
+mailto:doc@example.org[Contact the doc]

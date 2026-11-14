@@ -1,0 +1,4 @@
+<indexterm>
+<primary>Flash</primary>
+<see>HTML 5</see>
+</indexterm>

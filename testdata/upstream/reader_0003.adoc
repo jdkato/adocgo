@@ -1,0 +1,7 @@
+****
+captured
+
+also captured
+****
+
+not captured

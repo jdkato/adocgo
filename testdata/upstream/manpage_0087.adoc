@@ -1,0 +1,5 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+== UI Macros
+
+menu:View[Zoom > Zoom In]

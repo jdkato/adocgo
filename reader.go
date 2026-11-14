@@ -21,6 +21,12 @@ type Reader struct {
 	processLines bool
 	unescapeNext bool
 	saved        *Reader
+	// placeholders records which pending lines (by stack index) are list
+	// continuation placeholders. Asciidoctor tags such (empty) strings by
+	// object identity, and that identity survives as lines flow through
+	// nested readers, so it has to be tracked explicitly here.
+	placeholders    map[int]bool
+	lastPlaceholder bool
 
 	// preprocessor state
 	doc              *Document
@@ -72,6 +78,24 @@ func reverseLines(lines []string) []string {
 
 func newReader(lines []string) *Reader {
 	return &Reader{lines: reverseLines(lines), dir: ".", path: "<stdin>", lineno: 1, processLines: true}
+}
+
+// newListItemReader creates a reader over the lines collected for a list
+// item, preserving list continuation placeholders.
+func newListItemReader(lines []listLine) *Reader {
+	strs := make([]string, len(lines))
+	r := &Reader{dir: ".", path: "<stdin>", lineno: 1, processLines: true}
+	for i, l := range lines {
+		strs[i] = l.s
+		if l.marker && l.s == "" {
+			if r.placeholders == nil {
+				r.placeholders = map[int]bool{}
+			}
+			r.placeholders[len(lines)-1-i] = true
+		}
+	}
+	r.lines = reverseLines(strs)
+	return r
 }
 
 func newPreprocessorReader(doc *Document, data string, file string) *Reader {
@@ -247,6 +271,11 @@ func (r *Reader) shift() (string, bool) {
 	}
 	line := r.lines[len(r.lines)-1]
 	r.lines = r.lines[:len(r.lines)-1]
+	r.lastPlaceholder = false
+	if r.placeholders != nil && r.placeholders[len(r.lines)] {
+		r.lastPlaceholder = true
+		delete(r.placeholders, len(r.lines))
+	}
 	if r.unescapeNext {
 		r.unescapeNext = false
 		if line != "" {
@@ -260,6 +289,13 @@ func (r *Reader) shift() (string, bool) {
 func (r *Reader) UnshiftLine(line string) {
 	r.lineno--
 	r.lookAhead++
+	if r.lastPlaceholder && line == "" {
+		if r.placeholders == nil {
+			r.placeholders = map[int]bool{}
+		}
+		r.placeholders[len(r.lines)] = true
+	}
+	r.lastPlaceholder = false
 	r.lines = append(r.lines, line)
 }
 

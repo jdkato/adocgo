@@ -1,0 +1,8 @@
+* Foo
++
+  literal
+. still literal
++
+para
+
+* Bar

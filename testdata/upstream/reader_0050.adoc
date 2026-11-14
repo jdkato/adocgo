@@ -1,0 +1,11 @@
+\x20 def initialize breed
+\x20   @breed = breed
+\x20 end
+
+\x20 def bark
+\x20   if @breed == 'beagle'
+\x20     'woof woof woof woof woof'
+\x20   else
+\x20     'woof woof'
+\x20   end
+\x20 end

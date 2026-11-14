@@ -1,0 +1,8 @@
+:source-highlighter: rouge
+
+[source%linenums,ruby,start=5,highlight=6]
+----
+get {
+  render "Hello, World!"
+}
+----

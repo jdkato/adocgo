@@ -1,0 +1,5 @@
+[separator=\\t]
+,===
+a\tb\tc
+1\t2\t3
+,===

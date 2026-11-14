@@ -133,6 +133,7 @@ func parseListItem(reader *Reader, list *Block, m *rx.Match, siblingTrait string
 		if len(list.Blocks) == 0 && style == "" {
 			if implicitStyle != "" {
 				list.Style = implicitStyle
+				list.implicitStyle = true
 			} else if n := len(siblingTrait) - 1; n >= 0 && n < len(orderedListStyles) {
 				list.Style = orderedListStyles[n]
 			} else {
@@ -159,7 +160,7 @@ func parseListItem(reader *Reader, list *Block, m *rx.Match, siblingTrait string
 func parseListItemBody(reader *Reader, list, item *Block, listType, siblingTrait string, siblingRx *rx.Regexp, hasText bool) {
 	dlist := listType == "dlist"
 	reader.Shift()
-	itemReader := newReader(readLinesForListItem(reader, listType, siblingTrait, siblingRx, hasText))
+	itemReader := newListItemReader(readLinesForListItem(reader, listType, siblingTrait, siblingRx, hasText))
 	if !itemReader.HasMoreLines() {
 		return
 	}
@@ -209,7 +210,7 @@ func nestedListType(line string, withinNested bool) (string, *rx.Match) {
 	return "", nil
 }
 
-func readLinesForListItem(reader *Reader, listType, siblingTrait string, siblingRx *rx.Regexp, hasText bool) []string {
+func readLinesForListItem(reader *Reader, listType, siblingTrait string, siblingRx *rx.Regexp, hasText bool) []listLine {
 	var buffer []listLine
 	const (
 		inactive = iota
@@ -225,7 +226,7 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 	hasThis := false
 	for reader.HasMoreLines() {
 		s, _ := reader.ReadLine()
-		thisLine, hasThis = listLine{s: s}, true
+		thisLine, hasThis = listLine{s: s, marker: reader.lastPlaceholder}, true
 		if isSibling(s) {
 			break
 		}
@@ -380,6 +381,7 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 		hasThis = false
 	}
 	if hasThis {
+		reader.lastPlaceholder = thisLine.marker && thisLine.s == ""
 		reader.UnshiftLine(thisLine.s)
 	}
 	if detachedContinuation >= 0 && detachedContinuation < len(buffer) {
@@ -396,11 +398,7 @@ func readLinesForListItem(reader *Reader, listType, siblingTrait string, sibling
 			break
 		}
 	}
-	out := make([]string, len(buffer))
-	for i, l := range buffer {
-		out[i] = l.s
-	}
-	return out
+	return buffer
 }
 
 func resolveListMarker(listType, marker string) string {

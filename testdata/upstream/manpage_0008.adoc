@@ -1,0 +1,7 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+[#a]
+== A <<b>>
+
+[#b]
+== B <<a>>

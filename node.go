@@ -24,6 +24,10 @@ type Block struct {
 	Attributes map[string]string
 	// Style is the block style (e.g. "source", "NOTE", "arabic").
 	Style string
+	// implicitStyle is set when an ordered list style was inferred from an
+	// explicit marker such as "A." (Asciidoctor stores a Symbol in that case,
+	// which suppresses the type attribute on the <ol> element).
+	implicitStyle bool
 	// Caption is the caption prefix assigned to the block title.
 	Caption    string
 	hasCaption bool

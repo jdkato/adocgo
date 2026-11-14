@@ -1,0 +1,9 @@
+[cols=2*]
+|===
+l|
+  one
+  two
+three
+
+  | normal
+|===

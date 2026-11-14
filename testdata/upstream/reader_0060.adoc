@@ -1,0 +1,5 @@
+def bark
+  if @breed == 'beagle'
+    'woof woof woof woof woof'
+  end
+end

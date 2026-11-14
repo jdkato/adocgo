@@ -1,0 +1,2 @@
+:man-linkstyle: cyan R < >
+#{SAMPLE_MANPAGE_HEADER}

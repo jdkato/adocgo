@@ -1,0 +1,3 @@
+* a
+* b#{decode_char 8232}b
+* c

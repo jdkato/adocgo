@@ -1,0 +1,6 @@
+.SH "SECTION WITH BREAK"
+.sp
+before break
+.bp
+.sp
+after break

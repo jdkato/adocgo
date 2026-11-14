@@ -1,0 +1,4 @@
+<informalequation>
+<alt><![CDATA[\sqrt{3x-1}+(1+x)^2 < y]]></alt>
+<mathphrase><![CDATA[\sqrt{3x-1}+(1+x)^2 < y]]></mathphrase>
+</informalequation>

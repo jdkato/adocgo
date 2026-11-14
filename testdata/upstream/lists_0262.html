@@ -1,0 +1,30 @@
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'asciidoctor' <b class="conum">(1)</b>
+doc = Asciidoctor.load('Hello, World!') # <b class="conum">(2)</b> <b class="conum">(3)</b> <b class="conum">(4)</b>
+puts doc.convert <b class="conum">(5)</b><b class="conum">(6)</b>
+exit 0</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Require library</p>
+</li>
+<li>
+<p>Load document from String</p>
+</li>
+<li>
+<p>Uses default backend and doctype</p>
+</li>
+<li>
+<p>One more for good luck</p>
+</li>
+<li>
+<p>Renders document to String</p>
+</li>
+<li>
+<p>Prints output to stdout</p>
+</li>
+</ol>
+</div>

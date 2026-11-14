@@ -1,0 +1,7 @@
+<div class="sidebarblock">
+<div class="content">
+First line of sidebar.
+The backend is html5.
+Last line of sidebar.
+</div>
+</div>

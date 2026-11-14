@@ -1,0 +1,5 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+Behold the wisdom of the Magic 8 Ball!
+
+image::signs-point-to-yes.jpg[]

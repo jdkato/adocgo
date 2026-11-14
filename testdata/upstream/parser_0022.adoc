@@ -1,0 +1,5 @@
+    def names
+
+\t  @name.split
+
+    end

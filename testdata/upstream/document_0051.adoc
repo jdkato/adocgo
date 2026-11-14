@@ -1,0 +1,6 @@
+= Document Title#{attr_entries ? ?\n + (attr_entries.join ?\n) : ''}
+
+ifdef::showtitle[showtitle: set]
+ifndef::showtitle[showtitle: not set]
+ifdef::notitle[notitle: set]
+ifndef::notitle[notitle: not set]

@@ -1,0 +1,13 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+If you read nothing else, read the <<_foo_bar>> section.
+
+=== Options
+
+--foo-bar _foobar_::
+Puts the foo in your bar.
+See <<_foo_bar>> section for details.
+
+== Foo Bar
+
+Foo goes with bar, not baz.

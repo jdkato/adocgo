@@ -1,0 +1,9 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+== Section With Break
+
+before break
+
+<<<
+
+after break

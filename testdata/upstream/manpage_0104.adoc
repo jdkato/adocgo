@@ -1,0 +1,4 @@
+.SH "NOTES"
+.IP [1]
+go to \c
+.URL "https://example.org" "example site" "."

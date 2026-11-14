@@ -1,0 +1,2 @@
+#{SAMPLE_MANPAGE_HEADER}
+Bugs fixed daily by doc@example.org.

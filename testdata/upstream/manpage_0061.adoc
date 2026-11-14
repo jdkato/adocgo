@@ -1,0 +1,7 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+|===
+|a l|b
+c    _d_
+.
+|===

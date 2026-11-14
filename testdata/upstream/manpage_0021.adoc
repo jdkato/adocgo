@@ -1,0 +1,6 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+Oh, here it goes again
+  I should have known,
+    should have known,
+should have known again

@@ -1,0 +1,6 @@
+|===
+|A |B
+
+|text
+a|include::does-not-exist.adoc[]
+|===

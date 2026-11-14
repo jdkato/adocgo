@@ -1,0 +1,4 @@
+\$f: bbb"N" -&gt; bbb"N"\$
+<br>
+<br>
+\$f: x |-&gt; x + 1\$

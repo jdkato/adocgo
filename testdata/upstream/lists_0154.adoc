@@ -1,0 +1,3 @@
+A:: a
+B:: b#{decode_char 8232}b
+C:: c

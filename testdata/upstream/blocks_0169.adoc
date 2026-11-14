@@ -1,0 +1,3 @@
+:data-uri:
+
+image::#{image_uri}[Dot]

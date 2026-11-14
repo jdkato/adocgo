@@ -792,6 +792,9 @@ func parseColspecs(records string) []*colSpec {
 	}
 	var specs []*colSpec
 	var parts []string
+	if records == "" {
+		return nil
+	}
 	if strings.Contains(records, ",") {
 		parts = strings.Split(records, ",")
 	} else {

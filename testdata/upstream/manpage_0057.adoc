@@ -1,0 +1,22 @@
+allbox tab(:);
+ltB.
+T{
+.sp
+Header
+T}
+.T&
+lt.
+T{
+.sp
+Body 1
+T}
+T{
+.sp
+Body 2
+T}
+T{
+.sp
+Footer
+T}
+.TE
+.sp

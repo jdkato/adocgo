@@ -1,0 +1,10 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+.Table of options
+|===
+| Name | Description | Default
+
+| dim
+| dimension of the object
+| 3
+|===

@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+http://asciidoc.org[AsciiDoc] can be used to create man pages.

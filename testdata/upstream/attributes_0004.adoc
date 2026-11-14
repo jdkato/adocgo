@@ -1,0 +1,3 @@
+:signature: Linus Torvalds + \
+Linux Hacker + \
+linus.torvalds@example.com

@@ -87,16 +87,17 @@ type Document struct {
 	maxAttrValueSize   int
 	parsed             bool
 
-	refs      map[string]refTarget
-	refOrder  []string
-	reftexts  map[string]string
-	footnotes *[]footnote
-	callouts  *callouts
-	includes  map[string]bool
-	mannames  []string
-	highlight bool // highlight.js enabled
-	reader    *Reader
-	conv      *html5Converter
+	refs       map[string]refTarget
+	refOrder   []string
+	reftexts   map[string]string
+	footnotes  *[]footnote
+	callouts   *callouts
+	includes   map[string]bool
+	mannames   []string
+	highlight  bool // highlight.js enabled
+	fallbackHL string
+	reader     *Reader
+	conv       *html5Converter
 }
 
 // Options configures a conversion.
@@ -385,6 +386,7 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 	doc.counters = map[string]string{}
 	doc.attributesModified = map[string]bool{}
 	doc.highlight = parent.highlight
+	doc.fallbackHL = parent.fallbackHL
 	ov := map[string]override{}
 	for k, v := range parent.attributeOverrides {
 		ov[k] = v
@@ -816,6 +818,15 @@ func (d *Document) saveAttributes() {
 	if d.parentDocument == nil {
 		if hl, ok := attrs["source-highlighter"]; ok {
 			d.highlight = hl == "highlight.js" || hl == "highlightjs"
+			// The server-side highlighters are not available; mimic the
+			// markup Asciidoctor emits when the highlighter library cannot
+			// be loaded (the adapter still formats the <pre> wrapper).
+			switch hl {
+			case "coderay":
+				d.fallbackHL = "CodeRay"
+			case "rouge", "pygments":
+				d.fallbackHL = hl
+			}
 		}
 		d.outfilesuffix = attrs["outfilesuffix"]
 		if o, ok := d.attributeOverrides["sectnums"]; ok && o.state == 's' {

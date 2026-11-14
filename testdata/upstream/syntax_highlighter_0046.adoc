@@ -1,0 +1,2 @@
+<span class="hll"><span class="nb">puts</span> <span class="s1">'Hello, world!'</span>
+</span><span class="nb">puts</span> <span class="s1">'Goodbye, world!'</span>#{opts == '%linenums' ? ?\n : '</code>'}</pre>

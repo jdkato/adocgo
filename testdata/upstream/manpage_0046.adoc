@@ -1,0 +1,3 @@
+#{SAMPLE_MANPAGE_HEADER}
+
+The corresponding implementations are http://clisp.sf.net[CLISP], http://ccl.clozure.com[Clozure CL], http://cmucl.org[CMUCL], http://ecls.sf.net[ECL], and http://sbcl.sf.net[SBCL].

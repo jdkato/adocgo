@@ -61,7 +61,7 @@ var (
 	inlinePassRx                = rx.MustCompile(`((?:^|[^\p{Word};:\\])(?=(\[)|\+)|\\(?=\[)|(?=\\\+))(?:\2(x-|[^\]]+ x-)\]|(?:\[([^\]]+)\])?(?=(\\)?\+))(\5?(\+|`+"`"+`)(\S|\S.*?\S)\7)(?!\p{Word})`, "m")
 	inlinePassCompatRx          = rx.MustCompile("(^|[^`\\p{Word}])(?:(\\Z)()|\\[([^\\]]+)\\](?=(\\\\))?)?(\\5?(`)([^`\\s]|[^`\\s].*?\\S)\\7)(?![`\\p{Word}])", "m")
 	inlinePassMacroRx           = rx.MustCompile(`(?:(?:(\\?)\[([^\]]+)\])?(\\{0,2})(\+\+\+?|\$\$)(.*?)\4|(\\?)pass:([a-z]+(?:,[a-z-]+)*)?\[(|.*?[^\\])\])`, "m")
-	inlineXrefMacroRx           = rx.MustCompile(`\\?(?:&lt;&lt;([\p{Word}#/.:{].*?)&gt;&gt;|xref:([\p{Word}#/.:{].*?)\[(?:\]|(.*?[^\\])\])))`, "m")
+	inlineXrefMacroRx           = rx.MustCompile(`\\?(?:&lt;&lt;([\p{Word}#/.:{].*?)&gt;&gt;|xref:([\p{Word}#/.:{].*?)\[(?:\]|(.*?[^\\])\]))`, "m")
 	hardLineBreakRx             = rx.MustCompile(`^(.*) \+$`)
 	markdownThematicBreakRx     = rx.MustCompile(`^ {0,3}([-*_])( *)\1\2\1$`)
 	extLayoutBreakRx            = rx.MustCompile(`^(?:'{3,}|<{3,}|([-*_])( *)\1\2\1)$`)

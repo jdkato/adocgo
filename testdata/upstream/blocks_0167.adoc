@@ -1,0 +1,4 @@
+:data-uri:
+:imagesdir: http://#{resolve_localhost}:9876/fixtures
+
+image::dot.gif[Dot]

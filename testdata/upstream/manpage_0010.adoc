@@ -1,0 +1,2 @@
+:man-linkstyle: pass:[cyan R < >]
+#{SAMPLE_MANPAGE_HEADER}

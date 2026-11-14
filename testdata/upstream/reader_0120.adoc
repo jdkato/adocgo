@@ -1,0 +1,7 @@
+before
+
+ifdef::attribute-not-set[]
+#{lines}
+endif::attribute-not-set[]
+
+after

@@ -1,0 +1,4 @@
+<span class="n">get</span> <span class="p">{</span>
+<span class="hll">  <span class="n">render</span> <span class="s2">"Hello, World!"</span>
+</span><span class="p">}</span>
+</pre>

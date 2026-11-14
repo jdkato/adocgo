@@ -1,0 +1,34 @@
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'asciidoctor' # <b class="conum">(1)</b>
+doc = Asciidoctor::Document.new('Hello, World!') # <b class="conum">(2)</b>
+puts doc.convert # <b class="conum">(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Imports the library
+as a RubyGem</p>
+</li>
+<li>
+<p>Creates a new document</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Scans the lines for known blocks</p>
+</li>
+<li>
+<p>Converts the lines into blocks</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Renders the document</p>
+<div class="paragraph">
+<p>You can write this to file rather than printing to stdout.</p>
+</div>
+</li>
+</ol>
+</div>
