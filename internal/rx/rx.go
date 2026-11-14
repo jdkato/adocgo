@@ -94,7 +94,7 @@ type Regexp struct {
 	memoOK  bool
 	splitID []int // dense index of each split instruction in progs[0], or -1
 	nsplits int
-	bol    bool // pattern can only match at start of a line
+	bol     bool // pattern can only match at start of a line
 }
 
 func (re *Regexp) String() string { return re.src }

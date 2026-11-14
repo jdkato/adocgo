@@ -96,6 +96,7 @@ type Document struct {
 	mannames   []string
 	highlight  bool // highlight.js enabled
 	fallbackHL string
+	xmlMode    bool
 	reader     *Reader
 	conv       *html5Converter
 }
@@ -387,6 +388,7 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 	doc.attributesModified = map[string]bool{}
 	doc.highlight = parent.highlight
 	doc.fallbackHL = parent.fallbackHL
+	doc.xmlMode = parent.xmlMode
 	ov := map[string]override{}
 	for k, v := range parent.attributeOverrides {
 		ov[k] = v
@@ -524,6 +526,7 @@ func (d *Document) updateBackendAttributes(newBackend string, init bool) {
 			attrs["htmlsyntax"] = "html"
 		}
 	}
+	d.xmlMode = attrs["htmlsyntax"] == "xml"
 	switch newBackend {
 	case "html":
 		newBackend = "html5"

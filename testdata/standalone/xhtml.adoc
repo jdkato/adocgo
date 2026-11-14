@@ -1,0 +1,48 @@
+= XHTML Output
+Author Name <a@b.c>
+v1, 2020: r
+
+line +
+break
+
+'''
+
+image::a.png[]
+
+NOTE: n
+
+[%interactive]
+* [x] a
+* [ ] b
+
+[%reversed]
+. a
+
+|===
+|a |b
+|===
+
+video::v.mp4[opts="autoplay,loop,muted"]
+
+video::x[youtube]
+
+audio::a.mp3[opts=autoplay]
+
+[horizontal,labelwidth=10]
+a:: b
+c::
+d:: e
+
+[quote,a,b]
+q
+
+----
+x <1>
+----
+<1> c
+
+image:i.png[] icon:x[] footnote:[f]
+
+[%hardbreaks]
+a
+b

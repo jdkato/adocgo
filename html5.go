@@ -35,6 +35,25 @@ type html5Converter struct {
 	resolvingXref bool
 }
 
+// xml reports whether XML (XHTML) syntax is in effect, i.e. the backend is
+// xhtml5 or the htmlsyntax attribute was set to xml.
+func (c *html5Converter) xml() bool { return c.doc.xmlMode }
+
+// sl returns the slash used to close void elements ("/" in XML mode).
+func (c *html5Converter) sl() string {
+	if c.doc.xmlMode {
+		return "/"
+	}
+	return ""
+}
+
+func (c *html5Converter) boolAttr(name string) string {
+	if c.doc.xmlMode {
+		return " " + name + `="` + name + `"`
+	}
+	return " " + name
+}
+
 type quoteTag struct {
 	open, close string
 	tag         bool
@@ -168,7 +187,7 @@ func (c *html5Converter) convertBlock(n *Block) string {
 	case "table":
 		return c.table(n)
 	case "thematic_break":
-		return "<hr>"
+		return "<hr" + c.sl() + ">"
 	case "verse":
 		return c.verse(n)
 	case "video":
@@ -220,7 +239,7 @@ func (d *Document) authors() []author {
 func (c *html5Converter) footnotesDiv(d *Document, maxWidthAttr string) []string {
 	var result []string
 	if len(*d.footnotes) > 0 && !d.hasAttr("nofootnotes") {
-		result = append(result, `<div id="footnotes"`+maxWidthAttr+">\n<hr>")
+		result = append(result, `<div id="footnotes"`+maxWidthAttr+">\n<hr"+c.sl()+">")
 		for _, fn := range *d.footnotes {
 			result = append(result, `<div class="footnote" id="_footnotedef_`+fn.index+"\">\n<a href=\"#_footnoteref_"+fn.index+`">`+fn.index+"</a>. "+fn.text+"\n</div>")
 		}
@@ -230,7 +249,8 @@ func (c *html5Converter) footnotesDiv(d *Document, maxWidthAttr string) []string
 }
 
 func (c *html5Converter) document(node *Document) string {
-	br := "<br>"
+	sl := c.sl()
+	br := "<br" + sl + ">"
 	assetURIScheme := node.attrOr("asset-uri-scheme", "https")
 	if assetURIScheme != "" {
 		assetURIScheme += ":"
@@ -246,15 +266,19 @@ func (c *html5Converter) document(node *Document) string {
 	if !node.hasAttr("nolang") {
 		langAttribute = ` lang="` + node.attrOr("lang", "en") + `"`
 	}
-	result = append(result, "<html"+langAttribute+">")
+	xmlns := ""
+	if c.xml() {
+		xmlns = ` xmlns="http://www.w3.org/1999/xhtml"`
+	}
+	result = append(result, "<html"+xmlns+langAttribute+">")
 	result = append(result, `<head>
-<meta charset="`+node.attrOr("encoding", "UTF-8")+`">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor `+node.Attributes["asciidoctor-version"]+`">`)
+<meta charset="`+node.attrOr("encoding", "UTF-8")+`"`+sl+`>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"`+sl+`>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"`+sl+`>
+<meta name="generator" content="Asciidoctor `+node.Attributes["asciidoctor-version"]+`"`+sl+">")
 	for _, m := range [][2]string{{"app-name", "application-name"}, {"description", "description"}, {"keywords", "keywords"}} {
 		if node.hasAttr(m[0]) {
-			result = append(result, `<meta name="`+m[1]+`" content="`+node.Attributes[m[0]]+`">`)
+			result = append(result, `<meta name="`+m[1]+`" content="`+node.Attributes[m[0]]+`"`+sl+">")
 		}
 	}
 	if node.hasAttr("authors") {
@@ -262,10 +286,10 @@ func (c *html5Converter) document(node *Document) string {
 		if strings.Contains(authors, "<") {
 			authors = xmlSanitizeRx.ReplaceAll(authors, "")
 		}
-		result = append(result, `<meta name="author" content="`+authors+`">`)
+		result = append(result, `<meta name="author" content="`+authors+`"`+sl+">")
 	}
 	if node.hasAttr("copyright") {
-		result = append(result, `<meta name="copyright" content="`+node.Attributes["copyright"]+`">`)
+		result = append(result, `<meta name="copyright" content="`+node.Attributes["copyright"]+`"`+sl+">")
 	}
 	if node.hasAttr("favicon") {
 		iconHref := node.Attributes["favicon"]
@@ -275,7 +299,7 @@ func (c *html5Converter) document(node *Document) string {
 		} else if ext := extname(iconHref); ext != "" && ext != ".ico" {
 			iconType = "image/" + ext[1:]
 		}
-		result = append(result, `<link rel="icon" type="`+iconType+`" href="`+iconHref+`">`)
+		result = append(result, `<link rel="icon" type="`+iconType+`" href="`+iconHref+`"`+sl+">")
 	}
 	title, _ := node.doctitle(true)
 	result = append(result, "<title>"+sanitizeTitle(title)+"</title>")
@@ -284,16 +308,16 @@ func (c *html5Converter) document(node *Document) string {
 			if webfonts == "" {
 				webfonts = "Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"
 			}
-			result = append(result, `<link rel="stylesheet" href="`+assetURIScheme+"//fonts.googleapis.com/css?family="+webfonts+`">`)
+			result = append(result, `<link rel="stylesheet" href="`+assetURIScheme+"//fonts.googleapis.com/css?family="+webfonts+`"`+sl+">")
 		}
 		if linkcss {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath("asciidoctor.css", node.attrOr("stylesdir", ""), false)+`">`)
+			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath("asciidoctor.css", node.attrOr("stylesdir", ""), false)+`"`+sl+">")
 		} else {
 			result = append(result, "<style>\n"+rstrip(defaultStylesheet)+"\n</style>")
 		}
 	} else if ok {
 		if linkcss {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(ss, node.attrOr("stylesdir", ""), true)+`">`)
+			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(ss, node.attrOr("stylesdir", ""), true)+`"`+sl+">")
 		} else {
 			data, _ := os.ReadFile(node.normalizeSystemPath(ss, node.Attributes["stylesdir"]))
 			result = append(result, "<style>\n"+string(data)+"\n</style>")
@@ -301,14 +325,14 @@ func (c *html5Converter) document(node *Document) string {
 	}
 	if node.Attributes["icons"] == "font" {
 		if node.hasAttr("iconfont-remote") {
-			result = append(result, `<link rel="stylesheet" href="`+node.attrOr("iconfont-cdn", cdnBaseURL+"/font-awesome/"+fontAwesomeVersion+"/css/font-awesome.min.css")+`">`)
+			result = append(result, `<link rel="stylesheet" href="`+node.attrOr("iconfont-cdn", cdnBaseURL+"/font-awesome/"+fontAwesomeVersion+"/css/font-awesome.min.css")+`"`+sl+">")
 		} else {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(node.attrOr("iconfont-name", "font-awesome")+".css", node.attrOr("stylesdir", ""), false)+`">`)
+			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(node.attrOr("iconfont-name", "font-awesome")+".css", node.attrOr("stylesdir", ""), false)+`"`+sl+">")
 		}
 	}
 	hljsBase := node.attrOr("highlightjsdir", cdnBaseURL+"/highlight.js/"+highlightJSVersion)
 	if node.highlight {
-		result = append(result, `<link rel="stylesheet" href="`+hljsBase+"/styles/"+node.attrOr("highlightjs-theme", "github")+`.min.css">`)
+		result = append(result, `<link rel="stylesheet" href="`+hljsBase+"/styles/"+node.attrOr("highlightjs-theme", "github")+`.min.css"`+sl+">")
 	}
 	result = append(result, "</head>")
 	sectioned := node.hasSections()
@@ -321,7 +345,7 @@ func (c *html5Converter) document(node *Document) string {
 	}
 	result = append(result, "<body"+idAttr(node.ID)+` class="`+strings.Join(classes, " ")+`">`)
 	tocDiv := func() string {
-		return `<div id="toc" class="` + node.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + node.Attributes["toc-title"] + "</div>\n" + c.outline(&node.Block, 0, 0) + "\n</div>"
+		return `<div id="toc" class="` + node.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + node.Attributes["toc-title"] + "</div>\n" + c.outline(&node.Block, nil, nil) + "\n</div>"
 	}
 	if !node.hasAttr("noheader") {
 		result = append(result, `<div id="header"`+maxWidthAttr+">")
@@ -451,7 +475,7 @@ func (c *html5Converter) embedded(node *Document) string {
 	}
 	if node.hasSections() && node.hasAttr("toc") {
 		if p := node.Attributes["toc-placement"]; p != "macro" && p != "preamble" {
-			result = append(result, "<div id=\"toc\" class=\"toc\">\n<div id=\"toctitle\">"+node.Attributes["toc-title"]+"</div>\n"+c.outline(&node.Block, 0, 0)+"\n</div>")
+			result = append(result, "<div id=\"toc\" class=\"toc\">\n<div id=\"toctitle\">"+node.Attributes["toc-title"]+"</div>\n"+c.outline(&node.Block, nil, nil)+"\n</div>")
 		}
 	}
 	result = append(result, node.content())
@@ -504,15 +528,22 @@ func intAttr(attrs map[string]string, name string, def int) int {
 	return def
 }
 
-func (c *html5Converter) outline(node *Block, toclevels, sectnumlevels int) string {
+// outline renders the table of contents. A nil toclevels or sectnumlevels
+// means "use the document attribute".
+func (c *html5Converter) outline(node *Block, toclevelsOpt, sectnumlevelsOpt *int) string {
 	if !node.hasSections() {
 		return ""
 	}
 	docAttrs := node.Document.Attributes
-	if sectnumlevels == 0 {
+	var sectnumlevels, toclevels int
+	if sectnumlevelsOpt != nil {
+		sectnumlevels = *sectnumlevelsOpt
+	} else {
 		sectnumlevels = intAttr(docAttrs, "sectnumlevels", 3)
 	}
-	if toclevels == 0 {
+	if toclevelsOpt != nil {
+		toclevels = *toclevelsOpt
+	} else {
 		toclevels = intAttr(docAttrs, "toclevels", 2)
 	}
 	sections := node.sections()
@@ -527,7 +558,7 @@ func (c *html5Converter) outline(node *Block, toclevels, sectnumlevels int) stri
 		}
 		child := ""
 		if section.Level < toclevels {
-			child = c.outline(section, toclevels, sectnumlevels)
+			child = c.outline(section, &toclevels, &sectnumlevels)
 		}
 		if child != "" {
 			result = append(result, `<li><a href="#`+section.ID+`">`+stitle+"</a>", child, "</li>")
@@ -657,7 +688,7 @@ func (c *html5Converter) admonition(node *Block) string {
 		if _, hasIcon := node.Attributes["icon"]; node.Document.Attributes["icons"] == "font" && !hasIcon {
 			label = `<i class="fa icon-` + name + `" title="` + node.Attributes["textlabel"] + `"></i>`
 		} else {
-			label = `<img src="` + node.iconURI(name) + `" alt="` + node.Attributes["textlabel"] + `">`
+			label = `<img src="` + node.iconURI(name) + `" alt="` + node.Attributes["textlabel"] + `"` + c.sl() + ">"
 		}
 	} else {
 		label = `<div class="title">` + node.Attributes["textlabel"] + "</div>"
@@ -696,13 +727,13 @@ func (c *html5Converter) audio(node *Block) string {
 	title := titleDiv(node)
 	opts := ""
 	if node.hasOption("autoplay") {
-		opts += " autoplay"
+		opts += c.boolAttr("autoplay")
 	}
 	if !node.hasOption("nocontrols") {
-		opts += " controls"
+		opts += c.boolAttr("controls")
 	}
 	if node.hasOption("loop") {
-		opts += " loop"
+		opts += c.boolAttr("loop")
 	}
 	return "<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "audioblock") + "\">\n" + title + "<div class=\"content\">\n<audio src=\"" + node.mediaURI(node.Attributes["target"]) + timeAnchor(node) + `"` + opts + ">\nYour browser does not support the audio tag.\n</audio>\n</div>\n</div>"
 }
@@ -744,7 +775,7 @@ func (c *html5Converter) colist(node *Block) string {
 			if fontIcons {
 				numLabel = `<i class="conum" data-value="` + num + `"></i><b>` + num + "</b>"
 			} else {
-				numLabel = `<img src="` + node.iconURI("callouts/"+num) + `" alt="` + num + `">`
+				numLabel = `<img src="` + node.iconURI("callouts/"+num) + `" alt="` + num + `"` + c.sl() + ">"
 			}
 			extra := ""
 			text := item.itemText()
@@ -820,12 +851,12 @@ func (c *html5Converter) dlist(node *Block) string {
 			if hasLW {
 				st = ` style="width: ` + strings.TrimSuffix(lw, "%") + `%;"`
 			}
-			result = append(result, "<col"+st+">")
+			result = append(result, "<col"+st+c.sl()+">")
 			st = ""
 			if hasIW {
 				st = ` style="width: ` + strings.TrimSuffix(iw, "%") + `%;"`
 			}
-			result = append(result, "<col"+st+">", "</colgroup>")
+			result = append(result, "<col"+st+c.sl()+">", "</colgroup>")
 		}
 		for _, e := range node.DlistItems {
 			result = append(result, "<tr>")
@@ -836,7 +867,7 @@ func (c *html5Converter) dlist(node *Block) string {
 			result = append(result, `<td class="hdlist1`+strong+`">`)
 			for i, dt := range e.Terms {
 				if i > 0 {
-					result = append(result, "<br>")
+					result = append(result, "<br"+c.sl()+">")
 				}
 				result = append(result, dt.itemText())
 			}
@@ -976,7 +1007,7 @@ func (c *html5Converter) image(node *Block) string {
 	}
 	var img string
 	plain := func() string {
-		return `<img src="` + node.imageURI(target, "imagesdir") + `" alt="` + encodeAttributeValue(node.alt()) + `"` + dims + ">"
+		return `<img src="` + node.imageURI(target, "imagesdir") + `" alt="` + encodeAttributeValue(node.alt()) + `"` + dims + c.sl() + ">"
 	}
 	if (node.Attributes["format"] == "svg" || strings.Contains(target, ".svg")) && node.Document.Safe < SafeSecure {
 		if node.hasOption("inline") {
@@ -988,7 +1019,7 @@ func (c *html5Converter) image(node *Block) string {
 		} else if node.hasOption("interactive") {
 			fallback := `<span class="alt">` + node.alt() + "</span>"
 			if fb, ok := node.Attributes["fallback"]; ok {
-				fallback = `<img src="` + node.imageURI(fb, "imagesdir") + `" alt="` + encodeAttributeValue(node.alt()) + `"` + dims + ">"
+				fallback = `<img src="` + node.imageURI(fb, "imagesdir") + `" alt="` + encodeAttributeValue(node.alt()) + `"` + dims + c.sl() + ">"
 			}
 			img = `<object type="image/svg+xml" data="` + node.imageURI(target, "imagesdir") + `"` + dims + ">" + fallback + "</object>"
 		} else {
@@ -1100,7 +1131,7 @@ func (c *html5Converter) stem(node *Block) string {
 	equation := node.content()
 	if node.Style == "asciimath" && strings.Contains(equation, "\n") {
 		equation = stemBreakRx.ReplaceAllFunc(equation, func(m *rx.Match) string {
-			return close + strings.Repeat("\n<br>", strings.Count(m.Group(0), "\n")-1) + "\n" + open
+			return close + strings.Repeat("\n<br"+c.sl()+">", strings.Count(m.Group(0), "\n")-1) + "\n" + open
 		})
 	}
 	if !(strings.HasPrefix(equation, open) && strings.HasSuffix(equation, close)) {
@@ -1144,7 +1175,7 @@ func (c *html5Converter) olist(node *Block) string {
 	}
 	rev := ""
 	if node.hasOption("reversed") {
-		rev = " reversed"
+		rev = c.boolAttr("reversed")
 	}
 	result = append(result, `<ol class="`+node.Style+`"`+typ+start+rev+">")
 	for _, item := range node.Blocks {
@@ -1195,12 +1226,12 @@ func (c *html5Converter) preamble(node *Block) string {
 	doc := node.Document
 	toc := ""
 	if doc.Attributes["toc-placement"] == "preamble" && doc.hasSections() && doc.hasAttr("toc") {
-		toc = "\n<div id=\"toc\" class=\"" + doc.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + doc.Attributes["toc-title"] + "</div>\n" + c.outline(&doc.Block, 0, 0) + "\n</div>"
+		toc = "\n<div id=\"toc\" class=\"" + doc.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + doc.Attributes["toc-title"] + "</div>\n" + c.outline(&doc.Block, nil, nil) + "\n</div>"
 	}
 	return "<div id=\"preamble\">\n<div class=\"sectionbody\">\n" + node.content() + "\n</div>" + toc + "\n</div>"
 }
 
-func attributionElement(node *Block) string {
+func attributionElement(node *Block, sl string) string {
 	attribution, hasAttr := node.Attributes["attribution"]
 	citetitle, hasCite := node.Attributes["citetitle"]
 	if !hasAttr && !hasCite {
@@ -1214,7 +1245,7 @@ func attributionElement(node *Block) string {
 	if hasAttr {
 		text = "&#8212; " + attribution
 		if hasCite {
-			text += "<br>\n"
+			text += "<br" + sl + ">\n"
 		}
 	}
 	return "\n<div class=\"attribution\">\n" + text + cite + "\n</div>"
@@ -1225,7 +1256,7 @@ func (c *html5Converter) quote(node *Block) string {
 	if node.hasTitle {
 		title = "\n<div class=\"title\">" + node.Title() + "</div>"
 	}
-	attr := attributionElement(node)
+	attr := attributionElement(node, c.sl())
 	return "<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "quoteblock") + `">` + title + "\n<blockquote>\n" + node.content() + "\n</blockquote>" + attr + "\n</div>"
 }
 
@@ -1234,7 +1265,7 @@ func (c *html5Converter) verse(node *Block) string {
 	if node.hasTitle {
 		title = "\n<div class=\"title\">" + node.Title() + "</div>"
 	}
-	attr := attributionElement(node)
+	attr := attributionElement(node, c.sl())
 	return "<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "verseblock") + `">` + title + "\n<pre class=\"content\">" + node.content() + "</pre>" + attr + "\n</div>"
 }
 
@@ -1285,9 +1316,9 @@ func (c *html5Converter) table(node *Block) string {
 		result = append(result, "<colgroup>")
 		for _, col := range t.Columns {
 			if autowidth || col.Autowidth {
-				result = append(result, "<col>")
+				result = append(result, "<col"+c.sl()+">")
 			} else {
-				result = append(result, `<col style="width: `+col.Pcwidth.String()+`%;">`)
+				result = append(result, `<col style="width: `+col.Pcwidth.String()+`%;"`+c.sl()+">")
 			}
 		}
 		result = append(result, "</colgroup>")
@@ -1366,15 +1397,16 @@ func (c *html5Converter) toc(node *Block) string {
 	if node.hasTitle {
 		title = node.Title()
 	}
-	levels := 0
+	var levels *int
 	if l, ok := node.Attributes["levels"]; ok {
-		levels = atoi(l)
+		n := atoi(l)
+		levels = &n
 	}
 	role, ok := node.Attributes["role"]
 	if !ok {
 		role = doc.attrOr("toc-class", "toc")
 	}
-	return "<div" + ida + ` class="` + role + "\">\n<div" + titleID + ` class="title">` + title + "</div>\n" + c.outline(&doc.Block, levels, 0) + "\n</div>"
+	return "<div" + ida + ` class="` + role + "\">\n<div" + titleID + ` class="title">` + title + "</div>\n" + c.outline(&doc.Block, levels, nil) + "\n</div>"
 }
 
 func (c *html5Converter) ulist(node *Block) string {
@@ -1387,8 +1419,8 @@ func (c *html5Converter) ulist(node *Block) string {
 		divClasses = append(divClasses, "checklist")
 		ulClass = ` class="checklist"`
 		if node.hasOption("interactive") {
-			markerChecked = `<input type="checkbox" data-item-complete="1" checked> `
-			markerUnchecked = `<input type="checkbox" data-item-complete="0"> `
+			markerChecked = `<input type="checkbox" data-item-complete="1"` + c.boolAttr("checked") + c.sl() + "> "
+			markerUnchecked = `<input type="checkbox" data-item-complete="0"` + c.sl() + "> "
 		} else if node.Document.Attributes["icons"] == "font" {
 			markerChecked = `<i class="fa fa-check-square-o"></i> `
 			markerUnchecked = `<i class="fa fa-square-o"></i> `
@@ -1486,7 +1518,7 @@ func (c *html5Converter) video(node *Block) string {
 		if opt("muted") {
 			params += next() + "muted=1"
 		}
-		fs := " allowfullscreen"
+		fs := c.boolAttr("allowfullscreen")
 		if opt("nofullscreen") {
 			fs = ""
 		}
@@ -1516,7 +1548,7 @@ func (c *html5Converter) video(node *Block) string {
 		if opt("nocontrols") {
 			params += "&amp;controls=0"
 		}
-		fsParam, fsAttr := "", " allowfullscreen"
+		fsParam, fsAttr := "", c.boolAttr("allowfullscreen")
 		if opt("nofullscreen") {
 			fsParam, fsAttr = "&amp;fs=0", ""
 		}
@@ -1564,16 +1596,16 @@ func (c *html5Converter) video(node *Block) string {
 	}
 	opts := ""
 	if opt("autoplay") {
-		opts += " autoplay"
+		opts += c.boolAttr("autoplay")
 	}
 	if opt("muted") {
-		opts += " muted"
+		opts += c.boolAttr("muted")
 	}
 	if !opt("nocontrols") {
-		opts += " controls"
+		opts += c.boolAttr("controls")
 	}
 	if opt("loop") {
-		opts += " loop"
+		opts += c.boolAttr("loop")
 	}
 	return head + "\n<div class=\"content\">\n<video src=\"" + node.mediaURI(target) + timeAnchor(node) + `"` + dims + poster + opts + preload + ">\nYour browser does not support the video tag.\n</video>\n</div>\n</div>"
 }
@@ -1588,7 +1620,7 @@ func (c *html5Converter) convertInline(n *Inline) string {
 	case "anchor":
 		return c.inlineAnchor(n)
 	case "break":
-		return n.Text + "<br>"
+		return n.Text + "<br" + c.sl() + ">"
 	case "button":
 		return `<b class="button">` + n.Text + "</b>"
 	case "callout":
@@ -1701,7 +1733,7 @@ func (c *html5Converter) inlineCallout(node *Inline) string {
 		if icons == "font" {
 			return `<i class="conum" data-value="` + node.Text + `"></i><b>(` + node.Text + ")</b>"
 		}
-		return `<img src="` + node.Parent.iconURI("callouts/"+node.Text) + `" alt="` + node.Text + `">`
+		return `<img src="` + node.Parent.iconURI("callouts/"+node.Text) + `" alt="` + node.Text + `"` + c.sl() + ">"
 	}
 	if len(node.Guard) == 2 {
 		return `&lt;!--<b class="conum">(` + node.Text + ")</b>--&gt;"
@@ -1771,14 +1803,14 @@ func (c *html5Converter) inlineImage(node *Inline) string {
 			img = `<i class="` + cls + `"` + attrs + "></i>"
 		} else if hasIcons {
 			tmp := &Block{Document: doc, Attributes: node.Attrs, Parent: p}
-			img = `<img src="` + tmp.iconURI(target) + `" alt="` + encodeAttributeValue(alt) + `"` + stdAttrs() + ">"
+			img = `<img src="` + tmp.iconURI(target) + `" alt="` + encodeAttributeValue(alt) + `"` + stdAttrs() + c.sl() + ">"
 		} else {
 			img = "[" + alt + "&#93;"
 		}
 	} else {
 		attrs := stdAttrs()
 		plain := func() string {
-			return `<img src="` + p.imageURI(target, "imagesdir") + `" alt="` + encodeAttributeValue(alt) + `"` + attrs + ">"
+			return `<img src="` + p.imageURI(target, "imagesdir") + `" alt="` + encodeAttributeValue(alt) + `"` + attrs + c.sl() + ">"
 		}
 		_, inlineOpt := node.Attrs["inline-option"]
 		_, interactiveOpt := node.Attrs["interactive-option"]
@@ -1792,7 +1824,7 @@ func (c *html5Converter) inlineImage(node *Inline) string {
 			} else if interactiveOpt {
 				fallback := `<span class="alt">` + alt + "</span>"
 				if fb, ok := node.Attrs["fallback"]; ok {
-					fallback = `<img src="` + p.imageURI(fb, "imagesdir") + `" alt="` + encodeAttributeValue(alt) + `"` + attrs + ">"
+					fallback = `<img src="` + p.imageURI(fb, "imagesdir") + `" alt="` + encodeAttributeValue(alt) + `"` + attrs + c.sl() + ">"
 				}
 				img = `<object type="image/svg+xml" data="` + p.imageURI(target, "imagesdir") + `"` + attrs + ">" + fallback + "</object>"
 			} else {
