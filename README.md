@@ -170,6 +170,17 @@ stylesheets, docinfo files, and XML syntax (`-b xhtml5`).
   path, or deep recursion), adocgo's behaviour is unspecified beyond "no
   panic, no hang".
 
+## Performance
+
+`go test -bench Convert -benchmem` converts three corpus documents. On a
+generated 150 KB document (headings, paragraphs with inline markup, lists,
+code blocks, block quotes) written equivalently in AsciiDoc and Markdown,
+adocgo runs at roughly 7 MB/s against roughly 19 MB/s for
+[goldmark](https://github.com/yuin/goldmark) on the same machine, and
+allocates about 1.4x as much. Most of the time is spent in the
+backtracking regex engine (`internal/rx`) that runs Asciidoctor's patterns
+unchanged.
+
 ## Testing
 
 ```console

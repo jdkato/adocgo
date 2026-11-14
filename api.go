@@ -107,10 +107,12 @@ func (d *Document) Convert() (out []byte, err error) {
 		d.Attributes["outdir"] = fileDirname(d.outFile)
 	}
 	s := d.convertDocument()
+	out = make([]byte, 0, len(s)+1)
+	out = append(out, s...)
 	if s != "" && !strings.HasSuffix(s, "\n") {
-		s += "\n"
+		out = append(out, '\n')
 	}
-	return []byte(s), nil
+	return out, nil
 }
 
 // DocTitle returns the document title with substitutions applied, if any.
