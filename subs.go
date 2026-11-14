@@ -279,7 +279,14 @@ func subReplacements(text string) string {
 
 func (b *Block) inline(n *Inline) string {
 	n.Parent = b
-	return b.Document.conv.convertInline(n)
+	// Calling the HTML converter directly (rather than through the
+	// converter interface) lets the compiler keep the inline node on the
+	// caller's stack; other converters get a copy.
+	if c := b.Document.html; c != nil {
+		return c.convertInline(n)
+	}
+	cp := *n
+	return b.Document.conv.convertInline(&cp)
 }
 
 func (b *Block) subMacros(text string) string {

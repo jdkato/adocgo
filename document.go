@@ -103,6 +103,7 @@ type Document struct {
 	nesting    *int
 	reader     *Reader
 	conv       converter
+	html       *html5Converter // set when conv is the HTML converter
 }
 
 // Options configures a conversion.
@@ -452,7 +453,7 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 		// mirror update_doctype_attributes DEFAULT_DOCTYPE
 		doc.updateDoctypeAttributes("article")
 	}
-	doc.conv = newConverter(doc)
+	doc.setConverter()
 	doc.reader = newReader(lines)
 	parseDocument(doc.reader, doc, false)
 	doc.restoreAttributes()
@@ -590,7 +591,7 @@ func (d *Document) updateBackendAttributes(newBackend string, init bool) {
 	} else {
 		delete(attrs, "pagewidth")
 	}
-	defer func() { d.conv = newConverter(d) }()
+	defer d.setConverter()
 	if !hasBase || base != currentBase {
 		if currentDoctype != "" {
 			if hasBase {
@@ -1211,13 +1212,15 @@ type converter interface {
 	embedded(w *bytes.Buffer, d *Document)
 }
 
-// newConverter returns the converter for the document's backend. Backends
-// other than DocBook are rendered as HTML5.
-func newConverter(d *Document) converter {
+// setConverter installs the converter for the document's backend.
+// Backends other than DocBook are rendered as HTML5.
+func (d *Document) setConverter() {
 	if d.Attributes["basebackend"] == "docbook" {
-		return &docbook5Converter{}
+		d.conv, d.html = &docbook5Converter{}, nil
+		return
 	}
-	return &html5Converter{doc: d}
+	d.html = &html5Converter{doc: d}
+	d.conv = d.html
 }
 
 // OutFileSuffix returns the file extension for the output (".html", or
