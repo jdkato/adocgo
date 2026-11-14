@@ -87,6 +87,13 @@ type Regexp struct {
 	nslots int
 	first  *[256]bool
 	bot    bool // pattern can only match at start of text
+	// memoOK reports whether failed (split, position) states of the main
+	// program may be memoized: true when the pattern has no backreferences
+	// and no empty-loop guards, so the outcome of a state depends only on
+	// the program counter and the input position.
+	memoOK  bool
+	splitID []int // dense index of each split instruction in progs[0], or -1
+	nsplits int
 	bol    bool // pattern can only match at start of a line
 }
 
@@ -173,6 +180,24 @@ func Compile(pattern string, flags ...string) (re *Regexp, err error) {
 	prog = append(prog, inst{op: opMatch})
 	re.progs[0] = prog
 	re.nslots = c.nslots
+	re.memoOK = true
+	for _, pr := range re.progs {
+		for _, in := range pr {
+			if in.op == opBackref || in.op == opChkMark {
+				re.memoOK = false
+			}
+		}
+	}
+	if re.memoOK {
+		re.splitID = make([]int, len(prog))
+		for i, in := range prog {
+			re.splitID[i] = -1
+			if in.op == opSplit {
+				re.splitID[i] = re.nsplits
+				re.nsplits++
+			}
+		}
+	}
 	var set [256]bool
 	if !firstSet(n, &set) {
 		re.first = &set
@@ -869,6 +894,12 @@ type machine struct {
 	s     string
 	slots []int
 	stack []frame
+	// memoization of failed states (see Regexp.memoOK); enabled lazily
+	// once a scan has backtracked a lot, which keeps the common case cheap
+	// while bounding pathological inputs to O(len(prog) * len(s)).
+	backtracks int
+	memoOn     bool
+	memo       []uint64
 }
 
 func wordAt(s string, i int) bool {
@@ -957,6 +988,14 @@ func (m *machine) run(pi int, pos int) int {
 				ok = false
 			}
 		case opSplit:
+			if m.memoOn && pi == 0 {
+				bit := m.re.splitID[pc]*(len(s)+1) + pos
+				if m.memo[bit>>6]&(1<<(uint(bit)&63)) != 0 {
+					ok = false
+					break
+				}
+				m.memo[bit>>6] |= 1 << (uint(bit) & 63)
+			}
 			m.stack = append(m.stack, frame{pc: in.y, pos: pos})
 			pc = in.x
 		case opJmp:
@@ -1068,6 +1107,13 @@ func (m *machine) run(pi int, pos int) int {
 				continue
 			}
 			pc, pos = f.pc, f.pos
+			if pi == 0 && !m.memoOn && m.re.memoOK {
+				m.backtracks++
+				if m.backtracks > 4*len(s)+256 {
+					m.memoOn = true
+					m.memo = make([]uint64, (m.re.nsplits*(len(s)+1))/64+1)
+				}
+			}
 			break
 		}
 	}
@@ -1144,6 +1190,9 @@ func (re *Regexp) matchFrom(m *machine, start int) *Match {
 		if end := m.run(0, i); end >= 0 {
 			caps := make([]int, 2*(re.ncap+1))
 			copy(caps, m.slots)
+			// states on the successful path were recorded as visited, so
+			// the memo must not be reused for the next scan
+			m.memoOn, m.memo, m.backtracks = false, nil, 0
 			return &Match{s: s, caps: caps}
 		}
 	}
