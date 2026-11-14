@@ -422,21 +422,30 @@ func (d *Document) hasAttr(name string) bool {
 type author struct {
 	name, email string
 	hasEmail    bool
+	// name parts and initials, each with a flag telling whether it is set
+	firstname, middlename, lastname, initials             string
+	hasFirstname, hasMiddlename, hasLastname, hasInitials bool
 }
 
 func (d *Document) authors() []author {
 	attrs := d.Attributes
-	name, ok := attrs["author"]
-	if !ok {
+	if _, ok := attrs["author"]; !ok {
 		return nil
 	}
-	email, hasEmail := attrs["email"]
-	out := []author{{name, email, hasEmail}}
+	get := func(sfx string) author {
+		var a author
+		a.name = attrs["author"+sfx]
+		a.email, a.hasEmail = attrs["email"+sfx]
+		a.firstname, a.hasFirstname = attrs["firstname"+sfx]
+		a.middlename, a.hasMiddlename = attrs["middlename"+sfx]
+		a.lastname, a.hasLastname = attrs["lastname"+sfx]
+		a.initials, a.hasInitials = attrs["authorinitials"+sfx]
+		return a
+	}
+	out := []author{get("")}
 	n := atoi(attrs["authorcount"])
 	for idx := 2; idx <= n; idx++ {
-		s := strconv.Itoa(idx)
-		e, he := attrs["email_"+s]
-		out = append(out, author{attrs["author_"+s], e, he})
+		out = append(out, get("_"+strconv.Itoa(idx)))
 	}
 	return out
 }

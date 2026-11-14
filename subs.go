@@ -428,19 +428,45 @@ func (b *Block) subMacros(text string) string {
 				if strings.HasPrefix(all, `\`) {
 					return all[1:]
 				}
-				return b.inline(&Inline{Context: "indexterm"})
+				n := &Inline{Context: "indexterm"}
+				attrlist := normalizeText(m.Group(2), true, true)
+				if strings.Contains(attrlist, "=") {
+					attrs := parseAttrList(attrlist, b, nil)
+					if primary, ok := attrs["$1"]; ok {
+						n.Terms = []string{primary}
+						if secondary, ok := attrs["$2"]; ok {
+							n.Terms = append(n.Terms, secondary)
+							if tertiary, ok := attrs["$3"]; ok {
+								n.Terms = append(n.Terms, tertiary)
+							}
+						}
+						n.setSee(attrs)
+					} else {
+						// Asciidoctor stores the raw string as the terms in
+						// this case, which converters then index by character
+						for _, r := range attrlist {
+							n.Terms = append(n.Terms, string(r))
+						}
+					}
+				} else {
+					n.Terms = splitSimpleCSV(attrlist)
+				}
+				return b.inline(n)
 			case "indexterm2":
 				if strings.HasPrefix(all, `\`) {
 					return all[1:]
 				}
+				n := &Inline{Context: "indexterm", hasText: true, Type: "visible"}
 				term := normalizeText(m.Group(2), true, true)
 				if strings.Contains(term, "=") {
 					attrs := parseAttrList(term, b, nil)
 					if t, ok := attrs["$1"]; ok {
 						term = t
+						n.setSee(attrs)
 					}
 				}
-				return b.inline(&Inline{Context: "indexterm", Text: term, hasText: true, Type: "visible"})
+				n.Text = term
+				return b.inline(n)
 			}
 			enclText := m.Group(3)
 			visible := true
@@ -465,19 +491,28 @@ func (b *Block) subMacros(text string) string {
 				}
 			}
 			var subbed string
-			if visible {
-				term := normalizeText(enclText, true, false)
-				if strings.Contains(term, ";&") {
-					if i := strings.Index(term, " &gt;&gt; "); i >= 0 {
-						term = term[:i]
-					} else if i := strings.Index(term, " &amp;&gt; "); i >= 0 {
-						term = term[:i]
+			n := &Inline{Context: "indexterm"}
+			term := normalizeText(enclText, true, false)
+			if strings.Contains(term, ";&") {
+				if i := strings.Index(term, " &gt;&gt; "); i >= 0 {
+					n.See, n.hasSee = term[i+10:], true
+					term = term[:i]
+				} else if strings.Contains(term, " &amp;&gt; ") {
+					parts := rubySplit(term, " &amp;&gt; ")
+					term = ""
+					if len(parts) > 0 {
+						term = parts[0]
+						n.SeeAlso = parts[1:]
 					}
+					n.hasSeeAlso = true
 				}
-				subbed = b.inline(&Inline{Context: "indexterm", Text: term, hasText: true, Type: "visible"})
-			} else {
-				subbed = b.inline(&Inline{Context: "indexterm"})
 			}
+			if visible {
+				n.Text, n.hasText, n.Type = term, true, "visible"
+			} else {
+				n.Terms = splitSimpleCSV(term)
+			}
+			subbed = b.inline(n)
 			if hasBefore {
 				return before + subbed + after
 			}
@@ -1153,9 +1188,11 @@ func (b *Block) extractPassthroughs(text string) string {
 			if typ == "latexmath" && strings.HasPrefix(content, "$") && strings.HasSuffix(content, "$") && len(content) >= 2 {
 				content = content[1 : len(content)-1]
 			}
-			subs := basicSubs
+			var subs []string
 			if m.Has(2) {
 				subs = resolveSubs(m.Group(2), "inline", nil)
+			} else if b.Document.Attributes["basebackend"] == "html" {
+				subs = basicSubs
 			}
 			key := len(b.passthroughs)
 			b.passthroughs = append(b.passthroughs, passthru{text: content, subs: subs, typ: typ})

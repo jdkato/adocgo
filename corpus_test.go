@@ -14,7 +14,7 @@ import (
 // fixtureOptions derives the conversion options for a fixture: fixtures
 // under a "standalone" directory are converted as full documents, and an
 // optional sidecar NAME.flags file holds asciidoctor-style command line
-// flags (-a, -d, -S, -s).
+// flags (-a, -b, -d, -S, -s).
 func fixtureOptions(t testing.TB, path string) Options {
 	opts := Options{Safe: SafeUnsafe, Attributes: map[string]string{}}
 	for _, seg := range strings.Split(filepath.ToSlash(path), "/") {
@@ -42,6 +42,8 @@ func fixtureOptions(t testing.TB, path string) Options {
 			opts.Attributes[name] = val
 		case "-d":
 			opts.Doctype = next()
+		case "-b":
+			opts.Backend = next()
 		case "-S":
 			opts.Safe, _ = ParseSafeMode(next())
 		case "-s", "-e":
@@ -88,6 +90,16 @@ func splitFlags(s string) []string {
 		out = append(out, cur.String())
 	}
 	return out
+}
+
+// expectedPath returns the file holding the reference output of a fixture:
+// NAME.xml for fixtures converted with a DocBook backend, else NAME.html.
+func expectedPath(path string, opts Options) string {
+	ext := ".html"
+	if strings.HasPrefix(opts.Backend, "docbook") {
+		ext = ".xml"
+	}
+	return strings.TrimSuffix(path, ".adoc") + ext
 }
 
 func corpusFiles(t testing.TB) []string {
@@ -151,13 +163,14 @@ func TestCorpus(t *testing.T) {
 	known := knownFailures(t)
 	var pass, fail, knownFail, missing int
 	for _, path := range corpusFiles(t) {
-		want, err := os.ReadFile(strings.TrimSuffix(path, ".adoc") + ".html")
+		opts := fixtureOptions(t, path)
+		want, err := os.ReadFile(expectedPath(path, opts))
 		if err != nil {
 			missing++
 			t.Errorf("%s: missing expected output (run scripts/regen.sh)", path)
 			continue
 		}
-		got, err := ConvertFile(path, fixtureOptions(t, path))
+		got, err := ConvertFile(path, opts)
 		ok := err == nil && bytes.Equal(got, want)
 		switch {
 		case ok && known[path]:

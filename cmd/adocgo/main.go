@@ -17,7 +17,7 @@ const usage = `Usage: adocgo [OPTION]... FILE...
 Convert the AsciiDoc source FILE or FILE(s) to HTML5 (use - for stdin).
 
   -a, --attribute name[=value]  set a document attribute (name!, name@ supported)
-  -b, --backend BACKEND         output format: html5 (default) or xhtml5
+  -b, --backend BACKEND         output format: html5 (default), xhtml5 or docbook5
   -B, --base-dir DIR            base directory containing the document and resources
   -d, --doctype DOCTYPE         document type: article, book, manpage, inline
   -e, --embedded                output an embedded document (no header/footer)
@@ -132,10 +132,10 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 				return fail("%v", err)
 			}
 			switch v {
-			case "html5", "html", "xhtml5", "xhtml":
+			case "html5", "html", "xhtml5", "xhtml", "docbook5", "docbook":
 				opts.Attributes["backend"] = v
 			default:
-				return fail("unsupported backend: %s (only html5 and xhtml5 are available)", v)
+				return fail("unsupported backend: %s (html5, xhtml5 and docbook5 are available)", v)
 			}
 			continue
 		}
@@ -168,14 +168,20 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 				out, err = adocgo.Convert(src, o)
 			}
 		} else {
-			if dest == "" {
-				ext := filepath.Ext(file)
-				dest = strings.TrimSuffix(file, ext) + ".html"
-			}
-			if dest != "-" {
+			if dest != "" && dest != "-" {
 				o.OutFile = dest
 			}
-			out, err = adocgo.ConvertFile(file, o)
+			var doc *adocgo.Document
+			doc, err = adocgo.LoadFile(file, o)
+			if err == nil {
+				if dest == "" {
+					// like asciidoctor, write next to the input using the
+					// backend's file extension (.html or .xml)
+					dest = strings.TrimSuffix(file, filepath.Ext(file)) + doc.OutFileSuffix()
+					doc.SetOutFile(dest)
+				}
+				out, err = doc.Convert()
+			}
 		}
 		if err != nil {
 			fmt.Fprintf(stderr, "adocgo: %v\n", err)

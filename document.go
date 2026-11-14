@@ -1,6 +1,7 @@
 package adocgo
 
 import (
+	"bytes"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -71,7 +72,7 @@ type Document struct {
 	Safe SafeMode
 	// Doctype is the document type (article, book, manpage, inline).
 	Doctype string
-	// Backend is the output backend (always html5).
+	// Backend is the output backend (html5, xhtml5 or docbook5).
 	Backend string
 
 	header             *Block
@@ -101,7 +102,7 @@ type Document struct {
 	srcLen     int
 	nesting    *int
 	reader     *Reader
-	conv       *html5Converter
+	conv       converter
 }
 
 // Options configures a conversion.
@@ -123,6 +124,9 @@ type Options struct {
 	BaseDir string
 	// Doctype overrides the document type (article, book, manpage, inline).
 	Doctype string
+	// Backend selects the output format: html5 (the default), xhtml5 or
+	// docbook5 (alias docbook), like asciidoctor -b.
+	Backend string
 	// InputFile is the path of the source document, if any. It is used to
 	// populate the docfile, docdir and docname attributes.
 	InputFile string
@@ -289,6 +293,9 @@ func newDocument(opts Options) *Document {
 	if opts.Doctype != "" {
 		setOv("doctype", opts.Doctype)
 	}
+	if opts.Backend != "" {
+		setOv("backend", opts.Backend)
+	}
 	if doc.Safe >= SafeServer {
 		orNil("copycss")
 		orNil("source-highlighter")
@@ -363,7 +370,6 @@ func newDocument(opts Options) *Document {
 		attrs["iconsdir"] = imagesdir + "/icons"
 	}
 	doc.fillDatetimeAttributes(opts.ModTime)
-	doc.conv = &html5Converter{doc: doc}
 	return doc
 }
 
@@ -421,7 +427,6 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 		doc.Attributes["compat-mode"] = ""
 	}
 	doc.outfilesuffix = parent.outfilesuffix
-	doc.conv = &html5Converter{doc: doc}
 	attrs := doc.Attributes
 	ov["embedded"] = override{val: "", state: 's'}
 	attrs["notitle"] = ""
@@ -447,6 +452,7 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 		// mirror update_doctype_attributes DEFAULT_DOCTYPE
 		doc.updateDoctypeAttributes("article")
 	}
+	doc.conv = newConverter(doc)
 	doc.reader = newReader(lines)
 	parseDocument(doc.reader, doc, false)
 	doc.restoreAttributes()
@@ -584,6 +590,7 @@ func (d *Document) updateBackendAttributes(newBackend string, init bool) {
 	} else {
 		delete(attrs, "pagewidth")
 	}
+	defer func() { d.conv = newConverter(d) }()
 	if !hasBase || base != currentBase {
 		if currentDoctype != "" {
 			if hasBase {
@@ -824,7 +831,16 @@ func (d *Document) saveAttributes() {
 		}
 	}
 	if d.parentDocument == nil {
-		if hl, ok := attrs["source-highlighter"]; ok {
+		if attrs["basebackend"] == "docbook" {
+			// DocBook output always carries the TOC and section numbering
+			// processing instructions unless the document turned them off
+			if !d.attributeLocked("toc") && !d.attributesModified["toc"] {
+				attrs["toc"] = ""
+			}
+			if !d.attributeLocked("sectnums") && !d.attributesModified["sectnums"] {
+				attrs["sectnums"] = ""
+			}
+		} else if hl, ok := attrs["source-highlighter"]; ok {
 			d.highlight = hl == "highlight.js" || hl == "highlightjs"
 			// The server-side highlighters are not available; mimic the
 			// markup Asciidoctor emits when the highlighter library cannot
@@ -1181,4 +1197,37 @@ func (d *Document) docinfo(location string) string {
 		read(docname + "-" + file)
 	}
 	return strings.Join(content, "\n")
+}
+
+// converter turns the document tree into output for one backend.
+type converter interface {
+	// writeBlock writes the converted form of a block node to w.
+	writeBlock(w *bytes.Buffer, n *Block)
+	// convertInline converts an inline node.
+	convertInline(n *Inline) string
+	// document writes the standalone form of the document.
+	document(w *bytes.Buffer, d *Document)
+	// embedded writes the embeddable form of the document.
+	embedded(w *bytes.Buffer, d *Document)
+}
+
+// newConverter returns the converter for the document's backend. Backends
+// other than DocBook are rendered as HTML5.
+func newConverter(d *Document) converter {
+	if d.Attributes["basebackend"] == "docbook" {
+		return &docbook5Converter{}
+	}
+	return &html5Converter{doc: d}
+}
+
+// OutFileSuffix returns the file extension for the output (".html", or
+// ".xml" for DocBook), honouring the outfilesuffix attribute.
+func (d *Document) OutFileSuffix() string { return d.outfilesuffix }
+
+// SetOutFile records the path the output will be written to, which is
+// exposed to the document through the outfile and outdir attributes.
+func (d *Document) SetOutFile(name string) {
+	if p, err := filepath.Abs(name); err == nil {
+		d.outFile = filepath.ToSlash(p)
+	}
 }

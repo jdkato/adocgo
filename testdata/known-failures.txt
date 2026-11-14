@@ -1,5 +1,5 @@
 # Fixtures whose output is known to differ from Asciidoctor. One path per
 # line (relative to the repository root), optionally followed by a reason.
 # TestCorpus expects these to fail and reports an error if one starts passing.
-
-testdata/upstream/attributes_0015.adoc  sets :backend: docbook in the header; only the html5 backend is implemented
+#
+# (currently empty)

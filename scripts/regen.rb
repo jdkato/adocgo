@@ -27,7 +27,10 @@ files.each do |adoc|
       invoker.redirect_streams out, err
       invoker.invoke!
     end
-    File.write adoc.sub(/\.adoc\z/, '.html'), out.string
+    # fixtures converted with a DocBook backend keep their output in NAME.xml
+    bi = args.index '-b'
+    ext = bi && args[bi + 1].to_s.start_with?('docbook') ? '.xml' : '.html'
+    File.write adoc.sub(/\.adoc\z/, ext), out.string
     count += 1
   rescue Exception => e # rubocop:disable Lint/RescueException
     warn "FAILED #{adoc}: #{e.class}: #{e.message.lines.first}"

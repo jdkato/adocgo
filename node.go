@@ -415,11 +415,13 @@ type Inline struct {
 	Target  string
 	Attrs   map[string]string
 	// list-valued attributes
-	Keys     []string
-	Submenus []string
-	Terms    []string
-	SeeAlso  []string
-	Guard    []string
+	Keys               []string
+	Submenus           []string
+	Terms              []string
+	SeeAlso            []string
+	See                string
+	hasSee, hasSeeAlso bool
+	Guard              []string
 }
 
 func (n *Inline) attr(name string) string { return n.Attrs[name] }
@@ -442,4 +444,21 @@ func intToRoman(val int) string {
 		}
 	}
 	return sb.String()
+}
+
+// setSee copies the see and see-also attributes of an index term macro.
+func (n *Inline) setSee(attrs map[string]string) {
+	if see, ok := attrs["see"]; ok {
+		n.See, n.hasSee = see, true
+	}
+	if seeAlso, ok := attrs["see-also"]; ok {
+		n.hasSeeAlso = true
+		if strings.Contains(seeAlso, ",") {
+			for _, item := range rubySplit(seeAlso, ",") {
+				n.SeeAlso = append(n.SeeAlso, lstrip(item))
+			}
+		} else {
+			n.SeeAlso = []string{seeAlso}
+		}
+	}
 }

@@ -133,6 +133,24 @@ func Convert(src []byte, opts Options) ([]byte, error) {
 	return doc.Convert()
 }
 
+// LoadFile reads and parses the named file. Unless set in opts, the input
+// file name and modification time are derived from the file.
+func LoadFile(name string, opts Options) (*Document, error) {
+	src, err := os.ReadFile(name)
+	if err != nil {
+		return nil, err
+	}
+	if opts.InputFile == "" {
+		opts.InputFile = name
+	}
+	if opts.ModTime.IsZero() {
+		if st, err := os.Stat(name); err == nil {
+			opts.ModTime = st.ModTime()
+		}
+	}
+	return Load(src, opts)
+}
+
 // ConvertFile reads the named file and converts it to HTML5. Unless set in
 // opts, the input file name, base directory and modification time are
 // derived from the file.

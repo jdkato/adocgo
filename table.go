@@ -27,9 +27,38 @@ func (n num) String() string {
 	return strconv.FormatFloat(n.f, 'f', -1, 64)
 }
 
-func truncate4(f float64) float64 { return math.Trunc(f*10000) / 10000 }
+// truncate4 ports Ruby's Float#truncate(4) (float floor/ceil with digits),
+// including its correction for values that are already representable with
+// four decimals.
+func truncate4(f float64) float64 {
+	const s = 10000.0
+	if f >= 0 {
+		mul := math.Floor(f * s)
+		if res := (mul + 1) / s; res <= f {
+			return res
+		}
+		return mul / s
+	}
+	mul := math.Ceil(f * s)
+	if res := (mul - 1) / s; res >= f {
+		return res
+	}
+	return mul / s
+}
 
-func round4(f float64) float64 { return math.Round(f*10000) / 10000 }
+// round4 ports Ruby's Float#round(4) (round half up).
+func round4(x float64) float64 {
+	const s = 10000.0
+	f := math.Round(x * s)
+	if x > 0 {
+		if (f+0.5)/s <= x {
+			f++
+		}
+	} else if (f-0.5)/s >= x {
+		f--
+	}
+	return f / s
+}
 
 // floatOrInt mirrors the Ruby idiom `x = x.to_i if x.to_i == x`.
 func floatOrInt(f float64) num {
@@ -47,6 +76,8 @@ type Table struct {
 	Foot    [][]*Cell
 	// hasHeaderOption: 0 false, 1 true, 2 implicit, 3 nil
 	hasHeaderOption int
+	absWidth        num
+	hasAbsWidth     bool
 }
 
 // Column describes a table column.
@@ -58,6 +89,7 @@ type Column struct {
 	Halign    string
 	Valign    string
 	Pcwidth   num
+	Abswidth  num
 	Autowidth bool
 }
 
@@ -120,6 +152,12 @@ func newTable(parent *Block, attributes map[string]string) *Block {
 		}
 	}
 	t.Attributes["tablepcwidth"] = strconv.Itoa(pc)
+	if pw, ok := t.Document.Attributes["pagewidth"]; ok {
+		// only backends with a page width (DocBook) track absolute widths
+		abs := floatOrInt(truncate4(float64(pc) / 100.0 * rubyToF(pw)))
+		t.Table.absWidth, t.Table.hasAbsWidth = abs, true
+		t.Attributes["tableabswidth"] = abs.String()
+	}
 	if _, ok := attributes["rotate-option"]; ok {
 		t.Attributes["orientation"] = "landscape"
 	}
@@ -151,6 +189,9 @@ func newColumn(table *Block, index int, spec *colSpec) *Column {
 func (c *Column) assignWidth(colPcwidth num, widthBase float64, hasBase bool) num {
 	if hasBase {
 		colPcwidth = floatOrInt(truncate4(c.Width.f * 100.0 / widthBase))
+	}
+	if t := c.table.Table; t.hasAbsWidth {
+		c.Abswidth = floatOrInt(truncate4(colPcwidth.f / 100.0 * t.absWidth.f))
 	}
 	c.Pcwidth = colPcwidth
 	return colPcwidth
@@ -209,7 +250,7 @@ func (tb *Block) assignColumnWidths(widthBase float64, hasBase bool, autowidthCo
 	if totalWidth != 100 {
 		last := t.Columns[len(t.Columns)-1]
 		v := round4(100 - totalWidth + colPcwidth.f)
-		last.Pcwidth = num{f: v, isFloat: true}
+		last.assignWidth(num{f: v, isFloat: true}, 0, false)
 	}
 }
 
