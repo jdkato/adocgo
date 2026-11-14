@@ -1,15 +1,7 @@
 package adocgo
 
-// Regular expressions ported verbatim from Asciidoctor's rx.rb. In the Ruby
-// source CC_ANY and CC_ALL are both "." (the latter combined with the m flag),
-// CC_WORD/CG_WORD are \p{Word}, CC_ALPHA is \p{Alpha}, CC_ALNUM is \p{Alnum}
-// and CG_BLANK is \p{Blank}.
-var (
-	inlineLinkRx       = rxScan(`(^|link:|\p{Blank}|\\?&lt;()|[>\(\)\[\];"'])(\\?(?:https?|file|ftp|irc)://)(?:([^\s\[\]]+)\[(|.*?[^\\])\]|\2([^\s]+?)&gt;|([^\s\[\]<]*([^\s,.?!\[\]<\)])))`, "m")
-	inlinePassRx       = rxScan(`((?:^|[^\p{Word};:\\])(?=(\[)|\+)|\\(?=\[)|(?=\\\+))(?:\2(x-|[^\]]+ x-)\]|(?:\[([^\]]+)\])?(?=(\\)?\+))(\5?(\+|`+"`"+`)(\S|\S.*?\S)\7)(?!\p{Word})`, "m")
-	inlinePassCompatRx = rxScan("(^|[^`\\p{Word}])(?:(\\Z)()|\\[([^\\]]+)\\](?=(\\\\))?)?(\\5?(`)([^`\\s]|[^`\\s].*?\\S)\\7)(?![`\\p{Word}])", "m")
-	inlinePassMacroRx  = rxScan(`(?:(?:(\\?)\[([^\]]+)\])?(\\{0,2})(\+\+\+?|\$\$)(.*?)\4|(\\?)pass:([a-z]+(?:,[a-z-]+)*)?\[(|.*?[^\\])\])`, "m")
-)
+// Shared definitions for the scanners (see scan*.go), which replace the
+// regular expressions of Asciidoctor's rx.rb.
 
 var orderedListStyles = []string{"arabic", "loweralpha", "lowerroman", "upperalpha", "upperroman"}
 

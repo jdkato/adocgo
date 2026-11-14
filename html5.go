@@ -19,14 +19,151 @@ const (
 	mathjaxVersion     = "2.7.9"
 )
 
-var (
-	dropAnchorRx         = rxScan(`<(?:a\b[^>]*|/a)>`)
-	leadingAnchorsRx     = rxScan(`^(?:<a id="[^"]+"></a>)+`)
-	stemBreakRx          = rxScan(` *\\\n(?:\\?\n)*|\n\n+`)
-	svgPreambleRx        = rxScan(`\A.*?(?=<svg[\s>])`, "m")
-	svgStartTagRx        = rxScan(`\A<svg(?:\s[^>]*)?>`)
-	dimensionAttributeRx = rxScan(`\s(?:width|height|style)=(["']).*?\1`)
-)
+var dropAnchorRx = newScanner(`<(?:a\b[^>]*|/a)>`, "", 0,
+	func(s string, from int, c []int) bool {
+		for i := from; i < len(s); i++ {
+			j := strings.IndexByte(s[i:], '<')
+			if j < 0 {
+				return false
+			}
+			i += j
+			if i+1 < len(s) && s[i+1] == 'a' && !isWordAt(s, i+2) {
+				if k := strings.IndexByte(s[i+2:], '>'); k >= 0 {
+					set2(c, 0, i, i+2+k+1)
+					return true
+				}
+			}
+			if strings.HasPrefix(s[i+1:], "/a>") {
+				set2(c, 0, i, i+4)
+				return true
+			}
+		}
+		return false
+	})
+
+var leadingAnchorsRx = bolScanner(`^(?:<a id="[^"]+"></a>)+`, "", 0,
+	func(s string, i int, c []int) bool {
+		p := i
+		for strings.HasPrefix(s[p:], `<a id="`) {
+			j := strings.IndexByte(s[p+7:], '"')
+			if j <= 0 || !strings.HasPrefix(s[p+7+j:], `"></a>`) {
+				break
+			}
+			p += 7 + j + 6
+		}
+		if p == i {
+			return false
+		}
+		set2(c, 0, i, p)
+		return true
+	})
+
+var stemBreakRx = newScanner(` *\\\n(?:\\?\n)*|\n\n+`, "", 0,
+	func(s string, from int, c []int) bool {
+		p1 := strings.Index(s[from:], "\\\n")
+		p2 := strings.Index(s[from:], "\n\n")
+		a1 := -1
+		if p1 >= 0 {
+			p1 += from
+			a1 = p1
+			for a1 > from && s[a1-1] == ' ' {
+				a1--
+			}
+		}
+		if p2 >= 0 {
+			p2 += from
+		}
+		switch {
+		case a1 >= 0 && (p2 < 0 || a1 < p2):
+			e := p1 + 2
+			for e < len(s) {
+				if s[e] == '\n' {
+					e++
+				} else if s[e] == '\\' && e+1 < len(s) && s[e+1] == '\n' {
+					e += 2
+				} else {
+					break
+				}
+			}
+			set2(c, 0, a1, e)
+			return true
+		case p2 >= 0:
+			e := p2 + 2
+			for e < len(s) && s[e] == '\n' {
+				e++
+			}
+			set2(c, 0, p2, e)
+			return true
+		}
+		return false
+	})
+
+var svgPreambleRx = newScanner(`\A.*?(?=<svg[\s>])`, "m", 0,
+	func(s string, from int, c []int) bool {
+		if from != 0 {
+			return false
+		}
+		for i := 0; i < len(s); i++ {
+			j := strings.Index(s[i:], "<svg")
+			if j < 0 {
+				return false
+			}
+			i += j
+			if i+4 < len(s) && (s[i+4] == '>' || isSpaceByte(s[i+4])) {
+				set2(c, 0, 0, i)
+				return true
+			}
+		}
+		return false
+	})
+
+var svgStartTagRx = newScanner(`\A<svg(?:\s[^>]*)?>`, "", 0,
+	func(s string, from int, c []int) bool {
+		if from != 0 || !strings.HasPrefix(s, "<svg") || len(s) < 5 {
+			return false
+		}
+		if isSpaceByte(s[4]) {
+			if j := strings.IndexByte(s[5:], '>'); j >= 0 {
+				set2(c, 0, 0, 5+j+1)
+				return true
+			}
+			return false
+		}
+		if s[4] == '>' {
+			set2(c, 0, 0, 5)
+			return true
+		}
+		return false
+	})
+
+var dimensionAttributeRx = newScanner(`\s(?:width|height|style)=(["']).*?\1`, "", 1,
+	func(s string, from int, c []int) bool {
+		for i := from; i < len(s); i++ {
+			if !isSpaceByte(s[i]) {
+				continue
+			}
+			rest := s[i+1:]
+			var p int
+			switch {
+			case strings.HasPrefix(rest, "width="), strings.HasPrefix(rest, "style="):
+				p = i + 7
+			case strings.HasPrefix(rest, "height="):
+				p = i + 8
+			default:
+				continue
+			}
+			if p >= len(s) || (s[p] != '"' && s[p] != '\'') {
+				continue
+			}
+			le := lineEnd(s, p+1)
+			if j := strings.IndexByte(s[p+1:le], s[p]); j >= 0 {
+				set2(c, 0, i, p+1+j+1)
+				set2(c, 1, p, p+1)
+				return true
+			}
+		}
+		return false
+	})
 
 type html5Converter struct {
 	doc           *Document

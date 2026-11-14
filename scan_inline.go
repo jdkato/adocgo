@@ -14,6 +14,11 @@ import (
 // `\]`. Unless dotall is set the `.*?` part must not cross a newline (the
 // final character may still be one). It returns -1 if there is none.
 func findClose(s string, start int, dotall bool) int {
+	return findUnescaped(s, start, ']', dotall)
+}
+
+// findUnescaped is findClose for an arbitrary closing byte.
+func findUnescaped(s string, start int, closer byte, dotall bool) int {
 	limit := len(s)
 	if !dotall {
 		if nl := strings.IndexByte(s[start:], '\n'); nl >= 0 {
@@ -26,7 +31,7 @@ func findClose(s string, start int, dotall bool) int {
 		}
 	}
 	for k := start + 1; k < limit; k++ {
-		j := strings.IndexByte(s[k:limit], ']')
+		j := strings.IndexByte(s[k:limit], closer)
 		if j < 0 {
 			return -1
 		}

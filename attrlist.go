@@ -5,14 +5,79 @@ import (
 	"strings"
 )
 
+// Scanners used by the attribute list parser, each anchored at the current
+// scan position.
 var (
-	alBoundaryQuot  = rxScan(`.*?[^\\](?=")`)
-	alBoundaryApos  = rxScan(`.*?[^\\](?=')`)
-	alBoundaryComma = rxScan(`.*?(?=[ \t]*(,|$))`)
-	alNameRx        = rxScan(`\p{Word}[\p{Word}\-.]*`)
-	alBlankRx       = rxScan(`[ \t]+`)
-	alSkipRx        = rxScan(`[ \t]*(,|$)`)
+	alBoundaryQuot  = atScanner(`.*?[^\\](?=")`, 0, func(s string, pos int, c []int) bool { return scanToQuote(s, pos, '"', c) })
+	alBoundaryApos  = atScanner(`.*?[^\\](?=')`, 0, func(s string, pos int, c []int) bool { return scanToQuote(s, pos, '\'', c) })
+	alBoundaryComma = atScanner(`.*?(?=[ \t]*(,|$))`, 1, func(s string, pos int, c []int) bool {
+		le := lineEnd(s, pos)
+		for e := pos; e <= le; e++ {
+			k := skipBlanks(s, e)
+			if k < len(s) && s[k] == ',' {
+				set2(c, 0, pos, e)
+				set2(c, 1, k, k+1)
+				return true
+			}
+			if isEOL(s, k) {
+				set2(c, 0, pos, e)
+				set2(c, 1, k, k)
+				return true
+			}
+		}
+		return false
+	})
+	alNameRx = atScanner(`\p{Word}[\p{Word}\-.]*`, 0, func(s string, pos int, c []int) bool {
+		ok, sz := wordAt(s, pos)
+		if !ok {
+			return false
+		}
+		e := pos + sz
+		for e < len(s) {
+			if s[e] == '-' || s[e] == '.' {
+				e++
+			} else if ok, sz := wordAt(s, e); ok {
+				e += sz
+			} else {
+				break
+			}
+		}
+		set2(c, 0, pos, e)
+		return true
+	})
+	alBlankRx = atScanner(`[ \t]+`, 0, func(s string, pos int, c []int) bool {
+		e := skipBlanks(s, pos)
+		if e == pos {
+			return false
+		}
+		set2(c, 0, pos, e)
+		return true
+	})
+	alSkipRx = atScanner(`[ \t]*(,|$)`, 1, func(s string, pos int, c []int) bool {
+		k := skipBlanks(s, pos)
+		if k < len(s) && s[k] == ',' {
+			set2(c, 0, pos, k+1)
+			set2(c, 1, k, k+1)
+			return true
+		}
+		if isEOL(s, k) {
+			set2(c, 0, pos, k)
+			set2(c, 1, k, k)
+			return true
+		}
+		return false
+	})
 )
+
+// scanToQuote matches .*?[^\\](?=QUOTE) at pos.
+func scanToQuote(s string, pos int, quote byte, c []int) bool {
+	k := findUnescaped(s, pos, quote, false)
+	if k < 0 {
+		return false
+	}
+	set2(c, 0, pos, k)
+	return true
+}
 
 // posKey returns the attribute key used for the positional attribute at the
 // given 1-based index.

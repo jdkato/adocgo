@@ -184,3 +184,14 @@ func newScanner(pat, flags string, n int, find func(s string, from int, c []int)
 
 // allScanners lists every hand-written scanner (used by the tests).
 var allScanners []*scanner
+
+// atScanner declares a hand-written scanner that is only used anchored at
+// a given offset (via MatchAt).
+func atScanner(pat string, n int, at func(s string, pos int, c []int) bool) *scanner {
+	sc := &scanner{pat: pat, n: n, at: at, hand: true}
+	allAtScanners = append(allAtScanners, sc)
+	return sc
+}
+
+// allAtScanners lists every anchored hand-written scanner.
+var allAtScanners []*scanner

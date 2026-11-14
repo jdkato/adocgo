@@ -226,5 +226,17 @@ func TestScannersOnSamples(t *testing.T) {
 			}
 		}
 	}
+	for _, sc := range allAtScanners {
+		for _, in := range samples {
+			for pos := 0; pos <= len(in) && pos < 24; pos++ {
+				var m rmatch
+				c := m.c[:2*(sc.n+1)]
+				for i := range c {
+					c[i] = -1
+				}
+				o.check(sc, in, pos, true, c, sc.at(in, pos, c))
+			}
+		}
+	}
 	o.report(t)
 }
