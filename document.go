@@ -98,6 +98,7 @@ type Document struct {
 	fallbackHL string
 	xmlMode    bool
 	outFile    string
+	srcLen     int
 	nesting    *int
 	reader     *Reader
 	conv       *html5Converter

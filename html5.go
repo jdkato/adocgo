@@ -1,6 +1,7 @@
 package adocgo
 
 import (
+	"bytes"
 	_ "embed"
 	"encoding/base64"
 	"os"
@@ -207,24 +208,43 @@ var quoteTags = map[string]quoteTag{
 	"latexmath":   {`\(`, `\)`, false},
 }
 
-// convert converts a block node (Ruby: node.convert).
-func (b *Block) convert() string {
+// convertTo converts a block node into w (Ruby: node.convert).
+func (b *Block) convertTo(w *bytes.Buffer) {
 	b.Document.playbackAttributes(b.Attributes)
-	return b.Document.conv.convertBlock(b)
+	b.Document.conv.writeBlock(w, b)
+}
+
+// convert converts a block node to a string.
+func (b *Block) convert() string {
+	var w bytes.Buffer
+	b.convertTo(&w)
+	return w.String()
+}
+
+// writeContent writes the converted content of the block to w.
+func (b *Block) writeContent(w *bytes.Buffer) {
+	if b.ContentModel != "compound" {
+		w.WriteString(b.content())
+		return
+	}
+	if b.Context == "document" {
+		delete(b.Document.Attributes, "title")
+	}
+	for i, c := range b.Blocks {
+		if i > 0 {
+			w.WriteByte('\n')
+		}
+		c.convertTo(w)
+	}
 }
 
 // content returns the converted content of the block.
 func (b *Block) content() string {
 	switch b.ContentModel {
 	case "compound":
-		if b.Context == "document" {
-			delete(b.Document.Attributes, "title")
-		}
-		parts := make([]string, len(b.Blocks))
-		for i, c := range b.Blocks {
-			parts[i] = c.convert()
-		}
-		return strings.Join(parts, "\n")
+		var w bytes.Buffer
+		b.writeContent(&w)
+		return w.String()
 	case "simple":
 		return b.applySubs(strings.Join(b.Lines, "\n"), b.subs)
 	case "verbatim", "raw":
@@ -246,7 +266,45 @@ func (b *Block) content() string {
 	return ""
 }
 
+// lineWriter writes newline-separated chunks to a buffer, mirroring the
+// `result << ...; result.join LF` idiom of the Ruby converter.
+type lineWriter struct {
+	w       *bytes.Buffer
+	started bool
+}
+
+// begin starts a new chunk; the caller then writes it to lw.w.
+func (lw *lineWriter) begin() {
+	if lw.started {
+		lw.w.WriteByte('\n')
+	}
+	lw.started = true
+}
+
+// lines writes each argument as a chunk of its own.
+func (lw *lineWriter) lines(ls ...string) {
+	for _, l := range ls {
+		lw.begin()
+		lw.w.WriteString(l)
+	}
+}
+
+// line writes a chunk made of the given parts.
+func (lw *lineWriter) line(parts ...string) {
+	lw.begin()
+	for _, p := range parts {
+		lw.w.WriteString(p)
+	}
+}
+
+// convertDocument converts the document to a string.
 func (d *Document) convertDocument() string {
+	var w bytes.Buffer
+	d.convertDocumentTo(&w)
+	return w.String()
+}
+
+func (d *Document) convertDocumentTo(w *bytes.Buffer) {
 	if d.Doctype == "inline" {
 		var block *Block
 		if len(d.Blocks) > 0 {
@@ -255,14 +313,16 @@ func (d *Document) convertDocument() string {
 			block = d.header
 		}
 		if block == nil || block.ContentModel == "compound" || block.ContentModel == "empty" {
-			return ""
+			return
 		}
-		return block.content()
+		w.WriteString(block.content())
+		return
 	}
 	if d.standalone && d.parentDocument == nil {
-		return d.conv.document(d)
+		d.conv.document(w, d)
+		return
 	}
-	return d.conv.embedded(d)
+	d.conv.embedded(w, d)
 }
 
 func idAttr(id string) string {
@@ -279,44 +339,54 @@ func roleSuffix(b *Block) string {
 	return ""
 }
 
-func (c *html5Converter) convertBlock(n *Block) string {
+// writeBlock writes the converted form of n to w. Container blocks stream
+// their children straight into w; the remaining blocks are converted to a
+// string first.
+func (c *html5Converter) writeBlock(w *bytes.Buffer, n *Block) {
 	switch n.Context {
 	case "paragraph":
-		return c.paragraph(n)
+		c.paragraph(w, n)
 	case "section":
-		return c.section(n)
+		c.section(w, n)
+	case "ulist":
+		c.ulist(w, n)
+	case "olist":
+		c.olist(w, n)
+	case "admonition":
+		c.admonition(w, n)
+	case "example":
+		c.example(w, n)
+	case "open":
+		c.open(w, n)
+	case "preamble":
+		c.preamble(w, n)
+	case "quote":
+		c.quote(w, n)
+	case "sidebar":
+		c.sidebar(w, n)
+	default:
+		w.WriteString(c.convertBlock(n))
+	}
+}
+
+func (c *html5Converter) convertBlock(n *Block) string {
+	switch n.Context {
 	case "listing":
 		return c.listing(n)
 	case "literal":
 		return c.literal(n)
-	case "ulist":
-		return c.ulist(n)
-	case "olist":
-		return c.olist(n)
 	case "dlist":
 		return c.dlist(n)
-	case "admonition":
-		return c.admonition(n)
 	case "colist":
 		res := c.colist(n)
 		n.Document.callouts.nextList()
 		return res
-	case "example":
-		return c.example(n)
 	case "floating_title":
 		return c.floatingTitle(n)
 	case "image":
 		return c.image(n)
-	case "open":
-		return c.open(n)
 	case "page_break":
 		return `<div style="page-break-after: always;"></div>`
-	case "preamble":
-		return c.preamble(n)
-	case "quote":
-		return c.quote(n)
-	case "sidebar":
-		return c.sidebar(n)
 	case "stem":
 		return c.stem(n)
 	case "table":
@@ -383,7 +453,7 @@ func (c *html5Converter) footnotesDiv(d *Document, maxWidthAttr string) []string
 	return result
 }
 
-func (c *html5Converter) document(node *Document) string {
+func (c *html5Converter) document(w *bytes.Buffer, node *Document) {
 	sl := c.sl()
 	br := "<br" + sl + ">"
 	assetURIScheme := node.attrOr("asset-uri-scheme", "https")
@@ -396,7 +466,8 @@ func (c *html5Converter) document(node *Document) string {
 	if node.hasAttr("max-width") {
 		maxWidthAttr = ` style="max-width: ` + node.Attributes["max-width"] + `;"`
 	}
-	result := []string{"<!DOCTYPE html>"}
+	lw := lineWriter{w: w}
+	lw.lines("<!DOCTYPE html>")
 	langAttribute := ""
 	if !node.hasAttr("nolang") {
 		langAttribute = ` lang="` + node.attrOr("lang", "en") + `"`
@@ -405,15 +476,15 @@ func (c *html5Converter) document(node *Document) string {
 	if c.xml() {
 		xmlns = ` xmlns="http://www.w3.org/1999/xhtml"`
 	}
-	result = append(result, "<html"+xmlns+langAttribute+">")
-	result = append(result, `<head>
-<meta charset="`+node.attrOr("encoding", "UTF-8")+`"`+sl+`>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"`+sl+`>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"`+sl+`>
-<meta name="generator" content="Asciidoctor `+node.Attributes["asciidoctor-version"]+`"`+sl+">")
+	lw.lines("<html" + xmlns + langAttribute + ">")
+	lw.lines(`<head>
+<meta charset="` + node.attrOr("encoding", "UTF-8") + `"` + sl + `>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"` + sl + `>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"` + sl + `>
+<meta name="generator" content="Asciidoctor ` + node.Attributes["asciidoctor-version"] + `"` + sl + ">")
 	for _, m := range [][2]string{{"app-name", "application-name"}, {"description", "description"}, {"keywords", "keywords"}} {
 		if node.hasAttr(m[0]) {
-			result = append(result, `<meta name="`+m[1]+`" content="`+node.Attributes[m[0]]+`"`+sl+">")
+			lw.lines(`<meta name="` + m[1] + `" content="` + node.Attributes[m[0]] + `"` + sl + ">")
 		}
 	}
 	if node.hasAttr("authors") {
@@ -421,10 +492,10 @@ func (c *html5Converter) document(node *Document) string {
 		if strings.Contains(authors, "<") {
 			authors = xmlSanitizeRx.ReplaceAll(authors, "")
 		}
-		result = append(result, `<meta name="author" content="`+authors+`"`+sl+">")
+		lw.lines(`<meta name="author" content="` + authors + `"` + sl + ">")
 	}
 	if node.hasAttr("copyright") {
-		result = append(result, `<meta name="copyright" content="`+node.Attributes["copyright"]+`"`+sl+">")
+		lw.lines(`<meta name="copyright" content="` + node.Attributes["copyright"] + `"` + sl + ">")
 	}
 	if node.hasAttr("favicon") {
 		iconHref := node.Attributes["favicon"]
@@ -434,45 +505,45 @@ func (c *html5Converter) document(node *Document) string {
 		} else if ext := extname(iconHref); ext != "" && ext != ".ico" {
 			iconType = "image/" + ext[1:]
 		}
-		result = append(result, `<link rel="icon" type="`+iconType+`" href="`+iconHref+`"`+sl+">")
+		lw.lines(`<link rel="icon" type="` + iconType + `" href="` + iconHref + `"` + sl + ">")
 	}
 	title, _ := node.doctitle(true)
-	result = append(result, "<title>"+sanitizeTitle(title)+"</title>")
+	lw.lines("<title>" + sanitizeTitle(title) + "</title>")
 	if ss, ok := node.Attributes["stylesheet"]; ok && (ss == "" || ss == "DEFAULT") {
 		if webfonts, ok := node.Attributes["webfonts"]; ok {
 			if webfonts == "" {
 				webfonts = "Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"
 			}
-			result = append(result, `<link rel="stylesheet" href="`+assetURIScheme+"//fonts.googleapis.com/css?family="+webfonts+`"`+sl+">")
+			lw.lines(`<link rel="stylesheet" href="` + assetURIScheme + "//fonts.googleapis.com/css?family=" + webfonts + `"` + sl + ">")
 		}
 		if linkcss {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath("asciidoctor.css", node.attrOr("stylesdir", ""), false)+`"`+sl+">")
+			lw.lines(`<link rel="stylesheet" href="` + node.normalizeWebPath("asciidoctor.css", node.attrOr("stylesdir", ""), false) + `"` + sl + ">")
 		} else {
-			result = append(result, "<style>\n"+rstrip(defaultStylesheet)+"\n</style>")
+			lw.lines("<style>\n" + rstrip(defaultStylesheet) + "\n</style>")
 		}
 	} else if ok {
 		if linkcss {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(ss, node.attrOr("stylesdir", ""), true)+`"`+sl+">")
+			lw.lines(`<link rel="stylesheet" href="` + node.normalizeWebPath(ss, node.attrOr("stylesdir", ""), true) + `"` + sl + ">")
 		} else {
 			data, _ := os.ReadFile(node.normalizeSystemPath(ss, node.Attributes["stylesdir"]))
-			result = append(result, "<style>\n"+string(data)+"\n</style>")
+			lw.lines("<style>\n" + string(data) + "\n</style>")
 		}
 	}
 	if node.Attributes["icons"] == "font" {
 		if node.hasAttr("iconfont-remote") {
-			result = append(result, `<link rel="stylesheet" href="`+node.attrOr("iconfont-cdn", cdnBaseURL+"/font-awesome/"+fontAwesomeVersion+"/css/font-awesome.min.css")+`"`+sl+">")
+			lw.lines(`<link rel="stylesheet" href="` + node.attrOr("iconfont-cdn", cdnBaseURL+"/font-awesome/"+fontAwesomeVersion+"/css/font-awesome.min.css") + `"` + sl + ">")
 		} else {
-			result = append(result, `<link rel="stylesheet" href="`+node.normalizeWebPath(node.attrOr("iconfont-name", "font-awesome")+".css", node.attrOr("stylesdir", ""), false)+`"`+sl+">")
+			lw.lines(`<link rel="stylesheet" href="` + node.normalizeWebPath(node.attrOr("iconfont-name", "font-awesome")+".css", node.attrOr("stylesdir", ""), false) + `"` + sl + ">")
 		}
 	}
 	hljsBase := node.attrOr("highlightjsdir", cdnBaseURL+"/highlight.js/"+highlightJSVersion)
 	if node.highlight {
-		result = append(result, `<link rel="stylesheet" href="`+hljsBase+"/styles/"+node.attrOr("highlightjs-theme", "github")+`.min.css"`+sl+">")
+		lw.lines(`<link rel="stylesheet" href="` + hljsBase + "/styles/" + node.attrOr("highlightjs-theme", "github") + `.min.css"` + sl + ">")
 	}
 	if di := node.docinfo("head"); di != "" {
-		result = append(result, di)
+		lw.lines(di)
 	}
-	result = append(result, "</head>")
+	lw.lines("</head>")
 	sectioned := node.hasSections()
 	classes := []string{node.Doctype}
 	if sectioned && node.hasAttr("toc-class") && node.hasAttr("toc") && node.Attributes["toc-placement"] == "auto" {
@@ -481,28 +552,28 @@ func (c *html5Converter) document(node *Document) string {
 	if r, ok := node.Attributes["role"]; ok {
 		classes = append(classes, r)
 	}
-	result = append(result, "<body"+idAttr(node.ID)+` class="`+strings.Join(classes, " ")+`">`)
+	lw.lines("<body" + idAttr(node.ID) + ` class="` + strings.Join(classes, " ") + `">`)
 	if di := node.docinfo("header"); di != "" {
-		result = append(result, di)
+		lw.lines(di)
 	}
 	tocDiv := func() string {
 		return `<div id="toc" class="` + node.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + node.Attributes["toc-title"] + "</div>\n" + c.outline(&node.Block, nil, nil) + "\n</div>"
 	}
 	if !node.hasAttr("noheader") {
-		result = append(result, `<div id="header"`+maxWidthAttr+">")
+		lw.lines(`<div id="header"` + maxWidthAttr + ">")
 		if node.Doctype == "manpage" {
 			dt, _ := node.doctitle(false)
-			result = append(result, "<h1>"+dt+" Manual Page</h1>")
+			lw.lines("<h1>" + dt + " Manual Page</h1>")
 			if sectioned && node.hasAttr("toc") && node.Attributes["toc-placement"] == "auto" {
-				result = append(result, tocDiv())
+				lw.lines(tocDiv())
 			}
 			if node.hasAttr("manpurpose") {
-				result = append(result, c.mannameSection(node))
+				lw.lines(c.mannameSection(node))
 			}
 		} else {
 			if node.hasHeader() {
 				if !node.hasAttr("notitle") {
-					result = append(result, "<h1>"+node.header.Title()+"</h1>")
+					lw.lines("<h1>" + node.header.Title() + "</h1>")
 				}
 				var details []string
 				for i, a := range node.authors() {
@@ -529,28 +600,31 @@ func (c *html5Converter) document(node *Document) string {
 					details = append(details, br+`<span id="revremark">`+node.Attributes["revremark"]+"</span>")
 				}
 				if len(details) > 0 {
-					result = append(result, `<div class="details">`)
-					result = append(result, details...)
-					result = append(result, "</div>")
+					lw.lines(`<div class="details">`)
+					lw.lines(details...)
+					lw.lines("</div>")
 				}
 			}
 			if sectioned && node.hasAttr("toc") && node.Attributes["toc-placement"] == "auto" {
-				result = append(result, tocDiv())
+				lw.lines(tocDiv())
 			}
 		}
-		result = append(result, "</div>")
+		lw.lines("</div>")
 	}
-	result = append(result, `<div id="content"`+maxWidthAttr+">\n"+node.content()+"\n</div>")
-	result = append(result, c.footnotesDiv(node, maxWidthAttr)...)
+	lw.begin()
+	w.WriteString(`<div id="content"` + maxWidthAttr + ">\n")
+	node.writeContent(w)
+	w.WriteString("\n</div>")
+	lw.lines(c.footnotesDiv(node, maxWidthAttr)...)
 	if !node.hasAttr("nofooter") {
-		result = append(result, `<div id="footer"`+maxWidthAttr+">", `<div id="footer-text">`)
+		lw.lines(`<div id="footer"`+maxWidthAttr+">", `<div id="footer-text">`)
 		if node.hasAttr("revnumber") {
-			result = append(result, node.Attributes["version-label"]+" "+node.Attributes["revnumber"]+br)
+			lw.lines(node.Attributes["version-label"] + " " + node.Attributes["revnumber"] + br)
 		}
 		if node.hasAttr("last-update-label") && !node.hasAttr("reproducible") {
-			result = append(result, node.Attributes["last-update-label"]+" "+node.Attributes["docdatetime"])
+			lw.lines(node.Attributes["last-update-label"] + " " + node.Attributes["docdatetime"])
 		}
-		result = append(result, "</div>", "</div>")
+		lw.lines("</div>", "</div>")
 	}
 	if node.highlight {
 		langs := ""
@@ -559,8 +633,8 @@ func (c *html5Converter) document(node *Document) string {
 				langs += `<script src="` + hljsBase + "/languages/" + lstrip(lang) + ".min.js\"></script>\n"
 			}
 		}
-		result = append(result, `<script src="`+hljsBase+`/highlight.min.js"></script>
-`+langs+`<script>
+		lw.lines(`<script src="` + hljsBase + `/highlight.min.js"></script>
+` + langs + `<script>
 if (!hljs.initHighlighting.called) {
   hljs.initHighlighting.called = true
   ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
@@ -572,7 +646,7 @@ if (!hljs.initHighlighting.called) {
 		if eqnums == "" {
 			eqnums = "AMS"
 		}
-		result = append(result, `<script type="text/x-mathjax-config">
+		lw.lines(`<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   messageStyle: "none",
   tex2jax: {
@@ -584,7 +658,7 @@ MathJax.Hub.Config({
     delimiters: [["\\$", "\\$"]],
     ignoreClass: "nostem|noasciimath"
   },
-  TeX: { equationNumbers: { autoNumber: "`+eqnums+`" } }
+  TeX: { equationNumbers: { autoNumber: "` + eqnums + `" } }
 })
 MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
   MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
@@ -595,36 +669,35 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
   })
 })
 </script>
-<script src="`+cdnBaseURL+"/mathjax/"+mathjaxVersion+`/MathJax.js?config=TeX-MML-AM_CHTML"></script>`)
+<script src="` + cdnBaseURL + "/mathjax/" + mathjaxVersion + `/MathJax.js?config=TeX-MML-AM_CHTML"></script>`)
 	}
 	if di := node.docinfo("footer"); di != "" {
-		result = append(result, di)
+		lw.lines(di)
 	}
-	result = append(result, "</body>", "</html>")
-	return strings.Join(result, "\n")
+	lw.lines("</body>", "</html>")
 }
 
-func (c *html5Converter) embedded(node *Document) string {
-	var result []string
+func (c *html5Converter) embedded(w *bytes.Buffer, node *Document) {
+	lw := lineWriter{w: w}
 	if node.Doctype == "manpage" {
 		if !node.hasAttr("notitle") {
 			dt, _ := node.doctitle(false)
-			result = append(result, "<h1"+idAttr(node.ID)+">"+dt+" Manual Page</h1>")
+			lw.lines("<h1" + idAttr(node.ID) + ">" + dt + " Manual Page</h1>")
 		}
 		if node.hasAttr("manpurpose") {
-			result = append(result, c.mannameSection(node))
+			lw.lines(c.mannameSection(node))
 		}
 	} else if node.hasHeader() && !node.hasAttr("notitle") {
-		result = append(result, "<h1"+idAttr(node.ID)+">"+node.header.Title()+"</h1>")
+		lw.lines("<h1" + idAttr(node.ID) + ">" + node.header.Title() + "</h1>")
 	}
 	if node.hasSections() && node.hasAttr("toc") {
 		if p := node.Attributes["toc-placement"]; p != "macro" && p != "preamble" {
-			result = append(result, "<div id=\"toc\" class=\"toc\">\n<div id=\"toctitle\">"+node.Attributes["toc-title"]+"</div>\n"+c.outline(&node.Block, nil, nil)+"\n</div>")
+			lw.lines("<div id=\"toc\" class=\"toc\">\n<div id=\"toctitle\">" + node.Attributes["toc-title"] + "</div>\n" + c.outline(&node.Block, nil, nil) + "\n</div>")
 		}
 	}
-	result = append(result, node.content())
-	result = append(result, c.footnotesDiv(node, "")...)
-	return strings.Join(result, "\n")
+	lw.begin()
+	node.writeContent(w)
+	lw.lines(c.footnotesDiv(node, "")...)
 }
 
 func (c *html5Converter) mannameSection(node *Document) string {
@@ -714,7 +787,7 @@ func (c *html5Converter) outline(node *Block, toclevelsOpt, sectnumlevelsOpt *in
 	return strings.Join(result, "\n")
 }
 
-func (c *html5Converter) section(node *Block) string {
+func (c *html5Converter) section(w *bytes.Buffer, node *Block) {
 	docAttrs := node.Document.Attributes
 	level := node.Level
 	title := c.sectionTitle(node, intAttr(docAttrs, "sectnumlevels", 3))
@@ -737,14 +810,22 @@ func (c *html5Converter) section(node *Block) string {
 		}
 	}
 	if level == 0 {
-		return "<h1" + ida + ` class="sect0` + roleSuffix(node) + `">` + title + "</h1>\n" + node.content()
+		w.WriteString("<h1" + ida + ` class="sect0` + roleSuffix(node) + `">` + title + "</h1>\n")
+		node.writeContent(w)
+		return
 	}
 	h := strconv.Itoa(level + 1)
 	head := `<div class="sect` + strconv.Itoa(level) + roleSuffix(node) + "\">\n<h" + h + ida + ">" + title + "</h" + h + ">\n"
 	if level == 1 {
-		return head + "<div class=\"sectionbody\">\n" + node.content() + "\n</div>\n</div>"
+		w.WriteString(head + "<div class=\"sectionbody\">\n")
+		node.writeContent(w)
+		w.WriteString("\n</div>\n</div>")
+		return
 	}
-	return head + node.content() + "\n</div>"
+	w.WriteString(head)
+	node.writeContent(w)
+	w.WriteString("\n</div>")
+	return
 }
 
 func titleDiv(node *Block) string {
@@ -824,7 +905,7 @@ func (b *Block) alt() string {
 
 func encodeAttributeValue(val string) string { return strings.ReplaceAll(val, `"`, "&quot;") }
 
-func (c *html5Converter) admonition(node *Block) string {
+func (c *html5Converter) admonition(w *bytes.Buffer, node *Block) {
 	name := node.Attributes["name"]
 	titleElement := titleDiv(node)
 	var label string
@@ -837,7 +918,10 @@ func (c *html5Converter) admonition(node *Block) string {
 	} else {
 		label = `<div class="title">` + node.Attributes["textlabel"] + "</div>"
 	}
-	return "<div" + idAttr(node.ID) + ` class="admonitionblock ` + name + roleSuffix(node) + "\">\n<table>\n<tr>\n<td class=\"icon\">\n" + label + "\n</td>\n<td class=\"content\">\n" + titleElement + node.content() + "\n</td>\n</tr>\n</table>\n</div>"
+	w.WriteString("<div" + idAttr(node.ID) + ` class="admonitionblock ` + name + roleSuffix(node) + "\">\n<table>\n<tr>\n<td class=\"icon\">\n" + label + "\n</td>\n<td class=\"content\">\n" + titleElement)
+	node.writeContent(w)
+	w.WriteString("\n</td>\n</tr>\n</table>\n</div>")
+	return
 }
 
 func classList(items ...string) string {
@@ -892,12 +976,19 @@ func joinClasses(node *Block, base ...string) string {
 	return strings.Join(out, " ")
 }
 
-func itemContent(item *Block) string {
-	parts := make([]string, len(item.Blocks))
+func itemContentTo(w *bytes.Buffer, item *Block) {
 	for i, b := range item.Blocks {
-		parts[i] = b.convert()
+		if i > 0 {
+			w.WriteByte('\n')
+		}
+		b.convertTo(w)
 	}
-	return strings.Join(parts, "\n")
+}
+
+func itemContent(item *Block) string {
+	var w bytes.Buffer
+	itemContentTo(&w, item)
+	return w.String()
 }
 
 func (c *html5Converter) colist(node *Block) string {
@@ -1045,7 +1136,7 @@ func (c *html5Converter) dlist(node *Block) string {
 	return strings.Join(result, "\n")
 }
 
-func (c *html5Converter) example(node *Block) string {
+func (c *html5Converter) example(w *bytes.Buffer, node *Block) {
 	if node.hasOption("collapsible") {
 		classAttr := ""
 		if r, ok := node.Attributes["role"]; ok {
@@ -1059,13 +1150,19 @@ func (c *html5Converter) example(node *Block) string {
 		if node.hasOption("open") {
 			open = " open"
 		}
-		return "<details" + idAttr(node.ID) + classAttr + open + ">\n" + summary + "\n<div class=\"content\">\n" + node.content() + "\n</div>\n</details>"
+		w.WriteString("<details" + idAttr(node.ID) + classAttr + open + ">\n" + summary + "\n<div class=\"content\">\n")
+		node.writeContent(w)
+		w.WriteString("\n</div>\n</details>")
+		return
 	}
 	title := ""
 	if node.hasTitle {
 		title = `<div class="title">` + node.captionedTitle() + "</div>\n"
 	}
-	return "<div" + idAttr(node.ID) + ` class="exampleblock` + roleSuffix(node) + "\">\n" + title + "<div class=\"content\">\n" + node.content() + "\n</div>\n</div>"
+	w.WriteString("<div" + idAttr(node.ID) + ` class="exampleblock` + roleSuffix(node) + "\">\n" + title + "<div class=\"content\">\n")
+	node.writeContent(w)
+	w.WriteString("\n</div>\n</div>")
+	return
 }
 
 func (c *html5Converter) floatingTitle(node *Block) string {
@@ -1299,15 +1396,15 @@ func liOpen(item *Block) string {
 	return "<li>"
 }
 
-func (c *html5Converter) olist(node *Block) string {
-	var result []string
+func (c *html5Converter) olist(w *bytes.Buffer, node *Block) {
+	lw := lineWriter{w: w}
 	base := []string{"olist"}
 	if node.Style != "" {
 		base = append(base, node.Style)
 	}
-	result = append(result, "<div"+idAttr(node.ID)+` class="`+joinClasses(node, base...)+`">`)
+	lw.lines("<div" + idAttr(node.ID) + ` class="` + joinClasses(node, base...) + `">`)
 	if node.hasTitle {
-		result = append(result, `<div class="title">`+node.Title()+"</div>")
+		lw.lines(`<div class="title">` + node.Title() + "</div>")
 	}
 	typ := ""
 	if k, ok := orderedListKeywords[node.Style]; ok && !node.implicitStyle {
@@ -1321,38 +1418,44 @@ func (c *html5Converter) olist(node *Block) string {
 	if node.hasOption("reversed") {
 		rev = c.boolAttr("reversed")
 	}
-	result = append(result, `<ol class="`+node.Style+`"`+typ+start+rev+">")
+	lw.lines(`<ol class="` + node.Style + `"` + typ + start + rev + ">")
 	for _, item := range node.Blocks {
-		result = append(result, liOpen(item), "<p>"+item.itemText()+"</p>")
+		lw.lines(liOpen(item), "<p>"+item.itemText()+"</p>")
 		if item.hasBlocks() {
-			result = append(result, itemContent(item))
+			lw.begin()
+			itemContentTo(w, item)
 		}
-		result = append(result, "</li>")
+		lw.lines("</li>")
 	}
-	result = append(result, "</ol>", "</div>")
-	return strings.Join(result, "\n")
+	lw.lines("</ol>", "</div>")
 }
 
-func (c *html5Converter) open(node *Block) string {
+func (c *html5Converter) open(w *bytes.Buffer, node *Block) {
 	style := node.Style
 	if style == "abstract" {
 		if node.Parent == &node.Document.Block && node.Document.Doctype == "book" {
-			return ""
+			return
 		}
 		title := titleDiv(node)
-		return "<div" + idAttr(node.ID) + ` class="quoteblock abstract` + roleSuffix(node) + "\">\n" + title + "<blockquote>\n" + node.content() + "\n</blockquote>\n</div>"
+		w.WriteString("<div" + idAttr(node.ID) + ` class="quoteblock abstract` + roleSuffix(node) + "\">\n" + title + "<blockquote>\n")
+		node.writeContent(w)
+		w.WriteString("\n</blockquote>\n</div>")
+		return
 	} else if style == "partintro" && (node.Level > 0 || node.Parent.Context != "section" || node.Document.Doctype != "book") {
-		return ""
+		return
 	}
 	title := titleDiv(node)
 	st := ""
 	if style != "" && style != "open" {
 		st = " " + style
 	}
-	return "<div" + idAttr(node.ID) + ` class="openblock` + st + roleSuffix(node) + "\">\n" + title + "<div class=\"content\">\n" + node.content() + "\n</div>\n</div>"
+	w.WriteString("<div" + idAttr(node.ID) + ` class="openblock` + st + roleSuffix(node) + "\">\n" + title + "<div class=\"content\">\n")
+	node.writeContent(w)
+	w.WriteString("\n</div>\n</div>")
+	return
 }
 
-func (c *html5Converter) paragraph(node *Block) string {
+func (c *html5Converter) paragraph(w *bytes.Buffer, node *Block) {
 	var attributes string
 	if r, ok := node.Attributes["role"]; ok {
 		attributes = idAttr(node.ID) + ` class="paragraph ` + r + `"`
@@ -1361,18 +1464,27 @@ func (c *html5Converter) paragraph(node *Block) string {
 	}
 	if node.hasTitle {
 		t := node.Title()
-		return "<div" + attributes + ">\n<div class=\"title\">" + t + "</div>\n<p>" + node.content() + "</p>\n</div>"
+		w.WriteString("<div" + attributes + ">\n<div class=\"title\">" + t + "</div>\n<p>")
+		node.writeContent(w)
+		w.WriteString("</p>\n</div>")
+		return
 	}
-	return "<div" + attributes + ">\n<p>" + node.content() + "</p>\n</div>"
+	w.WriteString("<div" + attributes + ">\n<p>")
+	node.writeContent(w)
+	w.WriteString("</p>\n</div>")
+	return
 }
 
-func (c *html5Converter) preamble(node *Block) string {
+func (c *html5Converter) preamble(w *bytes.Buffer, node *Block) {
 	doc := node.Document
 	toc := ""
 	if doc.Attributes["toc-placement"] == "preamble" && doc.hasSections() && doc.hasAttr("toc") {
 		toc = "\n<div id=\"toc\" class=\"" + doc.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + doc.Attributes["toc-title"] + "</div>\n" + c.outline(&doc.Block, nil, nil) + "\n</div>"
 	}
-	return "<div id=\"preamble\">\n<div class=\"sectionbody\">\n" + node.content() + "\n</div>" + toc + "\n</div>"
+	w.WriteString("<div id=\"preamble\">\n<div class=\"sectionbody\">\n")
+	node.writeContent(w)
+	w.WriteString("\n</div>" + toc + "\n</div>")
+	return
 }
 
 func attributionElement(node *Block, sl string) string {
@@ -1395,13 +1507,16 @@ func attributionElement(node *Block, sl string) string {
 	return "\n<div class=\"attribution\">\n" + text + cite + "\n</div>"
 }
 
-func (c *html5Converter) quote(node *Block) string {
+func (c *html5Converter) quote(w *bytes.Buffer, node *Block) {
 	title := ""
 	if node.hasTitle {
 		title = "\n<div class=\"title\">" + node.Title() + "</div>"
 	}
 	attr := attributionElement(node, c.sl())
-	return "<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "quoteblock") + `">` + title + "\n<blockquote>\n" + node.content() + "\n</blockquote>" + attr + "\n</div>"
+	w.WriteString("<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "quoteblock") + `">` + title + "\n<blockquote>\n")
+	node.writeContent(w)
+	w.WriteString("\n</blockquote>" + attr + "\n</div>")
+	return
 }
 
 func (c *html5Converter) verse(node *Block) string {
@@ -1413,9 +1528,12 @@ func (c *html5Converter) verse(node *Block) string {
 	return "<div" + idAttr(node.ID) + ` class="` + joinClasses(node, "verseblock") + `">` + title + "\n<pre class=\"content\">" + node.content() + "</pre>" + attr + "\n</div>"
 }
 
-func (c *html5Converter) sidebar(node *Block) string {
+func (c *html5Converter) sidebar(w *bytes.Buffer, node *Block) {
 	title := titleDiv(node)
-	return "<div" + idAttr(node.ID) + ` class="sidebarblock` + roleSuffix(node) + "\">\n<div class=\"content\">\n" + title + node.content() + "\n</div>\n</div>"
+	w.WriteString("<div" + idAttr(node.ID) + ` class="sidebarblock` + roleSuffix(node) + "\">\n<div class=\"content\">\n" + title)
+	node.writeContent(w)
+	w.WriteString("\n</div>\n</div>")
+	return
 }
 
 func (c *html5Converter) table(node *Block) string {
@@ -1553,8 +1671,8 @@ func (c *html5Converter) toc(node *Block) string {
 	return "<div" + ida + ` class="` + role + "\">\n<div" + titleID + ` class="title">` + title + "</div>\n" + c.outline(&doc.Block, levels, nil) + "\n</div>"
 }
 
-func (c *html5Converter) ulist(node *Block) string {
-	var result []string
+func (c *html5Converter) ulist(w *bytes.Buffer, node *Block) {
+	lw := lineWriter{w: w}
 	divClasses := []string{"ulist"}
 	checklist := node.hasOption("checklist")
 	markerChecked, markerUnchecked := "", ""
@@ -1578,29 +1696,29 @@ func (c *html5Converter) ulist(node *Block) string {
 	if node.Style != "" {
 		divClasses = append(divClasses, node.Style)
 	}
-	result = append(result, "<div"+idAttr(node.ID)+` class="`+joinClasses(node, divClasses...)+`">`)
+	lw.lines("<div" + idAttr(node.ID) + ` class="` + joinClasses(node, divClasses...) + `">`)
 	if node.hasTitle {
-		result = append(result, `<div class="title">`+node.Title()+"</div>")
+		lw.lines(`<div class="title">` + node.Title() + "</div>")
 	}
-	result = append(result, "<ul"+ulClass+">")
+	lw.lines("<ul" + ulClass + ">")
 	for _, item := range node.Blocks {
-		result = append(result, liOpen(item))
+		lw.lines(liOpen(item))
 		if _, ok := item.Attributes["checkbox"]; checklist && ok {
 			marker := markerUnchecked
 			if _, ok := item.Attributes["checked"]; ok {
 				marker = markerChecked
 			}
-			result = append(result, "<p>"+marker+item.itemText()+"</p>")
+			lw.lines("<p>" + marker + item.itemText() + "</p>")
 		} else {
-			result = append(result, "<p>"+item.itemText()+"</p>")
+			lw.lines("<p>" + item.itemText() + "</p>")
 		}
 		if item.hasBlocks() {
-			result = append(result, itemContent(item))
+			lw.begin()
+			itemContentTo(w, item)
 		}
-		result = append(result, "</li>")
+		lw.lines("</li>")
 	}
-	result = append(result, "</ul>", "</div>")
-	return strings.Join(result, "\n")
+	lw.lines("</ul>", "</div>")
 }
 
 func (c *html5Converter) video(node *Block) string {

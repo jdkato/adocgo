@@ -4,6 +4,7 @@
 package adocgo
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -82,6 +83,7 @@ func Load(src []byte, opts Options) (doc *Document, err error) {
 		}
 	}()
 	doc = newDocument(opts)
+	doc.srcLen = len(src)
 	doc.reader = newPreprocessorReader(doc, string(src), doc.Attributes["docfile"])
 	if opts.OutFile != "" {
 		if p, err := filepath.Abs(opts.OutFile); err == nil {
@@ -106,12 +108,13 @@ func (d *Document) Convert() (out []byte, err error) {
 		d.Attributes["outfile"] = d.outFile
 		d.Attributes["outdir"] = fileDirname(d.outFile)
 	}
-	s := d.convertDocument()
-	out = make([]byte, 0, len(s)+1)
-	out = append(out, s...)
-	if s != "" && !strings.HasSuffix(s, "\n") {
-		out = append(out, '\n')
+	var w bytes.Buffer
+	w.Grow(d.srcLen + d.srcLen/2 + 256)
+	d.convertDocumentTo(&w)
+	if n := w.Len(); n > 0 && w.Bytes()[n-1] != '\n' {
+		w.WriteByte('\n')
 	}
+	out = w.Bytes()
 	return out, nil
 }
 
