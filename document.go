@@ -97,6 +97,7 @@ type Document struct {
 	highlight  bool // highlight.js enabled
 	fallbackHL string
 	xmlMode    bool
+	outFile    string
 	reader     *Reader
 	conv       *html5Converter
 }
@@ -1115,4 +1116,65 @@ func (b *Block) normalizeWebPath(target, start string, preserveURITarget bool) s
 		return encodeSpacesInURI(target)
 	}
 	return webPath(target, start)
+}
+
+// docinfo ports Document#docinfo: it reads the shared and/or private docinfo
+// files for the given location ("head", "header" or "footer").
+func (d *Document) docinfo(location string) string {
+	if d.Safe >= SafeSecure {
+		return ""
+	}
+	attrs := d.Attributes
+	qualifier := ""
+	if location != "head" {
+		qualifier = "-" + location
+	}
+	var kinds []string
+	if v, ok := attrs["docinfo"]; !ok || v == "" {
+		if _, ok2 := attrs["docinfo2"]; ok2 {
+			kinds = []string{"private", "shared"}
+		} else if _, ok1 := attrs["docinfo1"]; ok1 {
+			kinds = []string{"shared"}
+		} else if ok {
+			kinds = []string{"private"}
+		} else {
+			return ""
+		}
+	} else {
+		for _, k := range rubySplit(v, ",") {
+			kinds = append(kinds, strip(k))
+		}
+	}
+	has := func(names ...string) bool {
+		for _, k := range kinds {
+			for _, n := range names {
+				if k == n {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	file := "docinfo" + qualifier + d.outfilesuffix
+	dir := attrs["docinfodir"]
+	subs := []string{"attributes"}
+	if v, ok := attrs["docinfosubs"]; ok {
+		subs = resolveSubs(v, "block", nil)
+	}
+	var content []string
+	read := func(name string) {
+		data, err := os.ReadFile(d.normalizeSystemPath(name, dir))
+		if err != nil {
+			return
+		}
+		text := strings.Join(prepareSourceString(string(data), true), "\n")
+		content = append(content, d.applySubs(text, subs))
+	}
+	if has("shared", "shared-"+location) {
+		read(file)
+	}
+	if docname := attrs["docname"]; docname != "" && has("private", "private-"+location) {
+		read(docname + "-" + file)
+	}
+	return strings.Join(content, "\n")
 }

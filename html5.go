@@ -334,6 +334,9 @@ func (c *html5Converter) document(node *Document) string {
 	if node.highlight {
 		result = append(result, `<link rel="stylesheet" href="`+hljsBase+"/styles/"+node.attrOr("highlightjs-theme", "github")+`.min.css"`+sl+">")
 	}
+	if di := node.docinfo("head"); di != "" {
+		result = append(result, di)
+	}
 	result = append(result, "</head>")
 	sectioned := node.hasSections()
 	classes := []string{node.Doctype}
@@ -344,6 +347,9 @@ func (c *html5Converter) document(node *Document) string {
 		classes = append(classes, r)
 	}
 	result = append(result, "<body"+idAttr(node.ID)+` class="`+strings.Join(classes, " ")+`">`)
+	if di := node.docinfo("header"); di != "" {
+		result = append(result, di)
+	}
 	tocDiv := func() string {
 		return `<div id="toc" class="` + node.attrOr("toc-class", "toc") + "\">\n<div id=\"toctitle\">" + node.Attributes["toc-title"] + "</div>\n" + c.outline(&node.Block, nil, nil) + "\n</div>"
 	}
@@ -455,6 +461,9 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 })
 </script>
 <script src="`+cdnBaseURL+"/mathjax/"+mathjaxVersion+`/MathJax.js?config=TeX-MML-AM_CHTML"></script>`)
+	}
+	if di := node.docinfo("footer"); di != "" {
+		result = append(result, di)
 	}
 	result = append(result, "</body>", "</html>")
 	return strings.Join(result, "\n")

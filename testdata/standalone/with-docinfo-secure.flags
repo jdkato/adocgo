@@ -1,0 +1,1 @@
+-S secure -a docinfo=shared -a docinfodir=include

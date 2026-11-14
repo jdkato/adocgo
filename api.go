@@ -6,6 +6,7 @@ package adocgo
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -82,10 +83,9 @@ func Load(src []byte, opts Options) (doc *Document, err error) {
 	}()
 	doc = newDocument(opts)
 	doc.reader = newPreprocessorReader(doc, string(src), doc.Attributes["docfile"])
-	if doc.Safe < SafeServer {
-		if opts.OutFile != "" {
-			doc.Attributes["outfile"] = opts.OutFile
-			doc.Attributes["outdir"] = fileDirname(opts.OutFile)
+	if opts.OutFile != "" {
+		if p, err := filepath.Abs(opts.OutFile); err == nil {
+			doc.outFile = filepath.ToSlash(p)
 		}
 	}
 	parseDocument(doc.reader, doc, false)
@@ -102,6 +102,10 @@ func (d *Document) Convert() (out []byte, err error) {
 			err = fmt.Errorf("adocgo: failed to convert document: %v", r)
 		}
 	}()
+	if d.Safe < SafeServer && d.outFile != "" {
+		d.Attributes["outfile"] = d.outFile
+		d.Attributes["outdir"] = fileDirname(d.outFile)
+	}
 	s := d.convertDocument()
 	if s != "" && !strings.HasSuffix(s, "\n") {
 		s += "\n"
@@ -109,7 +113,7 @@ func (d *Document) Convert() (out []byte, err error) {
 	return []byte(s), nil
 }
 
-// Title returns the document title with substitutions applied, if any.
+// DocTitle returns the document title with substitutions applied, if any.
 func (d *Document) DocTitle() string {
 	t, _ := d.doctitle(false)
 	return t

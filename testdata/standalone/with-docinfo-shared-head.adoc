@@ -1,0 +1,3 @@
+= Docinfo Head Only (C)
+
+text

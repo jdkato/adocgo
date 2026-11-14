@@ -1,0 +1,3 @@
+= Docinfo missing
+
+text

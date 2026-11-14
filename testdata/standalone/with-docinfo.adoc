@@ -1,0 +1,6 @@
+= Docinfo Test
+Author Name
+:docinfo: shared,private
+:docinfodir: include
+
+text
