@@ -34,6 +34,13 @@ var subOptions = map[string]map[string]bool{
 	"inline": set("none", "normal", "verbatim", "specialchars", "specialcharacters", "quotes", "attributes", "replacements", "macros", "post_replacements"),
 }
 
+// maxPassthroughDepth bounds the recursion when restoring passthroughs.
+const maxPassthroughDepth = 32
+
+// maxPassthroughRestores bounds the number of placeholders restored for one
+// top-level substitution pass.
+const maxPassthroughRestores = 100000
+
 const (
 	charCAN   = "\u0018"
 	charDEL   = "\u007f"
@@ -1164,11 +1171,27 @@ func (b *Block) extractPassthroughs(text string) string {
 }
 
 func (b *Block) restorePassthroughs(text string) string {
+	// A passthrough whose text contains a placeholder (only possible if the
+	// input contains the raw placeholder characters) can recurse forever or
+	// expand exponentially; Asciidoctor dies with "stack level too deep" in
+	// the cyclic case. Bound both the depth and the total work.
+	if b.passDepth == 0 {
+		b.passBudget = maxPassthroughRestores
+	}
+	if b.passDepth >= maxPassthroughDepth {
+		return text
+	}
+	b.passDepth++
+	defer func() { b.passDepth-- }()
 	return passSlotRx.ReplaceAllFunc(text, func(m *rx.Match) string {
 		idx := atoi(m.Group(1))
-		if idx >= len(b.passthroughs) {
+		if len(m.Group(1)) > 9 || idx >= len(b.passthroughs) {
 			return "??pass??"
 		}
+		if b.passBudget <= 0 {
+			return m.Group(0)
+		}
+		b.passBudget--
 		pass := b.passthroughs[idx]
 		subbed := b.applySubs(pass.text, pass.subs)
 		if pass.typ != "" {

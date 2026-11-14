@@ -56,6 +56,8 @@ type Block struct {
 
 	passthroughs []passthru
 	passLocked   bool
+	passDepth    int
+	passBudget   int
 
 	nextSectionIndex   int
 	nextSectionOrdinal int

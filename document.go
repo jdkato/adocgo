@@ -98,6 +98,7 @@ type Document struct {
 	fallbackHL string
 	xmlMode    bool
 	outFile    string
+	nesting    *int
 	reader     *Reader
 	conv       *html5Converter
 }
@@ -143,6 +144,7 @@ func newDocument(opts Options) *Document {
 	doc.Attributes = map[string]string{}
 	doc.ContentModel = "compound"
 	doc.nextSectionOrdinal = 1
+	doc.nesting = new(int)
 	doc.refs = map[string]refTarget{}
 	doc.footnotes = &[]footnote{}
 	doc.callouts = newCallouts()
@@ -380,6 +382,7 @@ func newNestedDocument(parent *Document, lines []string) *Document {
 	doc.ContentModel = "compound"
 	doc.nextSectionOrdinal = 1
 	doc.parentDocument = parent
+	doc.nesting = parent.nesting
 	doc.baseDir = parent.baseDir
 	doc.refs = parent.refs
 	doc.footnotes = &[]footnote{}

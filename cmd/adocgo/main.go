@@ -16,6 +16,7 @@ const usage = `Usage: adocgo [OPTION]... FILE...
 Convert the AsciiDoc source FILE or FILE(s) to HTML5 (use - for stdin).
 
   -a, --attribute name[=value]  set a document attribute (name!, name@ supported)
+  -b, --backend BACKEND         output format: html5 (default) or xhtml5
   -B, --base-dir DIR            base directory containing the document and resources
   -d, --doctype DOCTYPE         document type: article, book, manpage, inline
   -e, --embedded                output an embedded document (no header/footer)
@@ -129,8 +130,11 @@ func run(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 			if err != nil {
 				return fail("%v", err)
 			}
-			if v != "html5" && v != "html" {
-				return fail("unsupported backend: %s (only html5 is available)", v)
+			switch v {
+			case "html5", "html", "xhtml5", "xhtml":
+				opts.Attributes["backend"] = v
+			default:
+				return fail("unsupported backend: %s (only html5 and xhtml5 are available)", v)
 			}
 			continue
 		}

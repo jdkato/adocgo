@@ -131,6 +131,8 @@ func TestPathological(t *testing.T) {
 		"attr cycle":          ":a: {b}\n:b: {a}\n\n{a} {b}\n",
 		"long line":           strings.Repeat("word *bold* _em_ `code` ", 5000) + "\n",
 		"many sections":       strings.Repeat("== S\n\n", 2000),
+		"pass slot self ref":  "pass:[\u00960\u0097] and \u00961\u0097 +x+\n\n+++\u00960\u0097+++ pass:n[\u00960\u0097 +a+ \u00961\u0097]\n",
+		"stray pass slots":    "\u0096\u0097 \u00969\u0097 \u0096999999999999999999999\u0097 +a+ \u0018 \u007f {x}\n",
 		"deep sections":       "= T\n\n== a\n\n=== b\n\n==== c\n\n===== d\n\n====== e\n\n======= f\n",
 		"table spans":         "|===\n" + strings.Repeat("99+|x 3.99+|y\n", 50) + "|===\n",
 		"table many cols":     "[cols=\"100000*\"]\n|===\n|a\n|===\n",
@@ -164,6 +166,32 @@ func TestPathological(t *testing.T) {
 		for name, src := range cases {
 			opts := Options{Safe: SafeSecure, Doctype: doctype, Standalone: doctype == "book"}
 			convertWithTimeout(t, name+" ("+doctype+")", []byte(src), opts)
+		}
+	}
+}
+
+// TestNestingLimit checks that absurdly deep nesting yields an error (as
+// with the reference implementation) rather than a stack overflow.
+func TestNestingLimit(t *testing.T) {
+	cases := map[string]string{
+		"quotes":   strings.Repeat("> ", 20000) + "x\n",
+		"sections": strings.Repeat(":leveloffset: +1\n\n== S\n\n", 20000),
+	}
+	for name, src := range cases {
+		done := make(chan error, 1)
+		go func() {
+			_, err := Convert([]byte(src), Options{Safe: SafeSecure})
+			done <- err
+		}()
+		select {
+		case err := <-done:
+			if err == nil {
+				t.Logf("%s: converted without hitting the nesting limit", name)
+			} else if !strings.Contains(err.Error(), "nesting") {
+				t.Errorf("%s: unexpected error: %v", name, err)
+			}
+		case <-time.After(60 * time.Second):
+			t.Fatalf("%s: did not finish", name)
 		}
 	}
 }
@@ -215,6 +243,8 @@ func FuzzConvert(f *testing.F) {
 		":a: {b}\n:b: 1 \\\n2\n\n{a} {counter:c} {set:d:e}\n",
 		"image::a.png[b,1,2,link=c]\n\nvideo::d[youtube]\n\ntoc::[]\n",
 		",===\na,\"b\nc\",d\n,===\n",
+		"pass:[\u00960\u0097] +x+ \u00961\u0097 \u0018\u007f{x}\n",
+		"> > > q\n\n:leveloffset: +1\n\n== S\n\nxref:a[b] <<c>> kbd:[d] menu:e[f > g] image:h[i] icon:j[k]\n",
 	}
 	for _, s := range seeds {
 		f.Add([]byte(s), uint8(0))

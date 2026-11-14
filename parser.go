@@ -338,6 +338,8 @@ func clearAttrs(m map[string]string) {
 }
 
 func nextSection(reader *Reader, parent *Block, attributes map[string]string) (*Block, map[string]string) {
+	parent.Document.enterNesting()
+	defer parent.Document.leaveNesting()
 	var preamble, intro *Block
 	part := false
 	var section *Block
@@ -519,7 +521,28 @@ func atoi(s string) int {
 	return n
 }
 
+// maxNestingDepth bounds how deeply blocks and sections may nest. The
+// reference implementation runs out of stack ("stack level too deep") well
+// before this limit; exceeding it makes the conversion fail with an error
+// instead of overflowing the goroutine stack.
+const maxNestingDepth = 3000
+
+type nestingError struct{}
+
+func (nestingError) Error() string { return "document nesting is too deep" }
+
+func (d *Document) enterNesting() {
+	*d.nesting++
+	if *d.nesting > maxNestingDepth {
+		panic(nestingError{})
+	}
+}
+
+func (d *Document) leaveNesting() { *d.nesting-- }
+
 func nextBlock(reader *Reader, parent *Block, attributes map[string]string, options blockOpts) *Block {
+	parent.Document.enterNesting()
+	defer parent.Document.leaveNesting()
 	skipped := reader.SkipBlankLines()
 	if skipped < 0 {
 		return nil
