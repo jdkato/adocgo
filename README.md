@@ -229,6 +229,16 @@ $ scripts/difffuzz.sh 7 "-d book"   # differential fuzzing against asciidoctor
 
 None of the tests need Ruby; only the `scripts/` do.
 
+## AI attribution
+
+adocgo was written by [Claude Code](https://claude.com/claude-code),
+Anthropic's AI coding agent, working under the direction of the repository
+owner. The code is a port of the Asciidoctor source, and its correctness
+rests on the differential test corpus described above (byte-for-byte
+comparison with Asciidoctor 2.0.26) rather than on line-by-line human
+authorship. Commits produced this way carry a `Co-Authored-By: Claude`
+trailer.
+
 ## License
 
 Apache-2.0 (see [LICENSE](LICENSE)). adocgo is derived from Asciidoctor, which

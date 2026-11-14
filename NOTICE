@@ -1,6 +1,9 @@
 adocgo
 ======
 
+Copyright 2026 Joseph Kato. Licensed under the Apache License, Version 2.0
+(see LICENSE).
+
 This project is a Go port of Asciidoctor (https://asciidoctor.org). The
 parsing rules, regular expressions and HTML5 output templates are derived
 from the Asciidoctor Ruby source code.
