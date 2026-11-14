@@ -116,18 +116,13 @@ func subSpecialchars(text string) string {
 	return text
 }
 
-var (
-	quotedTextSniffRx       = rxScan("[*_`#^~]")
-	quotedTextSniffCompatRx = rxScan(`[*'_+#^~]`)
-)
-
 func (b *Block) subQuotes(text string) string {
 	compat := b.Document.compatMode
-	sniff, qs := quotedTextSniffRx, quoteSubs
+	sniff, qs := "*_`#^~", quoteSubs
 	if compat {
-		sniff, qs = quotedTextSniffCompatRx, quoteSubsCompat
+		sniff, qs = "*'_+#^~", quoteSubsCompat
 	}
-	if sniff.MatchString(text) {
+	if strings.ContainsAny(text, sniff) {
 		for _, q := range qs {
 			q := q
 			text = q.re.ReplaceAllFunc(text, func(m *rmatch) string {
