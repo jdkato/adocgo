@@ -1,0 +1,71 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page gives you a crash course in how to extend the PDF converter.
+It begins by introducing the technology the converter uses to generate the PDF and links you to a tutorial covering how to use it.
+Then it briefly explains how the theming system influences the converter.
+Finally, it gives you an overview of how to extend the converter.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prawn">Prawn</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF uses {url-prawn}[Prawn^] under the covers to generate the PDF.
+Prawn is a low-level PDF writer that can load fonts, ink text, embed images, add graphics, and draw lines.
+With those operations alone, this converter manages to produce a PDF from an AsciiDoc document.</p>
+</div>
+<div class="paragraph">
+<p>Before you dive into extending this converter, you&#8217;ll need to understand how to use Prawn.
+The article <a href="https://www.sitepoint.com/hackable-pdf-typesetting-in-ruby-with-prawn/" target="_blank" rel="noopener">Hackable PDF Typesetting in Ruby with Prawn</a> gives a crash course in how to create your first PDF document containing text, graphics, and images with Prawn.
+That article is essential reading for extending Asciidoctor PDF, because Asciidoctor PDF uses many of the same operations (as well as many helpful add-ons).
+Once you feel comfortable with Prawn, you&#8217;re ready to extend the converter.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_going_beyond_theming">Going beyond theming</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While creating the PDF document, there are thousands of small decisions the converter must make about how to instruct Prawn to lay out the content elements on the page (so-called &#8220;hackable typesetting&#8221;).
+But once these elements are written, they can&#8217;t be moved or styled (as is the case with HTML and CSS).
+To help influence those decisions&#8212;&#8203;and thus prevent the converter from becoming too opinionated, a theming system was introduced.</p>
+</div>
+<div class="paragraph">
+<p>The theme support is there to provide basic customizations (fonts, colors, borders, spacing, etc.).
+But it can only go so far.
+At some point, it becomes necessary to extend the converter to meet advanced design requirements.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tailoring_the_conversion">Tailoring the conversion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The pages <a href="create-converter.html">create-converter.html</a> and <a href="use-converter.html">use-converter.html</a> provide step-by-step instructions about how to create and use your first extended converter.
+If you have those steps under your belt, browse the <a href="use-cases.html">use-cases.html</a> page to see examples of how to extend the converter and give you ideas about the kinds of customizations you can make in an extended converter.</p>
+</div>
+<div class="sect2">
+<h3 id="_convert_methods">Convert methods</h3>
+<div class="paragraph">
+<p>The methods on a converter class that handle conversion of elements follow the pattern <code>convert_&lt;name&gt;</code> for block elements (e.g., <code>convert_example</code>) and <code>convert_inline_&lt;name&gt;</code> for inline elements (e.g., <code>convert_inline_anchor</code>), where <code>&lt;name&gt;</code> is the name of the element.</p>
+</div>
+<div class="paragraph">
+<p>When you override a block element, you write PDF objects directly to the Prawn Document (the current context).
+When you override an inline element, you return pseudo-HTML, which is then parsed and converted into PDF objects.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pseudo_html">Pseudo-HTML</h3>
+<div class="paragraph">
+<p>The pseudo-HTML in Asciidoctor PDF evolved from the inline formatting in Prawn, now supporting the following elements: a, br, button, code, color, del, em, font, img, key, mark, span, strong, sub, sup.
+All decimal and hexadecimal character references are supported, as well as the named entities amp, apos, gt, lt, nbsp, and quot (e.g., <code>&amp;apos;</code>).
+You can change the font color using the <code>rgb</code> attribute on the <code>color</code> element (e.g., <code>&lt;color rgb="#ff0000"&gt;</code>) and the font family and size using the <code>name</code> and <code>size</code> attributes on the <code>font</code> element, respectively (e.g., <code>&lt;font name="sans" size="12"&gt;</code>).
+You can also use the <code>style</code> attribute on <code>span</code> to control the font color, weight, and style using the relevant CSS property names.
+The pseudo-HTML in Asciidoctor PDF also supports the <code>class</code> attribute on any element for applying roles from the theme.
+(Though not recommended, you can pass this pseudo-HTML straight through to Prawn using an inline passthrough in AsciiDoc).</p>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,103 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default unit of measure for a PDF canvas is points (pt).
+However, you may prefer think of measurements in terms of inches (in), centimeters (cm), or millimeters (mm).
+The theme can convert from any of the supported measurement units to points when you specify a unit notation directly after a number.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="default">Default unit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many of the theme keys, such as <code>border-width</code>, <code>padding</code>, etc., require their values be a measurement.
+If you specify a number without any units, the units defaults to points (pt), the unit of measure for the PDF canvas.
+A point is defined as 1/72 of an inch.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="supported">Supported units</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following units are supported:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Unit</th>
+<th class="tableblock halign-left valign-top">Suffix</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Centimeter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cm</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inches</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">in</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Millimeter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mm</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Percentage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">%, vw, or vh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A percentage with the % unit is calculated relative to the width or height of the content area.
+Viewport-relative percentages (vw or vh units) are calculated as a percentage of the page width or height, respectively.
+Currently, percentage units can only be used for placing elements on the title page or for setting the width of a block image.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Points</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default unit of measure when no unit is specified.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="specify">Specify a measurement unit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here&#8217;s an example of how you can use inches to define the page margins:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  margin: [0.75in, 1in, 0.75in, 1in]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The order of elements in a measurement array is the same as it is in CSS:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>top</p>
+</li>
+<li>
+<p>right</p>
+</li>
+<li>
+<p>bottom</p>
+</li>
+<li>
+<p>left</p>
+</li>
+</ol>
+</div>
+</div>
+</div>

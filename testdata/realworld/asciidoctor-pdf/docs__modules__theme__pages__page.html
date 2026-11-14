@@ -1,0 +1,316 @@
+<div class="sect1">
+<h2 id="page">page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>page</code> category control the size, margins, and background of the pages in a document (i.e., canvas).
+We recommended that you define this category before all other categories.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The background of the title page can be styled independently of other pages.
+See <a href="title-pages.html">title-pages.html</a> and <a href="title-page.html">title-page.html</a> for details.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#background-color">background-color</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <code>'FFFFFF'</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  background-color: #FEFEFE</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#background">background-image</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#specify">image macro</a> | <a href="images.html#specify">path</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  background-image: image:page-bg.png[]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#recto-and-verso">background-image-(recto|verso)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#specify">image macro</a> | <a href="images.html#specify">path</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  background-image:
+    recto: image:page-bg-recto.png[]
+    verso: image:page-bg-verso.png[]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#columns">columns</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer<br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  columns: 2</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">column-gap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <em>$base-font-size</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  columns: 2
+  columns-gap: 12</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#foreground">foreground-image</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="images.html#specify">image macro</a> | <a href="images.html#specify">path</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  foreground-image: image:watermark.svg[]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">initial-zoom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Fit</code> | <code>FitH</code> | <code>FitV</code><br>
+(default: <code>FitH</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  initial-zoom: Fit</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">layout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>landscape</code> | <code>portrait</code><br>
+(default: <code>portrait</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  layout: landscape</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">margin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a> | <a href="measurement-units.html">Measurement[top,right,bottom,left]</a><br>
+(default: <code>36</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  margin: [0.5in, 0.67in, 1in, 0.67in]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#rotated-margin">margin-rotated</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a> | <a href="measurement-units.html">Measurement[top,right,bottom,left]</a><br>
+(default: <code>$page-margin</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  margin-rotated: [0.5in, 0.5in, 1in, 0.5in]</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#prepress-margins">margin-inner</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>48</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  margin-inner: 0.75in</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#prepress-margins">margin-outer</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <code>24</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  margin-outer: 0.59in</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>outline</code> | <code>none</code> | <code>thumbs</code> | <code>fullscreen</code> | <code>fullscreen outline</code> | <code>fullscreen none</code> | <code>fullscreen thumbs</code><br>
+(default: <code>outline</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  mode: fullscreen none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/prawnpdf/pdf-core/blob/0.6.0/lib/pdf/core/page_geometry.rb#L16-L68" target="_blank" rel="noopener">Named size</a> | <a href="measurement-units.html">Measurement[width,height]</a><br>
+(default: <code>A4</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  size: Letter</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="background-color">Disable background-color</h3>
+<div class="paragraph">
+<p>To turn off the background color for the page, set the value of the <code>background-color</code> key to white (i.e., <code>#FFFFFF</code>).
+The color keyword <code>transparent</code> is not recognized in this context.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rotated-margin">Rotated margin</h3>
+<div class="paragraph">
+<p>The rotated margin is applied to the opposing page layout when a page is rotated.
+If the initial page layout is portrait, then the rotated margin applies to landscape pages, and vice versa.
+The <code>margin</code> key applies to the initial page layout.</p>
+</div>
+<div class="paragraph">
+<p>The rotated margin does not honor <a href="#prepress-margins">Inner and outer margins</a>.
+Rather, it&#8217;s the same margin regardless of whether the page side is recto or verso.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="prepress-margins">Inner and outer margins</h3>
+<div class="paragraph">
+<p>The margins for <code>recto</code> (right-hand, odd-numbered) and <code>verso</code> (left-hand, even-numbered) pages are calculated automatically from the <code>margin-inner</code> and <code>margin-outer</code> values.
+These margins are only used when the value <code>prepress</code> is assigned to the <code>media</code> document attribute.</p>
+</div>
+<div class="paragraph">
+<p>The recto margin is applied to the title page if a front cover is specified.
+To apply the recto margin to the title page without specifying a front cover, assign the value <code>~</code> to the <code>front-cover-image</code>.
+See <a href="cover.html">cover.html</a> for information about the <code>cover</code> category keys.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Setting <code>front-cover-image</code> to <code>~</code> makes the converter acts as though a front cover is present without reserving a page for it.
+It essentially informs the converter that the front cover will be inserted by a separate process.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="columns">Columns</h3>
+<div class="paragraph">
+<p>Page columns are applied to the body of a document that has either the article or manpage doctype.
+The body of the document begins after the document title and, if present, the TOC.</p>
+</div>
+<div class="paragraph">
+<p>If the toc macro is used in a document configured to have columns, the behavior is undefined.</p>
+</div>
+<div class="paragraph">
+<p>If the columns are set on the index section using the <code>index-columns</code> key, that setting will be overridden by the value of <code>page-columns</code>.
+The index will be arranged within the page columns.</p>
+</div>
+<div class="sect3">
+<h4 id="column-break">Column break</h4>
+<div class="paragraph">
+<p>Even when columns are enabled, the AsciiDoc page break macro will still end the current page and start a new page.
+The next chunk of content will be written to the left-most column on that new page.</p>
+</div>
+<div class="paragraph">
+<p>If you want the page break macro to end the current column instead, add the <code>column</code> role to it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">left column
+
+[.column]
+&lt;&lt;&lt;
+
+right column</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If columns are not enabled, the <code>column</code> role will be ignored and it will revert to a true page break.
+Thus, it&#8217;s safe to add the role even when you&#8217;re not using columns.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="numbering">page-numbering</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The key in the <code>page-numbering</code> category controls where the integer (1-based) page numbering begins.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 33.3333%;">
+<col style="width: 41.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start-at</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="page-numbers.html#start-at">Start page</a> | Integer<br>
+(default: <code>body</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  numbering:
+    start-at: cover</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>See <a href="page-numbers.html#start-at">Starting integer page numbering</a> for more information about the <code>start-at</code> key, its values, and their requirements.</p>
+</div>
+</div>
+</div>

@@ -1,0 +1,225 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page describes how to configure fallback fonts, why they are necessary, and when they get used.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_purpose">Purpose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a TrueType font (not an AFM font) is missing a character needed to render the document, such as a special symbol or emoji, you can have Asciidoctor PDF look for the character in a fallback font.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+The fallback font only gets used when the primary font is a TrueType or OpenType font (i.e., TTF, DFont, TTC, OTF).
+This functionality is not supported when using an AFM font.
+Any glyph missing from an AFM font is simply replaced with the &#8220;not&#8221; glyph (<code>&#172;</code>).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>While multiple fallback fonts are supported, you only need to specify a single fallback font, typically one that provides a full set of symbols.
+If the character isn&#8217;t found in a fallback font, it will (mostly likely) be replaced by a box (i.e., the notdef glyph).
+This behavior is guaranteed if you&#8217;re using the bundled fallback font.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+Using the fallback font slows down PDF generation slightly because it has to analyze every single character.
+Its use is not recommended for large documents.
+Instead, it&#8217;s best to select primary fonts that have all the characters you need.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the PDF generator (Prawn) makes use of the fallback font to render a character, that will introduce a break opportunity, regardless of what role is set on the span of text or what characters are adjacent (e.g., <code>{nbsp}</code>).
+When Prawn makes use of a fallback font, it disrupts assumptions about line wrapping.
+In order to assign the fallback font to the character, Prawn must create a dedicated fragment for that character.
+In other words, using the fallback font to resolve the glyph for a character introduces a new fragment.
+A fragment boundary always creates an artificial break opportunity in the text.</p>
+</div>
+<div class="paragraph">
+<p>The best way to ensure that the no-break boundaries are honored is to ensure that the primary font contains glyphs for all the characters in the manuscript, as well as any required characters for using a custom font with Asciidoctor PDF.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements">Requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When defining the fallback font, you <strong>must specify all four variants</strong> (<code>normal</code>, <code>bold</code>, <code>italic</code>, <code>bold_italic</code>), even if you use the same font file for each.
+You can use a shorthand syntax to do so, which is shown below.</p>
+</div>
+<div class="paragraph">
+<p>You cannot use a color emoji font as a fallback font in Asciidoctor PDF.
+The font library used by Asciidoctor PDF does not support color fonts and will cause Asciidoctor to crash.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_the_built_in_fallback_fonts">Using the built-in fallback fonts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF provides two fallback fonts.
+One is for general writing in non-Latin languages (M+ 1p) and the other is for emoji (Noto Emoji).</p>
+</div>
+<div class="paragraph">
+<p>The <code>default</code> theme does not register any fallback fonts.
+In order to use the built-in fallback fonts, you must use or extend the <code>default-with-font-fallbacks</code> theme instead.</p>
+</div>
+<div class="paragraph">
+<p>If you want to build a theme that uses the built-in fallback fonts, you can do so by extending the <code>default-with-font-fallbacks</code> theme, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default-with-font-fallbacks
+base:
+  font_color: #000000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If, instead, you want to use the built-in fallback fonts in your own theme which does not extend <code>default-with-font-fallbacks</code>, you can do so as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+font:
+  catalog:
+    merge: true
+    M+ 1p Fallback: GEM_FONTS_DIR/mplus1p-regular-fallback.ttf
+    Noto Emoji: GEM_FONTS_DIR/notoemoji-subset.ttf
+  fallbacks: [M+ 1p Fallback, Noto Emoji]
+base:
+  font_color: #000000</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_fallback_font">Custom fallback font</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like with other custom fonts, you first need to declare the fallback font.
+Let&#8217;s choose <a href="https://github.com/android/platform_frameworks_base/blob/master/data/fonts/DroidSansFallback.ttf" target="_blank" rel="noopener">Droid Sans Fallback</a>.
+You can map all the styles to a single font file (since bold and italic don&#8217;t usually make sense for symbols).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+font:
+  catalog:
+    Roboto:
+      normal: roboto-normal.ttf
+      italic: roboto-italic.ttf
+      bold: roboto-bold.ttf
+      bold_italic: roboto-bold_italic.ttf
+    DroidSansFallback: droid-sans-fallback.ttf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that we only declare the fallback font file once using a literal value.
+This ensures the font is defined for all four variants so it will be used regardless of which font style is active when it&#8217;s called on.
+This assignment is equivalent to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">DroidSansFallback:
+  '*': droid-sans-fallback.ttf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The benefit of the expanded syntax is that it allows you to override the font file for just one of the variants (e.g., bold).</p>
+</div>
+<div class="paragraph">
+<p>Next, add the key name to the <code>fallbacks</code> key under the <code>font-catalog</code> key.
+The <a href="font.html">fallbacks key</a> accepts an array of values, meaning you can specify more than one fallback font.
+However, we recommend using a single fallback font, if possible, as shown here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+font:
+  catalog:
+    Roboto:
+      normal: roboto-normal.ttf
+      italic: roboto-italic.ttf
+      bold: roboto-bold.ttf
+      bold_italic: roboto-bold_italic.ttf
+    DroidSansFallback: droid-sans-fallback.ttf
+  fallbacks:
+  - DroidSansFallback</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using more than one fallback font, add additional lines to the <code>fallbacks</code> key.</p>
+</div>
+<div class="paragraph">
+<p>Finally, make sure you&#8217;ve configured your theme to use your custom font:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-family: Roboto</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s it!
+Now you&#8217;re covered.
+If your custom font is missing a glyph, Asciidoctor PDF will look in your fallback font to find it.
+You don&#8217;t need to reference the fallback font anywhere else in your theme file.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Keep in mind that the fallback font will be used regardless of what the original font is.
+Thus, it&#8217;s possible the fallback font will be used in place of a monospace character.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s another example that shows how to use an alternative emoji font (Symbola) instead of the the built-in one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default-with-font-fallbacks
+font:
+  catalog:
+    merge: true
+    Symbola: /path/to/symbola.ttf
+  fallbacks: [ M+ 1p, Symbola ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now Asciidoctor PDF will look for the emoji in the Symbola font instead of the Noto Emoji font.</p>
+</div>
+</div>
+</div>

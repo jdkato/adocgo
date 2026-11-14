@@ -1,0 +1,111 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Use the keys in the <code>role</code> category to define custom roles or redefine the built-in roles.
+Custom roles only apply to paragraphs and inline phrases.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_define_a_custom_role">Define a custom role</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom roles are defined under the <code>role</code> category key.
+The name of a custom role may contain a hyphen, but <strong>a role name cannot contain an underscore</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role: <b class="conum">(1)</b>
+  rolename: <b class="conum">(2)</b>
+    font-color: #FF7F50 <b class="conum">(3)</b>
+    font-style: bold
+    text-decoration: underline
+  another-role: <b class="conum">(4)</b>
+    border-width: 0.5</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Custom roles are defined under the <code>role</code> category key.</p>
+</li>
+<li>
+<p>Create a name for your custom role.</p>
+</li>
+<li>
+<p>Enter a formatting key and its value on a new line under the name of the role.
+Each key that you want applied to a role should be entered on a new line.</p>
+</li>
+<li>
+<p>You can define more than one custom role under the <code>role</code> category key.
+Role names can contain hyphens, but not underscores.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The formatting keys that a custom role can accept are listed in <a href="role.html">role.html</a>.
+Be aware that some keys do not apply to the context where the role is used.
+Let&#8217;s look at some custom role definition and usage examples in the next section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_role_examples">Custom role examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the following example, a custom role named <code>red</code> is defined.
+The keys <code>background-color</code> and <code>font-color</code> are set and each key is assigned a color value using the <a href="color.html#hex">hex format</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  red:
+    background-color: #333333
+    font-color: #FF0000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use a custom role to unset the default styling of a paragraph or inline phrase and make it inherit the styling of its parent element.
+In the example below, a custom role named <code>heading-code</code> is defined and the <code>font-color</code> key is unset by assigning a tilde (<code>~</code>) as its value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">role:
+  heading-code:
+    font-color: ~</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the next example, the <code>red</code> and <code>heading-code</code> custom roles are assigned to text in a document.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+
+== Section title
+
+[.red] <b class="conum">(1)</b>
+Error text is shown in red.
+
+=== [.heading-code]`SELECT` clause <b class="conum">(2)</b>
+
+A paragraph.</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>The <code>red</code> custom role is assigned to a paragraph.</p>
+</li>
+<li>
+<p>The <code>heading-code</code> custom role is assigned to an inline phrase marked up with the codespan syntax.
+The code phrase will inherit the font color of the section heading, because the <code>heading-code</code> role unsets the font color that would usually be applied to a code phrase.
+However, the phrase <code>Select</code> will inherit all the other code phrase styles.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>See <a href="role.html">role.html</a> for the list of keys a custom role can accept.</p>
+</div>
+</div>
+</div>

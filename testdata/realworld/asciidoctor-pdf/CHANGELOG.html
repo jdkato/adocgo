@@ -1,0 +1,5768 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document provides a high-level view of the changes to the Asciidoctor PDF by release.
+For a detailed view of what has changed, refer to the <a href="https://github.com/asciidoctor/asciidoctor-pdf/commits/main">commit history</a> on GitHub.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_27_2026_09_02_mojavelinux">2.3.27 (2026-09-02) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>honor attribute unset in AsciiDoc table cell when determining if attribute is unspecified</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.27">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.26...v2.3.27">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_26_2026_09_02_mojavelinux">2.3.26 (2026-09-02) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>scope Document#attr_unspecified? to parent document; don&#8217;t crash if <code>:attributes</code> option not set (#2656)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_2">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.26">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.25...v2.3.26">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_25_2026_08_31_mojavelinux">2.3.25 (2026-08-31) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add the ballot X glyphs (U+2717 and U+2718) to the code and fallback fonts (#2652)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>suppress warning if glyph for LF cannot be found in fallback font as it&#8217;s unlike to impact rendering</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>properly encode all non-ASCII IDs when creating and referencing destinations in PDF (#2646) (<strong>@sandraLbdvTW</strong>)</p>
+</li>
+<li>
+<p>don&#8217;t crash when creating toc for article with only an abstract section (#2649)</p>
+</li>
+<li>
+<p>use empty value for preface in running content if <code>preface-title</code> attribute is explicitly unset (#2644)</p>
+</li>
+<li>
+<p>don&#8217;t allow <code>admonition-label-min-width</code> key to be less than required space to fit admonition icon</p>
+</li>
+<li>
+<p>correctly map all icons from FontAwesome 4 (#2373)</p>
+</li>
+<li>
+<p>don&#8217;t include children of section with empty title in TOC</p>
+</li>
+<li>
+<p>don&#8217;t include children of section with empty title in outline</p>
+</li>
+<li>
+<p>when checking whether an attribute is unspecified, consider attributes that are soft set/unset from API/CLI (#2654)</p>
+</li>
+<li>
+<p>restore original require after loading treetop</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_3">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.25">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.24...v2.3.25">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_24_2025_11_15_mojavelinux">2.3.24 (2025-11-15) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>bypass any dry run logic if remaining height on page is less than heading font size</p>
+</li>
+<li>
+<p>update import_page method on converter to return true if page was imported (nil otherwise), on par with the functionality of method it replaces</p>
+</li>
+<li>
+<p>limit min toclevels value so it does not cause TOC to be empty (#2619)</p>
+</li>
+<li>
+<p>add checkmark glyph (U+2713) to prose fonts (Noto Serif and Noto Sans) to avoid need for fallback font (#2617)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_4">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.24">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.23...v2.3.24">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_23_2025_10_26_mojavelinux">2.3.23 (2025-10-26) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix incorrect spacing between entries in horizontal dlist when entry description crosses page boundary (#2614)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_5">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.23">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.22...v2.3.23">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_22_2025_10_23_mojavelinux">2.3.22 (2025-10-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>don&#8217;t orphan section with unbreakable option that spans page boundary (#2608)</p>
+</li>
+<li>
+<p>correctly track start page number of section title that self-advances when section is breakable (#2609)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_6">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.22">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.21...v2.3.22">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_21_2025_10_08_mojavelinux">2.3.21 (2025-10-08) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>remove shy hyphens from text in log message when formatted text cannot be parsed (#2599)</p>
+</li>
+<li>
+<p>clear float box if next block falls outside of float group (#2596)</p>
+</li>
+<li>
+<p>resolve fonts relative to theme dir before GEM_FONTS_DIR if <code>pdf-fontsdir</code> not specified (#2349)</p>
+</li>
+<li>
+<p>add see and see-also associations on index terms to index (#2527)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_7">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.21">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.20...v2.3.21">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_20_2025_09_17_mojavelinux">2.3.20 (2025-09-17) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add symbols for shift, command, option, and return keys to the fallback font</p>
+</li>
+<li>
+<p>render horizontal dlist without using prawn-table, allowing the description to exceed the height of one page (#2591)</p>
+</li>
+<li>
+<p>allow relative font size for sub and sup to be set independently (support combined setting for backwards compatibility)</p>
+</li>
+<li>
+<p>allow value of <code>base-font-size-min</code> and <code>&lt;category&gt;-font-size-min</code> theme keys to be relative (e.g., 0.75em) (#2547)</p>
+</li>
+<li>
+<p>respect <code>hide-uri-scheme</code> attribute when appending URL to link text when media is print or prepress (#2583)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>always force NULL character to have 0 width, even if missing from font (#2585)</p>
+</li>
+<li>
+<p>don&#8217;t drop line in running content if attribute reference resolves to text that contains attribute reference (not originally present)</p>
+</li>
+<li>
+<p>correctly calculate extent for block in columns that starts below doctitle (#2579)</p>
+</li>
+<li>
+<p>support internal link on image (value of link attribute starts with #) (#2572)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>suppress warning about the use of Ruby&#8217;s logger gem when loading Asciidoctor</p>
+</li>
+<li>
+<p>ignore error if bigdecimal gem cannot be eagerly required</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_8">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.20">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.19...v2.3.20">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_19_2024_10_11_mojavelinux">2.3.19 (2024-10-11) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>replace OpenStruct with internal ThemeData class for storing theme data (#2535)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>support horizontal alignment on AsciiDoc table cell that only contains paragraphs (#2358)</p>
+</li>
+<li>
+<p>don&#8217;t allow AsciiDoc table cell to overrun bottom of page on which it fits (#2538)</p>
+</li>
+<li>
+<p>don&#8217;t look for NULL glyph in fallback font as this can impact line height (#2541)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_9">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.19">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.18...v2.3.19">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_18_2024_07_27_mojavelinux">2.3.18 (2024-07-27) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>position foreground image correctly when page layout changes (#2528)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>release lock on version of rexml (pulled in by asciidoctor-diagram and prawn-svg) now that incompatibility is resolved</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_10">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.18">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.17...v2.3.18">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_17_2024_06_01_mojavelinux">2.3.17 (2024-06-01) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>always use /Producer field in document info to credit Asciidoctor PDF and Prawn, even when author is set (#2510)</p>
+</li>
+<li>
+<p>map <code>producer</code> attribute to /Producer field in document info to override or default value (#2510)</p>
+</li>
+<li>
+<p>map <code>publisher</code> attribute to /Creator field instead of /Producer field in document info; use author as fallback (#2510)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_11">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.17">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.16...v2.3.17">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_16_2024_05_31_mojavelinux">2.3.16 (2024-05-31) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>don&#8217;t hyphenate autolink when hyphenation is enabled (#2521) (<strong>@meonkeys</strong>)</p>
+</li>
+<li>
+<p>add support for base64-encoded SVG image reference in SVG (#2512)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>duplicate attributes on table when wrapping table in breakable or unbreakable container (#2520)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>lock version of rexml (pulled in by asciidoctor-diagram and prawn-svg) to fix incompatibility</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_12">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.16">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.15...v2.3.16">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_15_2024_03_12_mojavelinux">2.3.15 (2024-03-12) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>drop links from entries in TOC (#2505)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>lock ttfunk to 1.7.x to avoid requiring Ruby headers (i.e., development libraries) to install gem (#2508)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_13">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.15">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.14...v2.3.15">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_14_2024_03_08_mojavelinux">2.3.14 (2024-03-08) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>upgrade prawn-svg to 0.34 to add support for SVG referenced by image tag (SVG in SVG)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>propagate source location to table cell for description in horizontal dlist so it is included in truncation warning message (#2502)</p>
+</li>
+<li>
+<p>eradicate use of the base64 library to fix warning about base64 gem when using Ruby &gt;= 3.3</p>
+</li>
+<li>
+<p>upgrade prawn-svg to 0.34 to fix warning about base64 gem when using Ruby &gt;= 3.3; apply additional patch to fix bug in prawn-svg</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Build / Infrastructure</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>bump upper Ruby version to 3.3 in CI workflow</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_14">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.14">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.13...v2.3.14">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_13_2024_02_16_mojavelinux">2.3.13 (2024-02-16) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>support toc start at value for page numbering and running content when toc is added using macro (#2489)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>don&#8217;t drop text on line above inline image macro in running content value (#2495)</p>
+</li>
+<li>
+<p>when looking for a value that only contains an image macro, match the whole string instead of per line (#2495)</p>
+</li>
+<li>
+<p>don&#8217;t warn about missing character in fallback font when inline image is advanced to next page (#2492)</p>
+</li>
+<li>
+<p>fix page number of index entries in prepress book when page numbering starts at toc or after toc and toc is inserted using macro (#2487)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_15">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.13">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.12...v2.3.13">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_12_2024_02_02_mojavelinux">2.3.12 (2024-02-02) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add combining characters to bundled fonts (#2482)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>ensure indentation is preserved at page transition of index when media=prepress; prevents margin from shifting to the left (#2480)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_16">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.12">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.11...v2.3.12">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_11_2024_01_23_mojavelinux">2.3.11 (2024-01-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>upgrade prawn-svg dependency to 0.33.x (PR #2469)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>extract shared <code>smallcaps</code> method from <code>TextTransform#smallcaps_pcdata</code> to make it easier to override</p>
+</li>
+<li>
+<p>assign node to <code>@node</code> instance variable on table instance to make it easer to access from Prawn::Table extension (#2471)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>ensure color spaces are set on page before adding running content (#2477)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_17">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.11">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.10...v2.3.11">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_10_2023_12_04_mojavelinux">2.3.10 (2023-12-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>show dot leaders in TOC entry if toclevels is increased for a given section (#2441)</p>
+</li>
+<li>
+<p>decouple tests from path of PWD (#2444)</p>
+</li>
+<li>
+<p>consider inherited styles when analyzing glyphs for fallback font support (#2463)</p>
+</li>
+<li>
+<p>add fallback character for placeholder character when using AFM font (#2453)</p>
+</li>
+<li>
+<p>don&#8217;t advance image that&#8217;s first child of block at top of page if image is taller than page (#2012)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_18">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.10">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.9...v2.3.10">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_9_2023_06_28_mojavelinux">2.3.9 (2023-06-28) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>correctly align block image in raster format in column when align is right or center and page columns are enabled (#2433)</p>
+</li>
+<li>
+<p>honor table caption end placement (<code>table-caption-end</code> theme key) when <code>unbreakable</code> (or <code>breakable</code>) option is set on table (#2434)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_19">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.9">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.8...v2.3.9">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_8_2023_06_25_mojavelinux">2.3.8 (2023-06-25) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>do not attempt to fit inline image in normal table cell to computed height of cell (#2428)</p>
+</li>
+<li>
+<p>support <code>fit=none</code> attribute on inline image to prevent image from being scaled down to fit available height (#2428)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>remove null character enclosed in XML tag when sanitizing text; fixes invisible text in outline when heading contains index term (#2430)</p>
+</li>
+<li>
+<p>alias <code>File.exists?</code> to <code>File.exist?</code> when loading RGhost optimizer to patch incompatibility when using Ruby 3.2</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Build / Infrastructure</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>bump upper Ruby version from 3.1 to 3.2 in CI workflow</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_20">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.8">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.7...v2.3.8">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_7_2023_04_16_mojavelinux">2.3.7 (2023-04-16) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>don&#8217;t crash if source block with custom subs is empty and source highlighter is enabled</p>
+</li>
+<li>
+<p>add workaround for JRuby on Windows when value of <code>imagesdir</code> attribute is absolute and contains non-ASCII characters</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_21">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.7">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.6...v2.3.7">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_6_2023_04_09_mojavelinux">2.3.6 (2023-04-09) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>rework <code>File.absolute_path?</code> patch so it returns correct response when running on JRuby</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_22">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.6">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.5...v2.3.6">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_5_2023_03_31_mojavelinux">2.3.5 (2023-03-31) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add <code>callout-list-marker-font-color</code> theme key to control color of conum marker in callout list (#2402)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>catalog all footnotes found inside AsciiDoc table cells and render them in the footnotes list (#2410)</p>
+</li>
+<li>
+<p>do not drop section that follows empty index (#2368)</p>
+</li>
+<li>
+<p>restore bottom margin on table with <code>breakable</code> or <code>unbreakable</code> option (#2379)</p>
+</li>
+<li>
+<p>honor theme settings for caption on table with <code>breakable</code> or <code>unbreakable</code> option (#2379)</p>
+</li>
+<li>
+<p>use first recto page after toc when media is prepress and page numbering or running content start-at value is <code>after-toc</code> (#2398)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_23">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.5">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.4...v2.3.5">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_4_2022_10_29_mojavelinux">2.3.4 (2022-10-29) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>resolve attribute references in target of image in running content (#2361)</p>
+</li>
+<li>
+<p>replace use of AbstractNode#role= method to ensure compatiblity with minimum supported version of Asciidoctor (Asciidoctor 2.0.10) (#2363)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_24">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.4">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.3...v2.3.4">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_3_2022_10_21_mojavelinux">2.3.3 (2022-10-21) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix crash if last fragment in TOC entry is not rendered (#2354)</p>
+</li>
+<li>
+<p>pass <code>-dNEWPDF=false</code> to Ghostscript when optimizing PDF so it does not break internal links (#2355)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_25">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.3">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.2...v2.3.3">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_2_2022_09_17_mojavelinux">2.3.2 (2022-09-17) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>provide fallback value for <code>base-font-size</code> theme key before processing keys (#2343)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_26">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.2">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.1...v2.3.2">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_1_2022_09_17_mojavelinux">2.3.1 (2022-09-17) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>provide a fallback value for <code>base-font-size</code> when loading theme (#2343)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix crash when smallcaps text transform is applied to a phrase (#2339)</p>
+</li>
+<li>
+<p>don&#8217;t add chapter signifier if <code>chapter-signifier</code> is unset (#2328)</p>
+</li>
+<li>
+<p>don&#8217;t add part signifier if <code>part-signifier</code> is unset (#2328)</p>
+</li>
+<li>
+<p>don&#8217;t include bottom margin when computing heading height if <code>heading-min-height-after</code> theme key is empty (#2326)</p>
+</li>
+<li>
+<p>draw border on heading (section title or discrete heading) if it is advanced to next page (#2322)</p>
+</li>
+<li>
+<p>arrange heading even if section is empty</p>
+</li>
+<li>
+<p>ensure <code>heading-min-height-after</code> theme key is ignored if section is empty or discrete heading is last child</p>
+</li>
+<li>
+<p>don&#8217;t force justify first line of abstract if it ends with a hard break</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_27">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.1">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.3.0...v2.3.1">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_3_0_2022_08_16_mojavelinux">2.3.0 (2022-08-16) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>place footnotes directly below last block of content if <code>footnotes-margin-top</code> theme key is 0 (#2291)</p>
+</li>
+<li>
+<p>allow page / column break to be forced using <code>always</code> option (e.g., <code>[%always]</code>) (#2300)</p>
+</li>
+<li>
+<p>insert column break instead of page break in multi-column layout if <code>column</code> role is specified on page break macro (#2293)</p>
+</li>
+<li>
+<p>use relative font size for big and small roles (#2307)</p>
+</li>
+<li>
+<p>use default-for-print theme by default if media is <code>print</code> or <code>prepress</code> (#2306)</p>
+</li>
+<li>
+<p>support text alignment roles on all styled paragraphs</p>
+</li>
+<li>
+<p>support text alignment roles on verse block</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>only indent text that starts at left margin (i.e., when text align is left or justify) (#2298)</p>
+</li>
+<li>
+<p>apply text transform and formatting when checking height of heading for orphan prevention</p>
+</li>
+<li>
+<p>apply text transform and formatting when computing height of background for caption</p>
+</li>
+<li>
+<p>honor theme settings (<code>prose-margin-inner</code> and <code>prose-text-indent-inner</code>) for inner paragraphs in abstract</p>
+</li>
+<li>
+<p>prevent footnote label from being split across lines (#2297)</p>
+</li>
+<li>
+<p>keep footnote label with preceding text if adjacent (#2297)</p>
+</li>
+<li>
+<p>strip formatting added to source block by custom subs when syntax highlighter is enabled (#2086)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>remove support for deprecated <code>spread</code> role on table</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_28">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.3.0">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.2.0...v2.3.0">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_2_0_2022_07_22_mojavelinux">2.2.0 (2022-07-22) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow page background image to be specified per layout using <code>{page-layout}</code> attribute reference in path (#1739)</p>
+</li>
+<li>
+<p>allow page margin for rotated page to be configured independently using <code>page-margin-rotated</code> theme key or <code>pdf-page-margin-rotated</code> document attribute (#1719)</p>
+</li>
+<li>
+<p>allow orphan detection to be enabled for all section titles and discrete headings by setting <code>heading-min-height-after</code> to <code>auto</code> in theme (#2268)</p>
+</li>
+<li>
+<p>set <code>docimagesdir</code> attribute when attribute substitutions are applied to value from theme (#2278)</p>
+</li>
+<li>
+<p>start page numbering and running content on empty verso page before first chapter of prepress book if <code>start-at</code> value is 0 (#2252)</p>
+</li>
+<li>
+<p>don&#8217;t force page break after TOC with automatic placement in article if <code>title-page</code> attribute is set and value of <code>toc-break-after</code> theme key is <code>auto</code> (#1768)</p>
+</li>
+<li>
+<p>add <code>--theme</code> option to CLI as shorthand for <code>-a pdf-theme</code> (#2250)</p>
+</li>
+<li>
+<p>add <code>--sourcemap</code> option to CLI to enable <code>:sourcemap</code> option on processor (#2265)</p>
+</li>
+<li>
+<p>broaden support for relative font sizes in theme to more than just inline elements; document support for relative font sizes</p>
+</li>
+<li>
+<p>allow theme to control font properties of marker for ordered list using <code>olist-marker</code> category (#2279)</p>
+</li>
+<li>
+<p>allow theme to control font style of marker (per marker or all markers) for unordered list</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add internal <code>Document#attr_unspecified?</code> method to simplify check for an attribute which has not been set or unset</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>always set <code>imagesdir</code> attribute to value of <code>themesdir</code> when resolving images from theme</p>
+</li>
+<li>
+<p>allow <code>top</code> keys in <code>title-page</code> theme category to accept a fixed value (e.g., <code>1in</code>) (#2269)</p>
+</li>
+<li>
+<p>prevent orphan detection for heading (section title or discrete heading) from modifying document state (#2288)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>configure table borders in way that is compatible with prawn-table &gt; 0.2.2</p>
+</li>
+<li>
+<p>don&#8217;t coerce font size &lt; 1 to relative font size; relative font size should be specified in units</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_29">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.2.0">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.1.6...v2.2.0">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_6_2022_07_19_mojavelinux">2.1.6 (2022-07-19) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>resolve font size for monospaced cell when font size value on <code>codespan</code> key in theme is relative (#2281)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_5_2022_07_10_mojavelinux">2.1.5 (2022-07-10) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix position of background color on caption with outside margin (#2271)</p>
+</li>
+<li>
+<p>don&#8217;t allow font scale to compound when entering nested table (#2276)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_4_2022_06_26_mojavelinux">2.1.4 (2022-06-26) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>include source location in warning message for truncated table cell if sourcemap is enabled (#2261)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow alt text for block image, video, and audio to wrap to next line on same page (#2258)</p>
+</li>
+<li>
+<p>apply text-tranform from custom role on phrase after attributes have been resolved (#2263)</p>
+</li>
+<li>
+<p>make URL check more strict so image target containing a colon is not mistaken as a URL</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_3_2022_06_23_mojavelinux">2.1.3 (2022-06-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>interpret <code>start-at</code> theme keys with value <code>1</code> correctly (as <code>1</code> instead of <code>2</code>) (#2255)</p>
+</li>
+<li>
+<p>restore column layout after importing page(s) from PDF (#2253)</p>
+</li>
+<li>
+<p>fix crash when border color is transparent (<code>thematic-break-border-color</code>, <code>admonition-column-rule</code>, <code>quote-border-color</code>, <code>verse-border-color</code>)</p>
+</li>
+<li>
+<p>ensure page margin is restored after imported page</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_30">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.1.3">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.1.2...v2.1.3">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_2_2022_06_17_mojavelinux">2.1.2 (2022-06-17) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>apply page layout from main document to new page in scratch document (#2248)</p>
+</li>
+<li>
+<p>use correct logic to insert page before TOC with automatic placement when doctype=book and media=prepress</p>
+</li>
+<li>
+<p>use <code>get_entries_for_toc</code> to determine if the TOC is non-empty rather than <code>Document#sections?</code></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_31">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.1.2">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.1.1...v2.1.2">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_1_2022_06_15_mojavelinux">2.1.1 (2022-06-15) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>store zero-based column on Extent for extensions to use to position cursor at start of extent</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>place block image in SVG format in correct column when align is left and page columns are enabled (#2241)</p>
+</li>
+<li>
+<p>accurately trap LoadError from CodeRay if source language is not recognized on code block</p>
+</li>
+<li>
+<p>only draw rounded rectangle around phrase if <code>border-radius</code> is &gt; 0</p>
+</li>
+<li>
+<p>use <code>base-border-color</code> value if border width is set on role for inline phrase but not border color</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_32">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.1.1">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.1.0...v2.1.1">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_1_0_2022_06_11_mojavelinux">2.1.0 (2022-06-11) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>arrange body of article or manpage doctype into multiple columns if <code>page-columns</code> key is set in theme (#327)</p>
+</li>
+<li>
+<p>allow column gap to be specified using <code>page-column-gap</code> key (#327)</p>
+</li>
+<li>
+<p>introduce <code>convert_index_categories</code> method to handle rendering of categories for index inside column box (#327)</p>
+</li>
+<li>
+<p>rename <code>convert_index_list</code> method to <code>convert_index_term</code> to make its purpose more clear (#327)</p>
+</li>
+<li>
+<p>add <code>save_theme</code> helper to work with a copy of the theme within a scope (#2196)</p>
+</li>
+<li>
+<p>add support for <code>scale</code> attribute or <code>iw</code> unit on <code>pdfwidth</code> attribute on image macros (#1933)</p>
+</li>
+<li>
+<p>add backlink from bibref on bibliography entry to first reference to that entry in the document (#1737)</p>
+</li>
+<li>
+<p>preserve text formatting on index term in index section (#897)</p>
+</li>
+<li>
+<p>don&#8217;t insert page break between part and first chapter if <code>heading-part-break-after</code> key in theme is <code>avoid</code> (#1795)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_33">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.1.0">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.8...v2.1.0">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_8_2022_06_08_mojavelinux">2.0.8 (2022-06-08) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>encapsulate logic to adjust column box inside float and dry run</p>
+</li>
+<li>
+<p>automatically set height on column box if not specified; update value automatically when reflowing margins</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>correctly compute value of to cursor on extent when column box starts below top of page (#2230)</p>
+</li>
+<li>
+<p>fix crash in <code>ColumnBox#move_past_bottom</code> when <code>:reflow_margins</code> option is not set</p>
+</li>
+<li>
+<p>fix x position of SVG when advanced to next column of column box</p>
+</li>
+<li>
+<p><code>at_page_top?</code> should consider top of column box to be top of page</p>
+</li>
+<li>
+<p>prevent SVG image taller than column from being advanced to next column</p>
+</li>
+<li>
+<p>don&#8217;t push section that follows index section in article to new page if last page of index does not extend to bottom of page</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_34">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.8">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.7...v2.0.8">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_7_2022_06_03_mojavelinux">2.0.7 (2022-06-03) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>don&#8217;t recommend prawn-gmagick if PNG or JPG is corrupt or incomplete</p>
+</li>
+<li>
+<p>add helper method to determine when to recommend the prawn-gmagick gem</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix crash when doctitle or section title with automatic ID contains inline image without explicit width (#2228)</p>
+</li>
+<li>
+<p>use prawn-gmagick, if available, to read raster image referenced by SVG (#2223)</p>
+</li>
+<li>
+<p>allow image path in SVG to refer to any location within Asciidoctor jail (no restriction if safe mode is unsafe) (#1941)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_35">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.7">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.6...v2.0.7">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_6_2022_05_30_mojavelinux">2.0.6 (2022-05-30) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>indent content of collapsible block and apply bottom margin to match style of HTML output (#2219)</p>
+</li>
+<li>
+<p>patch prawn-gmagick to reread bit depth of a PNG image if it extracts the wrong value (#2216)</p>
+</li>
+<li>
+<p>interpret width of SVG correctly when width is defined in file using px units (#2215)</p>
+</li>
+<li>
+<p>don&#8217;t crash if inline role defines border width but not border color</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_36">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.6">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.5...v2.0.6">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_5_2022_05_26_mojavelinux">2.0.5 (2022-05-26) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>do not filter TOC entries without an ID when computing the TOC extent (#2210)</p>
+</li>
+<li>
+<p>fix width of multi-word phrase with background and border offset (#2059)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_37">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.5">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.4...v2.0.5">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_4_2022_05_25_mojavelinux">2.0.4 (2022-05-25) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix calculation of TOC extent when TOC entry has children but no ID (#2208)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_38">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.4">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.3...v2.0.4">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_3_2022_05_25_mojavelinux">2.0.3 (2022-05-25) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>compute the optimize settings in init_pdf and store as Hash instead of after writing the PDF file</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>adjust TrimBox to fit inside of BleedBox when using optimizer and compliance is PDF/X (#2203)</p>
+</li>
+<li>
+<p>set height of resized image to available height to avoid float precision error when scaling down image to fit page (#2205)</p>
+</li>
+<li>
+<p>prevent content on title page from overrunning the bounds of a single page and warn; restriction applies to <code>ink_title_page</code></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_39">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.3">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.2...v2.0.3">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_2_2022_05_22_mojavelinux">2.0.2 (2022-05-22) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>use specified column widths to avoid bugs in column width calculation when using colspans (#1368)</p>
+</li>
+<li>
+<p>advance table to next page if rowspan in first row does not fit in space remaining on current page (#403)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_40">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.2">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.1...v2.0.2">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_1_2022_05_21_mojavelinux">2.0.1 (2022-05-21) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>scale inline image to fit within available height of page, accounting for the top padding of the line height and the bottom gutter (#2193)</p>
+</li>
+<li>
+<p>short-circuit formatted text routine and log error if fragments in first line cannot fit on an empty page</p>
+</li>
+<li>
+<p>break and wrap long contiguous text in source block when linenums is enabled (#2198)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_41">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.1">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0...v2.0.1">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_2022_05_18_mojavelinux">2.0.0 (2022-05-18) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>use more stable approach to recreating current bounds in scratch document</p>
+</li>
+<li>
+<p>add foundation to support multi-column layout for the body of an article (using an extended converter only)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_42">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.rc.1...v2.0.0">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_rc_1_2022_05_17_mojavelinux">2.0.0.rc.1 (2022-05-17) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow theme to position caption for code and example blocks below block using <code>caption-end</code> key (#1730)</p>
+</li>
+<li>
+<p>allow hyphenation to be turned on and configured using the <code>base-hyphens</code> key in the theme (#2161)</p>
+</li>
+<li>
+<p>replace <code>docdir</code> attribute reference in value of <code>pdf-themesdir</code> and <code>pdf-fontsdir</code> attributes (if not already replaced) (#412)</p>
+</li>
+<li>
+<p>split out <code>start_title_page</code> method from <code>ink_title_page</code> to make customization of the title page simpler using an extended converter</p>
+</li>
+<li>
+<p>introduce <code>start_toc_page</code> method to handle positioning cursor at first page of TOC</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>reclassify and mark which methods in the converter are private</p>
+</li>
+<li>
+<p>organize methods in converter</p>
+</li>
+<li>
+<p>add DOM traversal methods to simplify the logic in the converter</p>
+</li>
+<li>
+<p>remove requirement to add dummy text to title page to preserve it</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>apply top line height padding to first line of text when text runs to top of next page (#2173)</p>
+</li>
+<li>
+<p>don&#8217;t add entry to outline for notitle section if no content follows it</p>
+</li>
+<li>
+<p>don&#8217;t add entry to TOC for notitle section if no content follows it</p>
+</li>
+<li>
+<p>look for block align roles on image instead of text align roles (#2176)</p>
+</li>
+<li>
+<p>use correct left value when creating bounding box</p>
+</li>
+<li>
+<p>don&#8217;t apply border on block images to logo image on title page</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_43">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0.rc.1">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.beta.2...v2.0.0.rc.1">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_beta_2_2022_05_14_mojavelinux">2.0.0.beta.2 (2022-05-14) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add support for float attribute on image; wrap ensuing paragraphs around image with <code>float</code> attribute (#353)</p>
+</li>
+<li>
+<p>add <code>supports_float_wrapping?</code> method for extended converter to override to enlist other blocks in float wrapping; add example to docs (#353)</p>
+</li>
+<li>
+<p>add <code>image-float-gap</code> key to theme to control space around image float (#353)</p>
+</li>
+<li>
+<p>add support for <code>text-transform</code> property on first line of abstract in theme (#2141)</p>
+</li>
+<li>
+<p>rename <code>resolve_alignment_from_role</code> to <code>resolve_text_align_from_role</code> to reflect proper terminology and purpose; alias old method name</p>
+</li>
+<li>
+<p>add support for orphan avoidance to discrete headings to match behavior of section titles (using call to <code>arrange_heading</code>) (#2151)</p>
+</li>
+<li>
+<p>rename <code>arrange_section</code> to <code>arrange_heading</code> to reflect proper terminology and purpose</p>
+</li>
+<li>
+<p>add <code>index-column-gap</code> key to theme to control size of gap between columns</p>
+</li>
+<li>
+<p>coerce <code>image-caption-max-width</code> to <code>fit-content</code> if <code>float</code> attribute is set on block image (#2150)</p>
+</li>
+<li>
+<p>add support for text box with fixed height via <code>:height</code> option to <code>typeset_text</code> helper</p>
+</li>
+<li>
+<p>configure <code>typeset_text</code> and <code>ink_prose</code> to return remaining fragments when <code>:height</code> option is specified</p>
+</li>
+<li>
+<p>add support for <code>:indent_paragraphs</code> option to formatted text box (#353)</p>
+</li>
+<li>
+<p>if <code>float</code> attribute is set on block image, set max width on caption to <code>fit-content</code> if max width not already set to a <code>fit-content</code> value</p>
+</li>
+<li>
+<p>add built-in default-sans theme</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>rename theme suffix with-fallback-font to with-font-fallbacks</p>
+</li>
+<li>
+<p>rename sans-with-fallback-font theme to default-sans-with-font-fallbacks</p>
+</li>
+<li>
+<p>configure spacing around thematic break using <code>thematic-break-padding</code> key instead of margin top and bottom (#2164)</p>
+</li>
+<li>
+<p>rename <code>convert_listing_or_literal</code> to <code>convert_code</code> and alias old name</p>
+</li>
+<li>
+<p>reify convert handler for STEM blocks (<code>convert_stem</code>)</p>
+</li>
+<li>
+<p>reify convert handler for pass blocks (<code>convert_pass</code>) and remove block decoration</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>honor <code>caption-align</code> when element align is not <code>left</code> and <code>caption-max-width</code> is % of element width (e.g., <code>fit-content(50%)</code>) (#2156)</p>
+</li>
+<li>
+<p>do not orphan sidebar title (#2158)</p>
+</li>
+<li>
+<p>allow theme to set font style of first line of abstract to <code>normal_italic</code> (#2138)</p>
+</li>
+<li>
+<p>add support for <code>:color</code> option to <code>Prawn::Text::Formatted::Box</code> directly and remove workarounds</p>
+</li>
+<li>
+<p>preserve columns on subsequent pages in the index section (#2149)</p>
+</li>
+<li>
+<p>fix return value of <code>cursor</code> method inside block for column box in index section</p>
+</li>
+<li>
+<p>correctly detect preceding code block when determining whether to collapse top margin of colist</p>
+</li>
+<li>
+<p>apply bottom margin to thematic break that falls at top of page (#2164)</p>
+</li>
+<li>
+<p>allow extended converter to override <code>convert_code</code> method to handle <code>convert_listing</code> and <code>convert_literal</code> calls</p>
+</li>
+<li>
+<p>restore margin below pass block</p>
+</li>
+<li>
+<p>remove use of deprecated theme keys in default-for-print theme</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_44">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0.beta.2">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.beta.1...v2.0.0.beta.2">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_beta_1_2022_05_04_mojavelinux">2.0.0.beta.1 (2022-05-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>introduce <code>index-pagenum-sequence-style</code> document attribute to control style of sequential page numbers in index when media=screen (#1656)</p>
+</li>
+<li>
+<p>allow entry for document in outline to be controlled using <code>outline-title</code> attribute (#1789)</p>
+</li>
+<li>
+<p>allow extended converter to insert or filter toc entries by overriding <code>get_entries_for_toc</code> method (#2097)</p>
+</li>
+<li>
+<p>add <code>asciidoctor/pdf/nopngmagick</code> script to unregister Gmagick handler for PNG images only (#1687)</p>
+</li>
+<li>
+<p>allow theme to configure which end the caption is placed for a block image (#2115)</p>
+</li>
+<li>
+<p>add <code>Page#imported</code> method to mark page as imported (which suppresses running content)</p>
+</li>
+<li>
+<p>add support for <code>smallcaps</code> text transform by replacing lowercase letters with small capital variants (#1192)</p>
+</li>
+<li>
+<p>use <code>base-border-color</code> as default border color; control appearance of border using <code>border-width</code> value alone (#2134)</p>
+</li>
+<li>
+<p>remove border colors in base theme so all border colors can be controlled using <code>base-border-color</code> when extending theme</p>
+</li>
+<li>
+<p>enable running footer when using base theme</p>
+</li>
+<li>
+<p>allow built-in optimizer to set PDF compliance flag (PDF/A and PDF/X) using value of <code>optimize</code> attribute (#125)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow border width of block image to be specified as an array (1, 2, or 4 values) (#2119)</p>
+</li>
+<li>
+<p>rename <code>delete_page</code> extension method to <code>delete_current_page</code> to avoid conflict with incompatible method on <code>Prawn::Document</code></p>
+</li>
+<li>
+<p>remap <code>table-caption-side</code> theme key to <code>table-caption-end</code> (#2125)</p>
+</li>
+<li>
+<p>add missing glyph for <code>ÿ</code> in built-in fonts</p>
+</li>
+<li>
+<p>remove use of deprecated keys in chronicles-dark-theme.yml</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_45">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0.beta.1">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.alpha.3...v2.0.0.beta.1">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_alpha_3_2022_05_01_mojavelinux">2.0.0.alpha.3 (2022-05-01) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow border width of block to be specified per edge using 4-value array (#2102)</p>
+</li>
+<li>
+<p>allow padding on block to be specified using 2-value array for ends and sides or 3-value array with implied left side value (#2104)</p>
+</li>
+<li>
+<p>allow margins in running content to be specified using 2-value array for ends and sides or 3-value array with implied left side value (#2104)</p>
+</li>
+<li>
+<p>allow theme to set border and padding on headings per level (#434)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>reduce top and bottom padding on quote and verse blocks in base theme</p>
+</li>
+<li>
+<p>use uniform top and bottom padding on quote blocks in default theme</p>
+</li>
+<li>
+<p>change <code>inscribe_</code> method prefix in converter to <code>ink_</code></p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow <code>ink_toc</code> method in extended converter to insert page above TOC page</p>
+</li>
+<li>
+<p>remap <code>layout_</code> methods contributed to converter by prepended module</p>
+</li>
+<li>
+<p>neutralize padding hacks in themes designed before the converter had smart margins</p>
+</li>
+<li>
+<p>allow the smallest ends or sides border width on block to be less than 1</p>
+</li>
+<li>
+<p>cap border corners on block when width is defined using array (uniform or otherwise) (#2103)</p>
+</li>
+<li>
+<p>fix crash in certain circumstances when theme does not define value for <code>base-border-width</code> key</p>
+</li>
+<li>
+<p>use sensible fallbacks for table border and grid color and width (retains backwards compatibility)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_46">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0.alpha.3">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.alpha.2...v2.0.0.alpha.3">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_alpha_2_2022_04_29_mojavelinux">2.0.0.alpha.2 (2022-04-29) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>separate <code>align</code> and <code>text-align</code> keys in theme schema; remap old keys for backwards compatibility (#2095)</p>
+</li>
+<li>
+<p>allow theme to control the border on all sides of tables independently (#902)</p>
+</li>
+<li>
+<p>keep section title with first block of content is <code>breakable</code> option is set on section (#2075, #38)</p>
+</li>
+<li>
+<p>pass the <code>part</code> and <code>chapterlike</code> options to the <code>arrange_section</code> method for convenience</p>
+</li>
+<li>
+<p>add support for <code>background-color</code> property on caption (#1995)</p>
+</li>
+<li>
+<p>add support for image-based icons, resolved from <code>iconsdir</code> and having the <code>icontype</code> file extension (#1770)</p>
+</li>
+<li>
+<p>add <code>asciidoctor/pdf/nogmagick</code> script to prevent loading prawn-gmagick gem (#1687)</p>
+</li>
+<li>
+<p>change name of <code>untitled</code> option on special section to <code>notitle</code></p>
+</li>
+<li>
+<p>allow the title of any section to be hidden using the <code>notitle</code> option</p>
+</li>
+<li>
+<p>allow imported PDF page to be referenced in TOC by enclosing in parent section with <code>notitle</code> option (#1213)</p>
+</li>
+<li>
+<p>allow entry for preface to be added to TOC without adding title to body using the <code>notitle</code> option on the preface section (#1786)</p>
+</li>
+<li>
+<p>automatically promote the <code>notitle</code> option from the first block in the preamble to preface section; restore lead role on opening paragraph (#1786)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Improvements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>change "icon" to "icon image" in warning about missing admonition icon image</p>
+</li>
+<li>
+<p>report admonition type in warning about missing implicit admonition icon image</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>set the base font of the front cover image is a PDF and the title page is not active (#2092)</p>
+</li>
+<li>
+<p>pass through warnings in background SVG to logger (#1940)</p>
+</li>
+<li>
+<p>keep closing quote with trailing ellipsis in text enclosed in typographic quotes (#321)</p>
+</li>
+<li>
+<p>collapse space in front of hidden index term (#2061)</p>
+</li>
+<li>
+<p>delete dests on page before deleting it (keeps generated PDF clean of obsolete destinations)</p>
+</li>
+<li>
+<p>don&#8217;t call <code>arrange_section</code> if section title is hidden</p>
+</li>
+<li>
+<p>remove <code>theme_font</code> enclosure around call to <code>start_new_chapter</code> and <code>start_new_part</code></p>
+</li>
+<li>
+<p>change <code>layout_</code> method prefix in converter to <code>inscribe_</code> (#2099)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_details_47">Details</h3>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v2.0.0.alpha.2">git tag</a> | <a href="https://github.com/asciidoctor/asciidoctor-pdf/compare/v2.0.0.alpha.1...v2.0.0.alpha.2">full diff</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2_0_0_alpha_1_2022_04_20_mojavelinux">2.0.0.alpha.1 (2022-04-20) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>make delimited blocks breakable by default; require the <code>unbreakable</code> option on the block to retain the previous &#8220;keep together&#8221; behavior (#2004, #578, #509, #240)</p>
+</li>
+<li>
+<p>add support for the <code>unbreakable</code> option on a table to prevent it from being split across pages (#2022, #871, #819, #331)</p>
+</li>
+<li>
+<p>add support for the <code>breakable</code> option on a table (special case) to keep the caption and ID with the start of the table (#2022, #993)</p>
+</li>
+<li>
+<p>implement smart bottom margins on blocks to prevent extra space below blocks, particularly nested blocks (#1515, #1513, #1845)</p>
+</li>
+<li>
+<p>drop support for <code>top-margin</code> key on block and prose categories in theme; space between delimited blocks and lists now controlled using bottom margins only (#1515)</p>
+</li>
+<li>
+<p>allow location of anchor for block to be positioned relative to content using <code>block-anchor-top</code> key in theme (#2013)</p>
+</li>
+<li>
+<p>allow page numbering and running content to start after first page of a document without a title page by assigning an integer to the respective <code>start-at</code> theme key (#1644)</p>
+</li>
+<li>
+<p>allow page numbering and running content to start after toc (wherever it&#8217;s placed) by assigning the keyword <code>after-toc</code> to the respective <code>start-at</code> theme key (#1763)</p>
+</li>
+<li>
+<p>allow theme to configure page numbering to start at cover (#1727)</p>
+</li>
+<li>
+<p>allow the front and back cover images to be defined in the theme (#1584)</p>
+</li>
+<li>
+<p>allow the front and back cover images to be specified as a data URI (#1584)</p>
+</li>
+<li>
+<p>allow theme to control margin and content margin of running content per periphery (header or footer) and per side (recto or verso) (#994)</p>
+</li>
+<li>
+<p>allow theme to control border style of delimited blocks (example, sidebar, code, admonition, verse, quote) (#1586)</p>
+</li>
+<li>
+<p>allow theme to control font color of first line of abstract using <code>abstract-first-line-font-color</code> key</p>
+</li>
+<li>
+<p>allow theme to control background color and border offset (only for background) of links (#1705)</p>
+</li>
+<li>
+<p>support custom role on paragraph to allow theme to control font properties (#483)</p>
+</li>
+<li>
+<p>change lead category in theme to built-in role named lead (#2031)</p>
+</li>
+<li>
+<p>allow theme to control line height of blocks using line-height property where font properties are accepted (#2032)</p>
+</li>
+<li>
+<p>don&#8217;t render index section if index is empty (i.e., there are no index entries)</p>
+</li>
+<li>
+<p>allow title of special section to be hidden by setting <code>untitled</code> option on section</p>
+</li>
+<li>
+<p>stabilize font paths in built-in themes by prefixing paths with GEM_FONTS_DIR (#1568)</p>
+</li>
+<li>
+<p>assign <code>page-layout</code> attribute in running content so it can be used to select a background per layout (#1570)</p>
+</li>
+<li>
+<p>reset numbering of footnotes in each chapter (#1639)</p>
+</li>
+<li>
+<p>add chapter xreftext to label of footnote reference that refers to previous chapter (#1639)</p>
+</li>
+<li>
+<p>add support for assigning the same font file to all font variants (i.e., styles) using the wildcard key (<code>*</code>) (#1588)</p>
+</li>
+<li>
+<p>bundle Noto Sans in addition to Noto Serif and add built-in theme sans-with-fallback-font (#2010)</p>
+</li>
+<li>
+<p>allow caption max-width to be set to percentage of content by passing argument to fit-content function (#1494)</p>
+</li>
+<li>
+<p>allow theme to control text alignment of caption independent of box alignment (#1493)</p>
+</li>
+<li>
+<p>set <code>chapter-numeral</code> attribute in running content on pages in chapter if <code>sectnums</code> attribute is set (#1373)</p>
+</li>
+<li>
+<p>set <code>part-numeral</code> attribute in running content on pages in part if <code>partnums</code> attribute is set (#1373)</p>
+</li>
+<li>
+<p>add support for normal_italic font style (to reset font style to normal, then apply italic) (#1603)</p>
+</li>
+<li>
+<p>honor text alignment roles (e.g., <code>text-left</code>) or <code>list-text-align</code> theme key on callout lists</p>
+</li>
+<li>
+<p>honor text alignment roles (e.g., <code>text-center</code>) on block image (#1609)</p>
+</li>
+<li>
+<p>honor role and inherited role on inline image (#1939, #1376)</p>
+</li>
+<li>
+<p>disable running header and/or footer on toc pages if <code>noheader</code> and/or <code>nofooter</code> option is set on toc macro (#1378)</p>
+</li>
+<li>
+<p>add support for preamble toc placement</p>
+</li>
+<li>
+<p>only insert macro toc at location of first toc macro</p>
+</li>
+<li>
+<p>ignore requested pages not found in imported PDF (#1616)</p>
+</li>
+<li>
+<p>disable document outline if <code>outline</code> document attribute is unset (#1619)</p>
+</li>
+<li>
+<p>keep temporary artifacts (for debugging) if KEEP_ARTIFACTS env var is set</p>
+</li>
+<li>
+<p>define a dest name "toc" at the top of the default toc location</p>
+</li>
+<li>
+<p>normalize space characters in authors content and drop lines with unresolved attribute references (#1642)</p>
+</li>
+<li>
+<p>skip image block with missing image if computed alt text resolves to empty string (#1645)</p>
+</li>
+<li>
+<p>custom theme does not inherit from base theme by default; must be specified explicitly using <code>extends: base</code> (#1640)</p>
+</li>
+<li>
+<p>allow theme to configure number of index columns using <code>index-columns</code> key (#1663)</p>
+</li>
+<li>
+<p>configure AsciiDoc table cell to inherit font properties from table and scale font size of nested blocks (#926)</p>
+</li>
+<li>
+<p>scale font size of literal table cell (#1696)</p>
+</li>
+<li>
+<p>add support for <code>id</code> attribute on link macro</p>
+</li>
+<li>
+<p>add support for <code>link</code> attribute on icon macro (#1915)</p>
+</li>
+<li>
+<p>allow theme to configure width of block border on ends separate from sides (#1693)</p>
+</li>
+<li>
+<p>add additional glyphs to built-in fonts (heavy checkmark to fallback font; both checkmarks to monospaced font; numero sign to prose and fallback fonts) (#1625)</p>
+</li>
+<li>
+<p>allow theme to specify text decoration style, color, and width for captions (globally)</p>
+</li>
+<li>
+<p>allow admonition icon image to be remote (if allow-uri-read is set) or data URI (#1711)</p>
+</li>
+<li>
+<p>allow theme to configure font color of unresolved footnote using unresolved role</p>
+</li>
+<li>
+<p>show textual label on admonition if icon image fails to embed (#1741)</p>
+</li>
+<li>
+<p>allow theme to disable title page by assigning false to <code>title-page</code> category key (#1754)</p>
+</li>
+<li>
+<p>allow Rouge theme to be specified as theme class or instance (API only)</p>
+</li>
+<li>
+<p>allow theme to control font size of dot leader in TOC</p>
+</li>
+<li>
+<p>allow section to override <code>outlinelevels</code> for self and children using <code>outlinelevels</code> attribute on section</p>
+</li>
+<li>
+<p>use value of <code>author</code> attribute for PDF info and pdfmark if locked by the API (#1778)</p>
+</li>
+<li>
+<p>only extend theme in extends hierarchy once unless modified with <code>!important</code> (#1800)</p>
+</li>
+<li>
+<p>add print-optimized themes (<code>default-for-print</code> and <code>default-for-print-with-fallback-font</code>) (#1699)</p>
+</li>
+<li>
+<p>add support for power operator in theme (with same precedence as multiply and divide) (#1813)</p>
+</li>
+<li>
+<p>include floor and ceil match characters in fallback font (#1832) (<strong>@oddhack</strong>)</p>
+</li>
+<li>
+<p>allow horizontal and vertical lines of table grid to be styled independently (#1875) (<strong>@hextremist</strong>)</p>
+</li>
+<li>
+<p>allow theme to define the characters for typographical quotation marks (#1880) (<strong>@klonfish</strong>)</p>
+</li>
+<li>
+<p>allow theme to control top margin of callout lists that immediately follow a code block using <code>callout-list-margin-top-after-code</code> key (#1895)</p>
+</li>
+<li>
+<p>introduce <code>layout_general_heading</code> to allow extended converter to access node (#1904)</p>
+</li>
+<li>
+<p>use <code>Document#authors</code> to retrieve authors instead of extracting the information from the indexed document attributes</p>
+</li>
+<li>
+<p>add support for character references that contain both uppercase and lowercase hexadecimal characters (#1990) (<strong>@etiwnad</strong>)</p>
+</li>
+<li>
+<p>log error and skip table instead of raising error if cell content cannot fit into column width of table (#2009)</p>
+</li>
+<li>
+<p>extract <code>arrange_section</code> method to compute whether section title should be advanced to next page (#2023)</p>
+</li>
+<li>
+<p>introduce <code>callout-list</code> category in theme to control font properties and item spacing of callout lists (#1722)</p>
+</li>
+<li>
+<p>only indent inner paragraphs (paragraphs that follow an adjacent paragraph) if <code>prose-text-indent-inner</code> key is set in theme (#2034)</p>
+</li>
+<li>
+<p>stop and restart conversion in scratch document once the code determines the block does not fit in the available space (#2003)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>reimplement arrange block logic by using scratch document to compute extent for content block in primary document instead of height (#2003, #2016, #789)</p>
+</li>
+<li>
+<p>correctly compute height of delimited block attached to description of item in horizontal dlist (follow-up to #2003)</p>
+</li>
+<li>
+<p>do not crash if item in horizontal description list has no desc</p>
+</li>
+<li>
+<p>do not crash if item in unordered description list has no desc and do not append subject stop to term</p>
+</li>
+<li>
+<p>ensure that <code>Time.parse</code> is loaded</p>
+</li>
+<li>
+<p>resolve images in theme correctly when theme is loaded from classloader (JRuby only) (#1829)</p>
+</li>
+<li>
+<p>log warning rather than crash if front cover image cannot be embedded (such as a broken SVG)</p>
+</li>
+<li>
+<p>do not insert blank line in index when term is forced to break (#1665)</p>
+</li>
+<li>
+<p>honor prepress page margins on subsequent pages in index (#1929)</p>
+</li>
+<li>
+<p>use more robust strategy for line height normalization that accounts for case when line contains only monospaced text (#1650)</p>
+</li>
+<li>
+<p>add support for <code>line-height</code> property on <code>lead</code> role as documented</p>
+</li>
+<li>
+<p>prevent generator from allocating space for placeholder null char (used for anchors) if font is missing glyph (#1672)</p>
+</li>
+<li>
+<p>ensure background and admonition icon image files are closed after being read (#1566)</p>
+</li>
+<li>
+<p>ensure temporary images generated by running content are cleaned up (#1566)</p>
+</li>
+<li>
+<p>fix encoding of indent in wrapped source blocks when font is AFM (#1934)</p>
+</li>
+<li>
+<p>fix spacing after first line of indented paragraph (#1557)</p>
+</li>
+<li>
+<p>fix crash if btn or kbd macro is used in section title (#1563)</p>
+</li>
+<li>
+<p>fix crash when applying text transform to heading cell in table body (#1575)</p>
+</li>
+<li>
+<p>allow custom inline role to control text transform when it&#8217;s not the only role on the phrase</p>
+</li>
+<li>
+<p>do not convert already converted intrinsic width for block and inline SVG</p>
+</li>
+<li>
+<p>honor font style when looking for glyph in font</p>
+</li>
+<li>
+<p>resolve character references in custom admonition label (as defined via caption attribute)</p>
+</li>
+<li>
+<p>convert blocks inside abstract, not just the contents of the blocks</p>
+</li>
+<li>
+<p>only suggest installing prawn-gmagick gem if not loaded (#1578)</p>
+</li>
+<li>
+<p>applying double border style to thematic break should honor border width</p>
+</li>
+<li>
+<p>warn once instead of crashing if page background image cannot be embedded (#1780)</p>
+</li>
+<li>
+<p>warn once instead of crashing if <code>cache-uri</code> is set but library is not available</p>
+</li>
+<li>
+<p>sanitize values of PDF info values (#1594)</p>
+</li>
+<li>
+<p>configure headings to inherit font styles from theme (#1604)</p>
+</li>
+<li>
+<p>use conum font family defined in theme for conum in verbatim block (#1611)</p>
+</li>
+<li>
+<p>apply font color and text transform from theme to terms in horizontal dlist (#1994)</p>
+</li>
+<li>
+<p>prevent content of AsciiDoc table cell from overrunning content on subsequent pages (#1623)</p>
+</li>
+<li>
+<p>account for top/bottom padding when computing height of AsciiDoc table cell</p>
+</li>
+<li>
+<p>log error message if table cell is truncated (#1626)</p>
+</li>
+<li>
+<p>take hard line breaks into account when computing natural width of table cell (#1762)</p>
+</li>
+<li>
+<p>use "toc" as the default dest name for the macro toc</p>
+</li>
+<li>
+<p>position page split indicator correctly when block has transparent border</p>
+</li>
+<li>
+<p>replace block macro with missing PDF target with alt text</p>
+</li>
+<li>
+<p>consistently use default margin when page margin resolves to empty array</p>
+</li>
+<li>
+<p>sort page numbers in index numerically instead of lexicographically; sort mixed page number types correctly (#1657)</p>
+</li>
+<li>
+<p>use informal title prefixed with down indicator for collapsible block (#1660)</p>
+</li>
+<li>
+<p>don&#8217;t apply border, shading, or padding to collapsible block (#1660)</p>
+</li>
+<li>
+<p>escape bare ampersand in attribution and citetitle of quote or verse block (#1662)</p>
+</li>
+<li>
+<p>fix numeric assertions in test suite (#1542)</p>
+</li>
+<li>
+<p>prevent converter for list item from inserting new page to position marker when next page is already instantiated (#2001)</p>
+</li>
+<li>
+<p>keep block anchor with code block when block is moved to next page (#1897)</p>
+</li>
+<li>
+<p>keep block anchor with admonition block when block is moved to next page</p>
+</li>
+<li>
+<p>remove poorly-defined (and undocumented) border bottom property for caption</p>
+</li>
+<li>
+<p>fix crash when theme specifies CMYK value for table border color (#1700)</p>
+</li>
+<li>
+<p>fallback gracefully if unrecognized convert-time syntax highlighter is used</p>
+</li>
+<li>
+<p>correctly process a sequence of two or more callouts separated by spaces in a source block (#1898)</p>
+</li>
+<li>
+<p>allow callouts sub to be disabled on source blocks (#1704)</p>
+</li>
+<li>
+<p>show missing footnote reference in superscript</p>
+</li>
+<li>
+<p>fix crash when <code>icons=font</code> and <code>admonition_label_min_width</code> is set in theme</p>
+</li>
+<li>
+<p>use oembed API over HTTPS to get thumbnail for Vimeo video</p>
+</li>
+<li>
+<p>show link to Vimeo video if <code>allow-uri-read</code> attribute is not set</p>
+</li>
+<li>
+<p>don&#8217;t apply syntax highlighting if Rouge lexer fails to highlight source; show plain source instead</p>
+</li>
+<li>
+<p>don&#8217;t apply syntax highlighting to source block if <code>specialchars</code> sub is disabled</p>
+</li>
+<li>
+<p>apply border bottom to correct table row when frame and grid are disabled (#1873)</p>
+</li>
+<li>
+<p>allow caption max width to be set by theme to fixed value</p>
+</li>
+<li>
+<p>fix crash when footnote is defined in section title with auto-generated ID</p>
+</li>
+<li>
+<p>do not duplicate footnotes in desc of horizontal description list (#1775)</p>
+</li>
+<li>
+<p>allow an index term to be defined in section title with auto-generated ID</p>
+</li>
+<li>
+<p>fix alignment of link box for image in running content with numeric vertical alignment</p>
+</li>
+<li>
+<p>fix vertical center alignment of normal table cell</p>
+</li>
+<li>
+<p>short-circuit xreftext containing a circular reference path</p>
+</li>
+<li>
+<p>prevent PDF page import from corrupting references in PDF (#1726)</p>
+</li>
+<li>
+<p>display decimal list marker correctly when list is reversed (e.g., 10., 09., 08., etc.)</p>
+</li>
+<li>
+<p>use correct spacing for dotted border dash on table (length and spacing should match width)</p>
+</li>
+<li>
+<p>set color space on page with only image so font color is preserved in running content (#1742)</p>
+</li>
+<li>
+<p>compute font size for superscript and subscript correctly when parent element uses <code>em</code> and <code>%</code> units (#1745)</p>
+</li>
+<li>
+<p>respect hyphenation exceptions when word is adjacent to non-word character (#1715)</p>
+</li>
+<li>
+<p>fix crash when TOC is enabled and index is empty</p>
+</li>
+<li>
+<p>align TOC section properly when index exceeds one page and <code>section_indent</code> is positive (#1735)</p>
+</li>
+<li>
+<p>fix left margin drift when indentation is active across a page break (#1735, #1949)</p>
+</li>
+<li>
+<p>render image at end of section title in corresponding toc entry (#1752)</p>
+</li>
+<li>
+<p>allow inline image to be enclosed in link macro (alt text was breaking parsing)</p>
+</li>
+<li>
+<p>prevent inline image from rendering multiple times if fallback font is used for alt text (#1858)</p>
+</li>
+<li>
+<p>allow theme to set font style of first line of abstract to normal</p>
+</li>
+<li>
+<p>resize admonition label to fit if height exceeds height of content box</p>
+</li>
+<li>
+<p>fix crash when underline style is used in Rouge theme</p>
+</li>
+<li>
+<p>fix crash when Text token is not defined in custom Rouge theme</p>
+</li>
+<li>
+<p>fix crash when Pygments style is not recognized; fall back to pastie style</p>
+</li>
+<li>
+<p>avoid loss of precision in CMYK color value for conum or footnote font</p>
+</li>
+<li>
+<p>use value of <code>untitled-label</code> attribute as fallback value for doctitle in running content (#1772)</p>
+</li>
+<li>
+<p>use value of <code>untitled-label</code> attribute as fallback value for Title field in pdfmark (follow-up to #1772)</p>
+</li>
+<li>
+<p>show sensible error message if background image cannot be loaded (e.g., data is corrupt)</p>
+</li>
+<li>
+<p>honor alignment role when aligning alt text for missing block image</p>
+</li>
+<li>
+<p>don&#8217;t crash when rendering alt text for block image if value of align attribute is invalid (#1781)</p>
+</li>
+<li>
+<p>correctly scale down SVG that only marginally exceeds bounds of page when <code>fit=scale-down</code></p>
+</li>
+<li>
+<p>prevent font scale from compounding for nested blocks in AsciiDoc table cell (#2007)</p>
+</li>
+<li>
+<p>don&#8217;t suppress actual error message when theme cannot be loaded; may contain information about theme being extended</p>
+</li>
+<li>
+<p>force inline image to fit within table cell when width is larger than available space (#1798)</p>
+</li>
+<li>
+<p>hide print annotation for bare email address (#1806)</p>
+</li>
+<li>
+<p>patch float precision constant so prawn-table does not fail to arrange cells that span columns (#1835)</p>
+</li>
+<li>
+<p>capture footnotes in AsciiDoc table cell and render them with other footnotes at end of article/chapter (#1777)</p>
+</li>
+<li>
+<p>prevent PDF from being used as logo image on title page (since it cannot work properly anyway)</p>
+</li>
+<li>
+<p>don&#8217;t crash when generating TOC if section title is empty</p>
+</li>
+<li>
+<p>escape closing square bracket around alt text of missing image so it doesn&#8217;t get matched as part of a link macro</p>
+</li>
+<li>
+<p>use value of <code>author</code> attribute in PDF info and pdfmark if <code>authors</code> attribute is not set (#1922)</p>
+</li>
+<li>
+<p>honor <code>pdf-folio-placement</code> setting even when <code>media=prepress</code> (#1917)</p>
+</li>
+<li>
+<p>honor <code>pre-wrap</code> role on phrase (#1927)</p>
+</li>
+<li>
+<p>verify alignment of list marker in AsciiDoc table cell (#1965)</p>
+</li>
+<li>
+<p>don&#8217;t crash if value of <code>width</code> attribute on image has invalid format (#1970)</p>
+</li>
+<li>
+<p>don&#8217;t render borders and backgrounds in scratch document</p>
+</li>
+<li>
+<p>don&#8217;t insert blank page after document title if first block (chapter or toc macro) has <code>nonfacing</code> option (#1988)</p>
+</li>
+<li>
+<p>coerce negated variable reference to number if value of variable is numeric</p>
+</li>
+<li>
+<p>prepress page margins should honor value of <code>pdf-folio-placement</code> (#1918)</p>
+</li>
+<li>
+<p>ensure callout number in callout list stays with primary text when item is advanced to next page (#1967)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>drop support for Ruby &lt; 2.7 and JRuby &lt; 9.2 (#1681, #2038)</p>
+</li>
+<li>
+<p>declare the matrix gem as a dependency to fix compatibility with Ruby 3.1</p>
+</li>
+<li>
+<p>use <code>YAML.safe_load</code> from Ruby stdlib instead of <code>safe_yaml gem</code></p>
+</li>
+<li>
+<p>drop deprecated Pdf module alias in API (leaving only PDF)</p>
+</li>
+<li>
+<p>remove deprecated "ascii" fonts; only bundle the more complete "subset" fonts</p>
+</li>
+<li>
+<p>remove support for <code>&lt;color&gt;</code> tag in passthrough content; use <code>&lt;font color="&#8230;&#8203;"&gt;</code> instead (may affect themes)</p>
+</li>
+<li>
+<p>remove asciidoctor-pdf/converter and asciidoctor-pdf/version shim scripts; use asciidoctor/pdf/converter and asciidoctor/pdf/version instead</p>
+</li>
+<li>
+<p>rename Optimizer#generate_file method to Optimizer#optimize_file</p>
+</li>
+<li>
+<p>drop support for deprecated <code>pdf-style</code> and <code>pdf-stylesdir</code> attributes (#1827)</p>
+</li>
+<li>
+<p>drop use of the undocumented <code>vertical-spacing</code> key from the built-in themes</p>
+</li>
+<li>
+<p>rename the <code>outline-list</code> category in the theme to <code>list</code> and map the <code>outline-list-</code> keys to <code>list-</code> with warning if found (#1894)</p>
+</li>
+<li>
+<p>rename the <code>literal</code> category in the theme to <code>codespan</code> and map the <code>literal-</code> keys to <code>codespan-</code> with warning if found (#1796)</p>
+</li>
+<li>
+<p>rename the <code>blockquote</code> category key in the theme to <code>quote</code> and map the <code>blockquote-</code> prefix to <code>quote-</code> with warning if found (#2054)</p>
+</li>
+<li>
+<p>rename the <code>key</code> category key in theme to <code>kbd</code> and map the <code>key-</code> prefix to <code>kbd-</code> with warning if found (#2052)</p>
+</li>
+<li>
+<p>remove unneeded _mb functions (e.g., <code>uppercase_mb</code>); multibyte support for upcase, downcase, and capitalize is now provided by corelib</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Build / Infrastructure</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>migrate Linux CI jobs to GitHub Actions (#1814)</p>
+</li>
+<li>
+<p>enable CI job on macOS (#1817)</p>
+</li>
+<li>
+<p>add Ruby 3.1 to CI matrix; use as primary Ruby</p>
+</li>
+<li>
+<p>test against Asciidoctor upstream (#1821)</p>
+</li>
+<li>
+<p>skip tests for unreadable files when euid is 0</p>
+</li>
+<li>
+<p>use prawn-table release and drop recommendation to use the development version (converter now patches prawn-table)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_6_2_2021_12_31_mojavelinux">1.6.2 (2021-12-31) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>show URL of link for any media type when show-link-uri is set (#951)</p>
+</li>
+<li>
+<p>do not show URL of link when media type is screen or prepress when show-link-uri is unset (#951)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>update patches for <code>PDF::Core.real</code> and <code>PDF::Core.real_params</code> to prevent scientific notation ending up in PDF (#1983) (@rillbert)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_6_1_2021_09_04_mojavelinux">1.6.1 (2021-09-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>align footnotes block to the bottom of the page it is placed on (#1833)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>patch Prawn to preserve leading null character when running on Ruby 3; preserves inline anchors when text is split by page (#1963)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_6_0_2021_05_10_mojavelinux">1.6.0 (2021-05-10) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow path of ghostscript command to be controlled using <code>GS</code> env var (#1791)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>do not hyphenate a hyphen when hyphenation is enabled (#1562)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Compliance</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>add support for Ruby 3 and drop support for Ruby &lt; 2.5 and JRuby &lt; 9.2 (#1681)</p>
+</li>
+<li>
+<p>upgrade to Prawn 2.4.0 (adds support for Ruby 3 and OTF font support)</p>
+</li>
+<li>
+<p>upgrade to prawn-svg 0.32 (adds support for Ruby 3 without a patch and for loading embedded images from a data URI)</p>
+</li>
+<li>
+<p>upgrade to prawn-icon 3.0.x</p>
+</li>
+<li>
+<p>release lock on ttfunk version (1.6 produces slightly different output from 1.5 for certain missing glyphs)</p>
+</li>
+<li>
+<p>drop support for Asciidoctor &lt; 2 (#1552)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Build / Infrastructure</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>run tests against pygments.rb 2.x in addition to pygments.rb 1.2.0</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_3_2020_02_28_mojavelinux">1.5.3 (2020-02-28) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>do not hyphen a hyphen when hyphenation is enabled (#1562)</p>
+</li>
+<li>
+<p>fix crash when applying text transform to heading cell in table body (#1575)</p>
+</li>
+<li>
+<p>honor font style when looking for glyph in font</p>
+</li>
+<li>
+<p>only suggest installing prawn-gmagick gem if not loaded (#1578)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_2_2020_02_21_mojavelinux">1.5.2 (2020-02-21) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix crash if btn or kbd macro is used in section title (#1563)</p>
+</li>
+<li>
+<p>ensure background and admonition icon image files are closed after being read (#1566)</p>
+</li>
+<li>
+<p>ensure temporary images generated by running content are cleaned up (#1566)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_1_2020_02_16_mojavelinux">1.5.1 (2020-02-16) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Enhancements</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allow theme to control font color of first line of abstract</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Bug Fixes</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fix spacing after first line of indented paragraph (#1557)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_2020_02_11_mojavelinux">1.5.0 (2020-02-11) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>support table with multiple head rows &amp; decorate accordingly (#1539)</p>
+</li>
+<li>
+<p>draw background and border around entire delimited block with wrapped text that appears inside an AsciiDoc table cell (#820)</p>
+</li>
+<li>
+<p>fix crash when document has PDF cover page and SVG page background (#1546)</p>
+</li>
+<li>
+<p>allow page mode to be fully configured using pdf-page-mode attribute or page_mode theme key (#840)</p>
+</li>
+<li>
+<p>allow background image to be specified using a data URI</p>
+</li>
+<li>
+<p>allow running content image to be specified using a data URI</p>
+</li>
+<li>
+<p>support creating empty front or back cover by assigning empty value to front-cover-image or back-cover-image attribute</p>
+</li>
+<li>
+<p>only warn once per missing character (#1545)</p>
+</li>
+<li>
+<p>render pass block as listing block, using raw source as contents</p>
+</li>
+<li>
+<p>prevent image placeholder from altering character spacing in inline SVG (#1550)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_rc_3_2020_02_04_mojavelinux">1.5.0.rc.3 (2020-02-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>reserve space for inline image correctly so it doesn&#8217;t mangle the character spacing in the line when the image wraps (#1516)</p>
+</li>
+<li>
+<p>allow custom theme to merge font catalog with theme being extended (#1505)</p>
+</li>
+<li>
+<p>allow font path to be declared once for all font styles (#1507)</p>
+</li>
+<li>
+<p>continue border, background, and column rule of admonition block on subsequent pages when block gets split (#1287)</p>
+</li>
+<li>
+<p>allow max-width on caption be specified as a percentage (of the container width) (#1484)</p>
+</li>
+<li>
+<p>add support for remote image in running content (if allow-uri-read attribute is set) (#1536)</p>
+</li>
+<li>
+<p>add support for remote background images specified by theme (if allow-uri-read attribute is set) (#1536)</p>
+</li>
+<li>
+<p>add support for remote title page logo image specified by theme (if allow-uri-read attribute is set) (#1536)</p>
+</li>
+<li>
+<p>place dots on correct page when section title in TOC wraps across a page boundary (#1533)</p>
+</li>
+<li>
+<p>add destination to top of imported PDF if ID is specified on image block</p>
+</li>
+<li>
+<p>log reason if theme file cannot be parsed or compiled (#1491)</p>
+</li>
+<li>
+<p>fix crash if background image in theme is not readable</p>
+</li>
+<li>
+<p>bundle emoji font and use as fallback in default-with-fallback-font theme (#1129)</p>
+</li>
+<li>
+<p>add dark theme for chronicles example</p>
+</li>
+<li>
+<p>allow vertical-align key for header and footer categories to accept numeric offset as second value (e.g., [top, 10]) (#1488)</p>
+</li>
+<li>
+<p>link font family for abstract and sidebar to heading font family if only latter is set</p>
+</li>
+<li>
+<p>if path of missing font is absolute, don&#8217;t suggest that it was not found in the fontsdir</p>
+</li>
+<li>
+<p>allow use of style "regular" as alias for "normal" when defining font</p>
+</li>
+<li>
+<p>emit warning in verbose mode if glyph cannot be found in fallback font (#1529)</p>
+</li>
+<li>
+<p>don&#8217;t crash if table is empty and emit warning (#607)</p>
+</li>
+<li>
+<p>only emit warning when non-WINANSI character is used with AFM font if verbose mode is enabled</p>
+</li>
+<li>
+<p>do not emit warning when non-WINANSI character is used with AFM font inside scratch document</p>
+</li>
+<li>
+<p>do not emit log messages from scratch document</p>
+</li>
+<li>
+<p>upgrade treetop to 1.6</p>
+</li>
+<li>
+<p>reenable tests on Windows (#1499) <strong>@slonopotamus</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_rc_2_2020_01_09_mojavelinux">1.5.0.rc.2 (2020-01-09) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>patch Prawn to fix incompatibility with Ruby 2.7 (to fix text wrapping)</p>
+</li>
+<li>
+<p>fix crash when assigning font style to header cell in table body (#1468)</p>
+</li>
+<li>
+<p>fix parsing of array value of pdf-page-margin attribute (#1475)</p>
+</li>
+<li>
+<p>fix warning when reading data from a remote URL when running with Ruby 2.7 (#1477)</p>
+</li>
+<li>
+<p>pass SVG warnings to logger (#1479)</p>
+</li>
+<li>
+<p>compress streams if the compress attribute is set on the document (#1471)</p>
+</li>
+<li>
+<p>don&#8217;t set heading-font-family in default theme so it inherits from base</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_rc_1_2020_01_06_mojavelinux">1.5.0.rc.1 (2020-01-06) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>support data URI for SVG image (#1423)</p>
+</li>
+<li>
+<p>account for border offset in width of fragment (#1264)</p>
+</li>
+<li>
+<p>ignore case when sorting index terms (#1405)</p>
+</li>
+<li>
+<p>partition section title (title and subtitle) if <code>title-separator</code> document attribute or <code>separator</code> block attribute is set (#623)</p>
+</li>
+<li>
+<p>allow page numbering to start after first page of body by assigning an integer to the page_numbering_start_at theme key (#560)</p>
+</li>
+<li>
+<p>allow running content to start after first page of body by assigning an integer to the running_content_start_at theme key (#1455)</p>
+</li>
+<li>
+<p>allow output file to be written to stdout (#1411)</p>
+</li>
+<li>
+<p>implement line highlighting for source blocks when using Rouge as source highlighter (#681)</p>
+</li>
+<li>
+<p>implement line highlighting for source blocks when using Pygments as source highlighter (#1444)</p>
+</li>
+<li>
+<p>indent wrapped lines in source block beyond linenum gutter (#504)</p>
+</li>
+<li>
+<p>don&#8217;t mangle source block if linenums are enabled and language is not set</p>
+</li>
+<li>
+<p>don&#8217;t print line number if source block is empty</p>
+</li>
+<li>
+<p>don&#8217;t apply recto margin to title page if cover is absent unless value of front-cover-image attribute is <code>~</code> (#793)</p>
+</li>
+<li>
+<p>expose theme as property on converter</p>
+</li>
+<li>
+<p>add support for unbreakable option on open blocks (#1407) <strong>@mogztter</strong></p>
+</li>
+<li>
+<p>don&#8217;t add mailto: prefix to revealed mailto URI when hide-uri-scheme is set (#920)</p>
+</li>
+<li>
+<p>allow theme to set base text decoration width (#1414)</p>
+</li>
+<li>
+<p>allow theme to set font-kerning per category (#1431)</p>
+</li>
+<li>
+<p>allow theme to specify background image for running content (#356)</p>
+</li>
+<li>
+<p>allow theme to specify border for admonition block (#444)</p>
+</li>
+<li>
+<p>allow theme to specify background color for admonition block (#444)</p>
+</li>
+<li>
+<p>allow theme to specify background color and full border for quote and verse blocks (#1309)</p>
+</li>
+<li>
+<p>allow text alignment roles to be used to control alignment of discrete heading</p>
+</li>
+<li>
+<p>allow theme to configure image caption align(ment) to inherit from image align(ment) (#1459)</p>
+</li>
+<li>
+<p>allow theme to confine width of image caption to width of image (#1291)</p>
+</li>
+<li>
+<p>don&#8217;t apply border to block if border width is not set (or nil)</p>
+</li>
+<li>
+<p>use font color from pygments style for unhighlighted text (#1441)</p>
+</li>
+<li>
+<p>render stem block as raw literal block</p>
+</li>
+<li>
+<p>render stem phrase as monospaced text</p>
+</li>
+<li>
+<p>honor percentage unit on width attribute value on image (#1402)</p>
+</li>
+<li>
+<p>fix crash when capitalizing text that does not contain markup</p>
+</li>
+<li>
+<p>allow custom inline role to control text transform (#1379)</p>
+</li>
+<li>
+<p>convert link macro enclosed in smart quotes</p>
+</li>
+<li>
+<p>allow inline image to be fit within line using fit=line (#711)</p>
+</li>
+<li>
+<p>fix fit=cover for background image when aspect ratio of image is taller than page (#1430)</p>
+</li>
+<li>
+<p>compute and apply line metrics for cells in table head row (#1436)</p>
+</li>
+<li>
+<p>compute and apply line metrics correctly for cells in table body and foot rows (#1436)</p>
+</li>
+<li>
+<p>allow section to override toclevels for self and children using toclevels attribute on section (#734)</p>
+</li>
+<li>
+<p>allocate space for pagenum in toc consistently (#1434)</p>
+</li>
+<li>
+<p>fall back to default theme instead of crashing if specified theme cannot be resolved</p>
+</li>
+<li>
+<p>allow font color to be set on nested span in passthrough content</p>
+</li>
+<li>
+<p>move width and align attributes from font tag to width and align style properties on span tag</p>
+</li>
+<li>
+<p>compute table cell padding correctly when specified as a 4 element array</p>
+</li>
+<li>
+<p>preserve isolated callout on final line of source block</p>
+</li>
+<li>
+<p>fix missing require in asciidoctor-pdf-optimize script (#1467)</p>
+</li>
+<li>
+<p>lock version of ttfunk to 1.5.x</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_8_2019_11_23_mojavelinux">1.5.0.beta.8 (2019-11-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>automatically hyphenate prose using the text-hyphen gem if the <code>hyphens</code> document attribute is set (#20)</p>
+</li>
+<li>
+<p>set hyphenation language using the <code>hyphens</code> attribute value, falling back to the <code>lang</code> attribute (#20)</p>
+</li>
+<li>
+<p>add support for capitalize text transform (#1382)</p>
+</li>
+<li>
+<p>fix AsciiDoc table cell from overflowing bounds of table and creating extra page (#1369)</p>
+</li>
+<li>
+<p>don&#8217;t double escape XML special characters in literal table cell (#1370)</p>
+</li>
+<li>
+<p>allow theme to customize the width and color of text decoration (underline and line-through) (#812)</p>
+</li>
+<li>
+<p>use same line height throughout abstract</p>
+</li>
+<li>
+<p>don&#8217;t mangle XML attribute values when applying lowercase text transform (#1391)</p>
+</li>
+<li>
+<p>place toc at same position in outline as it is in the document (#1361)</p>
+</li>
+<li>
+<p>log warning with error message if remote image cannot be retrieved</p>
+</li>
+<li>
+<p>allow initial page mode to be set to fullscreen using pdf-page-mode=fullscreen attribute or page_mode=fullscreen theme key (#1357)</p>
+</li>
+<li>
+<p>allow theme to configure content of entries in authors line on title page (#800)</p>
+</li>
+<li>
+<p>allow theme to override styles of caption on admonition blocks (#561)</p>
+</li>
+<li>
+<p>allow theme to configure hanging indent for titles in toc (#1153)</p>
+</li>
+<li>
+<p>apply hanging indent to wrapped entries in index (#645)</p>
+</li>
+<li>
+<p>allow theme to configure text decoration of headings (#811)</p>
+</li>
+<li>
+<p>define line-through and underline roles as built-in custom roles so they can be customized (#1393)</p>
+</li>
+<li>
+<p>allow top value of logo and title on title page to be specified in any measurement unit</p>
+</li>
+<li>
+<p>don&#8217;t set a top value for the logo on the title page if not set in theme</p>
+</li>
+<li>
+<p>if value of scripts attribute is cjk, break lines between any two CJK characters except punctuation in table cells (#1359) (<strong>gasol</strong>)</p>
+</li>
+<li>
+<p>ignore invalid cellbgcolor value (#1396)</p>
+</li>
+<li>
+<p>recommend installing prawn-gmagick gem if image format is unsupported</p>
+</li>
+<li>
+<p>set cache_images option on SVG interface if cache-uri attribute is set on document (#223)</p>
+</li>
+<li>
+<p>upgrade prawn-svg to fix display of links in plantuml diagrams (#1105)</p>
+</li>
+<li>
+<p>allow icon set to be specified as prefix on target of icon macro (#1365)</p>
+</li>
+<li>
+<p>write Unix epoch dates to pdfmark file in UTC when reproducible is set</p>
+</li>
+<li>
+<p>don&#8217;t include software versions in PDF info if reproducible attribute is set</p>
+</li>
+<li>
+<p>fix optimizer so it applies pdfmark after reading input file</p>
+</li>
+<li>
+<p>allow converter instance to be reused</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_7_2019_10_29_mojavelinux">1.5.0.beta.7 (2019-10-29) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>fix value of implicit page-count attribute when page numbering and running content don&#8217;t start on same page (#1334)</p>
+</li>
+<li>
+<p>fix value of implicit chapter-title attribute on preface pages (#1340)</p>
+</li>
+<li>
+<p>show value of untitled-label attribute in outline if doctitle is not set (#1348)</p>
+</li>
+<li>
+<p>don&#8217;t show entry for doctitle in outline if doctitle is not set and untitled-label attribute is unset (#1348)</p>
+</li>
+<li>
+<p>generate outline if document has doctitle but no body (#1349)</p>
+</li>
+<li>
+<p>allow elements on title page to be disabled from theme using display: none (#1346)</p>
+</li>
+<li>
+<p>set chapter-title attribute to value of toc-title attribute on toc pages in book (#1338)</p>
+</li>
+<li>
+<p>set section-title attribute to value of toc-title attribute on toc pages in article if page has no other sections (#1338)</p>
+</li>
+<li>
+<p>allow ranges of pages from PDF file to be imported using image macro as specified by pages attribute (#1300)</p>
+</li>
+<li>
+<p>set default footer content in base theme; remove logic to process <code>footer_&lt;side&gt;_content: none</code> key (#1320)</p>
+</li>
+<li>
+<p>include doctitle in outline for article when article is only a single page (#1322)</p>
+</li>
+<li>
+<p>allow custom (inline) role to control text decoration property (#1326)</p>
+</li>
+<li>
+<p>point doctitle entry in outline to first page of content when doctype is article and document has front cover</p>
+</li>
+<li>
+<p>fix asciidoctor-pdf-optimize script and register it as a bin script</p>
+</li>
+<li>
+<p>rename <code>-q</code> CLI option of asciidoctor-pdf-optimize script to <code>--quality</code></p>
+</li>
+<li>
+<p>only promote first paragraph of preamble to lead paragraph (assuming it has no role) (#1332)</p>
+</li>
+<li>
+<p>don&#8217;t promote first paragraph of preamble to lead paragraph if it already has a role (#1332)</p>
+</li>
+<li>
+<p>fix crash when document has no doctitle or sections and untitled-label attribute is unset</p>
+</li>
+<li>
+<p>ignore invalid align value for title logo image (#1352)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_6_2019_10_11_mojavelinux">1.5.0.beta.6 (2019-10-11) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>reorganize source files under asciidoctor/pdf folder (instead of asciidoctor-pdf)</p>
+</li>
+<li>
+<p>reorganize monkeypatch files under asciidoctor/pdf/ext</p>
+</li>
+<li>
+<p>allow toc to be positioned using toc macro (#1030)</p>
+</li>
+<li>
+<p>extend dots leading up to page number from wrapped line in toc (#1152)</p>
+</li>
+<li>
+<p>set fit=contain by default on cover and page background images (#1275)</p>
+</li>
+<li>
+<p>implement fit=fill for cover, page background, and running content raster (non-SVG) images (#1276)</p>
+</li>
+<li>
+<p>allow foreground image (e.g., watermark) to be added to each page using page-foreground-image attribute or theme key (#727)</p>
+</li>
+<li>
+<p>allow section body to be indented using section_indent key in theme (#737)</p>
+</li>
+<li>
+<p>add glyphs for built-in characters to bundled monospace font (M+ 1mn) (#1274)</p>
+</li>
+<li>
+<p>look for "noborder" role on image even if other roles are defined</p>
+</li>
+<li>
+<p>remove deprecated table_odd_row_background_color and table_even_row_background_color keys from theme</p>
+</li>
+<li>
+<p>implement unordered and ordered description lists (#1280)</p>
+</li>
+<li>
+<p>recognize transparent as valid value for cellbgcolor attribute</p>
+</li>
+<li>
+<p>allow custom role to revert font style to normal (#1286)</p>
+</li>
+<li>
+<p>allow theme to control font properties (font size, font color, etc) of description list term (#1289)</p>
+</li>
+<li>
+<p>allow theme to override caption styles for specific block categories: blockquote, code, example, footnotes, image, listing, and table (#307)</p>
+</li>
+<li>
+<p>allow theme to control style of verse block independently of a quote block (#40)</p>
+</li>
+<li>
+<p>position list marker correctly when <code>media=prepress</code> and list item is advanced to next page or split across pages (#1303)</p>
+</li>
+<li>
+<p>layout horizontal dlist in two columns (#310)</p>
+</li>
+<li>
+<p>apply normal substitutions to content of manname section (#1294)</p>
+</li>
+<li>
+<p>optimize PDF using quality specified in value of optimize attribute if optimize attribute is set (#535)</p>
+</li>
+<li>
+<p>allow xref macro to override xrefstyle set on document</p>
+</li>
+<li>
+<p>assume admonition icon in theme is a legacy FontAwesome icon if the icon set prefix is absent</p>
+</li>
+<li>
+<p>rewrite optimize-pdf as a bin script named asciidoctor-pdf-optimize</p>
+</li>
+<li>
+<p>allow image alt text formatting and arrangement to be controlled by theme (#730)</p>
+</li>
+<li>
+<p>upgrade prawn-icon to 2.5.0 (which upgrades Font Awesome to 5.11.2)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_5_2019_09_13_mojavelinux">1.5.0.beta.5 (2019-09-13) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>pass styles for inline elements downwards when parsing, allowing role to override default styles for element (#1219)</p>
+</li>
+<li>
+<p>document title in outline should point to second page if document has cover page (#1268)</p>
+</li>
+<li>
+<p>start at setting for running content and page numbering must account for disabled title page (book doctype) (#1263)</p>
+</li>
+<li>
+<p>start at setting for running content and page numbering must account for front cover (#1266)</p>
+</li>
+<li>
+<p>preserve indentation that uses tabs in verbatim blocks when tabsize is not set (#1258)</p>
+</li>
+<li>
+<p>use consistent line height for list items and toc entries if text is entirely monospace (#1204)</p>
+</li>
+<li>
+<p>fix spacing between items in qanda list</p>
+</li>
+<li>
+<p>expand home directory reference in theme name when value ends with .yml and no themedir is specified</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_4_2019_09_04_mojavelinux">1.5.0.beta.4 (2019-09-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>always use ; as delimiter to separate multiple font dirs to be compatible with JAR paths (#1250)</p>
+</li>
+<li>
+<p>preserve hyphens in role names in theme file (#1254)</p>
+</li>
+<li>
+<p>allow second arg of outlinelevels attribute to control expand depth of outline (#1224)</p>
+</li>
+<li>
+<p>allow font catalog and font fallbacks to be defined as flat keys in the theme file (#1243)</p>
+</li>
+<li>
+<p>don&#8217;t crash when adding indentation guards to source highlighted with Pygments (#1246)</p>
+</li>
+<li>
+<p>don&#8217;t override font color of formatted text in toc (#1247)</p>
+</li>
+<li>
+<p>prevent toc from overrunning first page of content by reserving more space for the page number (#1242)</p>
+</li>
+<li>
+<p>allow number of digits reserved for page number in the toc to be adjusted using toc-max-pagenum-digits attribute (#1242)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_3_2019_08_30_mojavelinux">1.5.0.beta.3 (2019-08-30) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>allow multiple font dirs to be specified using the pdf-fontsdir attribute (#80)</p>
+</li>
+<li>
+<p>fill and stroke bounds of example across all pages (#362)</p>
+</li>
+<li>
+<p>allow page background color and background image to be used simultaneously (#1186)</p>
+</li>
+<li>
+<p>allow theme to specify initial zoom (#305)</p>
+</li>
+<li>
+<p>strip surrounding whitespace from text in normal table cells</p>
+</li>
+<li>
+<p>allow attribute references to be used in image paths in theme (#588)</p>
+</li>
+<li>
+<p>resolve variables in font catalog in theme file</p>
+</li>
+<li>
+<p>honor the cellbgcolor attribute defined in a table cell to set the cell background color (#234) (<strong>mch</strong>)</p>
+</li>
+<li>
+<p>add the .notdef glyph to the bundled fonts (a box which is used as the default glyph if the font is missing a character) (#1194)</p>
+</li>
+<li>
+<p>don&#8217;t drop headings if base font family is not set in theme</p>
+</li>
+<li>
+<p>don&#8217;t crash if heading margins are not set in theme</p>
+</li>
+<li>
+<p>don&#8217;t rely on base_line_height_length theme key in converter (should be internal to theme)</p>
+</li>
+<li>
+<p>set fallback value for base (root) font size</p>
+</li>
+<li>
+<p>reduce min font size in base theme</p>
+</li>
+<li>
+<p>allow theme to configure the minimum height required after a section title for it to stay on same page (#1210)</p>
+</li>
+<li>
+<p>convert hyphen to underscore in theme key for admonition icon type (#1217)</p>
+</li>
+<li>
+<p>always resolve images in running content relative to <code>themesdir</code> (instead of document) (#1183)</p>
+</li>
+<li>
+<p>fix placement of toc in article when doctitle is not set (#1240)</p>
+</li>
+<li>
+<p>honor text alignment role on abstract paragraph(s)</p>
+</li>
+<li>
+<p>don&#8217;t insert blank page at start of document if <code>media=prepress</code> and document does not have a cover (#1181)</p>
+</li>
+<li>
+<p>insert blank page after cover if <code>media=prepress</code> (#1181)</p>
+</li>
+<li>
+<p>add support for stretch role on table (as preferred alias for spread) (#1225)</p>
+</li>
+<li>
+<p>include revremark on title page if specified (#1198)</p>
+</li>
+<li>
+<p>allow theme to configure border around block image (#767)</p>
+</li>
+<li>
+<p>align first block of list item with marker if primary text is blank (#1196)</p>
+</li>
+<li>
+<p>apply correct margin to list item if primary text is blank (#1196)</p>
+</li>
+<li>
+<p>allow page break before and after part and before chapter to be configured by theme (#74)</p>
+</li>
+<li>
+<p>allow page number of PDF to import to be specified using <code>page</code> attribute on image macro (#1202)</p>
+</li>
+<li>
+<p>use value of theme key heading-margin-page-top as top margin for heading if cursor is at top of page (#576)</p>
+</li>
+<li>
+<p>resolve icon image relative to docdir instead of current working directory</p>
+</li>
+<li>
+<p>allow theme to style mark element; add default styles to built-in themes (#1226)</p>
+</li>
+<li>
+<p>if value of scripts attribute is cjk, break lines between any two CJK characters (except punctuation) (#1206)</p>
+</li>
+<li>
+<p>add support for role to font-based icon (to change font color) (#349)</p>
+</li>
+<li>
+<p>use fallback size for admonition icon</p>
+</li>
+<li>
+<p>allow attribute reference in running content to be escaped using a backslash</p>
+</li>
+<li>
+<p>allow theme to configure text background and border on a phrase with a custom role (#1223)</p>
+</li>
+<li>
+<p>fix crash if source-highlighter attribute is defined outside the header (#1231)</p>
+</li>
+<li>
+<p>fix crash when aligning line numbers of source highlighted with Pygments (#1233)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_2_2019_07_30_mojavelinux">1.5.0.beta.2 (2019-07-30) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>only apply title page background image to the title page (#1144)</p>
+</li>
+<li>
+<p>make sure title page background or color (and only title page background or color) gets applied to title page even when page has already been created (#1144)</p>
+</li>
+<li>
+<p>fix crash when image_width is defined in theme (#995)</p>
+</li>
+<li>
+<p>fix crash when toc is enabled and <code>toc-title</code> attribute is unset</p>
+</li>
+<li>
+<p>correctly map legacy Font Awesome icon names when icon set is not specified (#1157)</p>
+</li>
+<li>
+<p>coerce color values in theme that contain uppercase letters (#1149)</p>
+</li>
+<li>
+<p>prevent table alignment from modifying margins of subsequent pages; only align table if width is less than bounds (#1170)</p>
+</li>
+<li>
+<p>ensure base font color is set</p>
+</li>
+<li>
+<p>use more robust mechanism to detect an empty page; tare content stream after adding page background color or image</p>
+</li>
+<li>
+<p>ignore <code>pdf-themesdir</code> unless pdf-theme is specified (#1167)</p>
+</li>
+<li>
+<p>allow theme to control glyphs used for conums (#133)</p>
+</li>
+<li>
+<p>allow theme to control background and border of inline kbd (#313, #1004)</p>
+</li>
+<li>
+<p>add support for link on image in running content (#1002)</p>
+</li>
+<li>
+<p>allow theme to disable font kerning</p>
+</li>
+<li>
+<p>add support for default theme alignment for tables (#1164)</p>
+</li>
+<li>
+<p>add theming support to (inline) roles on phrases (#368)</p>
+</li>
+<li>
+<p>allow theme to customize style of titles in running content using <code>title-style</code> key (#1044)</p>
+</li>
+<li>
+<p>add support for the built-in big and small roles on phrases (#459)</p>
+</li>
+<li>
+<p>route AFM font warning through Asciidoctor logger</p>
+</li>
+<li>
+<p>upgrade code font (M+ 1mn) to TESTFLIGHT-63a</p>
+</li>
+<li>
+<p>include all alphanumeric characters in code font (mplus1mn) (#282)</p>
+</li>
+<li>
+<p>report clearer error message when theme can&#8217;t be found or loaded</p>
+</li>
+<li>
+<p>document how to prepare a TTF font to work best with Asciidoctor PDF (#297)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_beta_1_2019_07_08_mojavelinux">1.5.0.beta.1 (2019-07-08) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>rename <code>pdf-style</code> and <code>pdf-stylesdir</code> attributes to <code>pdf-theme</code> and <code>pdf-themesdir</code>, respectively (while still honoring the old names for compatibility) (#1127)</p>
+</li>
+<li>
+<p>don&#8217;t load fallback font by default; move fallback font to <code>default-with-fallback-font</code> theme</p>
+</li>
+<li>
+<p>apply cell padding to table cells in the head row (#1098)</p>
+</li>
+<li>
+<p>allow the theme to control the padding of table cells in the head row using the <code>table_head_cell_padding</code> key (#1098)</p>
+</li>
+<li>
+<p>fix position of table caption for reduced-width tables when caption align is center (#1138)</p>
+</li>
+<li>
+<p>adjust width of table caption to match width of table unless <code>table_caption_max_width</code> is none in theme (#1138)</p>
+</li>
+<li>
+<p>fix position of text in running header (#1087)</p>
+</li>
+<li>
+<p>ignore start attribute on ordered list if marker is disabled</p>
+</li>
+<li>
+<p>allow start value to be negative for ordered lists that use arabic or roman numbering (#498)</p>
+</li>
+<li>
+<p>don&#8217;t convert values in theme which are not color keys to a string (#1089)</p>
+</li>
+<li>
+<p>apply page layout specified on page break even when break falls page boundary (#1091)</p>
+</li>
+<li>
+<p>scale SVG background image to fit page in the same way raster image is scaled (#765)</p>
+</li>
+<li>
+<p>allow page background size to be controlled using image macro attributes (#1117)</p>
+</li>
+<li>
+<p>allow page background image position to be controlled using position attribute on image macro (#1124)</p>
+</li>
+<li>
+<p>add support for <code>fit=cover</code> for cover, page background, and running content images (#1136)</p>
+</li>
+<li>
+<p>change default background image position to center (#1124)</p>
+</li>
+<li>
+<p>allow cover image position to be controlled using position attribute on image macro (#1134)</p>
+</li>
+<li>
+<p>change default cover image position to center (#1134)</p>
+</li>
+<li>
+<p>allow cover image size to be controlled using fit, pdfwidth, and width attributes; don&#8217;t scale image by default (#1134)</p>
+</li>
+<li>
+<p>set <code>enable_file_requests_with_root</code> and <code>enable_web_requests</code> options for all SVGs (#683)</p>
+</li>
+<li>
+<p>automatically set <code>pdf-stylesdir</code> if <code>pdf-style</code> ends with .yml and <code>pdf-stylesdir</code> is not specified (#1126)</p>
+</li>
+<li>
+<p>replace hyphens with underscores in top-level theme keys</p>
+</li>
+<li>
+<p>allow hyphens to be used in variable references in theme (#1122)</p>
+</li>
+<li>
+<p>allow theme to control background and border of inline code (literal) (#306)</p>
+</li>
+<li>
+<p>allow theme to control background and border of inline button (#451)</p>
+</li>
+<li>
+<p>resolve null color value in theme to nil (aka not set)</p>
+</li>
+<li>
+<p>add support for cgi-style options on source language when syntax highlighting with Rouge (#1102)</p>
+</li>
+<li>
+<p>apply custom theme to chronicles example to customize running content and demonstrate how to extend default theme</p>
+</li>
+<li>
+<p>drop remapping of legacy running content keys in theme data</p>
+</li>
+<li>
+<p>resize running content to fit page layout (#1036)</p>
+</li>
+<li>
+<p>exclude border width from running content area (#1109)</p>
+</li>
+<li>
+<p>support text-transform property in running content (#702)</p>
+</li>
+<li>
+<p>make depth of section titles assigned to section-title attribute in running content configurable (#1141)</p>
+</li>
+<li>
+<p>support width attribute on image in running content if no other dimension attribute is specified</p>
+</li>
+<li>
+<p>apply correct scale-down logic to image in running content</p>
+</li>
+<li>
+<p>allow image format to be specified using format attribute (cover page image, page background image, running content image) (#1132)</p>
+</li>
+<li>
+<p>allow theme to set bottom border properties (color, style, and width) of table head row (#770)</p>
+</li>
+<li>
+<p>allow column rule and spacing to be specified for running content when multiple columns are specified (#1093)</p>
+</li>
+<li>
+<p>never load base theme when loading default theme; otherwise load base theme if extends isn&#8217;t specified, but only if theme data hasn&#8217;t been initialized</p>
+</li>
+<li>
+<p>shorten text-alignment attribute to text-align</p>
+</li>
+<li>
+<p>set PDF version to 1.4 by default (#302)</p>
+</li>
+<li>
+<p>allow PDF version to be set using pdf-version document attribute (#302)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_18_2019_06_01_mojavelinux">1.5.0.alpha.18 (2019-06-01) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>restore compatibility with Asciidoctor back to 1.5.3 and add verification to test matrix (#1038)</p>
+</li>
+<li>
+<p>allow one theme to extend another theme using the top-level <code>extends</code> key (#367)</p>
+</li>
+<li>
+<p>allow theme to set text indent for paragraphs using prose_text_indent (#191)</p>
+</li>
+<li>
+<p>allow theme to set spacing between adjacent paragraphs using prose_margin_inner (#191)</p>
+</li>
+<li>
+<p>show parts in toc when toclevels=0 (#783)</p>
+</li>
+<li>
+<p>add support for autonumbered callouts in source blocks (#1076)</p>
+</li>
+<li>
+<p>fix duplication of footnotes in keep together regions (#1047)</p>
+</li>
+<li>
+<p>display standalone preamble in book normally (#1051)</p>
+</li>
+<li>
+<p>allow outline depth to be set using outlinelevels attribute independent of toclevels (#1054)</p>
+</li>
+<li>
+<p>fix compounding cell padding (#1053)</p>
+</li>
+<li>
+<p>add support for qanda list (#1013)</p>
+</li>
+<li>
+<p>fix parsing of bibref and link inside footnote text (#1061)</p>
+</li>
+<li>
+<p>restore square brackets around ID of bibliography entry with custom ID (#1065)</p>
+</li>
+<li>
+<p>add page_numbering_start_at key to theme to control start page for page numbering (#1041)</p>
+</li>
+<li>
+<p>don&#8217;t allow running_content_start_at key to affect page numbering (#1041)</p>
+</li>
+<li>
+<p>substitute {chapter-title} property on front matter pages (replace with doctitle and toc-title, respectively, when running content starts before first page of body) (#1040)</p>
+</li>
+<li>
+<p>allow side margins to be set on elements on title page (#824)</p>
+</li>
+<li>
+<p>don&#8217;t promote preamble to preface if preface-title attribute is empty</p>
+</li>
+<li>
+<p>expand padding value for running content (header and footer) to array</p>
+</li>
+<li>
+<p>add support for unnumbered (and no-bullet) style on ordered list (#1073)</p>
+</li>
+<li>
+<p>add visual regression capability to test suite (@beatchristen)</p>
+</li>
+<li>
+<p>ensure index section doesn&#8217;t get numbered when using Asciidoctor &lt; 1.5.7</p>
+</li>
+<li>
+<p>add part signifier and part number to part title if partnums is set; allow signifier to be customized using part-signifier attribute (#597)</p>
+</li>
+<li>
+<p>add support for the chapter-signifier attribute as the preferred alternative to chapter-label</p>
+</li>
+<li>
+<p>warn if the image referenced in the running content cannot be found (#731)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_17_2019_04_23_mojavelinux">1.5.0.alpha.17 (2019-04-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>drop support for Ruby &lt; 2.3 (and installation will fail for Ruby &lt; 2.1)</p>
+</li>
+<li>
+<p>add asciidoctor/pdf and asciidoctor/pdf/version require aliases (#262)</p>
+</li>
+<li>
+<p>rename module to Asciidoctor::PDF and define Asciidoctor::Pdf alias for backwards compatibility (#262)</p>
+</li>
+<li>
+<p>switch to tilde dependency versions (flexible patch number) instead of ranges</p>
+</li>
+<li>
+<p>upgrade prawn-svg to 0.29.1; resolves numerous SVG rendering issues (#886, #430)</p>
+</li>
+<li>
+<p>drop support for Rouge &lt; 2</p>
+</li>
+<li>
+<p>add a test suite (#37)</p>
+</li>
+<li>
+<p>allow running content (header and footer) to be enabled on title and toc pages; controlled by running_content_start_at property in theme (#606)</p>
+</li>
+<li>
+<p>add support for nbsp named entity (i.e., <code>+&nbsp;</code>); replace occurrences of nbsp named entity with a single space in outline</p>
+</li>
+<li>
+<p>upgrade to FontAwesome 5; introduce the fas, far, and fab icon sets, now preferred over fa; drop support for octicons (#891) (@jessedoyle)</p>
+</li>
+<li>
+<p>place footnotes at end of chapters in books or end of document otherwise (#85) (@bcourtine)</p>
+</li>
+<li>
+<p>fix rendering of footnotes directly adjacent to text in a normal table cell (#927)</p>
+</li>
+<li>
+<p>place toc directly after document title when doctype is not book (#233) (@ogmios-voice)</p>
+</li>
+<li>
+<p>add page layout control to page break (#490) (@resort-diaper)</p>
+</li>
+<li>
+<p>allow additional style properties to be set per heading level (#176) (@billybooth)</p>
+</li>
+<li>
+<p>add support for hexadecimal character references, including in link href (#486)</p>
+</li>
+<li>
+<p>force set data-uri attribute on document so Asciidoctor Diagram returns absolute image paths (#1033)</p>
+</li>
+<li>
+<p>set line spacing for non-AsciiDoc table cells (#296)</p>
+</li>
+<li>
+<p>consider all scripts when looking for leading alpha characters in index (#853)</p>
+</li>
+<li>
+<p>don&#8217;t create title page for article doctype unless title-page attribute is set (#105)</p>
+</li>
+<li>
+<p>don&#8217;t show article title if <code>notitle</code> attribute is set (#998)</p>
+</li>
+<li>
+<p>generate name section for manpage doctype automatically (#882)</p>
+</li>
+<li>
+<p>remove unprocessed passthroughs in literal cells</p>
+</li>
+<li>
+<p>apply font style from theme to formatted text description list term (#854)</p>
+</li>
+<li>
+<p>prevent tempfile for remote image from being deleted before it&#8217;s used (#947)</p>
+</li>
+<li>
+<p>handle case when uri to make breakable is empty (#936)</p>
+</li>
+<li>
+<p>add support for <code>frame=ends</code> as alternative to <code>frame=topbot</code> on table</p>
+</li>
+<li>
+<p>allow table frame and grid to be set globally using the <code>table-frame</code> and <code>table-grid</code> attributes (#822)</p>
+</li>
+<li>
+<p>disable table stripes by default (#1049)</p>
+</li>
+<li>
+<p>allow table stripes to be enabled globally using table-stripes attribute (#1049)</p>
+</li>
+<li>
+<p>use new logging subsystem, if available; otherwise, use shim (#905)</p>
+</li>
+<li>
+<p>allow alignment of list text to be controlled using roles (#182)</p>
+</li>
+<li>
+<p>allow text alignment to be set for abstract (#893)</p>
+</li>
+<li>
+<p>prevent text from overlapping page number in TOC (#839)</p>
+</li>
+<li>
+<p>allow ulist marker to be controlled by theme (#798)</p>
+</li>
+<li>
+<p>add support for reftext for bibliography entry (#864)</p>
+</li>
+<li>
+<p>add support for fw (full-width) icons (#890)</p>
+</li>
+<li>
+<p>decouple vw units with alignment (#948)</p>
+</li>
+<li>
+<p>add align-to-page option for block images (#948)</p>
+</li>
+<li>
+<p>add support for SVG admonition icons (#828) (@keith-packard)</p>
+</li>
+<li>
+<p>rename pastie theme for Rouge to asciidoctor_pdf_default</p>
+</li>
+<li>
+<p>add bw theme for Rouge (#1018)</p>
+</li>
+<li>
+<p>reset top margin of index columns when overflowing to new page (#929)</p>
+</li>
+<li>
+<p>add support for line numbers in source listings (#224)</p>
+</li>
+<li>
+<p>add U+2060 (word joiner) character to built-in Noto Serif font and fallback font (#877)</p>
+</li>
+<li>
+<p>add U+202F (narrow no-break space) character to fallback font (#807)</p>
+</li>
+<li>
+<p>ensure callout number ends up on same page as item text (#914)</p>
+</li>
+<li>
+<p>guard against pygments returning nil (#884)</p>
+</li>
+<li>
+<p>encode quotes in alt text of inline image (#977)</p>
+</li>
+<li>
+<p>fix crash when menu macro is used in a section or block title (#934)</p>
+</li>
+<li>
+<p>remove duplicate message when syntax highlighter is unavailable; don&#8217;t crash processor (#1078)</p>
+</li>
+<li>
+<p>only look for the start attribute on the code block itself when highlighting with rouge</p>
+</li>
+<li>
+<p>apply block styling to background for line-oriented tokens in rouge by default</p>
+</li>
+<li>
+<p>detect pagenum ranges in index when media is print or prepress (#906)</p>
+</li>
+<li>
+<p>ignore style when resolving icon font (#956, #874)</p>
+</li>
+<li>
+<p>remove correct width method when overloading Prawn::Text::Formatted::Fragment</p>
+</li>
+<li>
+<p>remove ZWSP from alt text of image to prevent fragment from being duplicated (#958)</p>
+</li>
+<li>
+<p>avoid call to super in prepended module to fix Ruby 1.9.3</p>
+</li>
+<li>
+<p>look for correct file to require in bin script</p>
+</li>
+<li>
+<p>upgrade prawn-icon from 1.3.0 to 1.4.0</p>
+</li>
+<li>
+<p>upgrade rouge to 2.2.1</p>
+</li>
+<li>
+<p>add concurrent-ruby to runtime dependencies for compatibility w/ Asciidoctor 1.5.8</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_16_2017_07_30_mojavelinux">1.5.0.alpha.16 (2017-07-30) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>add support for xrefstyle attribute (#464)</p>
+</li>
+<li>
+<p>allow page side to be based on physical page number and/or be inverted (#813) (@fap-)</p>
+</li>
+<li>
+<p>fix layout error caused by nested keep together blocks (#791)</p>
+</li>
+<li>
+<p>upgrade prawn-svg to allow generic font names to be mapped in SVG (#777)</p>
+</li>
+<li>
+<p>upgrade prawn-svg to fix issue with dotted lines (#741)</p>
+</li>
+<li>
+<p>upgrade prawn-svg to enable linear gradients (#228)</p>
+</li>
+<li>
+<p>don&#8217;t attempt to parse text in literal cell (#816)</p>
+</li>
+<li>
+<p>warn if theme variable cannot be resolved; don&#8217;t replace (#801)</p>
+</li>
+<li>
+<p>number appendix subsections based on appendix number when doctype is book (#627)</p>
+</li>
+<li>
+<p>don&#8217;t add break hints to URI when using AFM font (#795)</p>
+</li>
+<li>
+<p>add rescue check for scratch document when state is not initialized</p>
+</li>
+<li>
+<p>allow page margin to be a single number; fixes regression introduced by #749</p>
+</li>
+<li>
+<p>check for margin as array, then as numeric, then as string</p>
+</li>
+<li>
+<p>extend version range for prawn-templates (#803)</p>
+</li>
+<li>
+<p>add missing part-title attribute to theming guide (#827)</p>
+</li>
+<li>
+<p>clarify in theming guide that variables are defined in document order</p>
+</li>
+<li>
+<p>clarify that the fallback font is only used when the primary font is a TrueType font</p>
+</li>
+<li>
+<p>add more information about prawn-gmagick to README</p>
+</li>
+<li>
+<p>fix warnings and incompatibility when using Ruby 1.9.3</p>
+</li>
+<li>
+<p>document in README how to install Asciidoctor PDF on Ruby 2.0.0</p>
+</li>
+<li>
+<p>enable Travis CI; configure CI-based deployment to RubyGems.org</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.16">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.16">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_15_2017_03_27_mojavelinux">1.5.0.alpha.15 (2017-03-27) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>fix compatibility with Prawn 2.2.0 (#775)</p>
+</li>
+<li>
+<p>add workaround for TTFunk bug when font table has empty data (#619, #651)</p>
+</li>
+<li>
+<p>take fallback font into account when calculating width of string (#651)</p>
+</li>
+<li>
+<p>fill and stroke bounds of sidebar across all pages (#259) (@TobiasHector)</p>
+</li>
+<li>
+<p>allow page margin to be set using pdf-page-margin attribute (#749)</p>
+</li>
+<li>
+<p>implement none, no-bullet and unstyled unordered list styles</p>
+</li>
+<li>
+<p>add dots to all levels in TOC if toc_dot_leader_levels is all</p>
+</li>
+<li>
+<p>use bold style for description list term by default (#776)</p>
+</li>
+<li>
+<p>always escape index term text (#761)</p>
+</li>
+<li>
+<p>don&#8217;t crash if color value on text span is invalid</p>
+</li>
+<li>
+<p>implement start line number for source listing (Rouge) (#752)</p>
+</li>
+<li>
+<p>enable "start inline" option when highlighting PHP (#755)</p>
+</li>
+<li>
+<p>persuade CodeRay to handle html+ source languages</p>
+</li>
+<li>
+<p>introduce stripes attribute to table to control zebra striping (#724)</p>
+</li>
+<li>
+<p>use theme key table_body_stripe_background_color to control color of table stripes (#724)</p>
+</li>
+<li>
+<p>allow theme to set style of table border and grid (#766)</p>
+</li>
+<li>
+<p>allow theme to set text transform on header cell in table body (#750)</p>
+</li>
+<li>
+<p>set top border width of first body row to match bottom border width of header row</p>
+</li>
+<li>
+<p>don&#8217;t add TOC if empty (#747)</p>
+</li>
+<li>
+<p>optimize code that generates outline level</p>
+</li>
+<li>
+<p>don&#8217;t recalculate header_cell_data for each row</p>
+</li>
+<li>
+<p>use slightly more efficient way to find Pygments lexer</p>
+</li>
+<li>
+<p>upgrade rouge to 2.0.7</p>
+</li>
+<li>
+<p>upgrade prawn-templates to 0.0.5</p>
+</li>
+<li>
+<p>revise information in theming guide pertaining to custom fonts</p>
+</li>
+<li>
+<p>document in README how to get full support for CJK languages</p>
+</li>
+<li>
+<p>document in theming guide that Asciidoctor PDF subsets font when embedding</p>
+</li>
+<li>
+<p>document that background images are scaled to fit bounds of page</p>
+</li>
+<li>
+<p>add note in theming guide about using double quoted strings</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.15">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.15">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_14_2017_02_05_mojavelinux">1.5.0.alpha.14 (2017-02-05) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>add support for AsciiDoc table cells (including nested tables) (#6)</p>
+</li>
+<li>
+<p>patch text cell to remove cursor advancement</p>
+</li>
+<li>
+<p>make header cell in body inherit styles from table head (#239)</p>
+</li>
+<li>
+<p>don&#8217;t crash if table is empty and cols are explicitly set (#610)</p>
+</li>
+<li>
+<p>fix vertical centering for cells in table head row</p>
+</li>
+<li>
+<p>implement converter for index (#386)</p>
+</li>
+<li>
+<p>record page number for index term when writing anchor (#639)</p>
+</li>
+<li>
+<p>support the underline and line-through roles on phrases (#339)</p>
+</li>
+<li>
+<p>allow printed URI to break at break opportunities (#563)</p>
+</li>
+<li>
+<p>don&#8217;t drop subsequent images after inline image fails to load</p>
+</li>
+<li>
+<p>don&#8217;t crash if inline image is an unsupported format; issue warning instead (#587)</p>
+</li>
+<li>
+<p>show alt text when image fails to embed (#693)</p>
+</li>
+<li>
+<p>always show block image caption even if image fails to embed</p>
+</li>
+<li>
+<p>delegate to method to handle missing image</p>
+</li>
+<li>
+<p>permit use of GIF image format if prawn-gmagick is available (#573)</p>
+</li>
+<li>
+<p>add support for image macros that have a data URI target (#318)</p>
+</li>
+<li>
+<p>don&#8217;t crash if format of image in running content is unrecognized</p>
+</li>
+<li>
+<p>only fit image within bounds of running content if contain option is set</p>
+</li>
+<li>
+<p>document fit attribute for image in running content</p>
+</li>
+<li>
+<p>fix alignment for SVG image in running content</p>
+</li>
+<li>
+<p>keep block image with caption (#690)</p>
+</li>
+<li>
+<p>place destination for block image on same page as image</p>
+</li>
+<li>
+<p>set color space when block image occurs on page by itself (#688)</p>
+</li>
+<li>
+<p>resize SVG to fit page (#691)</p>
+</li>
+<li>
+<p>backport resize method from prawn-svg and use it</p>
+</li>
+<li>
+<p>disable system font scan in Prawn SVG</p>
+</li>
+<li>
+<p>use character spacing to fine-tune width of placeholder for inline image (#686)</p>
+</li>
+<li>
+<p>fix duplicate inline image rendering (@fap-) (#388)</p>
+</li>
+<li>
+<p>constrain inline image to width of bounds</p>
+</li>
+<li>
+<p>add support for pdfwidth to inline images (@fap-) (#620)</p>
+</li>
+<li>
+<p>honor pdfwidth attribute for image in running content (#625)</p>
+</li>
+<li>
+<p>add support for absolute measurement units to scaledwidth attribute (#674)</p>
+</li>
+<li>
+<p>resize inline SVG without an explicit width (#684)</p>
+</li>
+<li>
+<p>resize inline image to fit within content height (#700)</p>
+</li>
+<li>
+<p>calculate height of inline image correctly in table cell (#295)</p>
+</li>
+<li>
+<p>fix bug in calculation when image overflows page (#708)</p>
+</li>
+<li>
+<p>simplify calculation of rendered width and height of images</p>
+</li>
+<li>
+<p>add square brackets around alt text for inline image</p>
+</li>
+<li>
+<p>don&#8217;t surround alt text of block image with non-breaking spaces</p>
+</li>
+<li>
+<p>specify width &amp; height when embedding (inline) raster image to avoid recalc</p>
+</li>
+<li>
+<p>resize title logo image to keep on page (#714)</p>
+</li>
+<li>
+<p>don&#8217;t leave blank page when importing PDF page (#614)</p>
+</li>
+<li>
+<p>fix running content dimensions (#616)</p>
+</li>
+<li>
+<p>introduce document attribute to control default text alignment (#396)</p>
+</li>
+<li>
+<p>allow setting a default columns spec for running content on both recto and verso pages; set if not defined</p>
+</li>
+<li>
+<p>show example of center column alignment in default theme</p>
+</li>
+<li>
+<p>map dynamic section-title attribute in running content to current section if page has no section (#709)</p>
+</li>
+<li>
+<p>assign dynamic part-title attribute for use in running content (#596)</p>
+</li>
+<li>
+<p>don&#8217;t set dynamic chapter-title attribute in running content for preface unless doctype is book</p>
+</li>
+<li>
+<p>clear section and chapter title in running content when part changes (#910, #879)</p>
+</li>
+<li>
+<p>clear section title in running content when chapter changes (#910)</p>
+</li>
+<li>
+<p>assign page number label to each page (#641)</p>
+</li>
+<li>
+<p>don&#8217;t set dynamic page-number attribute in running content of pagenums is disabled</p>
+</li>
+<li>
+<p>allow toc title properties to be controlled by theme (#701)</p>
+</li>
+<li>
+<p>use correct number of dots when font style is applied to toc level (#621)</p>
+</li>
+<li>
+<p>allow theme to control which toc levels have dot leaders; default to 2-3 (#631)</p>
+</li>
+<li>
+<p>set font color of page number for parts in toc</p>
+</li>
+<li>
+<p>don&#8217;t crash when toc dot leader is empty string</p>
+</li>
+<li>
+<p>list preface with title in table of contents (#732)</p>
+</li>
+<li>
+<p>allow theme to apply text decoration to link text (#567)</p>
+</li>
+<li>
+<p>allow page layout to be controlled from document (#565)</p>
+</li>
+<li>
+<p>don&#8217;t crash if image in running content fails to embed (#728)</p>
+</li>
+<li>
+<p>treat abstract section as abstract block (#703)</p>
+</li>
+<li>
+<p>set example block background to white by default</p>
+</li>
+<li>
+<p>automatically wire unspecified code and conum font family to literal font family</p>
+</li>
+<li>
+<p>add support for background colors when highlighting code with Rouge</p>
+</li>
+<li>
+<p>add support underline style for token in Rouge theme (#665)</p>
+</li>
+<li>
+<p>drop background colors on strings in rouge pastie theme</p>
+</li>
+<li>
+<p>add support for image-based icons (#479) (@JBR69)</p>
+</li>
+<li>
+<p>preliminary support for vertical alignment of admonition icon/label</p>
+</li>
+<li>
+<p>allow side padding on admonition label to be controlled separately from admonition content</p>
+</li>
+<li>
+<p>add more control over vertical rule in admonition block (#601)</p>
+</li>
+<li>
+<p>allow theme to control font properties for admonition content (#592)</p>
+</li>
+<li>
+<p>only add lead role to first paragraph of preamble (#654)</p>
+</li>
+<li>
+<p>display poster image for video with link to video URI (#287)</p>
+</li>
+<li>
+<p>add link to audio file (#475)</p>
+</li>
+<li>
+<p>don&#8217;t drop anchor within text that overruns page (#638)</p>
+</li>
+<li>
+<p>display title for abstract (#582)</p>
+</li>
+<li>
+<p>display title for open block (#577)</p>
+</li>
+<li>
+<p>display block title on quote and verse blocks (#416)</p>
+</li>
+<li>
+<p>don&#8217;t draw border for quote/verse block on empty page or if border width is 0</p>
+</li>
+<li>
+<p>allow delimiter between author names on title page to be configured in theme</p>
+</li>
+<li>
+<p>coerce resolved value of content key in theme to String (#653)</p>
+</li>
+<li>
+<p>honor background color from Pygments theme</p>
+</li>
+<li>
+<p>set default inner/outer margins in base theme</p>
+</li>
+<li>
+<p>document missing glyph encoding warning in theming guide; minor rewording</p>
+</li>
+<li>
+<p>document how to configure fonts in SVG images (#739)</p>
+</li>
+<li>
+<p>document how to use Asciidoctor Mathematical to enable STEM support (#45)</p>
+</li>
+<li>
+<p>transform text containing multibyte characters (#363)</p>
+</li>
+<li>
+<p>document in theming guide how to transform unicode letters with Ruby &lt; 2.4</p>
+</li>
+<li>
+<p>show unmodified text if text_transform is none (#584)</p>
+</li>
+<li>
+<p>make performance optimization to formatted text transform</p>
+</li>
+<li>
+<p>use reference_bounds instead of @margin_box to move past bottom</p>
+</li>
+<li>
+<p>handle negative bottom padding properly at page boundary</p>
+</li>
+<li>
+<p>use value of docdatetime &amp; localdatetime attributes in PDF info (#590)</p>
+</li>
+<li>
+<p>use truncate_to_precision instead of round to truncate floats; map to native method in Ruby &gt;= 2.4</p>
+</li>
+<li>
+<p>upgrade prawn-svg dependency to 0.26.x</p>
+</li>
+<li>
+<p>upgrade prawn-icon to 1.3.0</p>
+</li>
+<li>
+<p>document in the README how to use the autofit option on verbatim blocks</p>
+</li>
+<li>
+<p>clarify in README how inline image are sized</p>
+</li>
+<li>
+<p>clarify instructions in README about how to specify a page number range for printing</p>
+</li>
+<li>
+<p>document in theming guide how to define and apply a custom Rouge theme</p>
+</li>
+<li>
+<p>rename <code>pdfmarks</code> to <code>pdfmarks</code>; document pdfmark attribute in theming guide</p>
+</li>
+<li>
+<p>describe the quoted string value type in the theming guide</p>
+</li>
+<li>
+<p>add self-referencing anchor to each key prefix in theming guide</p>
+</li>
+<li>
+<p>document <code>nonfacing</code> option for sections (@jnerlich)</p>
+</li>
+<li>
+<p>fix documentation for <code>toc_dot_leader_font_color</code> in theming guide (@davidgamba)</p>
+</li>
+<li>
+<p>document that dot leader inherits font properties from toc category</p>
+</li>
+<li>
+<p>fill in missing defaults for keys in theming guide</p>
+</li>
+<li>
+<p>rewrite intro to Keys section in theming guide</p>
+</li>
+<li>
+<p>add keys for prose, menu, and conum categories to theming guide</p>
+</li>
+<li>
+<p>document <code>outline_list_marker_font_color</code> key in theming guide</p>
+</li>
+<li>
+<p>refactor measurement value helpers into module (#677)</p>
+</li>
+<li>
+<p>add reproducible flag to examples</p>
+</li>
+<li>
+<p>add inline ref and corresponding xref to chronicles example</p>
+</li>
+<li>
+<p>fix Ruby warnings</p>
+</li>
+<li>
+<p>update instructions and Gemfile config to use with Ruby 1.9.3</p>
+</li>
+<li>
+<p>configure build as the default rake task</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.14">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.14">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_13_2016_09_19_mojavelinux">1.5.0.alpha.13 (2016-09-19) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add support for mirror (recto/verso) margins and facing pages when <code>media=prepress</code></p>
+</li>
+<li>
+<p>Add non-breaking hyphen glyph to built-in fonts so its intended behavior is honored (#462)</p>
+</li>
+<li>
+<p>Add page break before a book part (#329)</p>
+</li>
+<li>
+<p>Allow running (header/footer) content to be arranged in columns (#449)</p>
+</li>
+<li>
+<p>Allow font properties to be set per element in running content (#454)</p>
+</li>
+<li>
+<p>Prevent the SVG from modifying the document font (#494)</p>
+</li>
+<li>
+<p>Implement decorative border for multipage quote and verse blocks (#270, #557, #558)</p>
+</li>
+<li>
+<p>Encode anchors in hex that contain characters outside of ASCII range (#481, #308)</p>
+</li>
+<li>
+<p>Size the line number gutter correctly (accounting for width of largest line number) (#402)</p>
+</li>
+<li>
+<p>Allow theme to specify default value for pdfwidth attribute on image and document in README (#455)</p>
+</li>
+<li>
+<p>Fix front matter page numbering by adding page labels for all front matter pages in outline (#458)</p>
+</li>
+<li>
+<p>Allow image type to be specified explicitly using format attribute on image macro (#540)</p>
+</li>
+<li>
+<p>Add support for literal and verse table cell styles</p>
+</li>
+<li>
+<p>Preserve indentation in literal and verse table cells</p>
+</li>
+<li>
+<p>Preserve paragraph breaks in normal table cells</p>
+</li>
+<li>
+<p>Honor value of width attribute even when <code>autowidth</code> option is set on table (#519)</p>
+</li>
+<li>
+<p>Align table title to left edge of table, regardless of table alignment (#469)</p>
+</li>
+<li>
+<p>Add support for reversed option on ordered list (#491)</p>
+</li>
+<li>
+<p>Don&#8217;t drop whitespace in front of conum on final line of source block (#470)</p>
+</li>
+<li>
+<p>Add more control over position of elements on title page, including support for vw units (#418)</p>
+</li>
+<li>
+<p>Allow table caption position/side to be controlled by theme (#531)</p>
+</li>
+<li>
+<p>Use base_align setting from theme as default alignment for headings</p>
+</li>
+<li>
+<p>Resolve bare image-related attribute values relative to base_dir</p>
+</li>
+<li>
+<p>Only allow Prawn SVG to fetch remote images if the allow-uri-read attribute is set (#548)</p>
+</li>
+<li>
+<p>Introduce page_margin_inner and page_margin_outer keys to theme</p>
+</li>
+<li>
+<p>Start title page, toc, main content, parts, and chapters on recto page when <code>media=prepress</code> and <code>doctype=book</code></p>
+</li>
+<li>
+<p>Allow default font style for table to be set via theme (<code>table_font_style</code>)</p>
+</li>
+<li>
+<p>Use correct default bullet per nested unordered list level (#529)</p>
+</li>
+<li>
+<p>Call <code>start_new_part</code> at start of each book part</p>
+</li>
+<li>
+<p>Delegate to <code>layout_part_title</code> method to layout part title</p>
+</li>
+<li>
+<p>Don&#8217;t match a special section as a chapter unless the doctype is book</p>
+</li>
+<li>
+<p>Fix list marker placement when list item touches bottom of page</p>
+</li>
+<li>
+<p>Eliminate excessive spacing between list items that contain nested lists</p>
+</li>
+<li>
+<p>Drop lines in running (header/footer) content with unresolved attributes (#522)</p>
+</li>
+<li>
+<p>Ensure <code>start_new_chapter</code> is always executed at a chapter transition (#524)</p>
+</li>
+<li>
+<p>Add support for root xref (e.g., <a href="included-doc.html">included-doc.html</a>) (#521)</p>
+</li>
+<li>
+<p>Prevent block from spilling to next page if there&#8217;s no more content (#361)</p>
+</li>
+<li>
+<p>Add support for px units to pdf-page-size attribute</p>
+</li>
+<li>
+<p>Fix parsing error when value of pdf-page-size attribute is unitless</p>
+</li>
+<li>
+<p>Don&#8217;t crash if table is empty (#480)</p>
+</li>
+<li>
+<p>Don&#8217;t crash when deleting last remaining page; don&#8217;t delete last page if empty (#317)</p>
+</li>
+<li>
+<p>Don&#8217;t orphan space between conums when extracting from verbatim block (#506)</p>
+</li>
+<li>
+<p>Properly scope attr and attr? lookups</p>
+</li>
+<li>
+<p>Rename internal page_start and page_end attributes to pdf-page-start and pdf-page-end, respectively</p>
+</li>
+<li>
+<p>Fix settings for table header cell</p>
+</li>
+<li>
+<p>Fix padding around content of quote block in default theme</p>
+</li>
+<li>
+<p>Read theme file with UTF-8 encoding (#533)</p>
+</li>
+<li>
+<p>Allow temporary image file to be deleted on Windows (#425)</p>
+</li>
+<li>
+<p>Don&#8217;t crash if theme file is empty (#551)</p>
+</li>
+<li>
+<p>Don&#8217;t crash if cover image can&#8217;t be read; warn instead</p>
+</li>
+<li>
+<p>Clarify in theming guide how to write numbers with 3 or more digits (#555)</p>
+</li>
+<li>
+<p>Document how inline images are sized</p>
+</li>
+<li>
+<p>Document how to disable default footer from theme</p>
+</li>
+<li>
+<p>Update explanation of WINANSI encoding behavior in theming guide</p>
+</li>
+<li>
+<p>Restore support for Ruby 1.9.3 (#528)</p>
+</li>
+<li>
+<p>Upgrade prawn-icon to 1.2.0 (which upgrades Font Awesome to 4.6.3)</p>
+</li>
+<li>
+<p>Upgrade prawn-svg to 0.25.2 (by way of more lenient version range)</p>
+</li>
+<li>
+<p>Fix Ruby warnings</p>
+</li>
+<li>
+<p>Document in README how image paths are resolved</p>
+</li>
+<li>
+<p>Configure README for better preview on GitHub</p>
+</li>
+<li>
+<p>Update chronicles example to modern AsciiDoc syntax; update content</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.13">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.13">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_12_2016_08_05_mojavelinux">1.5.0.alpha.12 (2016-08-05) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Fix incompatibility with Rouge 2 source highlighter (#471)</p>
+</li>
+<li>
+<p>Declare rouge gem in Gemfile for use with examples</p>
+</li>
+<li>
+<p>Add option to make URLs visible in printed PDF using show-link-uri or media=print attributes (#435, #463)</p>
+</li>
+<li>
+<p>Document options for scaling an image (#453)</p>
+</li>
+<li>
+<p>Add support for images to span width of page (#424)</p>
+</li>
+<li>
+<p>Fix embedding of remote images; fix case when imagesdir is a URI (#467)</p>
+</li>
+<li>
+<p>Collapse non-significant whitespace (#465)</p>
+</li>
+<li>
+<p>Document how to inherit font size for a given heading level (#460)</p>
+</li>
+<li>
+<p>Decode character references in link URIs (#448)</p>
+</li>
+<li>
+<p>Use arrow as caret for menu path instead of pipe (#441)</p>
+</li>
+<li>
+<p>Document theme-related AsciiDoc attributes in theming guide (#428)</p>
+</li>
+<li>
+<p>Section title alignment should be customizable via theme (#343)</p>
+</li>
+<li>
+<p>Collapse all whitespace when normalizing (#355)</p>
+</li>
+<li>
+<p>Require space on either side of math operator to avoid interpreting dates as math equations (#429)</p>
+</li>
+<li>
+<p>Allow specifying a font style for a title on the title page (#423)</p>
+</li>
+<li>
+<p>Fix Prawn SVG to support arrow heads on lines (#75)</p>
+</li>
+<li>
+<p>Upgrade prawn-svg to 0.25.1</p>
+</li>
+<li>
+<p>Upgrade prawn-icon to 1.1.0</p>
+</li>
+<li>
+<p>Fix rendering of two images in header or footer (#421)</p>
+</li>
+<li>
+<p>Allow table grid color and width to be controlled by theme (@ntfc)</p>
+</li>
+<li>
+<p>Fix undefined local variable or method `dest_y' when adding auto-generated anchor to section (#419)</p>
+</li>
+<li>
+<p>SVG files that include image elements are not rendered correctly improvement (@AlexanderZobkov) (#414)</p>
+</li>
+<li>
+<p>Fix Prawn SVG to support currentColor keyword (#407)</p>
+</li>
+<li>
+<p>Parser should recognize up to 6 digit character references (#404)</p>
+</li>
+<li>
+<p>Properly convert a negative measurement value in theme</p>
+</li>
+<li>
+<p>Coerce percentage value to float instead of integer in theme</p>
+</li>
+<li>
+<p>Set minimum required Ruby version to 1.9.3 instead of 1.9</p>
+</li>
+<li>
+<p>Use title capitalization for section titles in theming guide</p>
+</li>
+<li>
+<p>Update and reorganize keys in theming guide; document numerous keys previous missing</p>
+</li>
+<li>
+<p>Add hints to theming guide about how to apply styles when using Maven or Gradle (@fwilhe)</p>
+</li>
+<li>
+<p>Fix gemspec to collect files when project is not a git repository or git is not available</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.12">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.12">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_11_2016_01_05_mojavelinux">1.5.0.alpha.11 (2016-01-05) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Allow font style for first line of abstract to be controlled by theme (@nawroth) (#378)</p>
+</li>
+<li>
+<p>Add option to make builds reproducible (@bk2204) (#338)</p>
+</li>
+<li>
+<p>Set default page size to A4 (@stephenhay) (#319)</p>
+</li>
+<li>
+<p>Preprocess all hex color values (#381)</p>
+</li>
+<li>
+<p>Add note about preprocessing hex color values to theming guide (#381)</p>
+</li>
+<li>
+<p>Honor base font style (#373)</p>
+</li>
+<li>
+<p>Don&#8217;t fail to delete tmp file (#369)</p>
+</li>
+<li>
+<p>Lazy load icon fonts if detected (#364)</p>
+</li>
+<li>
+<p>Reduce heading line height in default theme (#351)</p>
+</li>
+<li>
+<p>Set default (fallback) SVG font from theme (#210)</p>
+</li>
+<li>
+<p>Expand last column to fit width of table (#372)</p>
+</li>
+<li>
+<p>Don&#8217;t cache resolved imagesdir attribute value</p>
+</li>
+<li>
+<p>Use fallback when merging icon data</p>
+</li>
+<li>
+<p>Defer to built-in caching in prawn-icon</p>
+</li>
+<li>
+<p>Document replacements and numeric character refs in header/footer content</p>
+</li>
+<li>
+<p>Document base_font_size_min setting in theming guide</p>
+</li>
+<li>
+<p>Document that page background colors &amp; images do not currently work in AsciidoctorJ PDF</p>
+</li>
+<li>
+<p>Use failproof relative require logic in bin script</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.11">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.11">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_10_2015_11_01_mojavelinux">1.5.0.alpha.10 (2015-11-01) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Allow admonition icon to be customized by theme (#121) (@jessedoyle)</p>
+</li>
+<li>
+<p>Update to prawn-icon 1.0.0 (#335) (@jessedoyle)</p>
+</li>
+<li>
+<p>Only generate the pdfmarks file if the <code>pdfmarks</code> attribute is set</p>
+</li>
+<li>
+<p>Honor table alignment (via align attribute or role) (#299)</p>
+</li>
+<li>
+<p>Use Hash for ViewerPreferences; set initial magnification (#303)</p>
+</li>
+<li>
+<p>Handle case when colpcwidth is unspecified (#314)</p>
+</li>
+<li>
+<p>Show title for lists (olist, ulist, dlist) (#316)</p>
+</li>
+<li>
+<p>Don&#8217;t attempt to add running content if document has no content pages</p>
+</li>
+<li>
+<p>Correctly calculate toc page range (#322)</p>
+</li>
+<li>
+<p>Don&#8217;t insert blank page after back cover (#328)</p>
+</li>
+<li>
+<p>Document theme key that sets sidebar padding (#344)</p>
+</li>
+<li>
+<p>Handle case when CodeRay passes nil text to text_token</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.10">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.10">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_9_2015_08_02_mojavelinux">1.5.0.alpha.9 (2015-08-02) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Apply point conversion to image widths (#221)</p>
+</li>
+<li>
+<p>Restore missing glyphs in Noto Serif font; adds support for Cyrillic languages (#72, #99)</p>
+</li>
+<li>
+<p>Add support for the Rouge source highlighter (#247)</p>
+</li>
+<li>
+<p>Fix parsing of style attribute in inline markup when it contains spaces; fixes Pygments highlighting</p>
+</li>
+<li>
+<p>Expand tabs to spaces in source document (#236)</p>
+</li>
+<li>
+<p>Scale down SVG if width is wider than page (#242)</p>
+</li>
+<li>
+<p>Load a base theme with defaults for required keys (#132)</p>
+</li>
+<li>
+<p>Enable PDF page import using block image macro (#177)</p>
+</li>
+<li>
+<p>Restore method in PDF::Core needed to import PDF page (#237)</p>
+</li>
+<li>
+<p>Restore text rendering mode after PDF import (#251)</p>
+</li>
+<li>
+<p>Support writing to STDOUT and other IO objects (#254)</p>
+</li>
+<li>
+<p>Enable pagenums by default; allow noheader &amp; nofooter to control running header/footer (#205)</p>
+</li>
+<li>
+<p>Implement explicit table width, including autowidth (#258)</p>
+</li>
+<li>
+<p>Handle conversion to windows-1252 more gracefully when using built-in (AFM) fonts (#290)</p>
+</li>
+<li>
+<p>Disable warning if using a built-in (AFM) font</p>
+</li>
+<li>
+<p>Remove use of rhythm theme keys from converter (#289)</p>
+</li>
+<li>
+<p>Allow font_style to be set on literal text (#291)</p>
+</li>
+<li>
+<p>Parse inline image macro value of page_background_image (#222)</p>
+</li>
+<li>
+<p>Allow theme to control header cells in table body (#272)</p>
+</li>
+<li>
+<p>Make line height in running header/footer configurable (#274)</p>
+</li>
+<li>
+<p>Normalize text content in running header/footer (#266)</p>
+</li>
+<li>
+<p>Modify vertical alignment setting for running header/footer (#264)</p>
+</li>
+<li>
+<p>Use table background color, even if white; upgrade to Prawn Table 0.2.2 (#214)</p>
+</li>
+<li>
+<p>Delete trailing content page if empty (#147)</p>
+</li>
+<li>
+<p>Fix dry run calculation of block height&#8230;&#8203;again (#215)</p>
+</li>
+<li>
+<p>Move footnotes to inline in a lighter shade</p>
+</li>
+<li>
+<p>Fix for JRuby 1.7 running in 2.0 mode</p>
+</li>
+<li>
+<p>Upgrade Prawn SVG to 0.21.0; fixes most badge SVGs</p>
+</li>
+<li>
+<p>Upgrade thread_safe gem</p>
+</li>
+<li>
+<p>Prevent crash if doc has no sections (@abatalev)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.9">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.9">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_8_2015_06_23_mojavelinux">1.5.0.alpha.8 (2015-06-23) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Support inline images (#9)</p>
+</li>
+<li>
+<p>Support link attribute on inline images (#209)</p>
+</li>
+<li>
+<p>Support inline icon macro (#97)</p>
+</li>
+<li>
+<p>Allow fine-grained control over image width (#76)</p>
+</li>
+<li>
+<p>Size conversion not yet applied to images on title page or in running header/footer</p>
+</li>
+<li>
+<p>Enable checklists (#181)</p>
+</li>
+<li>
+<p>Fix block height calculation when content is indented by propagating bounds to scratch document (#215)</p>
+</li>
+<li>
+<p>Don&#8217;t insert page break before content whose height exceeds a single page (#183)</p>
+</li>
+<li>
+<p>Dash border of literal/listing block at page boundary when broken across pages (#190)</p>
+</li>
+<li>
+<p>Don&#8217;t crash if toc entry is too long (#200)</p>
+</li>
+<li>
+<p>Add missing methods on OpenStruct to fix Rubinius compatibility (#81)</p>
+</li>
+<li>
+<p>Autofit font size in listing &amp; literal blocks if autofit option is specified (#185)</p>
+</li>
+<li>
+<p>Support border style (e.g., double, dashed, dotted) (#196)</p>
+</li>
+<li>
+<p>Allow font color of outline list marker to be set by theme (#170)</p>
+</li>
+<li>
+<p>Allow use of hyphen in property names in the theme (#193)</p>
+</li>
+<li>
+<p>Only include table of contents if toc attribute is defined in header (#187)</p>
+</li>
+<li>
+<p>Improve parsing of pdf-page-size attribute</p>
+</li>
+<li>
+<p>Handle case in colist converter when previous block isn&#8217;t found (#173)</p>
+</li>
+<li>
+<p>Print Asciidoctor PDF version in CLI output</p>
+</li>
+<li>
+<p>Upgrade Prawn (&lt; 3.0.0, &gt;= 1.3.0) (#68)</p>
+</li>
+<li>
+<p>Upgrade Prawn SVG to 0.20.0</p>
+</li>
+<li>
+<p>Document gem installation in README (#112)</p>
+</li>
+<li>
+<p>Perform code cleanups (#195)</p>
+</li>
+<li>
+<p>Silence warning about toc block macro</p>
+</li>
+<li>
+<p>Add -example suffix to example file names</p>
+</li>
+<li>
+<p>Use CodeRay as syntax highlighter in examples (#207)</p>
+</li>
+<li>
+<p>Use proper font names in default them to support custom fonts in SVGs</p>
+</li>
+<li>
+<p>Rework parser to parse void elements</p>
+</li>
+<li>
+<p>Apply first line formatting correctly (no dropped words)</p>
+</li>
+<li>
+<p>Add support for text-center role on paragraphs</p>
+</li>
+<li>
+<p>Update theming guide</p>
+</li>
+<li>
+<p>Fix cross references in README</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.8">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.8">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_7_2015_05_31_mojavelinux">1.5.0.alpha.7 (2015-05-31) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add support for font-based icons (Jesse Doyle) (#15)</p>
+</li>
+<li>
+<p>Enable font fallback support (Rei)</p>
+</li>
+<li>
+<p>Support single value for font_fallbacks key in theme</p>
+</li>
+<li>
+<p>Reenable M+ 1p as the fallback font</p>
+</li>
+<li>
+<p>Add option to specify the background color for even table rows (Tord Heimdal) (#104)</p>
+</li>
+<li>
+<p>Add block title for paragraphs (David Gamba) (#67)</p>
+</li>
+<li>
+<p>Allow custom page size setting (Otavio Salvador) (#84)</p>
+</li>
+<li>
+<p>Fix xref to sections (#56)</p>
+</li>
+<li>
+<p>Fix xrefs to non-section content (#110)</p>
+</li>
+<li>
+<p>Allow theme to control layout of title page (#135)</p>
+</li>
+<li>
+<p>Allow theme to control style of table of contents (#167)</p>
+</li>
+<li>
+<p>Allow running header &amp; footer content to be customized (#89)</p>
+</li>
+<li>
+<p>Tighten spacing between list items, make value configurable (#92)</p>
+</li>
+<li>
+<p>Support CMYK color values (#155)</p>
+</li>
+<li>
+<p>Add support for measurement values in theme (#156)</p>
+</li>
+<li>
+<p>Name per-level heading theme keys consistently (e.g., heading_h&lt;n&gt;_font_size) (#157)</p>
+</li>
+<li>
+<p>Preprocess theme data to allow # in front of hex colors (#158)</p>
+</li>
+<li>
+<p>Support linkable images (#51)</p>
+</li>
+<li>
+<p>Render table footer row (#123)</p>
+</li>
+<li>
+<p>Don&#8217;t crash if sectids attribute is disabled (#70)</p>
+</li>
+<li>
+<p>Support text transform in theme (uppercase / lowercase) (#138)</p>
+</li>
+<li>
+<p>Keep together shouldn&#8217;t create blank pages (#150)</p>
+</li>
+<li>
+<p>Properly resolve image target as system path (#87)</p>
+</li>
+<li>
+<p>Show warning when image cannot be read (#148)</p>
+</li>
+<li>
+<p>Allow page background image to be specified (#134)</p>
+</li>
+<li>
+<p>Support PDF format as cover page (#113)</p>
+</li>
+<li>
+<p>Accommodate numbered list with large numbers (#91)</p>
+</li>
+<li>
+<p>Position list marker correctly (#140)</p>
+</li>
+<li>
+<p>Allow theme to set font size &amp; family of table cells (#139)</p>
+</li>
+<li>
+<p>Unencode character entities in document title (#136)</p>
+</li>
+<li>
+<p>Process callouts in listing &amp; literal blocks (#31)</p>
+</li>
+<li>
+<p>Use :center to vertically align table cell (#118)</p>
+</li>
+<li>
+<p>Normalize endlines in table cell text (#116)</p>
+</li>
+<li>
+<p>Support setting page size via attribute (#65)</p>
+</li>
+<li>
+<p>Remove unused fonts; update version of NotoSerif font license file</p>
+</li>
+<li>
+<p>Remove Asciidoctor theme until we&#8217;re ready to fully implement</p>
+</li>
+<li>
+<p>Restore source highlighting when nested inside block</p>
+</li>
+<li>
+<p>Allow keys in theme to be nested to an arbitrary depth</p>
+</li>
+<li>
+<p>Assign width to border for blockquote if not specified in theme</p>
+</li>
+<li>
+<p>Add support for font family and style per heading level</p>
+</li>
+<li>
+<p>Implement basic converter for inline_indexterm</p>
+</li>
+<li>
+<p>Coerce negative values in theme if they slip through</p>
+</li>
+<li>
+<p>Use preserve_indentation in layout_prose</p>
+</li>
+<li>
+<p>Support remote images</p>
+</li>
+<li>
+<p>Add warning about unsupported gif format</p>
+</li>
+<li>
+<p>Abort cli if option parsing returns exit code</p>
+</li>
+<li>
+<p>Use SafeYAML to load theme files</p>
+</li>
+<li>
+<p>Handle transparent value for table background colors</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.7">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.7">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_6_2014_11_28_mojavelinux">1.5.0.alpha.6 (2014-11-28) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add pdf-fontsdir attributes to redefine fonts directory (andrey)</p>
+</li>
+<li>
+<p>Use require_relative to load Asciidoctor PDF in asciidoctor-pdf script (Ryan Bigg)</p>
+</li>
+<li>
+<p>Add example for specifying theme file (Leif Gruenwoldt) (#61)</p>
+</li>
+<li>
+<p>Add thread_safe gem to remove warning when registering converter</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.6">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.6">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_5_2014_09_15_mojavelinux">1.5.0.alpha.5 (2014-09-15) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Allow chapter label to be controlled using the <code>chapter-label</code> attribute (#47)</p>
+</li>
+<li>
+<p>Prevent toc from overflowing content (#35)</p>
+</li>
+<li>
+<p>Fix page numbering for various permutations of front matter</p>
+</li>
+<li>
+<p>Don&#8217;t activate implicit header include processor by default (#48, #25)</p>
+</li>
+<li>
+<p>Draw box around listings and literal blocks than span more than one page (#11)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.5">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.5">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_4_2014_09_09_mojavelinux">1.5.0.alpha.4 (2014-09-09) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Fix yield statement so Asciidoctor PDF can be used with JRuby</p>
+</li>
+<li>
+<p>Document that the coderay gem must be installed to run the examples (#42)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.4">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.4">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_3_2014_09_08_mojavelinux">1.5.0.alpha.3 (2014-09-08) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Remove unnecessary dependencies (tilt, slim, thread_safe)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.3">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.3">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_2_2014_09_05_mojavelinux">1.5.0.alpha.2 (2014-09-05) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Add magic encoding header to source file so Asciidoctor PDF can be used with Ruby 1.9.3 (#33, #36)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.2">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.2">git tag</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_1_5_0_alpha_1_2014_09_04_mojavelinux">1.5.0.alpha.1 (2014-09-04) - @mojavelinux</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Rewrite as proper Asciidoctor converter (#29)</p>
+</li>
+<li>
+<p>Initial pre-release</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-pdf/issues?q=milestone%3Av1.5.0.alpha.1">issues resolved</a> |
+<a href="https://github.com/asciidoctor/asciidoctor-pdf/releases/tag/v1.5.0.alpha.1">git tag</a></p>
+</div>
+</div>
+</div>

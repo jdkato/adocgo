@@ -1,0 +1,237 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The block styles can be applied to most blocks, including section headings, delimited blocks, admonitions, tables, captions, and block images.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="align">Block alignment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>align</code> key is used to align a block horizontally within its parent container.
+This key is used for non-text elements, such as an image, table, or caption with a narrower width than the content area.
+It&#8217;s roughly akin to the function of the <code>align-self</code> property of a flexbox element in CSS (when the flex direction is row).</p>
+</div>
+<div class="paragraph">
+<p>The block can be aligned using the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">center</dt>
+<dd>
+<p>The block is centered horizontally within the parent container.</p>
+</dd>
+<dt class="hdlist1">left</dt>
+<dd>
+<p>The block is aligned to the left side of the parent container.</p>
+</dd>
+<dt class="hdlist1">right</dt>
+<dd>
+<p>The block is aligned to the right side of the parent container.</p>
+</dd>
+<dt class="hdlist1">inherit</dt>
+<dd>
+<p><strong>Only applies to the captions of block images (<code>image-caption</code>) and tables (<code>table-caption</code>).</strong>
+The value <code>inherit</code> resolves to the alignment of the block image or table.
+Further information about using <code>inherit</code> on image captions and table captions, can be found on xref <a href="block-images.html#caption-align">Block Image Styles</a> and <a href="tables.html#caption-align">Table Styles</a>, respectively.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>align</code> key is distinct from the similarly-named <code>text-align</code> key.
+The <a href="text.html#text-align">text-align key</a> aligns text within the text box using text alignment rules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-width">Border width</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-width</code> key specifies the width of the border applied to a block.
+The key accepts a single measurement value or an array of measurements.
+When a single value is assigned to <code>border-width</code>, that value is applied to all four edges of the border.</p>
+</div>
+<div class="listingblock">
+<div class="title">Single value assigned to border-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-width: 4 <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>You don&#8217;t need to enclose a single value in a set of square brackets.
+If you do enclose the value in square brackets, it will be treated as an array, and any value assigned to the <code>border-radius</code> key will be ignored.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When a 2-value array is assigned to <code>border-width</code>, the first value is applied to the top and bottom borders, and the second value is applied to the left and right side borders.</p>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to border-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">example:
+  border-width: [0.5, 2]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a 4-value array is assigned to <code>border-width</code>, the first value is applied to the top border, the second to the right side border, the third to the bottom border, and the fourth to the left side border.</p>
+</div>
+<div class="listingblock">
+<div class="title">Four-value array assigned to border-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">heading:
+  h2-border-width: [0.75, 0, 2, 0]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t want a border applied to a block category, assign a tilde (<code>~</code>) to the <code>border-width</code> key.</p>
+</div>
+<div class="listingblock">
+<div class="title">Unset border-width</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-width: ~</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-color">Border color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-color</code> key specifies the color of a border.
+It accepts the following types of values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Hex, RGB, or CMYK color</dt>
+<dd>
+<p>A single color specified using the hex, RGB, or CMYK format.
+See <a href="color.html">color.html</a> to learn how to assign these formats in the theming language.</p>
+</dd>
+<dt class="hdlist1">transparent</dt>
+<dd>
+<p>A special keyword that indicates a color should not be used when drawing the border.</p>
+</dd>
+<dt class="hdlist1">Array of colors</dt>
+<dd>
+<p><strong>Only applies to the <code>table</code> category</strong>.
+An array that specifies <a href="tables.html#border-color">a color per edge on tables</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>border-color</code> key value is ignored if <code>border-width</code> isn&#8217;t set or is set to <code>0</code> on the category.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="radius">Border radius</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-radius</code> key rounds the corners of a block&#8217;s outer border.
+It accepts a single measurement value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  border-width: 4
+  border-radius: 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>border-radius</code> key value is ignored if <code>border-width</code> is assigned an array of values.
+The <code>border-radius</code> key can&#8217;t be set on the <code>table</code> category.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-style">Border style</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>border-style</code> key specifies the line style used when drawing a border.
+In most cases, it accepts the following values:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">dashed</dt>
+<dd>
+<p>The border is drawn as a series of short line segments.</p>
+</dd>
+<dt class="hdlist1">dotted</dt>
+<dd>
+<p>The border is drawn as a series of rounded dots.</p>
+</dd>
+<dt class="hdlist1">double</dt>
+<dd>
+<p>The border is drawn as two parallel, straight, solid lines.
+The <code>double</code> value can&#8217;t be applied to table borders.</p>
+</dd>
+<dt class="hdlist1">solid</dt>
+<dd>
+<p>The border is drawn as a straight, single line.</p>
+</dd>
+<dt class="hdlist1">Array of styles</dt>
+<dd>
+<p><strong>Only applies to the <code>table</code> category</strong>.
+An array that specifies <a href="tables.html#border-style">a style per edge on tables</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>border-style</code> key value is ignored on a block category if <code>border-width</code> isn&#8217;t set or <code>border-width</code> is set to <code>0</code> on the category.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="padding">Padding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Several of the block categories, such as <code>admonition</code>, <code>sidebar</code>, <code>verse</code>, etc., allow their padding to be customized.
+The <code>padding</code> key specifies the amount of space between a block&#8217;s content and its border.
+The key accepts a single measurement value or an array of measurements.
+When a single value is assigned to <code>padding</code>, the same amount of padding is applied to all four sides.</p>
+</div>
+<div class="listingblock">
+<div class="title">Single value assigned to padding</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">quote:
+  padding: 1.2mm <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>You don&#8217;t need to enclose a single value in a set of square brackets.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>When a 2-value array is assigned to <code>padding</code>, the first value is applied to the top and bottom padding, and the second value is applied to the left and right side padding.</p>
+</div>
+<div class="listingblock">
+<div class="title">Two-value array assigned to padding</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">sidebar:
+  padding: [0.5, 2]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When a 4-value array is assigned to <code>padding</code>, the first value is applied to the top, the second to the right side, the third to the bottom, and the fourth to the left side padding.</p>
+</div>
+<div class="listingblock">
+<div class="title">Four-value array assigned to padding</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">code:
+  padding: [0.75in, 0, 2in, 0.5in]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>padding</code> key also accepts a 3-value array, where the first value is applied to the top, the second to the right and left side, and the third to the bottom.</p>
+</div>
+</div>
+</div>

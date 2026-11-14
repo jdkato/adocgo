@@ -1,0 +1,491 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can customize the arrangement and style of the running header and footer content by extending the built-in themes and using the <code>header</code>, <code>footer</code>, and <code>running-content</code> category keys.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_activate_the_running_content">Activate the running content</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The running content won&#8217;t be activated unless:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the periphery (header or footer) is configured, and</p>
+</li>
+<li>
+<p>the <code>height</code> key for the periphery is assigned a value.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>By default, the built-in themes insert a footer with the page number on the right side of recto pages and the left side of verso pages if you don&#8217;t specify any running content.
+By extending the base or default themes, you can add content to and customize the layout of the header and footer, or disable the running content.
+Using the <code>running-content</code> key, you can also <a href="#start-at">specify on which page the header and footer start</a>.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+If the height of the running content periphery is taller than the page margin, the running content will cover the main content.
+To avoid this problem, reduce the height of the running content periphery or make the page margin on that side larger.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <a href="running-content.html">running-content.html</a> for the complete list of keys you can use to customize your running content.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="columns">Columns</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the header and footer running content is partitioned into three columns that all span the full content width of the running content box.
+These columns are mapped to the keys <code>left</code>, <code>center</code>, and <code>right</code> in the theme.
+The content is aligned within the column based on its position (e.g., content in the right column is aligned to the right).
+In order for there to be content in the column, that content must be defined in the theme.</p>
+</div>
+<div class="paragraph">
+<p>You can control the number and width of columns in the running content using the <code>columns</code> key on the respective running content periphery (<code>header</code> or <code>footer</code>), which can be overridden by the <code>columns</code> key on the side for that periphery (<code>recto</code> or <code>verso</code>).</p>
+</div>
+<div class="paragraph">
+<p>The running content supports maximum of 3 columns.
+The columns are defined using colspecs.
+A colspec defines the width of each column with an optional alignment.</p>
+</div>
+<div class="paragraph">
+<p>The width is represented in percentage of available space (the space from the left margin to the right margin).
+The widths do not have to add up to 100%, meaning each column can use whatever portion of available space it wants (absolute lateral positioning), though a total of 100% is recommended.</p>
+</div>
+<div class="paragraph">
+<p>The alignment is expressed as a symbol, <code>&lt;</code>, <code>=</code>, <code>&gt;</code> to represent left, center, and right, respectively.
+The alignment must precede the width.
+If the alignment isn&#8217;t specfied, it defaults to <code>&lt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at an example of a colspec:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">footer:
+  columns: =100%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This colspec defines a single column which uses all available space and centers its content.
+The column is mapped to the <code>center</code> key for defining content and other properties.
+Using this column value causes the <code>left</code> and <code>right</code> keys to be ignored.</p>
+</div>
+<div class="paragraph">
+<p>The colspecs are separated using a comma or space.
+The position (and thus name) of the column is inferred by its position in the list.
+The positions per number of columns are mapped as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">1</dt>
+<dd>
+<p>center</p>
+</dd>
+<dt class="hdlist1">2</dt>
+<dd>
+<p>left and right</p>
+</dd>
+<dt class="hdlist1">3</dt>
+<dd>
+<p>left, center, and right</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at example of a 3-column configuration:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>footer:
+  columns: &lt;25% =50% &gt;25%</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This colspec defines three columns.
+The content is aligned to the left for the left column, to the center for the center column, and to the right for the right column.
+The left and right columns occupy 25% of the available space and flank the center column that occupies 50%.
+To align the right column to the left, replace the colspec with &lt;25%.</p>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s look at example of a 2-column configuration.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>footer:
+  columns: &lt;25% &gt;25%</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This colspec defines two columns.
+The left column is aligned to the left and the right column is aligned to the right.
+Each column uses 25% of the available space.</p>
+</div>
+<div class="paragraph">
+<p>To configure 0 columns, assign and empty string to the <code>columns</code> key.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="start-at">Start page</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the running content starts on the first page of the document body.
+You can specify on what page the running content starts using the <code>start-at</code> key.
+The <code>start-at</code> key is set on the top-level <code>running-content</code> key in your theme.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">running-content:
+  start-at: toc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>start-at</code> key accepts the following keywords or an integer:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">after-toc</dt>
+<dd>
+<p>The running content starts after the last page of the TOC, no matter where the TOC is placed in the document.
+If <code>media=prepress</code>, this keyword refers to the next recto page after the last page of the TOC.
+The <code>after-toc</code> value is primarily intended to be used with the book doctype, though it can be used with the article doctype if the title page is enabled.
+If the TOC is not enabled, or the title page for an article is not enabled, this value reverts to <code>body</code>.</p>
+</dd>
+<dt class="hdlist1">body</dt>
+<dd>
+<p>This is the default value.
+The running content starts on the first page of the document body.
+If the TOC is enabled in its default location, the first page of the document body is the next recto page after the TOC when <code>media=prepress</code> or the page that immediately follows the TOC otherwise.</p>
+</dd>
+<dt class="hdlist1">title</dt>
+<dd>
+<p>The running content starts on the title page.
+The <code>title</code> value is only recognized if the title page is implicitly or explicitly enabled.</p>
+</dd>
+<dt class="hdlist1">toc</dt>
+<dd>
+<p>The running content starts on the first page of the TOC, no matter where the TOC is placed in the document.
+The <code>toc</code> value is primarily intended to be used with the book doctype, though it can be used with the article doctype if the title page is enabled.
+If the TOC is not enabled, or the title page for an article is not enabled, this value reverts to <code>body</code>.</p>
+</dd>
+<dt class="hdlist1"><a id="page"></a>Integer</dt>
+<dd>
+<p>The running content starts on the page that matches the number assigned to <code>start-at</code> (i.e., 1 is the first body page, 2 is the second body page).
+Refer to the <code>body</code> value for an explanation of where the body starts.
+For a prepress book (<code>doctype=book</code> and <code>media=prepress</code>), the running content starts on the empty verso page before the body if the value is <code>0</code>.
+An integer value is recognized by all doctypes and the title page doesn&#8217;t need to be enabled.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+To turn off the running content on TOC pages inserted by the toc macro, set the <code>noheader</code> or <code>nofooter</code> options on the macro (e.g., <code>toc::[opts=nofooter]</code>).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="page-number">Modify page number position</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To replace the alternating page numbers with a centered page number, you can restrict the footer to a single column and specify the content for the center position.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+footer:
+  columns: =100%
+  recto:
+    center:
+      content: '{page-number}'
+  verso:
+    center:
+      content: '{page-number}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the recto and verso keys have the same content, you can reduce the amount of configuring using a YAML reference.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+footer:
+  columns: =100%
+  recto: &amp;shared_footer
+    center:
+      content: '{page-number}'
+  verso: *shared_footer</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>&amp;shared_footer</code> assigns an ID to the YAML subtree under the <code>recto</code> key and the <code>*shared_footer</code> outputs a copy of it under the <code>verso</code> key.
+This technique can be used throughout the theme file as it&#8217;s a core feature of YAML.</p>
+</div>
+<div class="paragraph">
+<p>To learn more about the default page numbering and how to customize the numbering, see <a href="page-numbers.html">page-numbers.html</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="attribute-references">Attribute references</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can use any attribute defined in your AsciiDoc document (such as <code>doctitle</code>) in the content of the running header and footer.
+In addition, the following attributes are also available when defining the content keys in the footer:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>page-count</code> - the highest page number in the document (not necessarily the number of physical pages)</p>
+</li>
+<li>
+<p><code>page-number</code> (only set if the <code>pagenums</code> attribute is set on the document, which it is by default)</p>
+</li>
+<li>
+<p><code>page-layout</code></p>
+</li>
+<li>
+<p><code>document-title</code></p>
+</li>
+<li>
+<p><code>document-subtitle</code></p>
+</li>
+<li>
+<p><code>part-title</code></p>
+</li>
+<li>
+<p><code>part-numeral</code> (only set on part title page when part numbering is enabled)</p>
+</li>
+<li>
+<p><code>chapter-title</code></p>
+</li>
+<li>
+<p><code>chapter-numeral</code> (only set on chapter title page when section numbering is enabled)</p>
+</li>
+<li>
+<p><code>section-title</code></p>
+</li>
+<li>
+<p><code>section-or-chapter-title</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The value of the <code>*-title</code> attributes in the running content matches the text as it appears in the table of contents.
+You can control the style of the text stored in these attributes using the <code>title-style</code> key on the periphery category (<code>header</code> or <code>footer</code>) in the theme.
+The <code>title-style</code> key accepts the values <code>toc</code> (as the title appears in the TOC), <code>document</code> (as the title appears in the document), and <code>basic</code> (title only, no signifier or number prefix).</p>
+</div>
+<div class="paragraph">
+<p>If you reference an attribute which is not defined, all the text on that same line in the running content will be dropped.
+This feature allows you to have alternate lines that are selected when all the attribute references are satisfied.
+One case where this is useful is when referencing the <code>page-number</code> attribute.
+If you unset the <code>pagenums</code> attribute on the document, any line in the running content that makes reference to <code>{page-number}</code> will be dropped.</p>
+</div>
+<div class="paragraph">
+<p>You can also use built-in AsciiDoc text replacements like <code>(C)</code>, numeric character references like <code>&amp;#169;</code>, hexadecimal character references like <code>&amp;#x20ac;</code>, and inline formatting (e.g., bold, italic, monospace).</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example that shows how attributes and replacements can be used in the running content:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+header:
+  height: 0.75in
+  line-height: 1
+  recto:
+    center:
+      content: '(C) ACME -- v{revnumber}, {docdate}'
+  verso:
+    center:
+      content: $header-recto-center-content
+footer:
+  background-image: image:running-content-bg-{page-layout}.svg[]
+  height: 0.75in
+  line-height: 1
+  recto:
+    right:
+      content: '{section-or-chapter-title} | {page-number} of {page-count}'
+  verso:
+    left:
+      content: '{page-number} of {page-count} | *{chapter-title}*'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multi_line_values">Multi-line values</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can split the content value across multiple lines using YAML&#8217;s multiline string syntax.
+In this case, the single quotes around the string are not necessary.
+To force a hard line break in the output, add <code> +</code> to the end of the line in normal AsciiDoc fashion.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+footer:
+  height: 0.75in
+  line-height: 1.2
+  recto:
+    right:
+      content: |
+        Section Title - Page Number +
+        {section-or-chapter-title} - *{page-number}*
+  verso:
+    left:
+      content: |
+        Page Number - Chapter Title +
+        *{page-number}* - {chapter-title}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+You can use most AsciiDoc inline formatting in the values of these keys.
+For instance, to make the text bold, surround it in asterisks (as shown above).
+One exception to this rule are inline images, which are described in the next section.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_an_image">Add an image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can add images to the running header or footer using the AsciiDoc inline image syntax.
+The image target is resolved relative to the value of the <code>pdf-themesdir</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>If the image macro is the entire value of the content for a given position, it acts like a background image.
+That means you can use the <code>fit</code> attribute scale it relative to the column&#8217;s box.
+The <code>position</code> and <code>align</code> attributes on the macro aren&#8217;t currently recognized.
+Rather, the horizontal position is controlled by the alignment of the column and the vertical position is controlled by the <code>image-vertical-align</code> key on the periphery.</p>
+</div>
+<div class="paragraph">
+<p>If the image macro is adjacent to other text, the image behaves just like any other inline image.
+In this case, you can only adjust the width of the image using the <code>width</code> attribute (e.g., <code>width=16</code>) or the <code>fit=line</code> attribute.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to use an image in the running header (which also applies for the footer).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+header:
+  height: 0.75in
+  image-vertical-align: 2 # <b class="conum">(1)</b>
+  recto:
+    center:
+      content: image:footer-logo.png[pdfwidth=15pt]
+  verso:
+    center:
+      content: $header-recto-center-content</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>You can use the <code>image-vertical-align</code> key to slightly nudge the image up or down.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+The image must fit in the allotted space for the running header or footer.
+Otherwise, you&#8217;ll run into layout issues or the image may not display.
+You can adjust the width of the image to a fixed value using the <code>pdfwidth</code> attribute.
+Alternatively, you can use the <code>fit</code> attribute to set the size of the image dynamically based on the available space.
+Set the <code>fit</code> attribute to <code>scale-down</code> (e.g., <code>fit=scale-down</code>) to reduce the image size to fit in the available space or <code>contain</code> (i.e., <code>fit=contain</code>) to scale the image (up or down) to fit the available space.
+You should not rely on the <code>width</code> attribute to set the image width when converting to PDF.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="disable">Disable the header or footer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you extend either the base or default theme, and don&#8217;t specify content for the footer, the current page number will be added to the right side on recto pages and the left side on verso pages.
+To turn off the default content, use the following snippet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">extends: default
+footer:
+  recto:
+    right:
+      content: ~
+  verso:
+    left:
+      content: ~</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you define running header and footer content in your theme (including the height), you can still disable this content per document by setting the <code>noheader</code> and <code>nofooter</code> attributes in the AsciiDoc document header, respectively.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:noheader:
+:nofooter:
+
+No running content in this document.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to disable the header and footer on pages in the TOC that were added using the toc macro, you can do so by setting the <code>noheader</code> and/or <code>nofooter</code> options on the toc macro.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:doctype: book
+:toc: macro
+
+[dedication]
+== Dedication
+
+Credit where credit is due.
+
+[%noheader%nofooter]
+toc::[]
+
+== First Chapter</code></pre>
+</div>
+</div>
+</div>
+</div>

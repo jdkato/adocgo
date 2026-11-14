@@ -1,0 +1,198 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>PDF is a fixed-width canvas, therefore you almost always need to specify a width to get the image to fit properly on the page.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="width-attributes">Image width attributes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several attributes available for specifying the width of an image.
+These attributes are listed in the following table in order of precedence.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute&#160;Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="#pdfwidth">pdfwidth</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The display width of the image as an absolute size (e.g., 2in), percentage of the content area width (e.g., 75%), percentage of the intrinsic width of the image (e.g., 50iw), or percentage of the page width (e.g., 100vw).
+If a unit of measurement is not specified (or not recognized), points (<code>pt</code>) is assumed.
+<em>Intended to be used for the PDF converter only.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scale</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A percentage of the intrinsic width of the image.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scaledwidth</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The display width of the image as an absolute size (e.g., 2in) or percentage of the content area width (e.g., 75%).
+If a unit of measurement is not specified, percentage (<code>%</code>) is assumed.
+If a unit of measurement is recognized, points (<code>pt</code>) is assumed.
+<em>Intended to be used for print output such as PDF.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="#image-width">image-width key from theme</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepts the same values as <code>pdfwidth</code>.
+<em>Only applies to block images and <a href="theme:block-images.html#fallback">is set in the theme</a>, not the content.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>width</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unitless display width of the image (assumed to be pixels), typically matching the intrinsic width of the image.
+If the value ends in <code>%</code> (not recommended), it&#8217;s assumed to be the percentage of the available content area width.
+If the width exceeds the content area width, the image is scaled down to the content area width.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(Inline image only)</em>
+If the value is <code>line</code>, the image will be scaled down proportionally, as necessary, to fit the height of a line of text.
+If the value is <code>none</code>, the image will never be scaled down to fit within the height of the content area.
+The <code>none</code> value should only be used as a workaround in cases when the converter is scaling the image when it shouldn&#8217;t.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>unspecified</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you don&#8217;t specify one of the aforementioned width settings, the intrinsic width of the image is used (the px value is multiplied by 75% to convert to pt, assuming canvas is 96 dpi) unless the width exceeds the content area width, in which case the image is scaled down to the content area width.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+Images in running content and page background images also support the <code>fit</code> attribute when specified using the image macro.
+However, the acceptable values of the <code>fit</code> attribute in those cases differs from the acceptable values for an inline image.
+See <a href="background-images.html">background-images.html</a> for details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="default">Default sizing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An image is always sized based on the user-specified or intrinsic width (aka the resolved width), then its height is scaled proportionally.
+The computed height of the image is honored unless this value exceeds the height of the content area.
+In this case, the image is scaled down to fit within the content area.</p>
+</div>
+<div class="paragraph">
+<p>The height of the content area is typically the space between the top and bottom margins of the page.
+However, the content area in table cells is handled in two phases.</p>
+</div>
+<div class="sect2">
+<h3 id="_inline_image_sizing_in_table_cells">Inline image sizing in table cells</h3>
+<div class="paragraph">
+<p>In tables, each cell is considered its own content area.
+That content area is computed based on how much space the content requires, though still limited to the space between the top and bottom margins of the page.
+Inline images in table cells are permitted to increase the height of the cell.
+However, there can be differences in how the image is sized in a normal cell compared to an AsciiDoc table cell.</p>
+</div>
+<div class="paragraph">
+<p>The calculation of the content&#8217;s height in a normal table cell can be inaccurate, often impacted by the font used.
+When the table cell is rendered, its height is restricted to the computed height.
+This can impact the sizing of inline images in a normal table cell if <code>fit=line</code> is set on the image.
+If the computed height ends up being less than the line height, the image will be scaled down to fit.
+If you want to prevent the converter from attempting to scale down the height of the inline image in a normal table cell, don&#8217;t use <code>fit=line</code> or set <code>fit=none</code> on the inline image.</p>
+</div>
+<div class="paragraph">
+<p>The content area of an AsciiDoc table cell is computed more accurately.
+Thus, when you specify the <code>a</code> style on a table cell, the scaling of an inline image is true.
+An inline image will never be scaled down if it fits within the maximum available height of a single page.
+In this scenario, the <code>fit=line</code> attribute will work in the same way it does outside a table cell.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pdfwidth">pdfwidth attribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>pdfwidth</code> attribute is the recommended way to set the image size for the PDF output.
+This attribute is provided for two reasons.
+First, the fixed-width canvas often calls for a width that is distinct from other output formats, such as HTML.
+Second, this attribute allows the width to be expressed using a variety of units.</p>
+</div>
+<div class="paragraph">
+<p>The <code>pdfwidth</code> attribute supports the following units:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>pt (default)</p>
+</li>
+<li>
+<p>in</p>
+</li>
+<li>
+<p>cm</p>
+</li>
+<li>
+<p>mm</p>
+</li>
+<li>
+<p>px</p>
+</li>
+<li>
+<p>pc</p>
+</li>
+<li>
+<p>iw (percentage of intrinsic width of image)</p>
+</li>
+<li>
+<p>vw (percentage of page width)</p>
+</li>
+<li>
+<p>% (percentage of content area width)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In all cases, the width is converted to pt internally.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+See this <a href="https://groups.google.com/forum/#!msg/prawn-ruby/MbMsCx862iY/6ImCsvLGfVcJ" target="_blank" rel="noopener">discussion about image quality in PDFs</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="image-width">Fallback width for block images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To scale all block images that don&#8217;t define either a <code>pdfwidth</code> or <code>scaledwidth</code> attribute on an image macro in your document, assign a value to the <code>image-width</code> key in your theme file.
+If specified, the <code>image-width</code> value takes precedence over the <code>width</code> attribute on an image macro.
+See <a href="theme:block-images.html">theme:block-images.html</a> to learn how to set the <code>image-width</code> key in the theme.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_align_block_image_to_page_boundaries">Align block image to page boundaries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want a block image to align to the boundaries of the page (not the content margin), specify the <code>align-to-page</code> option (e.g., <code>opts="align-to-page"</code>).
+This is most useful when using vw units because you can make the image cover the entire width of the page.</p>
+</div>
+</div>
+</div>

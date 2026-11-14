@@ -1,0 +1,369 @@
+<div class="sect1">
+<h2 id="text-align">Text alignment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>text-align</code> key is used to align text horizontally within the text box.
+It has the same function as the <code>text-align</code> property in CSS.
+The text can be aligned using the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">center</dt>
+<dd>
+<p>Text is centered within the text box.</p>
+</dd>
+<dt class="hdlist1">justify</dt>
+<dd>
+<p>Text is spaced out to align evenly with both sides of the text box.</p>
+</dd>
+<dt class="hdlist1">left</dt>
+<dd>
+<p>Text is aligned to the left side of the text box.</p>
+</dd>
+<dt class="hdlist1">right</dt>
+<dd>
+<p>Text is aligned to the right side of the text box.</p>
+</dd>
+<dt class="hdlist1">inherit</dt>
+<dd>
+<p><strong>Only applies to the caption text of block images (<code>image-caption</code>) and tables (<code>table-caption</code>).</strong>
+The value <code>inherit</code> resolves to the alignment of the block.
+Further information about using <code>inherit</code> on image caption text and table caption text can be found on xref <a href="block-images.html#caption-text-align">Block Image Styles</a> and <a href="tables.html#caption-text-align">Table Styles</a>, respectively.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>text-align</code> key is distinct from the similarly-named <code>align</code> key.
+The <a href="blocks.html#align">align key</a> aligns a block element horizontally within its container.</p>
+</div>
+<div class="paragraph">
+<p>The base <code>text-align</code> can be set using the <code>text-align</code> document attribute, which takes precedence over the value in the theme.
+If a <code>text-&lt;align&gt;</code> role (e.g., <code>text-center</code>) is set on a block element it overrides the value from the theme.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="decoration">Decoration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>text-decoration</code> key specifies the type of decoration, such as an underline, that is applied to the text.
+It accepts the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">line-through</dt>
+<dd>
+<p>A line is drawn across the text.
+This is commonly referred to as a strikethrough.</p>
+</dd>
+<dt class="hdlist1">none</dt>
+<dd>
+<p>Clears an inherited value and no decoration is applied to the text.</p>
+</dd>
+<dt class="hdlist1">underline</dt>
+<dd>
+<p>A line is drawn beneath the text.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When a key category allows the <code>text-decoration</code> key to be set, you can usually specify a <code>text-decoration-color</code> and <code>text-decoration-width</code>, too.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="font-size">Font size</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>font-size</code> key specifies the size of the font.
+The font size may be specified either as a fixed value (e.g., <code>12</code>) or a relative value (e.g., <code>0.8em</code>).
+Font sizes are most often specified as a fixed value, though there are important cases when a relative value is more suitable.
+The font size always resolves to a point value when text is written to the PDF.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+The <code>base-font-size</code> must always be a number.
+That&#8217;s because the value of this key is the reference value on which relative font values (e.g., <code>0.75rem</code>) are based.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If the font size is specified as a number, or a number with a fixed unit of measurement (e.g., <code>px</code>), that value is converted to points.
+The conversion to points is done when the theme is loaded.
+The <code>font-size</code> key on the <code>base</code> category, as well as min, large, and small font size keys, must always be specified as a fixed value.</p>
+</div>
+<div class="paragraph">
+<p>The only time this value is not used as specified is when the element is inside a table.
+If the font size on the table or AsciiDoc table cell differs from the base font size, all nested content is scaled by that ratio.</p>
+</div>
+<div class="paragraph">
+<p>If the font size has relative units, <code>em</code>, <code>%</code>, or <code>rem</code>, then the value will be computed at the point of use.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If the value has the unit <code>em</code>, then that value will be multiplied by the current font size.</p>
+</li>
+<li>
+<p>If the value has the unit <code>%</code>, then that value will be divided by 100, then multiplied by the current font size.</p>
+</li>
+<li>
+<p>If the value has the unit <code>rem</code>, then that value will be multiplied by the base font size.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if the font size is <code>0.75em</code> and the current font size is <code>12</code>, then the font size will be <code>9</code>.</p>
+</div>
+<div class="paragraph">
+<p>Relative font sizes are best suited for inline elements, such as a codespan.
+Only use a relative font size when the font size should always be scaled relative to either the parent element (<code>em</code> or <code>%</code>) or base font size (<code>rem</code>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="line-height">Line height</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>line-height</code> key specifies the height of the box in which a single line of text is positioned.
+This theme key is used to control the spacing between wrapped lines.</p>
+</div>
+<div class="paragraph">
+<p>The line height value is a multiplier of the <a href="#font-size">font size</a>.
+A line height value of 1 means that the height of the line should be equivalent to the height of the font.
+In this case, a wrapped line will start directly below the previous line, with no extra vertical space.
+A line height value of 2 means that the height of the line should be equivalent to twice the height of the font.
+In this case, there will be extra space between wrapped lines than what the text occupies.
+If the value is greater than 1, the text is positioned equidistant between the top and bottom of the line&#8217;s box.</p>
+</div>
+<div class="paragraph">
+<p>The impact of the line height and how it&#8217;s computed is more complex than it would seem at first glance.
+Even if you set the value to 1, you may notice extra space between wrapped lines.
+As you&#8217;re no doubt aware, not all characters have the same height (e.g., <code>x</code> vs <code>X</code>).
+Furthermore, some characters have vertical strokes that rise above the lowercase letter <code>x</code> (ascenders) and some have strokes that drop below the lowercase letter <code>x</code> (descenders).
+We refer to the height of the lowercase letter <code>x</code> the x-height.
+The x-height is always less than&#8212;&#8203;and can vary considerably from&#8212;&#8203;the effective height of the font.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Many fonts contain built-in line height.
+As a result, the size of the font may appear to take up more room than the number of points you specify.
+You can compensate for this difference by adjusting the line height value in your theme.</p>
+</div>
+<div class="paragraph">
+<p>In particular, the Noto font family has a built-in line height of 1.36.
+Thus, if you set the line height in your theme to 1, you&#8217;re really setting it to 1.36.
+If you want a line height of 1.5, set the line height to 1.1 in your theme.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can study the built-in line height by setting the <code>base-line-height</code> key to 1, the <code>mark-border-offset</code> key to 0, then applying the <mark>mark</mark> formatting to various characters, words, and phrases.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">#x# #Hg# #Adjective# #Jog# +
+#Hg# #x#</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The background color under the marked text stretches across the entire built-in line height.
+This reveals the difference between the height of the text and the height of the line.
+If you increase the line height value, you&#8217;ll see spacing appear between the background color stripes of wrapped lines.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+If the <code>line-height</code> value is &lt; 1, you risk causing the text in adjacent lines to overlap.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The reserved height for ascenders and descenders, which can differ, also impacts how the text is positioned vertically within the line height.
+The text is positioned so that the space above and ascender and the space below a descender are equivalent.
+If the text has no ascenders or descenders (e.g., <code>x</code>), it can appear slightly higher or lower in the line than expected.
+It all depends on the properties of the font.
+You can observe this behavior by testing the previous example with different fonts.
+Try change the font family (e.g., <code>Helvetica</code> or <code>Times-Roman</code>) to see what impact it has.</p>
+</div>
+<div class="paragraph">
+<p>When you&#8217;re choosing a line height value, study the interplay between characters with ascenders (e.g, <code>h</code>) and descenders (e.g., <code>y</code>).
+Use marked text to reveal the space occupied by a single line.
+Adjust the line height value until the spacing between the lines matches what you expect.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="font-style">Font style</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>font-style</code> key specifies the font variant in a font family that the text should use.
+The key accepts the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bold</dt>
+<dd>
+<p>Text is styled using the bold variant of a font family.</p>
+</dd>
+<dt class="hdlist1">bold_italic</dt>
+<dd>
+<p>Text is styled using the bold italic variant of a font family</p>
+</dd>
+<dt class="hdlist1">italic</dt>
+<dd>
+<p>Text is styled using the italic variant of a font family.</p>
+</dd>
+<dt class="hdlist1">normal</dt>
+<dd>
+<p>Text is styled using the normal font variant in a font family.</p>
+</dd>
+<dt class="hdlist1">normal_italic</dt>
+<dd>
+<p>The style of the text is reset to normal, and then the text is styled using the italic variant of a font family.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Usually, you can specify a font style wherever you can set a font family (<code>font-family</code>).
+The converter uses the values of both keys in combination to locate the correct font within a font stack.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transform">Transform</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>text-transform</code> key changes the case of the text.
+It accepts the following keywords:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">capitalize</dt>
+<dd>
+<p>Transforms the first letter of each word to a capital letter.</p>
+</dd>
+<dt class="hdlist1">lowercase</dt>
+<dd>
+<p>Transforms all the text to lowercase letters.</p>
+</dd>
+<dt class="hdlist1">none</dt>
+<dd>
+<p>Clears an inherited value and no case transformation is applied to the text.</p>
+</dd>
+<dt class="hdlist1">smallcaps</dt>
+<dd>
+<p>Replaces lowercase ASCII letters (a-z) with their small capital variant.
+Lowercase letters outside the ASCII range are not transformed.</p>
+</dd>
+<dt class="hdlist1">uppercase</dt>
+<dd>
+<p>Transforms all the text to capital letters.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The <code>text-transform</code> key can&#8217;t be set on the <a href="base.html">base category</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you want the smallcaps transformation to support letters beyond the a-z range, you can do so by overridding the <code>smallcaps</code> method in an extended converter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class MyPDFConverter &lt; (Asciidoctor::Converter.for 'pdf')
+  register_for 'pdf'
+
+  def smallcaps string
+    string = super
+    string = string.gsub 'é', %(\u1d07\u0301)
+    string
+  end
+end</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This transformation can be automated using <code>String#unicode_normalize</code> with the <code>:nfd</code> form.
+This method will rewrite all characters with diacritical marks so that the diacritical mark is added using a combining character (i.e., a two graphene form).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class MyPDFConverter &lt; (Asciidoctor::Converter.for 'pdf')
+  register_for 'pdf'
+
+  def smallcaps string
+    string = string.unicode_normalize :nfd unless string.ascii_only?
+    super
+  end
+end</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The smallcaps transformation for extended Latin characters (e.g., characters that include an accent) typically requires the addition of a combining character, such as the combining acute accent in the example above).
+Therefore, you must ensure that the font you&#8217;re using supports these combining characters (meaning it provides the necessary glyphs).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="superscript">Superscript</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Text formatted as superscript, which includes footnote number references in the body, are displayed in a smaller font size (58.3%) and raised above the baseline (offset by 85% of the ascender height).
+It&#8217;s not currently possible to influence the font size and text position of superscript text using the theme.
+These settings are hardcoded into Asciidoctor PDF and Prawn, respectively.
+However, you can adjust them in a Prawn patch by requiring the following Ruby script:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">Prawn::Text::Formatted::Arranger.prepend (Module.new do
+  def initialize(*)
+    super
+    @sub_and_sup_relative_size = 0.75
+  end
+end)
+
+Prawn::Text::Formatted::Fragment.prepend (Module.new do
+  def y_offset
+    superscript? ? 0.5 * ascender : super
+  end
+end)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Adjust the relative size and y offset values as you see fit.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="border-background-color">Border and background color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For inline elements that support a border or background color, the decoration is fit to the text by default.
+That means it stretches from the start of the first character to the end of the last character horizontally and across the entire built-in line height of the text vertically.
+The <code>line-height</code> key on the block element (e.g., paragraph) does not affect the decoration.</p>
+</div>
+<div class="paragraph">
+<p>To extend the decoration out evenly on both axes, set the <code>border-offset</code> key to a positive number.
+This setting does not affect the layout of the text.
+It only swells the extent of the decoration under it.</p>
+</div>
+</div>
+</div>

@@ -1,0 +1,259 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Asciidoctor PDF theme language is described using the <a href="http://en.wikipedia.org/wiki/YAML" target="_blank" rel="noopener">YAML</a> data format.
+YAML is a human-friendly data format that resembles CSS.
+<strong>Note, however, that the theming system isn&#8217;t actually CSS.</strong></p>
+</div>
+<div class="paragraph">
+<p>A theme is stored in a dedicated theme file and described as YAML key-value pairs that can be nested and stored in a dedicated theme file.
+The theme language adds some extra features to YAML, such as variables, basic math, measurements, and color values.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="key-names">Key names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The theming language&#8217;s built-in key names are assembled from selectors and properties.
+Selectors are the component you want to style.
+The properties are the style elements of that component that can be styled.
+All selector names are implicit (e.g., <code>heading</code>), so you customize the theme primarily by manipulating pre-defined property values (e.g., <code>font-size</code>).</p>
+</div>
+<div class="sect2">
+<h3 id="css-properties">CSS Properties</h3>
+<div class="paragraph">
+<p>The theme language in Asciidoctor PDF supports a limited subset of the properties from CSS.
+Some of these properties have different names from those found in CSS.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An underscore (<code>_</code>) may be used in place of a hyphen (<code>-</code>) in all property names (so you may use <code>font_family</code> or <code>font-family</code>).</p>
+</li>
+<li>
+<p>An underscore (<code>_</code>) may be used in place of a hyphen (<code>-</code>) in all variable names (so you may use <code>$base_font_family</code> or <code>$base-font-family</code>).</p>
+</li>
+<li>
+<p>Instead of separate properties for font weight and font style, the theme language combines these settings in the <code>font-style</code> key.
+See the <a href="text.html#font-style">Font style section</a> for allowed values.</p>
+</li>
+<li>
+<p>The <code>align</code> key in the theme language is roughly equivalent to the <code>align-self</code> flexbox property in CSS.
+See <a href="blocks.html#align">Alignment for blocks</a> for more information.</p>
+</li>
+<li>
+<p>The <code>text-align</code> key in the theme language has the same function as the <code>text-align</code> property in CSS.
+See <a href="text.html#text-align">Text alignment</a> for more information.</p>
+</li>
+<li>
+<p>The <code>font-color</code> property in the theme language is equivalent to the <code>color</code> property in CSS.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+When you look at the bundled themes, you&#8217;ll see that they use an underscore to separate key names.
+The underscore separator is used for bundled themes since it requires no translation and those themes are loaded frequently.
+The hyphen is the preferred separator for use in custom themes since it looks clearer.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="values">Key values</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The value of a key may be one of the following types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>String</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Font family name</p>
+</li>
+<li>
+<p>Font style</p>
+</li>
+<li>
+<p>Alignment</p>
+</li>
+<li>
+<p>Color as hex string (e.g., 'ff0000', #ff0000, or '#ff0000')</p>
+</li>
+<li>
+<p>Image path</p>
+</li>
+<li>
+<p>Enumerated type (where specified)</p>
+</li>
+<li>
+<p>Text content (where specified)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Null (clears any previously assigned value)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>empty</em> (i.e., no value specified)</p>
+</li>
+<li>
+<p>null</p>
+</li>
+<li>
+<p>~</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Number (integer or float) with optional fixed units (default unit is points)</p>
+</li>
+<li>
+<p>Array</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Color as RGB array (e.g., [51, 51, 51])</p>
+</li>
+<li>
+<p>Color as CMYK array (e.g., [50, 100, 0, 0])</p>
+</li>
+<li>
+<p>Border width as ends and sides array (e.g., [10, 5])</p>
+</li>
+<li>
+<p>Margin as top, right, bottom, and left array (e.g., [1in, 1in, 1in, 1in])</p>
+</li>
+<li>
+<p>Padding (e.g., [1in, 1in, 1in, 1in])</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Variable reference (e.g., $base_font_color or $base-font-color)</p>
+</li>
+<li>
+<p>Math expression</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Keys almost always require a value of a specific type.
+The reference page for each <a href="keys.html">key category</a> specifies the acceptable values or value types per key.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_nesting">Key nesting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Keys may be nested to an arbitrary depth to eliminate redundant prefixes.
+Once the theme is loaded, all keys are flattened into a single map of qualified keys.
+Nesting is simply a shorthand way of organizing the keys.
+In the end, a theme is just a map of key/value pairs.</p>
+</div>
+<div class="paragraph">
+<p>Nested keys are adjoined to their parent key with an underscore (<code>_</code>) or hyphen (<code>-</code>).
+This means the selector part (e.g., <code>link</code>) is combined with the property name (e.g., <code>font-color</code>) into a single, qualified key (e.g., <code>link_font_color</code> or <code>link-font-color</code>).</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s assume we want to set the base (i.e., global) font size and color.
+These keys may be written longhand:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base-font-color: #333333
+base-font-family: Times-Roman
+base-font-size: 12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, to avoid having to type the prefix <code>base-</code> multiple times, the keys may be written as a hierarchy:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-color: #333333
+  font-family: Times-Roman
+  font-size: 12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or even:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font:
+    color: #333333
+    family: Times-Roman
+    size: 12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each level of nesting must be indented by two spaces from the indentation of the parent level.
+Also note the presence of the colon (<code>:</code>) after each key name.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_inheritance">Inheritance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like CSS, inheritance is a principal feature in the Asciidoctor PDF theme language.
+For many of the properties, if a key is not specified, the key inherits the value applied to the parent content in the content hierarchy.
+This behavior saves you from having to specify properties unless you want to override the inherited value.</p>
+</div>
+<div class="paragraph">
+<p>The following keys are inherited:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>font-family</code></p>
+</li>
+<li>
+<p><code>font-color</code></p>
+</li>
+<li>
+<p><code>font-size</code></p>
+</li>
+<li>
+<p><code>font-style</code></p>
+</li>
+<li>
+<p><code>text-transform</code></p>
+</li>
+<li>
+<p><code>line-height</code> (some exceptions)</p>
+</li>
+<li>
+<p><code>margin-bottom</code> (if not specified, defaults to <code>$vertical-spacing</code>)</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_heading_inheritance">Heading inheritance</h3>
+<div class="paragraph">
+<p>Headings inherit starting from a specific heading level (e.g., <code>heading-h2-font-size</code>), then to the heading category (e.g., <code>heading-font-size</code>), then directly to the base value (e.g., <code>base-font-size</code>).
+Any setting from an enclosing context, such as a sidebar, is skipped.</p>
+</div>
+</div>
+</div>
+</div>

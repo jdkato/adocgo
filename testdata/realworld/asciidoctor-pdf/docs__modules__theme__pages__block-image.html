@@ -1,0 +1,320 @@
+<div class="sect1">
+<h2 id="image">image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>image</code> category control the arrangement and style of block images.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 30.7692%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">align</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#align">Block alignment</a><br>
+(default: <code>left</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  align: right</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#border-color">border-color</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-color">Color</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  border-color: #CCCCCC</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#fit">border-fit</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code> | <code>auto</code><br>
+(default: <code>content</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  border-fit: auto</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-radius</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#radius">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  border-radius: 2</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-style">Border style</a><br>
+(default: <code>solid</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  border-style: dashed</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">border-width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="blocks.html#border-width">Measurement</a> | <a href="blocks.html#border-width">Measurement[]</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  border-width: 0.5</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float-gap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a> | <a href="measurement-units.html">Measurement[side,bottom]</a><br>
+(default: <code>[12, 6]</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  float-gap: 12</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#width">width</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="measurement-units.html">Measurement</a><br>
+(default: <em>not set</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  width: 100%</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_noborder_role">noborder role</h3>
+<div class="paragraph">
+<p>If the <code>noborder</code> role is present on a block image, the border is not drawn on that image even if the border-related keys are defined on the <code>image</code> category in the theme.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">image::image-without-border.png[role=noborder]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="border-color">border-color</h3>
+<div class="paragraph">
+<p>A border is applied to a block image if <code>border-color</code> is specified, <code>border-width</code> is specified, the value of <code>border-width</code> is greater than zero, and the <code>noborder</code> role isn&#8217;t present.
+The border is drawn above the image on the inside of the box reserved for the image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fit">border-fit</h3>
+<div class="paragraph">
+<p>When the value <code>auto</code> is assigned to the <code>border-fit</code> key the border will expand to fit the width of the container (i.e., full width) instead of the image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="width">width</h3>
+<div class="paragraph">
+<p>The <code>width</code> key only applies to block images that don&#8217;t have either a <code>pdfwidth</code> or <code>scaledwidth</code> attribute on the image macro.
+If <code>width</code> is specified, its value takes precedence over the value of the <code>width</code> attribute on the image macro, but not over the value of the <code>pdfwidth</code> or <code>scaledwidth</code> attributes.
+The <code>width</code> key accepts the same values as the <code>pdfwidth</code> attribute.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="alt">image-alt</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>image-alt</code> category control the arrangement and style of the alt text of block images.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 15.3846%;">
+<col style="width: 38.4615%;">
+<col style="width: 46.1539%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#content">content</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="quoted-string.html">Quoted string</a><br>
+(default: "%{link}[%{alt}]%{/link} | %{target}")</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    content: "%{alt} (%{target})"</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="color.html">Color</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    font-color: #FF0000</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-family</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="font-support.html">Font family name</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    font-family: Courier</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-kerning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>normal</code> | <code>none</code><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    font-kerning: none</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-size">Font size</a><br>
+(default: <em>inherit</em>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    font-size: 9</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">font-style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="text.html#font-style">Font style</a><br>
+(default: <code>normal</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  alt:
+    font-style: italic</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="content">content</h3>
+<div class="paragraph">
+<p>The <code>content</code> key accepts the placeholders <code>%{alt}</code>, <code>%{target}</code>, <code>%{link}</code>, and <code>%{/link}</code>.
+These placeholders insert the alt text, image target, and link open and close tags into the content template.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="caption">image-caption</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The keys in the <code>image-caption</code> category control the arrangement and style of the captions for block images.
+Most of the keys listed on <a href="caption.html">caption.html</a> can also be nested under the <code>image-caption</code> category to further customize the image captions.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value Type</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#caption-align">caption-align</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#caption-align">Block alignment</a> | <a href="block-images.html#caption-align">inherit</a><br>
+(default: <code>$caption-align</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  caption:
+    align: inherit</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#end">caption-end</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#end">End placement</a><br>
+(default: <code>bottom</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  caption:
+    end: top</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#caption-max-width">caption-max-width</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fit-content</code> | <code>fit-content</code>(percentage) | <code>none</code> | <a href="measurement-units.html">Measurement</a><br>
+(default: <code>none</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  caption:
+    max-width: fit-content</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#caption-text-align">caption-text-align</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="block-images.html#caption-text-align">Text alignment</a> | <a href="block-images.html#caption-text-align">inherit</a><br>
+(default: <code>$image-caption-align</code>)</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">image:
+  caption:
+    text-align: center</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

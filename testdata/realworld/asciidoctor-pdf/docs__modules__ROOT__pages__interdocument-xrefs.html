@@ -1,0 +1,184 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An xref to another AsciiDoc document (i.e., an interdocument xref) will either become a link to the PDF file generated from that source document or an internal link to an anchor within the current document.
+Which one it becomes depends on whether the target has been included into the current document.
+This page describes these two scenarios.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_referencing_another_document">Referencing another document</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the target PDF is generated from an AsciiDoc file, you can make a reference to that PDF using the xref macro.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s assume the current document is <em class="path">a.adoc</em> and the PDF you want to reference is generated from <em class="path">b.adoc</em>.
+Here&#8217;s how you can make a reference from the PDF generated from <em class="path">a.adoc</em> to the PDF generated from <em class="path">b.adoc</em>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">A link to xref:b.adoc[b].</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This xref macro is translated to a link that refers to <em class="path">b.pdf</em>.</p>
+</div>
+<div class="paragraph">
+<p>If there&#8217;s an anchor you want to target in <em class="path">b.pdf</em>, for example <em>chapter-b</em>, you can describe it using a URL fragment just like you would with any URL.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">A link to xref:b.adoc#chapter-b[b].</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Linking to a named anchor isn&#8217;t supported by all PDF viewers.
+Some viewers (like Firefox) only support relative links when the PDF is accessed through a web server.
+To verify it&#8217;s working, test the PDF in Firefox and served through a local web server.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>PDF supports a variety of PDF link open parameters you can control using the URL fragment.
+For example, you can configure the PDF to open on a specific page using the special fragment <code>page=&lt;N&gt;</code>, where <code>&lt;N&gt;</code> is the 1-based page number.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">A link to page 2 of xref:b.adoc#page=2[b].</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can find a list of all the special fragment parameters in the <a href="https://www.adobe.com/content/dam/acom/en/devnet/acrobat/pdfs/pdf_open_parameters.pdf#G4.1500549" target="_blank" rel="noopener">PDF Open Parameters</a> reference.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_converting_interdocument_xrefs_to_internal_xrefs">Converting interdocument xrefs to internal xrefs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you&#8217;re using this converter to generate a single PDF file from multiple source documents (combined using the include directive), references between those included documents must become internal references.
+Interdocument cross references (i.e., xrefs) will only successfully make that transition if you structure your document in accordance with the rules.</p>
+</div>
+<div class="paragraph">
+<p>Those rules are as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The path segment of the interdocument xref must match the project-relative path of the included document.</p>
+</li>
+<li>
+<p>The target document must be included entirely without the use of any filters (tags or lines).</p>
+</li>
+<li>
+<p>The reference must include the ID of the target element.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For instance, let&#8217;s assume your primary document contains the following include:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">include::chapters/chapter-1.adoc[]</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Notice that the file is included entirely, not filtered using tags or lines.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>An interdocument xref to an anchor in that chapter can be expressed as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">&lt;&lt;chapters/chapter-1.adoc#_anchor_name,Destination in Chapter 1&gt;&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The resolution of this xref holds regardless of which document the xref is located in.</p>
+</div>
+<div class="paragraph">
+<p>To resolve the interdocument xref, the converter first checks if the target matches the <code>docname</code> attribute.
+If not, it then looks to see if the target matches one of the (fully) included files.
+(The file extension is not considered in either case).
+If Asciidoctor cannot resolve the target of an interdocument xref, it simply makes a link, just like the HTML converter.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s consider a complete example.
+Assume you are converting the following book document at the root of the project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Book Title
+:doctype: book
+
+include::chapters/chapter-1.adoc[]
+
+include::chapters/chapter-2.adoc[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where the contents of chapter 1 is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">== Chapter 1
+
+We cover a little bit here.
+The rest you can find in &lt;&lt;chapters/chapter-2.adoc#_chapter_2,Chapter 2&gt;&gt;.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the contents of chapter 2 are as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">== Chapter 2
+
+Prepare to be educated.
+This chapter has it all!
+
+To begin, jump to &lt;&lt;chapters/chapter-2/first-steps.adoc#_first_steps,first steps&gt;&gt;.
+
+&lt;&lt;&lt;
+
+include::chapter-2/first-steps.adoc[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And, finally, the contents of the nested include are as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">=== First Steps
+
+Let's start small.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll find when you run this example that all the interdocument xrefs become internal references in the PDF.</p>
+</div>
+<div class="paragraph">
+<p>The reason both the path and anchor are required (even when linking to the top of a chapter) is so the interdocument xref works independent of the converter.
+In other words, it encodes the complete information about the reference so the converter can sort out where the target is in all circumstances.</p>
+</div>
+</div>
+</div>

@@ -1,0 +1,42 @@
+<div class="sect1">
+<h2 id="_register_an_extended_converter">Register an extended converter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor provides a mechanism for looking up a registered converter so it can be extended (i.e., used as a base class), then another mechanism for registering the extended converter in its place.
+Let&#8217;s see how that looks.</p>
+</div>
+<div class="listingblock">
+<div class="title">extended-pdf-converter.rb</div>
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">Unresolved directive in docs__modules__extend__pages__create-converter.adoc - include::example$extended-pdf-converter.rb[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When this script is required by Asciidoctor, it will replace the primary converter with the extended one automatically.
+As it stands, this converter doesn&#8217;t do anything different than the primary converter because we haven&#8217;t yet overridden any of its methods.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_override_a_method">Override a method</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start by overriding the thematic break (i.e., horizontal rule) to make it render like a red ribbon.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">Unresolved directive in docs__modules__extend__pages__create-converter.adoc - include::example$pdf-converter-custom-thematic-break.rb[tag=convert_thematic_break]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The return value of a convert handler for a block node is ignored.
+The return value of a convert handler for an inline node must be a string, which may contain the HTML-like markup that this convert supports.</p>
+</div>
+<div class="paragraph">
+<p>To find all the available methods to override, see the {url-api-docs}[API docs^].</p>
+</div>
+<div class="paragraph">
+<p>Now that you&#8217;ve made a change to the converter, let&#8217;s <a href="use-converter.html">learn how to activate it</a>.</p>
+</div>
+</div>
+</div>

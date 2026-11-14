@@ -1,0 +1,70 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>When converting to HTML, Asciidoctor relies on the JavaScript-based MathJax library to parse and render the STEM expressions in the browser when the page is loaded.
+The HTML converter wraps the expressions in special markup so MathJax can find and process them.
+However, unlike Asciidoctor&#8217;s built-in HTML converter, Asciidoctor PDF does not provide native support for STEM blocks and inline macros (i.e., asciimath and latexmath).</p>
+</div>
+<div class="paragraph">
+<p>In order to insert a rendered expression into the PDF, the toolchain must parse the expressions and convert them to a format the PDF writer (Prawn) can understand.
+That typically means converting to an image.</p>
+</div>
+<div class="paragraph">
+<p>One solution that provides this capability is an extension named <a href="#mathematical">Asciidoctor Mathematical</a>, which is covered in the next section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mathematical">Asciidoctor Mathematical</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/asciidoctor/asciidoctor-mathematical">Asciidoctor Mathematical</a> is an extension that processes STEM blocks and inline macros and converts them to a PDF-compatible format.
+After the document has been parsed, the extension locates each asciimath, latexmath, and stem block and inline macro, converts the expression to an image, and replaces the expression with an image.
+It uses Mathematical to render the LaTeX notation as an image.
+If the expression is AsciiMath, it first uses AsciiMath gem to convert to LaTeX.
+Conversion then proceeds as normal.</p>
+</div>
+<div class="paragraph">
+<p>Asciidoctor Mathematical is a Ruby gem that uses native extensions.
+It has a few system prerequisites which limit installation to Linux and macOS.
+Refer to the <a href="https://github.com/asciidoctor/asciidoctor-mathematical#installation" target="_blank" rel="noopener">installation section</a> in the Asciidoctor Mathematical README to learn how to install it.</p>
+</div>
+<div class="sect2">
+<h3 id="_activate_asciidoctor_mathematical">Activate Asciidoctor Mathematical</h3>
+<div class="paragraph">
+<p>Once Asciidoctor Mathematical is installed, you can enable it when invoking Asciidoctor PDF using the <code>-r</code> flag:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -r asciidoctor-mathematical sample.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re invoking Asciidoctor PDF via the API, you need to require the Asciidoctor Mathematical gem before invoking Asciidoctor PDF.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'asciidoctor-mathematical'
+require 'asciidoctor-pdf'
+
+Asciidoctor.convert_file 'sample.adoc', backend: 'pdf', safe: :safe</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mathematical-format">mathematical-format attribute</h3>
+<div class="paragraph">
+<p>To get the best quality output and maximize the speed of conversion, we recommend configuring Asciidoctor Mathematical to convert equations to SVG.
+You control this setting using the <code>mathematical-format</code> AsciiDoc attribute:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -r asciidoctor-mathematical -a mathematical-format=svg sample.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer to the <a href="https://github.com/asciidoctor/asciidoctor-mathematical#readme" target="_blank" rel="noopener">README</a> for Asciidoctor Mathematical to learn about additional settings and options.</p>
+</div>
+</div>
+</div>
+</div>

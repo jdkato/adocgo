@@ -1,0 +1,196 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some category keys allow background, foreground, and other category-specific images to be specified directly in the theme.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="formats">Supported image formats</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The theme supports the following image formats:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PNG (.png)</p>
+</li>
+<li>
+<p>JPEG (.jpg)</p>
+</li>
+<li>
+<p>SVG (.svg)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When specified, the filename of the image must use the file extension that matches its format.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+CAUTION: The GIF (.gif), WebP (.webp), TIFF (.tiff), BMP (.bmp), and interlaced PNG formats are not supported unless you install prawn-gmagick.
+See <a href="ROOT:image-paths-and-formats.html#other-image-formats">Supporting additional image file formats</a> for details.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="paths">Image paths in the theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the theme, an image can be specified as an AsciiDoc inline image macro.
+The image can also be specified as a bare path, except in running content.
+The benefit of using the image macro is that you can specify configuration, such as the alt text and size.</p>
+</div>
+<div class="paragraph">
+<p>The image path can be an absolute path, a data URI, or a relative path.
+If the image path is absolute or a data URI, the path is used as is.
+If the image path is relative, it&#8217;s resolved relative to the value of the <code>pdf-themesdir</code> attribute.
+If the value of the <code>pdf-theme</code> attribute is a path that ends in <code>.yml</code>, and <code>pdf-themesdir</code> is not otherwise set, then images are resolved relative to the directory of the theme path.</p>
+</div>
+<div class="paragraph">
+<p>If you want to reference an image relative to the document you&#8217;re converting, prefix the path with the <code>{docdir}</code> or <code>{docimagesdir}</code> attribute references, which both resolve to an absolute path.
+The <code>docimagesdir</code> is a combination of the <code>docdir</code> and <code>imagesdir</code> attribute values.
+When using one of these attribute references, it should be followed by the path separator.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="background">Background images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Several key categories, such as <code>page</code>, <code>title-page</code>, and the running content <code>header</code> and <code>footer</code>, allow a background image to be specified directly by the theme with the <code>background-image</code> key.
+<a href="covers.html">Front and back cover images</a> are handled like background images, too.</p>
+</div>
+<div class="sect2">
+<h3 id="specify">Specify a background image in the theme</h3>
+<div class="paragraph">
+<p>In the theme, a background image can specified either using the AsciiDoc inline image macro or as a bare image path.
+Here&#8217;s how a background image is specified in the theme file as a bare path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-image: title-cover.png</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how the background image is specified using the inline image macro:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-image: image:title-cover.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As described above, these relative paths will be resolved from the <code>pdf-themesdir</code>.
+Here&#8217;s an example of an image that is resolved relative to the <code>imagesdir</code> value of the document being converted:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-image: image:{docimagesdir}/title-cover.png[]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_per_page_layout">Per page layout</h3>
+<div class="paragraph">
+<p>You can configure any background image to be selected per page layout by including the <code>{page-layout}</code> attribute reference in the image path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">footer:
+  background-image: image:footer-bg-{page-layout}.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The image is resolved once per page layout that&#8217;s encountered in the document.
+Using this technique requires that the page layout value be included in the path of the image (e.g., footer-bg-landscape.png).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="attributes">Fit, width, and position</h3>
+<div class="paragraph">
+<p>By default, background images are automatically scaled to fit the bounds of the page (i.e., <code>fit=contain</code>) and centered (i.e., <code>position=center</code>).
+Wrapping the value in the image macro allows you to customize an image&#8217;s size and position.
+The size of the image assigned with an image macro can be controlled using the sizing attributes, <code>fit</code>, <code>pdfwidth</code>, <code>scaledwidth</code>, or <code>width</code>, when <code>fit=none</code>.
+The position of the image can be controlled using the <code>position</code> attribute.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  background-image: image:page-bg.png[fit=none,position=top center]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="ROOT:background-images.html">ROOT:background-images.html</a> for the available <code>fit</code> and <code>position</code> values.
+See <a href="ROOT:image-scaling.html">ROOT:image-scaling.html</a> to learn about the sizing attributes the image macro accepts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="recto-and-verso">Recto and verso</h3>
+<div class="paragraph">
+<p>The <code>page</code> category allows a background image to be set for recto pages (right-hand, odd-numbered pages) and verso pages (left-hand, even-numbered pages).
+The recto background image is specified using <code>page-background-image-recto</code> and the verso background image using <code>page-background-image-verso</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  background-image:
+    recto: image:page-bg-recto.png[]
+    verso: image:page-bg-verso.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you define the keys using the flattened structure (e.g., <code>page-background-image-recto</code>), you can also set the default page background image (<code>page-background-image</code>), which will be used as a fallback if a background image isn&#8217;t specified for a given side.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page-background-image: image:page-bg.png[]
+page-background-image-verso: image:verso-bg.png[]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deactivate_a_background_image">Deactivate a background image</h3>
+<div class="paragraph">
+<p>To deactivate an inherited background image, assign the value <code>none</code> to <code>background-image</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-image: none</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="foreground">Foreground images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to the <code>background-image</code> key, the <code>page</code> category has a <code>foreground-image</code> key.
+The <code>page-foreground-image</code> key accepts the same types of values and image macro attributes as <code>background-image</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">page:
+  foreground-image: image:watermark.svg[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, a foreground image is automatically scaled to fit the bounds of the page (i.e., <code>fit=contain</code>) and centered (i.e., <code>position=center</code>).
+A foreground image can&#8217;t be assigned only to recto pages or verso pages.</p>
+</div>
+</div>
+</div>

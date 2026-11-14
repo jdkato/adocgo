@@ -1,0 +1,87 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This page presents the changes made in each of the patch releases in the Asciidoctor PDF {page-component-version} release line.
+The releases are ordered from newest to oldest.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_asciidoctor_pdf_page_component_version_0">Asciidoctor PDF {page-component-version}.0</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em><strong>Release date:</strong> 2022.08.16 | <strong>Release notes:</strong> {url-project-repo}/releases/tag/v2.3.0[v{page-component-version}.0^] | <strong>Issue label:</strong> {url-project-issues}?q=is%3Aissue+milestone%3Av2.3.0+is%3Aclosed[{page-component-version}.0^]</em></p>
+</div>
+<div class="paragraph">
+<p>Asciidoctor PDF {page-component-version}.0 introduces several enhancements and bug fixes.
+For a complete list of changes, see the {url-project-repo}/blob/main/CHANGELOG.adoc[CHANGELOG^].</p>
+</div>
+<div class="sect2">
+<h3 id="_enhancements">Enhancements</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Place footnotes below last block of content, offset by the specified amount, when the <code>footnotes-margin-top</code> theme key is a fixed value (e.g. 0).</p>
+</li>
+<li>
+<p>Insert column break instead of page break in multi-column layout if <code>column</code> role is specified on the page break macro.</p>
+</li>
+<li>
+<p>Allow page or column break to be forced using <code>always</code> option (e.g., <code>[%always]</code>).</p>
+</li>
+<li>
+<p>Use a relative font size for big and small roles in the built-in themes.</p>
+</li>
+<li>
+<p>Use the default-for-print theme by default (no theme is specified) if media is <code>print</code> or <code>prepress</code>.</p>
+</li>
+<li>
+<p>Support text alignment roles on all styled paragraphs and verse blocks.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bug_fixes">Bug fixes</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Strip formatting added to source block by custom subs when syntax highlighter is enabled.</p>
+</li>
+<li>
+<p>Only indent text that starts at left margin (i.e., when text align is left or justify).</p>
+</li>
+<li>
+<p>Correctly compute height of heading and caption for orphan prevention.</p>
+</li>
+<li>
+<p>Honor theme settings (<code>prose-margin-inner</code> and <code>prose-text-indent-inner</code>) for inner paragraphs in abstract.</p>
+</li>
+<li>
+<p>Prevent footnote label from being split across lines.</p>
+</li>
+<li>
+<p>Keep footnote label with preceding adjacent text.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_compliance">Compliance</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Remove support for deprecated <code>spread</code> role on table.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_previous_releases">Previous releases</h3>
+<div class="paragraph">
+<p>See <a href="upgrade-to-2.html">Upgrade to Asciidoctor PDF 2</a> if you&#8217;re upgrading from Asciidoctor PDF &lt; 2.0.0.
+Otherwise, consult the {url-project-repo}/blob/main/CHANGELOG.adoc[CHANGELOG^] for a complete list of changes in Asciidoctor PDF.</p>
+</div>
+</div>
+</div>
+</div>

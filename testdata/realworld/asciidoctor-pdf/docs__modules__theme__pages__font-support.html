@@ -1,0 +1,233 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can select from <a href="#built-in">built-in fonts</a>, <a href="#bundled">fonts bundled with Asciidoctor PDF</a>, or <a href="custom-font.html">custom fonts</a> loaded from TrueType (TTF) or OpenType (OTF) font files.
+If you want to use custom fonts, you must first declare them in your theme file.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Asciidoctor has no challenge working with Unicode.
+In fact, it prefers Unicode and considers the entire range.
+However, once you convert to PDF, you have to meet the font requirements of PDF in order to preserve Unicode characters.
+That means you need to provide a font (at least a fallback font) that contains glyphs for all the characters you want to use.
+If you don&#8217;t, you may notice that characters are missing (usually replaced with a box).
+There&#8217;s nothing Asciidoctor can do to convince PDF to work with extended characters without the right fonts in play.
+To see which characters are missing from the font, enable verbose mode (<code>-v</code>) when running Asciidoctor PDF.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="built-in">Built-In (AFM) fonts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The names of the built-in fonts (for general-purpose text) are as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 33%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Font Name</th>
+<th class="tableblock halign-left valign-top">Font Family</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Helvetica</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sans-serif</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Times-Roman</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">serif</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Courier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">monospace</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Using a built-in font requires no additional files.
+According to the section &#8220;Standard Type 1 Fonts&#8221; in the PDF specification, &#8220;these fonts, or their font metrics and suitable substitution fonts, shall be available to the conforming reader.&#8221;</p>
+</div>
+<div class="paragraph">
+<p>You can use an AFM font anywhere a <code>font-family</code> key is recognized in the theme file.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">base:
+  font-family: Times-Roman</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, when you use a built-in font, the characters you can use in your document are limited to the characters in the WINANSI (<a href="https://en.wikipedia.org/wiki/Windows-1252" target="_blank" rel="noopener">Windows-1252</a>) code set.
+WINANSI includes most of the characters needed for writing in Western languages (English, French, Spanish, etc).
+For anything outside of that, PDF is BYOF (Bring Your Own Font).</p>
+</div>
+<div class="paragraph">
+<p>Even though the built-in fonts require the content to be encoded in WINANSI, <em>you still type your AsciiDoc document in UTF-8</em>.
+Asciidoctor PDF encodes the content into WINANSI when building the PDF.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Built-in (AFM) fonts do not use the <a href="fallback-font.html">fallback fonts</a>.
+In order for the fallback font to kick in, you must use a TrueType font anywhere you want the fallback font to be used (e.g., the base font family, the code font family, etc).
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">WINANSI Encoding Behavior</div>
+<div class="paragraph">
+<p>When using the built-in PDF (AFM) fonts on a block of content in your AsciiDoc document, any character that cannot be encoded to WINANSI is replaced with a logic &#8220;not&#8221; glyph (<code>&#172;</code>) and you&#8217;ll see the following warning in your console:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The following text could not be fully converted to the Windows-1252 character set:
+| &lt;string with unknown glyph&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This behavior differs from the default behavior in Prawn, which is to simply crash.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll often see this warning if you&#8217;re using callouts in your document and you haven&#8217;t specified a TrueType font in your theme.
+To prevent this warning, you need to specify a TrueType font.</p>
+</div>
+<div class="paragraph">
+<p>When using a TrueType font, you will get no warning for a missing glyph.
+That&#8217;s a consequence of how Prawn works and is outside of Asciidoctor PDF&#8217;s control.
+However, you&#8217;ll likely see it substituted with a box (guaranteed if you&#8217;re using one of the bundled fonts).</p>
+</div>
+<div class="paragraph">
+<p>For more information about how Prawn handles character encodings for built-in fonts, see <a href="https://github.com/prawnpdf/prawn/blob/master/CHANGELOG.md#vastly-improved-handling-of-encodings-for-pdf-built-in-afm-fonts" target="_blank" rel="noopener">this note in the Prawn CHANGELOG</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bundled">Bundled fonts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF bundles several fonts that are used by the default theme or a fallback font theme that extends the default theme.
+You can also declare these fonts in your custom theme.
+These fonts provide more characters than the built-in PDF fonts, but still only a subset of UTF-8 (to reduce the size of the gem).</p>
+</div>
+<div class="paragraph">
+<p>The family names of the fonts bundled with Asciidoctor PDF are as follows:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://mplus-fonts.osdn.jp/mplus-outline-fonts/design/index-en.html#mplus_1mn" target="_blank" rel="noopener">M+ 1mn</a></dt>
+<dd>
+<p>A monospaced font that maps different thicknesses to the styles <code>normal</code>, <code>italic</code>, <code>bold</code>, and <code>bold_italic</code>.
+M+ 1mn also provides the circled numbers used for callouts and callout lists.</p>
+</dd>
+<dt class="hdlist1"><a href="https://fonts.google.com/noto/specimen/Noto+Serif" target="_blank" rel="noopener">Noto Serif</a></dt>
+<dd>
+<p>A serif font that can be styled as <code>normal</code>, <code>italic</code>, <code>bold</code>, or <code>bold_italic</code>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://mplus-fonts.osdn.jp/mplus-outline-fonts/design/index-en.html#mplus_1p" target="_blank" rel="noopener">M+ 1p</a></dt>
+<dd>
+<p>A sans-serif font that provides a very complete set of Unicode glyphs.
+M+ 1p can only be styled as <code>normal</code>.
+This font is used as the fallback font in the <code>default-with-font-fallbacks</code> theme.</p>
+</dd>
+<dt class="hdlist1"><a href="https://fonts.google.com/noto/specimen/Noto+Emoji/about" target="_blank" rel="noopener">Noto Emoji</a></dt>
+<dd>
+<p>A font of emojis used as a fallback font in the <code>default-with-font-fallbacks</code> theme.</p>
+</dd>
+<dt class="hdlist1"><a href="https://fonts.google.com/noto/specimen/Noto+Sans" target="_blank" rel="noopener">Noto Sans</a></dt>
+<dd>
+<p>A sans font that is used as the fallback font in the <code>default-sans-with-font-fallbacks</code> theme.
+It can be styled as <code>normal</code>, <code>italic</code>, <code>bold</code>, or <code>bold_italic</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+The default themes refer to the bundled fonts using the <code>GEM_FONTS_DIR</code> prefix.
+That means you can extend a default theme and not have to worry about how the bundled fonts get resolved.
+If you redeclare the bundled fonts in your custom theme, be sure to prefix the path with the <code>GEM_FONTS_DIR</code> token.
+An alternative approach is to include <code>GEM_FONT_DIR</code> in the value of the <code>pdf-fontsdir</code> attribute separated by the location of your custom fonts using a comma (e.g., <code>path/to/your/fonts,GEM_FONTS_DIR</code>) or a semicolon (e.g., <code>path/to/your/fonts;GEM_FONTS_DIR</code>).
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_fonts">Custom Fonts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To learn how to use a custom font in your theme alongside or in place of built-in or bundled fonts, refer to <a href="custom-font.html">custom-font.html</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_support_for_non_latin_languages">Support for non-Latin languages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF can process the full range of characters in the UTF-8 character set.
+That means you can write your document in any language, save the file with UTF-8 encoding (<em>that&#8217;s important!</em>), and expect Asciidoctor PDF to convert the text properly.
+But you still need a font that provides the glyphs for those characters.</p>
+</div>
+<div class="paragraph">
+<p>When converting a document with Asciidoctor PDF, you may notice that some glyphs for certain languages, such as Simplified Chinese, are missing from the PDF.
+PDF is a &#8220;bring your own font&#8221; kind of system.
+In other words, the font you provide must provide glyphs for all the characters used.
+There&#8217;s no single font that supports all the world&#8217;s languages (though some, like Noto Sans and Noto Serif, certainly come close).
+Even if there were such a font, bundling that font with the main gem would make it <strong>enormous</strong>.
+It would also severely limit the style choices in the default theme, which caters to Latin-based languages.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re writing in a CJK language, such as Japanese, Asciidoctor PDF provides a built-in theme named <code>default-with-font-fallbacks</code> that provides a broad range of characters in the CJK charsets.
+You can start with that theme to see how far it gets you:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -a scripts=cjk --theme default-with-font-fallbacks document.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice the <code>-a scripts=cjk</code> option.
+That&#8217;s important.
+It tells the converter to insert break opportunities between CJK characters so that lines wrap properly when mixing English and a CJK language like Japanese.</p>
+</div>
+<div class="paragraph">
+<p>When using a CJK language, you probably don&#8217;t want text justification either, which is the default behavior.
+You can overridde this setting using the <code>text-align</code> document attribute (or a custom theme).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -a scripts=cjk -a text-align=left --theme default-with-font-fallbacks document.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the built-in theme with the fallback font doesn&#8217;t go far enough, you&#8217;ll need to create a <a href="cjk.html">custom CJK theme</a>.</p>
+</div>
+</div>
+</div>

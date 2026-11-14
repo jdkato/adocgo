@@ -1,0 +1,250 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can add a background image to all content pages in your document by setting the <code>page-background-image</code> document attribute.
+You can also set the background images for recto and verso pages separately using the <code>page-background-image-recto</code> and <code>page-background-image-verso</code> document attributes.
+You can set (or override) the background image applied to the title page using the <code>title-page-background-image</code> document attribute.
+If you want to overlay a background image on top of the page content (i.e., a watermark), you can do so using the <code>page-foreground-image</code>.</p>
+</div>
+<div class="paragraph">
+<p>This page explains how these document attributes are used.
+It also covers how attributes on the image macro can be used to control the size, fit, and position of the image.
+All the document attributes covered on this page must be defined in the document header.</p>
+</div>
+<div class="paragraph">
+<p>As an alternative to using document attributes, you can define these background images and the foreground image <a href="theme:images.html">in your theme</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="page-background-image">page-background-image attribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Background images can be applied to all content pages using the <code>page-background-image</code> document attribute.
+A content page is defined as every page in the document except for cover and imported pages.
+The list of content pages includes the title page as well as non-facing pages in a prepress document.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+As a counterpart, a foreground image can be added to all pages using the <code>page-foreground-image</code>.
+Unlike the background image, the foreground image cannot be added per side or page layout.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>page-background-image</code> attribute accepts an inline image macro.
+The target of the image macro can be <a href="image-paths-and-formats.html#imagesdir">an absolute path or a path relative to imagesdir</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image: image:bg.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also assign a page background image <a href="#recto-verso">per side</a> or <a href="#page-layout">per page layout</a>.</p>
+</div>
+<div class="paragraph">
+<p>When you set <code>page-background-image</code>, the specified image will be applied to the title page as well.
+You can specify a different image for the title page using the <code>title-page-background-image</code> document attribute.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:doctype: book
+:page-background-image: image:bg.png[]
+:title-page-background-image: image:title-bg.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternately, you can turn off the background image on the title page by assigning the value <code>none</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:doctype: book
+:page-background-image: image:bg.png[]
+:title-page-background-image: none</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, page background images are automatically scaled to fit the bounds of the page (i.e., <code>fit=contain</code>) and centered (i.e., <code>position=center</code>).
+To alter this behavior, you can set the <a href="#fit">fit</a>, sizing, and <a href="#position">position</a> attributes on the image macro.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fit">fit attribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Background images, including front and back cover images, can be sized relative to the page using the <code>fit</code> attribute on the image macro.
+The <code>fit</code> attribute works similarly to the <code>object-fit</code> property in CSS.
+Its value must be specified as a single keyword, chosen from the table below.
+The starting size of the image is determined by the explicit width, if specified, or the implicit width.
+The height is always derived from the width while respecting the implicit aspect ratio of the image.
+The available space&#8212;&#8203;the canvas&#8212;&#8203;for a background image is the page.
+If the <code>fit</code> attribute is not specified, it defaults to <code>contain</code>.
+The <code>contain</code> value automatically scales the image to fit the bounds of the page.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Values accepted by the fit attribute</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>contain</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The image is scaled up or down while retaining its aspect ratio to fit within the available space. (default)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>cover</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The image is scaled up or down while retaining its aspect ratio so the image completely covers the available space, even if it means the image must be clipped in one direction.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>scale-down</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The image is scaled down while retaining its aspect ratio to fit within the available space.
+If the image already fits, it is not scaled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>fill</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The image is scaled to fit the available space even if it requires modifying the aspect ratio of the image.
+The <code>fill</code> value does not apply to SVG images.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>none</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The image is not scaled.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If you want to scale the image using one of the <a href="image-scaling.html">sizing attributes</a> (<code>pdfwidth</code>, <code>scaledwidth</code>, <code>width</code>) on the image macro, you must set the <code>fit</code> attribute to the value <code>none</code> (i.e., <code>fit=none</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image: image:bg.png[fit=none,pdfwidth=50%] <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>fit</code> must be assigned the value <code>none</code> when using <code>pdfwidth</code> or any of the other sizing attributes.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>fit</code> attribute is often combined with the <code>position</code> attribute, <a href="#position">covered next</a>, to control the placement of the image on the canvas.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="position">position attribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to scaling, background images for cover pages, content pages, and the title page support positioning using the <code>position</code> attribute on the image macro.
+The <code>position</code> attribute accepts a syntax similar to the <code>background-position</code> property in CSS, except only the keyword positions are supported.
+The position consists of two values, the vertical position and the horizontal position (e.g., <code>top center</code>).
+If only one value is specified (e.g., <code>top</code>), the other value is assumed to be <code>center</code>.
+If the <code>position</code> attribute is not specified, its value defaults to is <code>center center</code>.
+The <code>center center</code> value centers the image vertically and horizontally on the page.</p>
+</div>
+<div class="paragraph">
+<p>The following table lists of the vertical and horizontal positioning keywords the <code>position</code> attribute supports.
+You can use any combination of these keywords to position the image.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Vertical Positions</th>
+<th class="tableblock halign-left valign-top">Horizontal Positions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">top<br>
+center<br>
+bottom</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">left<br>
+center<br>
+right</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Here&#8217;s an example of how to place a background image at the top center of a page:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image: image:bg.png[position=top]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s how to move it to the bottom right:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image: image:bg.png[fit=none,pdfwidth=50%,position=bottom right]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an image dimension matches the height or width of the page, the positioning keyword for that axis has no effect.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="recto-verso">Recto and verso background images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a background image is assigned to the recto pages (right-hand, odd-numbered pages) or verso pages (left-hand, even-numbered pages), the background will be used only for that side.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image-recto: image:bg.png[fit=none,pdfwidth=20%,position=bottom right]
+:page-background-image-verso: image:bg.png[fit=none,pdfwidth=20%,position=bottom left]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a background image isn&#8217;t specified for a side, the converter will use the default page background image (<code>page-background-image</code>), if specified.
+To turn off the background image for a side, assign the value <code>none</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="page-layout">Per page layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can configure any background image to be selected per page layout by including the <em>escaped</em> <code>{page-layout}</code> attribute reference in the image path.
+The reference has to be escaped so it&#8217;s not expanded until the converter resolves the image for a given page layout.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">= Document Title
+:page-background-image: image:bg-\{page-layout}.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The image is resolved the first time a given page layout is used in the document.
+Using this technique requires that the page layout value be included in the filename of the image (e.g., footer-bg-landscape.png).</p>
+</div>
+</div>
+</div>

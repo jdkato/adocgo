@@ -1,0 +1,293 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF is a native PDF converter for AsciiDoc that serves the <code>pdf</code> backend.
+It bypasses the step of generating an intermediary format such as DocBook, Apache FO, or LaTeX in order to produce PDF.
+Instead, you use Asciidoctor PDF to convert your documents directly from AsciiDoc to PDF with Asciidoctor.
+The aim of this library is to take the pain out of creating PDF documents from AsciiDoc.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The documentation for the latest, stable release of Asciidoctor PDF is available at <a href="https://docs.asciidoctor.org/pdf-converter/latest/" class="bare">https://docs.asciidoctor.org/pdf-converter/latest/</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re looking for the documentation for Asciidoctor PDF 1.6, refer to the <a href="https://github.com/asciidoctor/asciidoctor-pdf/tree/v1.6.x#readme">README</a> in the v1.6.x branch.
+Asciidoctor PDF 1.6 is no longer being developed and will reach EOL later this year.
+You are encouraged to migrate to Asciidoctor PDF 2 as soon as possible.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<!-- toc disabled -->
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF converts an AsciiDoc document directly to a PDF document.
+The style and layout of the PDF are controlled by a dedicated theme file.
+To the degree possible, Asciidoctor PDF supports all the features of AsciiDoc that are supported by Asciidoctor.
+It also provides <a href="https://docs.asciidoctor.org/pdf-converter/latest/features/">PDF-specific features</a>.
+However, there are <a href="https://docs.asciidoctor.org/pdf-converter/latest/features/#limitations">certain limitations</a> imposed by the PDF format and the PDF library this extension uses.</p>
+</div>
+<div class="paragraph">
+<p>Asciidoctor PDF uses the Prawn gem and Prawn&#8217;s extensions, such as prawn-svg and prawn-table, to generate a PDF document.
+<a href="https://prawnpdf.org">Prawn</a> is a general purpose PDF generator for Ruby that features high-level APIs for common needs like setting up the page and inserting images and low-level APIs for positioning and rendering text and graphics.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For the latest Asciidoctor PDF features and fixes, see <a href="https://docs.asciidoctor.org/pdf-converter/latest/whats-new/">What&#8217;s New in Asciidoctor PDF</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites">Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF is built on Asciidoctor.
+Like Asciidoctor, Asciidoctor PDF is a Ruby application.
+Therefore, to use it, you&#8217;ll need a Ruby runtime.</p>
+</div>
+<div class="paragraph">
+<p>The supported Ruby runtimes are Ruby 2.7 or greater and JRuby 9.2 or greater.
+However, we always recommend using the most recent release of Ruby or JRuby.
+All required libraries (i.e., gems) will be installed automatically when you install Asciidoctor PDF, which will be covered in the <a href="#install-asciidoctor-pdf">next section</a>.</p>
+</div>
+<div class="paragraph">
+<p>To check if you have Ruby available, run the <code>ruby</code> command to print the installed version:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ruby -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make sure this command reports a Ruby version that starts with 2.7 (or a JRuby version that starts with 9.2).
+If so, you&#8217;re ready to proceed.
+If not, head over to <a href="https://rvm.io" target="_blank" rel="noopener">rvm.io</a> to get RVM and use it to install Ruby.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="install-asciidoctor-pdf">Install Asciidoctor PDF</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can install Asciidoctor PDF using the <code>gem install</code> command.
+We&#8217;ll use this command to install the Asciidoctor PDF gem named <strong>asciidoctor-pdf</strong> that&#8217;s published on RubyGems.org.
+Pass the name of the gem to the <code>gem install</code> command as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install asciidoctor-pdf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Installing Asciidoctor PDF will install a number of other gems mentioned in these docs, including asciidoctor, prawn, prawn-svg, prawn-table, prawn-icon, and ttfunk.
+For the most part, the versions of these dependencies are locked to the version of Asciidoctor PDF.
+The patch versions are allowed to vary.
+Please note that the minimum supported version of the asciidoctor gem (Asciidoctor) is 2.0.10.</p>
+</div>
+<div class="paragraph">
+<p>For further installation information about installing Asciidoctor PDF, see <a href="https://docs.asciidoctor.org/pdf-converter/latest/install/">the installation documentation</a>.
+For troubleshooting help, see <a href="https://docs.asciidoctor.org/pdf-converter/latest/install/#installation-troubleshooting">Installation troubleshooting</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="install-a-prerelease-or-development-version">Install a prerelease or development version</h3>
+<div class="paragraph">
+<p>To install the latest prerelease of the <strong>asciidoctor-pdf</strong> gem from RubyGems.org (if a prerelease is available), use the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install asciidoctor-pdf --pre</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also <a href="https://github.com/asciidoctor/asciidoctor-pdf/blob/main/CONTRIBUTING-CODE.adoc">run the code from source</a> if you want to use a development version or participate in development.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="optional-dependencies">Optional dependencies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several optional features of this converter that require additional gems to be installed.
+Those features are as follows.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Source highlighting</dt>
+<dd>
+<p>You&#8217;ll need to <a href="https://docs.asciidoctor.org/pdf-converter/latest/syntax-highlighting/">install a syntax highlighter</a> to use source highlighting (build-time only).</p>
+</dd>
+<dt class="hdlist1">PDF optimization</dt>
+<dd>
+<p>If you want to optimize your PDF, you&#8217;ll need rghost or hexapdf.
+See <a href="https://docs.asciidoctor.org/pdf-converter/latest/optimize-pdf/">Optimize the PDF</a> for installation and usage instructions.</p>
+</dd>
+<dt class="hdlist1">Automatic hyphenation</dt>
+<dd>
+<p>To turn on automatic hyphenation using the <code>hyphens</code> attribute, you&#8217;ll need to install the <code>text-hyphen</code> gem:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ gem install text-hyphen</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Accelerated image decoding</dt>
+<dd>
+<p>Ruby is not particularly fast at decoding images, and the image formats it supports are limited.
+To help, you can install prawn-gmagick, which delegates the work of decoding images to GraphicsMagick.
+Refer to <a href="https://docs.asciidoctor.org/pdf-converter/latest/image-paths-and-formats/#other-image-formats">Supporting additional image file formats</a> for instructions about how to enable this integration.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Check the <a href="https://docs.asciidoctor.org/pdf-converter/latest/install/#table-minimum-version">minimum supported version table</a> to make sure you&#8217;re using a supported version of the dependency.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="run-the-application">Run the Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Assuming all the required gems install properly, verify you can run the <code>asciidoctor-pdf</code> script:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you see the version of Asciidoctor PDF printed, you&#8217;re ready to use Asciidoctor PDF!</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s grab an AsciiDoc document to distill and start putting Asciidoctor PDF to use.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t already have an AsciiDoc document to work with, you can use the <a href="examples/basic-example.html">basic-example.adoc</a> file found in the <em>examples</em> directory of this project.
+Copy it to the current directory as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cp examples/basic-example.adoc .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s take a look at the contents of that file.</p>
+</div>
+<div class="listingblock">
+<div class="title">basic-example.adoc</div>
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">Unresolved directive in README.adoc - include::examples/basic-example.adoc[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s time to convert the AsciiDoc document directly to PDF.</p>
+</div>
+<div class="sect2">
+<h3 id="convert-asciidoc-to-pdf">Convert AsciiDoc to PDF</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You&#8217;ll need the <code>rouge</code> gem installed to run this example since it uses the <code>source-highlighter</code> attribute with the value of <code>rouge</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Converting to PDF is as straightforward as running the <code>asciidoctor-pdf</code> script using Ruby and passing the AsciiDoc document as the first argument:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf basic-example.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command is a shorter way of running <code>asciidoctor</code> with the PDF converter and backend enabled:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor -r asciidoctor-pdf -b pdf basic-example.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>asciidoctor-pdf</code> command saves you from having to remember these low-level options.
+That&#8217;s why we provide it.</p>
+</div>
+<div class="paragraph">
+<p>When the script completes, you should see the file <em class="path">basic-example.pdf</em> in the current directory.
+Asciidoctor creates the output file in the same directory as the input file by default.
+Open the <em class="path">basic-example.pdf</em> file with a PDF viewer to see the result.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="docs/modules/ROOT/images/basic-example-pdf-screenshot.png" alt="Screenshot of PDF document" width="960">
+</div>
+<div class="title">Figure 1. Example PDF document rendered in a PDF viewer</div>
+</div>
+<div class="paragraph">
+<p>For more information about how to use Asciidoctor PDF and PDF-specific AsciiDoc syntax, see the <a href="https://docs.asciidoctor.org/pdf-converter/latest/">Asciidoctor PDF documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="themes">Themes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The layout and styling of the PDF is driven by a YAML configuration file.
+To learn how the theming system works and how to create and apply custom themes, refer to the <a href="https://docs.asciidoctor.org/pdf-converter/latest/theme/">Asciidoctor PDF theming documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributing">Contributing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>See the <a href="CONTRIBUTING.html">contributing guide</a>.
+To help develop Asciidoctor PDF, or to simply use the development version, refer to the <a href="CONTRIBUTING-CODE.html">developing and contributing code guide</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="authors">Authors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF was written by <a href="https://github.com/mojavelinux">Dan Allen</a> and <a href="https://github.com/graphitefriction">Sarah White</a> of OpenDevise Inc. on behalf of the Asciidoctor Project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="copyright">Copyright</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright &#169; 2014-present OpenDevise Inc. and the Asciidoctor Project.
+Free use of this software is granted under the terms of the MIT License.</p>
+</div>
+<div class="paragraph">
+<p>For the full text of the license, see the <a href="LICENSE" class="bare">LICENSE</a> file.
+Refer to the <a href="NOTICE.html">NOTICE</a> file for information about third-party Open Source software in use.</p>
+</div>
+</div>
+</div>

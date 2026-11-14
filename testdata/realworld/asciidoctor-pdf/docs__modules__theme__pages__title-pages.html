@@ -1,0 +1,102 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The layout, background, and styling of the title page and the title, author, and revision information displayed on it is controlled from the theme using the keys in the <code>title-page</code> category.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+The title page is only enabled by default for the book document type (e.g., <code>:doctype: book</code>).
+To enable the title page when using a different doctype, such as the default <code>article</code> doctype, you must define the <a href="ROOT:title-page.html">title-page attribute in the document header</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For the list of all available <code>title-page</code> theme keys, see <a href="title-page.html">title-page.html</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deactivate">Deactivate</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The title page can be deactivated from the theme by assigning <code>false</code> to the <code>title-page</code> category key.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page: false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also <a href="ROOT:title-page.html#notitle-attribute">deactivate the title page from the document header</a> using the <code>notitle</code> attribute.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="background-color">Background color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A background color can be applied to the title page with the <code>background-color</code> key.
+The key accepts the <a href="color.html">hex, RGB, and CMYK formats</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-color: #EAEAEA</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To turn off the background color for the title page, set the value to white (<code>#FFFFFF</code>).
+The color keyword <code>transparent</code> isn&#8217;t recognized in this context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-color: #FFFFFF</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="background-image">Background image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can apply a background image to the title page using the <code>background-image</code> key.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  background-image: image:title.png[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For accepted values and attributes, see <a href="images.html#background">Background images</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="logo-image">Logo image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The target of the image macro assigned to the <code>image</code> key may be a data URI, absolute path, or a path relative to the value of the <code>pdf-themesdir</code> attribute.
+Like in the AsciiDoc syntax, wrapping the <code>image</code> value in the image macro allows you to specify other settings, including <code>pdfwidth</code> and <code>align</code>.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">title-page:
+  logo:
+    image: image:logo.png[pdfwidth=2.5in,align=center]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>align</code> setting is used to align block images within the parent container.
+See <a href="blocks.html">blocks.html</a> for accepted alignment keywords.</p>
+</div>
+</div>
+</div>

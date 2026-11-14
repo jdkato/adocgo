@@ -1,0 +1,197 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After creating a theme, you&#8217;ll need to tell Asciidoctor PDF where to find it.
+This is done using AsciiDoc attributes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_theme_and_font_directories">Theme and font directories</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are three AsciiDoc attributes that tell Asciidoctor PDF how to locate and apply your theme.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">pdf-theme</dt>
+<dd>
+<p>The name or file path of the theme to load.
+Can be set using the <code>--theme</code> CLI option.
+When using JRuby, the file path may begin with <code>uri:classloader:</code> to reference a location on the classpath.</p>
+<div class="paragraph">
+<p>If the value of the <code>pdf-theme</code> attribute ends with <code>.yml</code> (e.g., <code>custom-theme.yml</code>), the name is assumed to be an absolute or relative file path.
+If the path is relative, it&#8217;s resolved starting from the value of the <code>pdf-themesdir</code> attribute.
+If the <code>pdf-themesdir</code> attribute is not specified, it is resolved from the current working directory instead.</p>
+</div>
+<div class="paragraph">
+<p>If the value of the <code>pdf-theme</code> attribute doesn&#8217;t end with <code>.yml</code> (e.g., <code>base</code>), the suffix <code>-theme.yml</code> is automatically appended to build a valid absolute or relative file path (i.e., <code>&lt;name&gt;-theme.yml</code>).
+The value is then treated as a relative path (even if it&#8217;s absolute) and resolved starting from the value of the <code>pdf-themesdir</code> attribute.
+If the <code>pdf-themesdir</code> is not specified, the built-in themes directory is used as the starting point instead (rather than the current working directory).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+The theme file <strong>must</strong> end in .yml, not .yaml.
+When the theme path specified does not end in .yml, Asciidoctor PDF appends the suffix <code>-theme.yml</code> and looks for the resulting file.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can use the <code>{docdir}</code> token as the first path segment in the name to build an absolute path starting from the directory of the source document.</p>
+</div>
+<div class="paragraph">
+<p>The theme name or file path can be specified using the <code>--theme</code> CLI option as a shorthand.</p>
+</div>
+</dd>
+<dt class="hdlist1">pdf-themesdir</dt>
+<dd>
+<p>The directory path where the theme file is located.
+When using JRuby, the directory path may begin with <code>uri:classloader:</code> to reference a location on the classpath.</p>
+<div class="paragraph">
+<p>If the path is relative, the value is resolved starting from the current working directory.
+You can use the <code>{docdir}</code> token as the first path segment to build an absolute path starting from the directory of the source document.</p>
+</div>
+<div class="paragraph">
+<p>If not specified, the value of this attribute will default to the absolute directory of the theme file (as specified by the <code>pdf-theme</code> attribute).
+If you want to use an ancestory directory instead, you must specify both the <code>pdf-themesdir</code> attribute and the <code>pdf-theme</code> attribute, and the <code>pdf-theme</code> attribute must be a path (at any depth) relative to the value of <code>pdf-themesdir</code>.</p>
+</div>
+<div class="paragraph">
+<p>Relative image paths in your theme (such as image targets) are resolved starting from this location.</p>
+</div>
+</dd>
+<dt class="hdlist1">pdf-fontsdir</dt>
+<dd>
+<p>The directory path or paths where the fonts used by your theme, if any, are located.
+When using JRuby, each path may begin with <code>uri:classloader:</code> to reference a location on the classpath.</p>
+<div class="paragraph">
+<p>Multiple entries must be separated by either a comma or a semicolon.
+To reference a file inside a JAR file on the classpath, prefix with the path with <code>uri:classloader:</code> (JRuby only).
+If the path is relative, the value is resolved starting from the current working directory.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>{docdir}</code> token as the first path segment to create an absolute path starting from the directory of the document.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_a_theme">Load a theme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s assume that you&#8217;ve put your theme files inside a directory named <code>resources</code> with the following layout:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>doc.adoc
+resources/
+  themes/
+    basic-theme.yml
+  fonts/
+    roboto-normal.ttf
+    roboto-italic.ttf
+    roboto-bold.ttf
+    roboto-bold_italic.ttf</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s the formal way of loading your theme when calling Asciidoctor PDF:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -a pdf-theme=basic -a pdf-themesdir=resources/themes -a pdf-fontsdir=resources/fonts doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can replace the <code>pdf-theme</code> attribute assignment with <code>--theme</code>, which does the same thing:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf --theme basic -a pdf-themesdir=resources/themes -a pdf-fontsdir=resources/fonts doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If all goes well, Asciidoctor PDF will convert your document without any errors or warnings.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">
+You only need to specify the <code>pdf-fontsdir</code> if you&#8217;re using custom fonts in your theme.
+By default, <code>pdf-fontsdir</code> resolves to the directory of the bundled fonts.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can skip setting the <code>pdf-themesdir</code> attribute by passing the relative path of your theme file to the <code>theme</code> option:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf --theme resources/themes/basic-theme.yml -a pdf-fontsdir=resources/fonts doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the <code>pdf-themesdir</code> will be set automatically to the directory of the theme path specified either by the <code>pdf-theme</code> attribute or the <code>--theme</code> option (e.g., <em class="path">resources/themes</em> in the previous example).</p>
+</div>
+<div class="paragraph">
+<p>If a relative path is specified for <code>pdf-themesdir</code> or <code>pdf-fontsdir</code>, or <code>pdf-theme</code> when <code>pdf-themesdir</code> is not specified, that path is resolved starting from the current working directory.
+Alternately, you can use <code>{docdir}</code> as the first path segment to anchor them to the directory of the source document instead.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re having difficulty getting the converter to locate your theme or fonts, you can specify absolute paths instead, which are used as is.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf --theme /path/to/resources/themes/basic-theme.yml -a pdf-fontsdir=/path/to/resources/fonts doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Relative font paths in the theme are resolved starting from the directory resolved from the <code>pdf-fontsdir</code> attribute.
+All other paths in the theme are resolved starting from the value of the <code>pdf-themesdir</code> attribute.
+You can prefix paths in the theme using the <code>{docdir}</code> or <code>{docimagesdir}</code> attribute references.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_maven_and_gradle">Using Maven and Gradle</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As usual, you can also use build tools like Maven and Gradle to build a themed PDF.
+The only thing you need to add to an existing build is the attributes mentioned above.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/asciidoctor/asciidoctor-maven-examples/tree/master/asciidoctor-pdf-with-theme-example" target="_blank" rel="noopener">Maven Example</a></p>
+</li>
+<li>
+<p><a href="https://github.com/asciidoctor/asciidoctor-gradle-examples/tree/master/asciidoc-to-pdf-with-theme-example" target="_blank" rel="noopener">Gradle Example</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Speaking of Java, you can bundle and distribute your theme and fonts in a jar file.
+To reference the theme file and/or directory of fonts from inside the jar, refer to their location on the classpath using the <code>uri:classloader:</code> prefix.
+Here&#8217;s how you&#8217;d load both the theme and fonts from the classpath:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctorj -b pdf --theme uri:classloader:/path/to/themes/my-theme.yml -a pdf-fontsdir=uri:classloader:/path/to/fonts document.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This only works when running Asciidoctor PDF with JRuby (i.e., on the JVM).</p>
+</div>
+</div>
+</div>

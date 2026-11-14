@@ -1,0 +1,100 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Asciidoctor PDF supports generating an index catalog that itemizes all index terms defined in the document, allowing the reader to navigate the document by keyword.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_index_section">Add index section</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To generate an index, add an empty level-0 or level-1 section annotated with the <code>index</code> style near the end of your document.
+The converter will automatically populate the catalog with the list of index terms in the document, organized by first letter.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-asciidoc" data-lang="asciidoc">[index]
+== Index</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Select the level appropriate for the doctype you are using (level-0 for book, level-1 for article, etc).
+You can use any text you want for the title of this section.
+The only restriction is that no index terms may be defined below this section.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Although the catalog is generated automatically, you have to mark the index terms manually.
+However, you could use an extension, such as a TreeProcessor, to automatically mark index terms.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_index_terms_are_grouped_and_sorted">How index terms are grouped and sorted</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, the converter groups index terms by the first letter of the primary term (e.g., A), which we call the category.
+These categories are displayed in alphabetical order in the index.
+Within the category, the converter sorts the terms alphabetically.</p>
+</div>
+<div class="paragraph">
+<p>The exception to this rule is if the primary term does not start with a letter.
+In this case, the converter group the term (along with its secondary and tertiary terms) in a special category named @.
+The @ category is displayed before all other categories in the index.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_customize_the_grouping_and_sorting_rules">Customize the grouping and sorting rules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to modify the default index grouping and sorting behavior, you must extend the index catalog and apply your own rules.</p>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s say that all your functions begin with the prefix <code>fn</code>, but you want to group and sort them by the function name that follows.
+Here&#8217;s rudimentary code you can use to do that:</p>
+</div>
+<div class="listingblock">
+<div class="title">index-customizer.rb</div>
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">module Asciidoctor::PDF
+  IndexCatalog.prepend (::Module.new do
+    def store_primary_term name, dest = nil
+      store_dest dest if dest
+      category = (name.delete_prefix 'fn').upcase.chr
+      (init_category category).store_term name, dest
+    end
+  end)
+
+  IndexTermGroup.prepend (::Module.new do
+    def &lt;=&gt; other
+      this = @name.delete_prefix 'fn'
+      that = other.name.delete_prefix 'fn'
+      (val = this.casecmp that) == 0 ? this &lt;=&gt; that : val
+    end
+  end)
+end</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You load this code when calling Asciidoctor PDF as follows:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor-pdf -r ./index-customizer.rb doc.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now the index terms will be grouped and sorted according to your custom rules.</p>
+</div>
+</div>
+</div>
