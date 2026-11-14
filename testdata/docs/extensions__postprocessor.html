@@ -1,0 +1,48 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Purpose</dt>
+<dd>
+<p>Insert copyright text in the footer.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyrightfooterpostprocessor">CopyrightFooterPostprocessor</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">class CopyrightFooterPostprocessor &lt; Asciidoctor::Extensions::Postprocessor
+  def process document, output
+    content = (document.attr 'copyright') || 'Copyright Acme, Inc.'
+    if document.basebackend? 'html'
+      replacement = %(&lt;div id="footer-text"&gt;\\1&lt;br&gt;\n#{content}\n&lt;/div&gt;)
+      output = output.sub(/&lt;div id="footer-text"&gt;(.*?)&lt;\/div&gt;/m, replacement)
+    elsif document.basebackend? 'docbook'
+      replacement = %(&lt;simpara&gt;#{content}&lt;/simpara&gt;\n\\1)
+      output = output.sub(/(&lt;\/(?:article|book)&gt;)/, replacement)
+    end
+    output
+  end
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage">Usage</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">Asciidoctor::Extensions.register do
+  postprocessor CopyrightFooterPostprocessor
+end
+
+Asciidoctor.convert_file 'sample-with-copyright-footer.adoc', safe: :safe</code></pre>
+</div>
+</div>
+</div>
+</div>

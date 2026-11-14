@@ -19,6 +19,9 @@ type Block struct {
 	Parent *Block
 	// ID is the node's id, if any.
 	ID string
+	// emptyID is set when an id was generated but turned out empty (Ruby
+	// distinguishes an empty id from a missing one).
+	emptyID bool
 	// Attributes holds the block attributes. Positional attributes are
 	// stored under the keys "$1", "$2", ...
 	Attributes map[string]string

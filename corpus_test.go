@@ -92,7 +92,7 @@ func splitFlags(s string) []string {
 
 func corpusFiles(t testing.TB) []string {
 	var files []string
-	err := filepath.WalkDir("testdata", func(path string, d fs.DirEntry, err error) error {
+	err := filepath.WalkDir(corpusRoot(), func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -114,9 +114,19 @@ func corpusFiles(t testing.TB) []string {
 	return files
 }
 
+// corpusRoot returns the directory holding the fixtures. It can be pointed
+// at another tree with ADOCGO_CORPUS_DIR, which is handy for ad-hoc
+// differential runs against a scratch corpus.
+func corpusRoot() string {
+	if dir := os.Getenv("ADOCGO_CORPUS_DIR"); dir != "" {
+		return dir
+	}
+	return "testdata"
+}
+
 func knownFailures(t testing.TB) map[string]bool {
 	known := map[string]bool{}
-	f, err := os.Open("testdata/known-failures.txt")
+	f, err := os.Open(filepath.Join(corpusRoot(), "known-failures.txt"))
 	if err != nil {
 		return known
 	}

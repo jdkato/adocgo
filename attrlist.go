@@ -122,16 +122,16 @@ func (a *attributeList) parseAttribute(index int, posattrs []string) bool {
 					value, hasValue = "", true
 					a.pos--
 				default:
-					value, hasValue = string(c2)+a.scanToDelimiter(), true
+					value, hasValue = string([]byte{c2})+a.scanToDelimiter(), true
 					if value == "None" {
 						return true
 					}
 				}
 			} else {
-				name = name + strings.Repeat(" ", skipped) + string(c) + a.scanToDelimiter()
+				name = name + strings.Repeat(" ", skipped) + string([]byte{c}) + a.scanToDelimiter()
 			}
 		} else {
-			name, hasName = string(c)+a.scanToDelimiter(), true
+			name, hasName = string([]byte{c})+a.scanToDelimiter(), true
 		}
 	}
 	if hasValue {

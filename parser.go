@@ -726,6 +726,7 @@ func nextBlock(reader *Reader, parent *Block, attributes map[string]string, opti
 						block.ID = floatID
 					} else if _, ok := docAttrs["sectids"]; ok {
 						block.ID = generateSectionID(block.Title(), document)
+						block.emptyID = block.ID == ""
 					}
 					block.Level = floatLevel
 					break
@@ -1254,10 +1255,11 @@ func initializeSection(reader *Reader, parent *Block, attributes map[string]stri
 	if section.ID == "" {
 		if _, ok := document.Attributes["sectids"]; ok {
 			section.ID = generateSectionID(section.Title(), document)
+			section.emptyID = section.ID == ""
 			generated = true
 		}
 	}
-	if section.ID != "" {
+	if section.ID != "" || section.emptyID {
 		if !generated && strings.Contains(sectTitle, "{") {
 			section.Title()
 		}

@@ -544,7 +544,7 @@ func (c *html5Converter) section(node *Block) string {
 	level := node.Level
 	title := c.sectionTitle(node, intAttr(docAttrs, "sectnumlevels", 3))
 	ida := ""
-	if id := node.ID; id != "" {
+	if id := node.ID; id != "" || node.emptyID {
 		ida = ` id="` + id + `"`
 		if _, ok := docAttrs["sectlinks"]; ok {
 			if m := leadingAnchorsRx.Find(title); strings.HasPrefix(title, "<a ") && m != nil {
@@ -899,7 +899,11 @@ func (c *html5Converter) floatingTitle(node *Block) string {
 	if node.Style != "" {
 		base = append(base, node.Style)
 	}
-	return "<" + tag + idAttr(node.ID) + ` class="` + joinClasses(node, base...) + `">` + node.Title() + "</" + tag + ">"
+	ida := idAttr(node.ID)
+	if node.emptyID {
+		ida = ` id=""`
+	}
+	return "<" + tag + ida + ` class="` + joinClasses(node, base...) + `">` + node.Title() + "</" + tag + ">"
 }
 
 func linkConstraintAttrs(attrs map[string]string) string {
