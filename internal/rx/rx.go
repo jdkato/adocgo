@@ -9,8 +9,11 @@
 package rx
 
 import (
+	"bytes"
 	"fmt"
+	"sort"
 	"strings"
+	"sync"
 	"unicode"
 	"unicode/utf8"
 )
@@ -96,6 +99,15 @@ type Regexp struct {
 	splitID []int // dense index of each split instruction in progs[0], or -1
 	nsplits int
 	bol     bool // pattern can only match at start of a line
+
+	// need lists byte sets of which every match must contain at least one
+	// member; a text lacking any of them cannot match (see search).
+	need []string
+
+	lazy bool // created by MustCompile; compiled by ensure
+	once sync.Once
+
+	pool sync.Pool // idle *machine values, reused to keep their stacks
 }
 
 func (re *Regexp) String() string { return re.src }
@@ -104,7 +116,10 @@ func (re *Regexp) String() string { return re.src }
 func (re *Regexp) Flags() string { return re.flags }
 
 // NumGroups returns the number of capture groups.
-func (re *Regexp) NumGroups() int { return re.ncap }
+func (re *Regexp) NumGroups() int {
+	re.ensure()
+	return re.ncap
+}
 
 // ---------------------------------------------------------------------------
 // Parser
@@ -147,12 +162,40 @@ type parser struct {
 
 // MustCompile compiles pattern with the given flags ("m" dotall, "i"
 // case-insensitive) and panics on error.
+//
+// Compilation is deferred until the pattern is first used, so that the
+// many package-level patterns cost nothing at program start; an invalid
+// pattern therefore panics on first use rather than here.
 func MustCompile(pattern string, flags ...string) *Regexp {
-	re, err := Compile(pattern, flags...)
-	if err != nil {
-		panic(err)
+	re := &Regexp{src: pattern, lazy: true}
+	for _, f := range flags {
+		if strings.Contains(f, "m") && !strings.Contains(re.flags, "m") {
+			re.flags += "m"
+		}
+	}
+	for _, f := range flags {
+		if strings.Contains(f, "i") && !strings.Contains(re.flags, "i") {
+			re.flags += "i"
+		}
 	}
 	return re
+}
+
+// ensure compiles a pattern created by MustCompile on first use.
+func (re *Regexp) ensure() {
+	if !re.lazy {
+		return
+	}
+	re.once.Do(func() {
+		c, err := Compile(re.src, re.flags)
+		if err != nil {
+			panic(err)
+		}
+		re.progs, re.ncap, re.nslots = c.progs, c.ncap, c.nslots
+		re.first, re.bot, re.bol = c.first, c.bot, c.bol
+		re.memoOK, re.splitID, re.nsplits = c.memoOK, c.splitID, c.nsplits
+		re.need = c.need
+	})
 }
 
 // Compile compiles pattern.
@@ -213,7 +256,76 @@ func Compile(pattern string, flags ...string) (re *Regexp, err error) {
 		re.first = &set
 	}
 	re.bot, re.bol = leadAnchor(n)
+	need := required(n)
+	sort.SliceStable(need, func(i, j int) bool { return len(need[i]) < len(need[j]) })
+	if len(need) > 2 {
+		need = need[:2]
+	}
+	re.need = need
 	return re, nil
+}
+
+// maxNeedSet bounds the size of a required-byte set worth testing for.
+const maxNeedSet = 8
+
+// required returns byte sets (ASCII only) such that any text matched by n
+// contains at least one byte of each set.
+func required(n *node) []string {
+	switch n.kind {
+	case nChar:
+		if n.c < utf8.RuneSelf {
+			return []string{string(rune(n.c))}
+		}
+	case nClass:
+		if n.cls.neg || len(n.cls.ranges) > 0 || len(n.cls.fns) > 0 {
+			return nil
+		}
+		var set []byte
+		for i, ok := range n.cls.ascii {
+			if ok {
+				set = append(set, byte(i))
+			}
+		}
+		if len(set) > 0 && len(set) <= maxNeedSet {
+			return []string{string(set)}
+		}
+	case nSeq:
+		var out []string
+		for _, sub := range n.subs {
+			out = append(out, required(sub)...)
+		}
+		return out
+	case nAlt:
+		// every branch must contribute a set; a match contains a byte of
+		// their union
+		var union []byte
+		for _, sub := range n.subs {
+			best := ""
+			for _, set := range required(sub) {
+				if best == "" || len(set) < len(best) {
+					best = set
+				}
+			}
+			if best == "" {
+				return nil
+			}
+			for i := 0; i < len(best); i++ {
+				if bytes.IndexByte(union, best[i]) < 0 {
+					union = append(union, best[i])
+				}
+			}
+		}
+		if len(union) > 0 && len(union) <= maxNeedSet {
+			return []string{string(union)}
+		}
+	case nRepeat:
+		if n.min >= 1 {
+			return required(n.subs[0])
+		}
+	case nGroup:
+		return required(n.subs[0])
+	}
+	return nil
 }
 
 func leadAnchor(n *node) (bot, bol bool) {
@@ -1171,22 +1283,48 @@ func (m *Match) Pre() string { return m.s[:m.caps[0]] }
 func (m *Match) Post() string { return m.s[m.caps[1]:] }
 
 func (re *Regexp) matchFrom(m *machine, start int) *Match {
+	if !re.search(m, start) {
+		return nil
+	}
+	caps := make([]int, 2*(re.ncap+1))
+	copy(caps, m.slots)
+	return &Match{s: m.s, caps: caps}
+}
+
+// search looks for the first match at or after start, leaving the capture
+// offsets in m.slots.
+func (re *Regexp) search(m *machine, start int) bool {
 	s := m.s
+	if start <= len(s) {
+		for _, set := range re.need {
+			if len(set) == 1 {
+				if strings.IndexByte(s[start:], set[0]) < 0 {
+					return false
+				}
+			} else if strings.IndexAny(s[start:], set) < 0 {
+				return false
+			}
+		}
+	}
+	for j := range m.slots {
+		m.slots[j] = -1
+	}
+	m.stack = m.stack[:0]
 	for i := start; i <= len(s); i++ {
 		if re.bot && i > 0 {
-			return nil
+			return false
 		}
 		if re.bol && i > 0 && s[i-1] != '\n' {
 			nl := strings.IndexByte(s[i:], '\n')
 			if nl < 0 {
-				return nil
+				return false
 			}
 			i += nl
 			continue
 		}
 		if re.first != nil {
 			if i == len(s) {
-				return nil
+				return false
 			}
 			if !re.first[s[i]] {
 				continue
@@ -1195,41 +1333,64 @@ func (re *Regexp) matchFrom(m *machine, start int) *Match {
 		if i > 0 && i < len(s) && s[i]&0xC0 == 0x80 {
 			continue // not a rune boundary
 		}
-		for j := range m.slots {
-			m.slots[j] = -1
-		}
-		m.stack = m.stack[:0]
+		// a failed run unwinds its stack, restoring every slot to -1
 		if end := m.run(0, i); end >= 0 {
-			caps := make([]int, 2*(re.ncap+1))
-			copy(caps, m.slots)
 			// states on the successful path were recorded as visited, so
 			// the memo must not be reused for the next scan
 			m.memoOn, m.memo, m.backtracks = false, nil, 0
-			return &Match{s: s, caps: caps}
+			return true
 		}
 	}
-	return nil
+	return false
 }
 
+// maxPooledStack bounds the backtrack stack kept alive by an idle machine.
+const maxPooledStack = 1 << 16
+
+// newMachine returns a machine for matching against s, reusing an idle one
+// (and its backtrack stack) when available. Release it with putMachine.
 func (re *Regexp) newMachine(s string) *machine {
+	re.ensure()
+	if m, _ := re.pool.Get().(*machine); m != nil {
+		m.s = s
+		return m
+	}
 	return &machine{re: re, s: s, slots: make([]int, re.nslots)}
 }
 
+func (re *Regexp) putMachine(m *machine) {
+	m.s = ""
+	m.memoOn, m.memo, m.backtracks = false, nil, 0
+	if cap(m.stack) > maxPooledStack {
+		m.stack = nil
+	}
+	re.pool.Put(m)
+}
+
 // Find returns the first match in s or nil.
-func (re *Regexp) Find(s string) *Match { return re.matchFrom(re.newMachine(s), 0) }
+func (re *Regexp) Find(s string) *Match { return re.FindAt(s, 0) }
 
 // FindAt returns the first match in s starting at or after offset start.
 func (re *Regexp) FindAt(s string, start int) *Match {
-	return re.matchFrom(re.newMachine(s), start)
+	m := re.newMachine(s)
+	mt := re.matchFrom(m, start)
+	re.putMachine(m)
+	return mt
 }
 
 // MatchString reports whether s contains a match.
-func (re *Regexp) MatchString(s string) bool { return re.Find(s) != nil }
+func (re *Regexp) MatchString(s string) bool {
+	m := re.newMachine(s)
+	ok := re.search(m, 0)
+	re.putMachine(m)
+	return ok
+}
 
 // FindAll returns all successive non-overlapping matches.
 func (re *Regexp) FindAll(s string) []*Match {
 	var out []*Match
 	m := re.newMachine(s)
+	defer re.putMachine(m)
 	pos := 0
 	for pos <= len(s) {
 		mt := re.matchFrom(m, pos)
@@ -1253,6 +1414,7 @@ func (re *Regexp) FindAll(s string) []*Match {
 // ReplaceAllFunc replaces every match with the result of f (Ruby gsub).
 func (re *Regexp) ReplaceAllFunc(s string, f func(m *Match) string) string {
 	m := re.newMachine(s)
+	defer re.putMachine(m)
 	mt := re.matchFrom(m, 0)
 	if mt == nil {
 		return s
@@ -1320,9 +1482,11 @@ func Quote(s string) string {
 // StringScanner#scan) and returns it, or nil.
 func (re *Regexp) MatchAt(s string, pos int) *Match {
 	m := re.newMachine(s)
+	defer re.putMachine(m)
 	for j := range m.slots {
 		m.slots[j] = -1
 	}
+	m.stack = m.stack[:0]
 	if end := m.run(0, pos); end >= 0 {
 		caps := make([]int, 2*(re.ncap+1))
 		copy(caps, m.slots)
