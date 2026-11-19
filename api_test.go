@@ -167,3 +167,26 @@ func TestConcurrent(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+// With NoXrefText, a cross reference the author gave no text is an empty
+// link, whether or not its target resolves; one with text keeps it.
+func TestNoXrefText(t *testing.T) {
+	src := []byte("== Intro\n\nSee <<_intro>>, <<_intro,the intro>>, <<missing>>, and xref:other.adoc#x[].\n")
+	out, err := Convert(src, Options{NoXrefText: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := `See <a href="#_intro"></a>, <a href="#_intro">the intro</a>, <a href="#missing"></a>, and <a href="other.html#x"></a>.`
+	if !strings.Contains(string(out), want) {
+		t.Errorf("got:\n%s\nwant a line containing:\n%s", out, want)
+	}
+
+	out, err = Convert(src, Options{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want = `See <a href="#_intro">Intro</a>, <a href="#_intro">the intro</a>, <a href="#missing">[missing]</a>, and <a href="other.html#x">other.html</a>.`
+	if !strings.Contains(string(out), want) {
+		t.Errorf("by default got:\n%s\nwant a line containing:\n%s", out, want)
+	}
+}

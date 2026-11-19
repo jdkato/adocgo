@@ -84,6 +84,7 @@ type Document struct {
 	attributeOverrides map[string]override
 	attributesModified map[string]bool
 	headerAttributes   map[string]string
+	noXrefText         bool
 	counters           map[string]string
 	maxAttrValueSize   int
 	parsed             bool
@@ -137,6 +138,13 @@ type Options struct {
 	// and doctime attributes. If zero, the current time is used. The
 	// SOURCE_DATE_EPOCH environment variable takes precedence.
 	ModTime time.Time
+
+	// NoXrefText renders a cross reference the document gives no text for
+	// as an empty link. Asciidoctor fills one in with the target's title
+	// when it resolves and "[id]" when it doesn't; neither is text the
+	// author wrote, and a reader of the output linting the author's words
+	// wants neither.
+	NoXrefText bool
 }
 
 // Version is the version of Asciidoctor whose behaviour this package
@@ -159,6 +167,7 @@ func newDocument(opts Options) *Document {
 	doc.attributesModified = map[string]bool{}
 	doc.standalone = opts.Standalone
 	doc.Safe = opts.Safe
+	doc.noXrefText = opts.NoXrefText
 	ov := map[string]override{}
 	doc.attributeOverrides = ov
 	userAttrs := map[string]string{}

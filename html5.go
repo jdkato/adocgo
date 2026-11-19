@@ -1929,6 +1929,8 @@ func (c *html5Converter) inlineAnchor(node *Inline) string {
 			text = path
 			if node.hasText {
 				text = node.Text
+			} else if node.Parent.Document.noXrefText {
+				text = ""
 			}
 		} else {
 			if hasRole {
@@ -1936,6 +1938,8 @@ func (c *html5Converter) inlineAnchor(node *Inline) string {
 			}
 			if node.hasText {
 				text = node.Text
+			} else if node.Parent.Document.noXrefText {
+				text = ""
 			} else {
 				doc := node.Parent.Document
 				refid, hasRefid := node.Attrs["refid"]
