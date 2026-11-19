@@ -2,6 +2,10 @@
 # real Asciidoctor command line implementation (in a single Ruby process).
 #
 # Usage: ruby scripts/regen.rb [testdata-dir] [file.adoc ...]
+# Record the same home and checkout directories on every machine; the corpus
+# test maps its own onto them (fixtureHome and fixtureRoot in corpus_test.go).
+ENV['HOME'] = '/root'
+FIXTURE_ROOT = '/home/user/adocgo'
 require 'asciidoctor'
 require 'asciidoctor/cli'
 require 'stringio'
@@ -30,7 +34,7 @@ files.each do |adoc|
     # fixtures converted with a DocBook backend keep their output in NAME.xml
     bi = args.index '-b'
     ext = bi && args[bi + 1].to_s.start_with?('docbook') ? '.xml' : '.html'
-    File.write adoc.sub(/\.adoc\z/, ext), out.string
+    File.write adoc.sub(/\.adoc\z/, ext), out.string.gsub(Dir.pwd, FIXTURE_ROOT)
     count += 1
   rescue Exception => e # rubocop:disable Lint/RescueException
     warn "FAILED #{adoc}: #{e.class}: #{e.message.lines.first}"

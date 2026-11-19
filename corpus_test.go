@@ -102,6 +102,13 @@ func expectedPath(path string, opts Options) string {
 	return strings.TrimSuffix(path, ".adoc") + ext
 }
 
+// The home and checkout directories that the expected output is recorded
+// with, so that fixtures showing user-home or docdir pass on any machine.
+const (
+	fixtureHome = "/root"
+	fixtureRoot = "/home/user/adocgo"
+)
+
 func corpusFiles(t testing.TB) []string {
 	var files []string
 	err := filepath.WalkDir(corpusRoot(), func(path string, d fs.DirEntry, err error) error {
@@ -160,6 +167,13 @@ func knownFailures(t testing.TB) map[string]bool {
 // fails if one of them unexpectedly passes so the list stays accurate.
 func TestCorpus(t *testing.T) {
 	t.Setenv("SOURCE_DATE_EPOCH", "1700000000")
+	// The expected output is recorded with these paths (see scripts/regen.rb).
+	t.Setenv("HOME", fixtureHome)
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatal(err)
+	}
+	wd = filepath.ToSlash(wd)
 	known := knownFailures(t)
 	var pass, fail, knownFail, missing int
 	for _, path := range corpusFiles(t) {
@@ -171,6 +185,7 @@ func TestCorpus(t *testing.T) {
 			continue
 		}
 		got, err := ConvertFile(path, opts)
+		got = bytes.ReplaceAll(got, []byte(wd), []byte(fixtureRoot))
 		ok := err == nil && bytes.Equal(got, want)
 		switch {
 		case ok && known[path]:
